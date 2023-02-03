@@ -7,7 +7,7 @@ Access the Roll Tracker from the Player List in the bottom-left.
 
 The stats card pop out, with options to export the stats to an R-Friendly text file for further use.
 
-![Dialog](https://i.imgur.com/EIm59Pw.png)
+![Dialog]()
 
 You can print your individual stats to the chat, or the GM can send a stats comparison across all players.
 
