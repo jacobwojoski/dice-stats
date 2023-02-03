@@ -27,7 +27,7 @@
             }
         },
         "global_data_form":{
-
+            
         },
         "player_data_form":{
 
@@ -37,6 +37,8 @@
         },
         "streak_chat_form":{
 
-        }
+        },
+        "player-stats-button-title": "Player Rolls",
+        "global-stats-button-title": "Global Rolls"
     }
 }

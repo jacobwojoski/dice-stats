@@ -45,7 +45,7 @@ class GlobalStatsPage extends FormApplication {
 
 class PlayerStatusPage extends FormApplication {
 
-    PLAYERDATA = new myData.PLAYER();
+    PLAYERDATA = new PLAYER;
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;

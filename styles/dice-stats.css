@@ -1,0 +1,19 @@
+.open-player-stats-button{
+    background: transparent;
+    color: white;
+    border: 0;
+    padding: 0;
+    line-height: 0;
+    align-self: center;
+    margin: 0 2%;
+}
+
+.open-global-stats-button{
+    background: transparent;
+    color: white;
+    border: 0;
+    padding: 0;
+    line-height: 0;
+    align-self: center;
+    margin: 0 2%;
+}
