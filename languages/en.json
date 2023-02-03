@@ -1,77 +1,42 @@
 {
-    "ROLL-TRACKER": {
-        "button-title": "Check Rolls",
-        "form-label": {
-            "mean": "Mean",
-            "median": "Median",
-            "mode": "Mode",
-            "nat1s": "Natural 1s",
-            "nat20s": "Natural 20s",
-            "lastRoll": "Last roll",
-            "count": "Rolls Counted",
-            "instance": "instance",
-            "instances": "instances",
-            "each": "each"
-        },
-        "form-button": {
-            "clear": "Clear Data",
-            "download": "Download",
-            "print": "Print to Chat"
-        },
-        "comparison-card": {
-            "title": "Comparison Card",
-            "mean-header": "Mean",
-            "median-header": "Median",
-            "nat1s-header": "Natural 1s",
-            "nat20s-header": "Natural 20s",
-            "highest": "Highest",
-            "lowest": "Lowest",
-            "with": "with",
-            "of": "of",
-            "rolls": "rolls"
-        },
-        "settings": {
-            "gm_see_players": {
-                "Name" : "See Player Roll Icons?",
-                "Hint" : "If enabled, the GM will see icons beside all player names that they can use to access that player's roll stats."
-            },
-            "roll_storage": {
-                "Name" : "Max rolls stored",
-                "Hint" : "How many rolls should the system store before older rolls begin to be overwritten?"
+    "DICE_STATS_TEXT" : {
+        "settings":{
+            "players_see_self": {
+                "Name" : "See YOUR stats?",
+                "Hint" : "If enabled, the player can see their own stats. Recomended On"
             },
             "players_see_players": {
-                "Name" : "Can Players Access Tracked Rolls?",
-                "Hint" : "If disabled, players will not be able to access their roll summaries."
+                "Name" : "See OTHER players stats?",
+                "Hint" : "If enabled, the player can see other players stats. Reccomended On"
             },
-            "count_hidden": {
-                "Name" : "Count Blind Rolls?",
-                "Hint" : "If disabled, blind rolls for players will not be counted in the tracker."
+            "players_see_gm": {
+                "Name" : "See GM roll data?",
+                "Hint" : "If enabled, the player can see the GM's stats. If you are the GM this is useless. Reccomended Off"
             },
-            "streak_behaviour": {
-                "Name" : "Streak Behaviour",
-                "Hint" : "Choose whether to disable streak messages, send them only to the GM, or show them publicly. Note: streaks that include a blind roll are always whispered to the GM.",
-                "disable": "Disable Streak Messages",
-                "hidden": "Whisper Streaks to GM",
-                "shown": "Publicly display Streaks"
+            "players_see_global": {
+                "Name" : "See GLOBAL roll data?",
+                "Hint" : "If enabled, the player can see the global stats. Reccomended On"
             },
-            "dnd5e": {
-                "restrict_counted_rolls": {
-                    "Name": "Don't Count Unlinked Rolls",
-                    "Hint": "If enabled, the tracker will not count any rolls that are not explicitly linked to an actor. Ex: typing /r 1d20 in the chat will not be counted, but an attack or saving throw will be."
-                }
+            "disable_streak": {
+                "Name" : "Stop all streaks from being printed to chat?",
+                "Hint" : "If enabled, streak messages will not be printed to the chat. Streaks can still be seen in data card. Reccomended On"
             },
-            "pf2e": {
-                "restrict_counted_rolls": {
-                    "Name": "Don't Count Unlinked Rolls",
-                    "Hint": "If enabled, the tracker will not count any rolls that are not explicitly linked to an actor. Ex: typing /r 1d20 in the chat will not be counted, but an attack or saving throw will be."
-                }
+            "see_blind_streaks": {
+                "Name" : "Let blind roll streaks be printed to chat",
+                "Hint" : "If enabled, streaks with blind rolls will be able to be printed in chat. Reccomended Off"
             }
         },
-        "confirms": {
-            "clear_rolls": {
-                "title": "Clear Rolls?",
-                "content": "Are you sure you want to clear your rolls? This cannot be undone."
-            }
+        "global_data_form":{
+
+        },
+        "player_data_form":{
+
+        },
+        "roll_chat_form":{
+
+        },
+        "streak_chat_form":{
+
         }
     }
 }

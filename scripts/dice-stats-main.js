@@ -137,7 +137,7 @@ class DIE_INFO {
     }
 }
 
-class RollTracker {
+class DiceStatsTracker {
     ID = 'roll-tracker'
     ALLPLAYERDATA = new Map();  //Map of all Players <PlayerID, PLAYER> 
     IMGM = false;
@@ -147,15 +147,10 @@ class RollTracker {
     SETTINGS = {
         PLAYERS_SEE_SELF: 'players_see_self',       //If players are allowed to view their stats
         PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either
-        COUNT_HIDDEN: 'count_hidden',               
-        STREAK_MESSAGE_HIDDEN: 'streak_message_hidden',
-        STREAK_BEHAVIOUR: 'streak_behaviour',
-        DND5E: {
-            RESTRICT_COUNTED_ROLLS: 'restrict_counted_rolls'
-        },
-        PF2E: {
-            RESTRICT_COUNTED_ROLLS: 'restrict_counted_rolls'
-        }
+        PLAYERS_SEE_GM:     'players_see_gm',
+        PLAYERS_SEE_GLOBAL: 'players_see_global',
+        DISABLE_STREAKS: 'disable_streak',
+        SEE_BLIND_STREAK: 'see_blind_streaks'              
     }
     
     constructor(){
@@ -177,6 +172,17 @@ class RollTracker {
         this.SYSTEM = `${game.system.id}`
 
         // A setting to determine whether players can see 
+        game.settings.register(this.ID, this.SETTINGS.PLAYERS_SEE_SELF, {
+            name: `ROLL-TRACKER.settings.${this.SETTINGS.PLAYERS_SEE_SELF}.Name`,
+            default: true,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `ROLL-TRACKER.settings.${this.SETTINGS.PLAYERS_SEE_SELF}.Hint`,
+            onChange: () => ui.players.render()
+        })
+
+        // A setting to determine whether players can see 
         game.settings.register(this.ID, this.SETTINGS.PLAYERS_SEE_PLAYERS, {
             name: `ROLL-TRACKER.settings.${this.SETTINGS.PLAYERS_SEE_PLAYERS}.Name`,
             default: true,
@@ -187,59 +193,25 @@ class RollTracker {
             onChange: () => ui.players.render()
         })
 
-        // A setting to determine whether blind GM rolls that PLAYERS make are tracked
-        // Blind GM rolls that GMs make are always tracked
-        game.settings.register(this.ID, this.SETTINGS.COUNT_HIDDEN, {
-            name: `ROLL-TRACKER.settings.${this.SETTINGS.COUNT_HIDDEN}.Name`,
+        // A setting to determine whether players can see streaks at all
+        game.settings.register(this.ID, this.SETTINGS.DISABLE_STREAKS, {
+            name: `ROLL-TRACKER.settings.${this.SETTINGS.DISABLE_STREAKS}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `ROLL-TRACKER.settings.${this.SETTINGS.COUNT_HIDDEN}.Hint`,
+            hint: `ROLL-TRACKER.settings.${this.SETTINGS.DISABLE_STREAKS}.Hint`
         })
 
-        game.settings.register(this.ID, this.SETTINGS.STREAK_BEHAVIOUR, {
-            name: `ROLL-TRACKER.settings.${this.SETTINGS.STREAK_BEHAVIOUR}.Name`,
-            default: true,
-            type: String,
+        // A setting to determine whether players can see a streak due to blind roll (default of No)
+        game.settings.register(this.ID, this.SETTINGS.SEE_BLIND_STREAK, {
+            name: `ROLL-TRACKER.settings.${this.SETTINGS.SEE_BLIND_STREAK}.Name`,
+            default: false,
+            type: Boolean,
             scope: 'world',
             config: true,
-            // hint: `ROLL-TRACKER.settings.${this.SETTINGS.STREAK_BEHAVIOUR}.Hint`,
-            choices: {
-                hidden: game.i18n.localize(`ROLL-TRACKER.settings.${this.SETTINGS.STREAK_BEHAVIOUR}.hidden`),
-                disable: game.i18n.localize(`ROLL-TRACKER.settings.${this.SETTINGS.STREAK_BEHAVIOUR}.disable`),
-                shown: game.i18n.localize(`ROLL-TRACKER.settings.${this.SETTINGS.STREAK_BEHAVIOUR}.shown`)
-            }
+            hint: `ROLL-TRACKER.settings.${this.SETTINGS.SEE_BLIND_STREAK}.Hint`
         })
-
-        // System specific settings
-        switch(this.SYSTEM) {
-            case 'dnd5e':
-                // A setting to specify that only rolls connected to an actor will be counted, not just
-                // random '/r 1d20s' or the like
-                game.settings.register(this.ID, this.SETTINGS.DND5E.RESTRICT_COUNTED_ROLLS, {
-                    name: `ROLL-TRACKER.settings.dnd5e.${this.SETTINGS.DND5E.RESTRICT_COUNTED_ROLLS}.Name`,
-                    default: true,
-                    type: Boolean,
-                    scope: 'world',
-                    config: true,
-                    hint: `ROLL-TRACKER.settings.dnd5e.${this.SETTINGS.DND5E.RESTRICT_COUNTED_ROLLS}.Hint`,
-                })
-                break;
-            case 'pf2e':
-                // A setting to specify that only rolls connected to an actor will be counted, not just
-                // random '/r 1d20s' or the like
-                game.settings.register(this.ID, this.SETTINGS.PF2E.RESTRICT_COUNTED_ROLLS, {
-                    name: `ROLL-TRACKER.settings.pf2e.${this.SETTINGS.PF2E.RESTRICT_COUNTED_ROLLS}.Name`,
-                    default: true,
-                    type: Boolean,
-                    scope: 'world',
-                    config: true,
-                    hint: `ROLL-TRACKER.settings.pf2e.${this.SETTINGS.PF2E.RESTRICT_COUNTED_ROLLS}.Hint`,
-                })
-                break;
-        } 
-
     }
 
     parseMessage(msg){
@@ -268,6 +240,8 @@ class RollTracker {
 //==========================================================
 
 Hooks.on('createChatMessage', (chatMessage) => {
+    //TODO
+    //check if fate (3 sided) and coin (2 sided) count as rolls or if somethign special is needed
     if (chatMessage.isRoll) {
         CLASSOBJ.parseMessage(chatMessage)
         CLASSOBJ.displayStreak();
@@ -276,5 +250,5 @@ Hooks.on('createChatMessage', (chatMessage) => {
 
 // Initialize dialog and settings on foundry boot up
 Hooks.once('init', () => {
-    CLASSOBJ = new RollTracker();
+    CLASSOBJ = new DiceStatsTracker();
 })

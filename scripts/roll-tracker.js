@@ -698,8 +698,8 @@ class RollTrackerData {
 }
 
 class RollTrackerDialog extends FormApplication {
-    constructor(userId, options={}) {  
-    // the first argument is the object, the second are the options
+    constructor(userId, options={}, dataObject = null) {  
+        // the first argument is the object, the second are the options
         super(userId, options)
     }
 
