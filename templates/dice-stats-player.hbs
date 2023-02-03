@@ -1,0 +1,66 @@
+{{!-- {{log 'Input data' this}} --}}
+<!-- Displays Specific Player info. Default is Only GM can see other players stats -->
+
+<!-- Base Lauout of player data
+    //Player Data * x         
+        //D2 Info
+            //Graph of number of each rolls
+            //Mean, Median, Mode
+            //Longest Streak
+        //D3 Info
+            //Graph of number of each rolls
+            //Mean, Median, Mode
+            //Longest Streak
+-->
+
+<form>
+    <div class="col">
+        <div class="row">
+            <h1>2D Dice Stats</h1>
+            <canvas id="d4Chart"></canvas>
+            <ul class="roll-tracker-form flexcol">
+                <li>Mean (Avg)</li>
+                <li>Meadian (Middle Number)</li>
+                <li>Mode (Most Common)</li>
+                <li>Longest Streak</li>
+                <li>Put Streak Numbers HERE</li>
+            </ul>
+        </div>
+        <br>
+        <div class="row">
+            <h1>2D Dice Stats</h1>
+            <canvas id="d20Chart"></canvas>
+            <ul class="roll-tracker-form flexcol">
+                <li>Mean (Avg)</li>
+                <li>Meadian (Middle Number)</li>
+                <li>Mode (Most Common)</li>
+                <li>Longest Streak</li>
+                <li>Put Streak Numbers HERE</li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const mychart = document.getElementById('d2Chart');
+
+    new Chart(mychart, {
+        type: 'bar',
+        data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+        }]
+        },
+        options: {
+        scales: {
+            y: {
+            beginAtZero: true
+            }
+        }
+        }
+    });
+</script>
