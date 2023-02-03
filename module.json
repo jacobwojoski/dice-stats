@@ -1,0 +1,36 @@
+{
+  "title": "Dice Stats",
+  "description": "A simple module which tracks all dice rolls and allows player to see end of session stats",
+  "authors": [
+    {
+      "name": "jacobwojo",
+      "flags": {}
+    }
+  ],
+    "version": "0.1",
+    "minimumCoreVersion": "10.0.0",
+    "compatibleCoreVersion": "10.0.0",
+    "scripts": [
+        "scripts/roll-tracker.js"
+    ],
+    "styles": [
+        "styles/roll-tracker.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+      "path": "languages/en.json",
+      "flags": {}
+    }
+  ],
+  "socket": true,
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "id": "roll-tracker",
+  "compatibility": {
+    "minimum": "10.0.0",
+    "verified": "10.0.0"
+  }
+}
