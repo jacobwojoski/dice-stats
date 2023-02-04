@@ -1,6 +1,6 @@
 {
   "title": "DiceStats",
-  "description": "A module which tracks all dice rolls of every dice type and allows player to see end of session stats",
+  "description": "A module which tracks all dice rolls of every dice type and allows player to see end of session stats.",
   "authors": [
     {
       "name": "jacobwojo",
@@ -11,11 +11,12 @@
     "minimumCoreVersion": "10.0.0",
     "compatibleCoreVersion": "10.0.0",
     "scripts": [
-        "scripts/DiceStats.js"
+        "scripts/dice-stats-main.js",
+        "scripts/dice-stats-math.js"
     ],
     "styles": [
-        "styles/GlobalStats.css",
-        "styles/PlayerStats.css"
+        "styles/dice-stats.css",
+        "styles/roll-tracker.css"
     ],
     "languages": [
         {
@@ -29,7 +30,7 @@
   "url": "https://github.com/jacobwojoski/DiceStats",
   "manifest": "",
   "download": "",
-  "id": "roll-tracker",
+  "id": "DiceStats",
   "compatibility": {
     "minimum": "10.0.0",
     "verified": "10.0.0"

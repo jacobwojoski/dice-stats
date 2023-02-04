@@ -1,20 +1,17 @@
-import * as myUtils from    "dice-stats-utils.js";
-import * as myMath from     "dice-stats-math.js";
-import * as myForms from    "dice-stats-forms.js";
-
 //----GLOBAL VALUES----
 CLASSOBJ = null;
-testPlayer = new PLAYER();
 
 //----GLOBAL CONST VALUES----
 
 
 //Get access to handlebars stuff
 const TEMPLATES = {
-    GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
-    PLAYERDATAFORM:     'modules/dice-stats/templates/dice-stats-player.hbs',
-    STREAKCHATMSGFORM:  'modules/dice-stats/templates/dice-stats-global.hbs',
-    ROLLCHATMSGFORM:    'modules/dice-stats/templates/dice-stats-global.hbs',
+    GLOBALDATAFORM:     'modules/DiceStats/templates/dice-stats-global.hbs',
+    PLAYERDATAFORM:     'modules/DiceStats/templates/dice-stats-player.hbs',
+    
+    //TODO
+    STREAKCHATMSGFORM:  'modules/DiceStats/templates/dice-stats-global.hbs',
+    ROLLCHATMSGFORM:    'modules/DiceStats/templates/dice-stats-global.hbs',
 }
 
 //Setting will really only impact button functionality everyone stores everyones rolls... for now
@@ -27,6 +24,7 @@ const SETTINGS = {
     SEE_BLIND_STREAK: 'see_blind_streaks'              
 }
 
+const NUM_DIE_TYPES = 9;
 //Enum of die types,
 const DIE_TYPE = {
     D2:     0,
@@ -58,7 +56,7 @@ MAX_TO_DIE.set(100, DIE_TYPE.D100);
 //Class that defines a player. Players are all connected people to server including gm
 //Player has Die Info for each die type they roll & some other misc data
 class PLAYER {
-    PLAYER_DICE = new Array(DIE_TYPE.length); //Aray of type<DIE_INFO>
+    PLAYER_DICE = new Array(NUM_DIE_TYPES); //Aray of type<DIE_INFO>
     USERNAME = '';
     USERID = 0;
     GM = false;
@@ -66,21 +64,21 @@ class PLAYER {
     constructor(){
         this.USERID = game.user.id;
         this.USERNAME = game.user.name;
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < this.PLAYER_DICE.length; i++) {
             this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
         }
     }
 
     getRolls(dieType){
-        return this.PLAYER_DICE[dieType].ROLLS;
+        return this.PLAYER_DICE[dieType-1].ROLLS;
     }
 
     getDieInfo(dieType){
-        return this.PLAYER_DICE[dieType];
+        return this.PLAYER_DICE[dieType-1];
     }
 
     saveRoll(isBlind, rollVal, dieType){
-        this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind)
+        this.PLAYER_DICE[dieType-1].addRoll(rollVal,isBlind)
     }
 
 }
@@ -107,7 +105,7 @@ class DIE_INFO {
     //Class Constructor function
     //Variable passed in should be max value
     constructor(dieMax = 100){
-        this.TYPE = MAX_TO_TYPE.get(dieMax);
+        this.TYPE = MAX_TO_DIE.get(dieMax);
         this.RECENTROLL =  -1;
         this.STREAK_SIZE = -1;
         this.STREAK_INIT = -1;
@@ -158,17 +156,22 @@ class DIE_INFO {
 
 class DiceStatsTracker {
 
-    ID = 'roll-tracker'
-    ALLPLAYERDATA = new Map();  //Map of all Players <PlayerID, PLAYER> 
+    static ALLPLAYERDATA = new Map();  //Map of all Players <PlayerID, PLAYER> 
+
+    ID = 'die-stats'
     IMGM = false;
     SYSTEM;
     
-    constructor(){
+    static async updateMap(){
         //Add Everyone to storage. Were tracking all even if we dont need
-        game.users.forEach(user => {
-            this.ALLPLAYERDATA.set(user.id,new PLAYER(user.id)) 
-        });
+        for (let user of game.users) {
+            if(!this.ALLPLAYERDATA.has(user.id)){
+                this.ALLPLAYERDATA.set(user.id,new PLAYER(user.id))    
+            }
+        }
+    }
 
+    constructor(){
         //Get Settings and Systtem Info
         // Store the current system, for settings purposes. It has to be set here, and not in the parent
         // class, because the system needs to initialize on foundry boot up before we can get its id
@@ -176,67 +179,66 @@ class DiceStatsTracker {
 
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
-            name: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_SELF}.Name`,
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_SELF}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_SELF}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_SELF}.Hint`,
         })
 
         // A setting to determine whether players can see other players data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_PLAYERS, {
-            name: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Name`,
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Hint`,
         })
 
         // A setting to determine whether players can see gm data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM, {
-            name: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_GM}.Name`,
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_GM}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Hint`,
         })
 
         // A setting to determine whether players can see global data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GLOBAL, {
-            name: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Name`,
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `ROLL-TRACKER.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
         })
 
         // A setting to determine whether players can see streaks at all
         game.settings.register(this.ID, SETTINGS.DISABLE_STREAKS, {
-            name: `ROLL-TRACKER.settings.${SETTINGS.DISABLE_STREAKS}.Name`,
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.DISABLE_STREAKS}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `ROLL-TRACKER.settings.${SETTINGS.DISABLE_STREAKS}.Hint`
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.DISABLE_STREAKS}.Hint`
         })
 
         // A setting to determine whether players can see a streak due to blind roll (default of No)
-        game.settings.register(this.ID, this.SETTINGS.SEE_BLIND_STREAK, {
-            name: `ROLL-TRACKER.settings.${SETTINGS.SEE_BLIND_STREAK}.Name`,
+        game.settings.register(this.ID, SETTINGS.SEE_BLIND_STREAK, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.SEE_BLIND_STREAK}.Name`,
             default: false,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `ROLL-TRACKER.settings.${SETTINGS.SEE_BLIND_STREAK}.Hint`
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.SEE_BLIND_STREAK}.Hint`
         })
     }
 
     parseMessage(msg){
-
         isBlind = msg.isBlind;
 
         //Get die type
@@ -261,8 +263,8 @@ class DiceStatsTracker {
 //==========================================================
 
 class PlayerStatusPage extends FormApplication {
-    TESTSTATS = new DIE_INFO(20);
-    TESTROLLS = new Array[20];
+    static TESTSTATS;
+    static TESTROLLS;
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
@@ -285,19 +287,26 @@ class PlayerStatusPage extends FormApplication {
         // the first argument is the object, the second are the options
         super(userId, options)
         //this.PLAYERDATA = dataObject;
-
-        this.TESTSTATS.ROLLS[0]=25;
-        temp = 50;
-        for (let i = 0; i < this.TESTSTATS.ROLLS.length; i++) {
-            this.TESTSTATS.ROLLS[i] = temp;
-            this.TESTROLLS[i] = temp;
-            temp--;
-            temp--;
-        }
     }
 
-    _render(){
-        
+    getData(){
+        this.TESTROLLS = new Array(20);
+        this.TESTSTATS = new PLAYER();
+
+        let playerRollsAry = this.TESTSTATS.PLAYER_DICE[DIE_TYPE.D20-1].ROLLS;
+        let tempver = 50;
+        for (let i = 0; i < 20; i++) {
+            playerRollsAry[i] = tempver;
+            this.TESTROLLS[i] = tempver;
+            tempver--;
+            tempver--;
+        }
+
+        var dataObject = 
+        {
+            testhandle : playerRollsAry[15].toString()
+        }
+        return dataObject;
     }
     //Player Data * x         
         //D2 Info
@@ -330,13 +339,15 @@ Hooks.once('init', () => {
 
 Hooks.on('renderPlayerList', (playerList, html) => {
     //TODO Incorperate Settings
-    
+
+    //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
+    DiceStatsTracker.updateMap();
     // This add icon to ALL players on the player list
     const tooltip = game.i18n.localize('ROLL-DICE_STATS_TEXT.player-stats-button-title')
     for (let user of game.users) {
         const buttonPlacement = html.find(`[data-user-id="${user.id}"]`)
         buttonPlacement.append(
-            `<button type="button" title='${tooltip}' class="roll-tracker-item-button flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
+            `<button type="button" title='${tooltip}' class="flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
         )
         html.on('click', `#${user.id}`, (event) => {
             new PlayerStatusPage(user.id).render(true);
@@ -344,3 +355,8 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     }
     
 })
+
+
+// Handlebars.registerHelper('testhandle', function (value) {
+//     return "--TEMP TEST VAL--";
+// });

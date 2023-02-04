@@ -1,13 +1,4 @@
-import * as myUtils from    "dice-stats-utils.js";
-import * as myData from     "dice-stats-main.js";
-
-const TEMPLATES = {
-    GLOBALDATA:     'modules/dice-stats/templates/dice-stats-global.hbs',
-    PLAYERDATA:     'modules/dice-stats/templates/dice-stats-player.hbs',
-    STREAKCHATMSG:  'modules/dice-stats/templates/dice-stats-global.hbs',
-    ROLLCHATMSG:    'modules/dice-stats/templates/dice-stats-global.hbs',
-}
-
+/*
 class GlobalStatsPage extends FormApplication {
 
     static get defaultOptions() {
@@ -81,3 +72,4 @@ class PlayerStatusPage extends FormApplication {
             //Mean, Median, Mode
             //Longest Streak
 }
+*/

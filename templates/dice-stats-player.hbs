@@ -18,53 +18,42 @@
 <form>
     <div >
         <ul >
-            <li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{TESTROLLS[0]}}</li>
-            <li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{localize TESTROLLS[1]}}</li>
-            <li>{{TESTROLLS[2]}}</li>
-            <li>{{TESTROLLS[3]}}</li>
-            <li>{{TESTROLLS[4]}}</li>
-            <li>{{TESTROLLS[5]}}</li>
-            <li>{{TESTROLLS[6]}}</li>
-            <li>{{TESTROLLS[7]}}</li>
-            <li>{{TESTROLLS[8]}}</li>
-            <li>{{TESTROLLS[9]}}</li>
-            <li>{{TESTROLLS[10]}}</li>
-            <li>{{TESTROLLS[11]}}</li>
+            <li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{testhandle}}</li>
         </ul>
     </div>
+
     <div class="col">
-        
-        <div class="row">
-            <h1>2D Dice Stats</h1>
-            <canvas id="d4Chart"></canvas>
-            <ul class="roll-tracker-form flexcol">
-                <li>Mean (Avg)</li>
-                <li>Meadian (Middle Number)</li>
-                <li>Mode (Most Common)</li>
-                <li>Longest Streak</li>
-                <li>Put Streak Numbers HERE</li>
-            </ul>
-        </div>
+        <h1>2D Dice Stats</h1>
+        <canvas id="d4Chart"></canvas>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
         <br>
-        <div class="row">
-            <h1>2D Dice Stats</h1>
-            <canvas id="d20Chart"></canvas>
-            <ul class="roll-tracker-form flexcol">
-                <li>Mean (Avg)</li>
-                <li>Meadian (Middle Number)</li>
-                <li>Mode (Most Common)</li>
-                <li>Longest Streak</li>
-                <li>Put Streak Numbers HERE</li>
-            </ul>
-        </div>
+        <h1>2D Dice Stats</h1>
+        <canvas id="d20Chart"></canvas>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
     </div>
-</form>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const mychart = document.getElementById('d2Chart');
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
 
-    new Chart(mychart, {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
         type: 'bar',
         data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -82,4 +71,7 @@
         }
         }
     });
-</script>
+    </script>
+
+</form>
+

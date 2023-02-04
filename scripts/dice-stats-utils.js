@@ -1,9 +1,3 @@
-import * as myMath from     "dice-stats-math.js";
-
-new Stats.PLAYER()
-new MATH.ROLL_MATH()
-ret = MATH.ROLL_MATH.getmode()
-
 //Convert ChartData to a chart object to be displayed
 Handlebars.registerHelper('getChart', function (chartData) {
     //TODO
@@ -37,7 +31,7 @@ class DICE_STATS_UTILS {
     //Build hook hook that waits for A DsN msg then return
     //This funtion returns after Hook is made so this code returns and now were 
     //waiting at the end of promise fn to get our resolve
-    async waitFor3DDiceMessage(targetMessageId) {
+    static async waitFor3DDiceMessage(targetMessageId) {
         function buildHook(resolve) {
             Hooks.once('diceSoNiceRollComplete', (messageId) => {
                 //This code ONLY gets called if a DsN roll completed (async code)
