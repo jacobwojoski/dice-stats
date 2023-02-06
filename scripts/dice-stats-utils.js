@@ -1,27 +1,7 @@
-//Convert Streak data to string to be printed on form
-Handlebars.registerHelper('getPlayerStreak', function (streakData) {
-    //Streakdata Should be 
-        //StreakData.StartPos
-        //StreakData.Length
-});
+
 
 class DICE_STATS_UTILS {
     //Makes an array of all the rolls from every play for a specific die type
-    static makeCombinedArray(players,dieType){
-        outputDieInfo = new DIE_INFO(dieType);
-
-        //For every player get Die rolls
-        for (let i = 0; i < players.length; i++) {
-            info = players[i].getDieInfo(dieType)?.ROLLS;
-            
-
-            for (let j = 0; j < array.length; j++) {
-                outputDieInfo.ROLLS[j] = tempAry[j]+info[j];
-                
-            }
-        }
-        return outputDieInfo;
-    }
 
     //Build hook hook that waits for A DsN msg then return
     //This funtion returns after Hook is made so this code returns and now were 
@@ -53,25 +33,60 @@ class DICE_STATS_UTILS {
         });   
     }
 
-    //DATA = PLAYERS[], dietpe=DIE_TYPE
-    static getGlobalDieStats(players, dietype){
-        combinedAry = [];
+    //Most common
+    //Find index that has the largest value 
+    //result = index+1
+    static getMode(RollsAry){
+        var indexOfMax = 0;
+        var maxValue = 0;
 
-        output = {
-            allUserMean: 0,
-            allUserMedian: 0,
-            allUserMode: 0,
-            totalUserMaxRolls: 0,
-            totalUserMinRolls: 0,
-            totalNumEachRoll:        [],
-
-            mostMaxRollsName:   '',
-            numMaxRolls:        0,
-
-            mostMinRollsName:       '',
-            numMinRolls:        0,
+        for(let i=0; i<RollsAry.length; i++){
+            if(RollsAry[i] > maxValue){
+                indexOfMax = i;
+                maxValue = RollsAry[i];
+            }
         }
 
-        return output
+        return indexOfMax+1;
+    }
+
+    //Average
+    //Becasue array holds number of each roll instead of each roll value math is more anoying
+    static getMean(RollsAry){
+        var numberOfRolls=0;
+        var sum = 0;
+
+        //For every elm in array
+        //Sum = Arrayindex+1(die Roll) * array value(number of times value was rolled)
+        for(let i=0; i<RollsAry.length; i++){
+            numberOfRolls += RollsAry[i];
+            sum = sum+((i+1)*RollsAry[i]);
+        }
+
+        return Math.round(sum/numberOfRolls);
+    }
+
+    //Middle number
+    //Make array of every number we have
+    //Find middle index
+    //Return value at index
+    static getMedian(RollsAry){
+        tempAry = [];
+
+        for(let i=0; i<RollsAry.length; i++){
+            var value = RollsAry[i]; //Number of that roll (i+1)
+            while(value!=0){
+                tempAry.push(i+1);
+                value--;
+            }
+        }
+
+        var middleIndex = tempAry.length/2;
+
+        if(tempAry.length>=middleIndex){
+            return tempAry[i];
+        }else{
+            return 0
+        }
     }
 }

@@ -3,7 +3,6 @@ CLASSOBJ = null;
 
 //----GLOBAL CONST VALUES----
 
-
 //Get access to handlebars stuff
 const TEMPLATES = {
     GLOBALDATAFORM:     'modules/DiceStats/templates/dice-stats-global.hbs',
@@ -14,7 +13,7 @@ const TEMPLATES = {
     ROLLCHATMSGFORM:    'modules/DiceStats/templates/dice-stats-global.hbs',
 }
 
-//Setting will really only impact button functionality everyone stores everyones rolls... for now
+//Currently Every user will store everyone elses data
 const SETTINGS = {
     PLAYERS_SEE_SELF: 'players_see_self',       //If players are allowed to view their stats
     PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either
@@ -24,6 +23,15 @@ const SETTINGS = {
     SEE_BLIND_STREAK: 'see_blind_streaks'              
 }
 
+/**
+ * If more dice types want to be added or number of dice types changed you need to edit the following:
+ * main/NUM_DIE_TYPES
+ * main/DIE_TYPE
+ * main/DIE_MAX
+ * main/MAX_TO_DIE
+ * datapack/PLAYER_HANDL_INFO/DICE_ROLL_DATA
+ * datapack/GLOBAL_HANDL_INFO/DICE_ROLL_DATA
+ */
 const NUM_DIE_TYPES = 9;
 //Enum of die types,
 const DIE_TYPE = {
