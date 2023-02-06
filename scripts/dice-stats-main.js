@@ -365,6 +365,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 })
 
 
+//Helper that is {{testHandle}} var is foubd in handlebars code this callback gets called
 // Handlebars.registerHelper('testhandle', function (value) {
 //     return "--TEMP TEST VAL--";
 // });
