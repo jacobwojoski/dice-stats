@@ -12,8 +12,8 @@
     "compatibleCoreVersion": "10.0.0",
     "scripts": [
         "scripts/dice-stats-main.js",
-        "scripts/dice-stats-math.js",
-        "scripts/dice-stats-charts.js",
+        "scripts/dice-stats-utils.js",
+        "scripts/dice-stats-datapack.js",
         "scripts/chartImport.js"
     ],
     "styles": [

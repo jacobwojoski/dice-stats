@@ -10,7 +10,7 @@ const TEMPLATES = {
     
     //TODO
     STREAKCHATMSGFORM:  'modules/DiceStats/templates/dice-stats-global.hbs',
-    ROLLCHATMSGFORM:    'modules/DiceStats/templates/dice-stats-global.hbs',
+    ROLLCHATMSGFORM:    'modules/DiceStats/templates/dice-stats-global.hbs'
 }
 
 //Currently Every user will store everyone elses data
