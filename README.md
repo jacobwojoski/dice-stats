@@ -21,7 +21,16 @@ Module also allows to view dice stats of the full game (Global stats)
 
 ## Dice Types Supported  
 Tracks multiple dice types. Currently supporting types are:  
-- D2, D3, D4, D6, D8, D10, D12, D20, D100  
+- D2, D3, D4, D6, D8, D10, D12, D20, D100
+
+### Editing Dice Types
+The user can <b>hand</b> edit the dice types saved by editing the following (planned feature to become a setting)
+ * main/NUM_DIE_TYPES 
+ * main/DIE_TYPE
+ * main/DIE_MAX
+ * main/MAX_TO_DIE
+ * datapack/PLAYER_HANDL_INFO/DICE_ROLL_DATA
+ * datapack/GLOBAL_HANDL_INFO/DICE_ROLL_DATA
   
 ## Module Settings options  
 - PLAYERS_SEE_SELF:       Allow Player to see their own data  
@@ -33,9 +42,9 @@ Tracks multiple dice types. Currently supporting types are:
 
 ## Install  
 [Downlaod Zip]() and add to module folder in  
-'''bash
+```bash
 $/Path_to_foundry_Data/Sources/Modules
-'''  
+```  
 ## Usage  
 View Each Players info by selecting icon next to the player in the bottom left  
 ![Access Roll Tracker]()  
