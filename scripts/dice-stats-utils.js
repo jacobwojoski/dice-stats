@@ -1,10 +1,5 @@
-//Convert ChartData to a chart object to be displayed
-Handlebars.registerHelper('getChart', function (chartData) {
-    //TODO
-});
-
 //Convert Streak data to string to be printed on form
-Handlebars.registerHelper('getStreak', function (streakData) {
+Handlebars.registerHelper('getPlayerStreak', function (streakData) {
     //Streakdata Should be 
         //StreakData.StartPos
         //StreakData.Length

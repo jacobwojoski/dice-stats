@@ -2,7 +2,7 @@
 
 PLAYER_HNDL_INFO = 
 {
-
+    
 }
 
 packagePlayerData()

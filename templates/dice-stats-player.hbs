@@ -16,15 +16,20 @@
 <!-- class values associate to css file-->
 
 <form>
+    <head>
+        <script type = "text/javascript">
+            google.charts.load('current', {packages: ['corechart']});     
+        </script>
+    </head>
     <div >
         <ul >
-            <li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{testhandle}}</li>
+            <!--<li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{testhandle}}</li>-->
         </ul>
     </div>
 
     <div class="col">
-        <h1>2D Dice Stats</h1>
-        <canvas id="d4Chart"></canvas>
+        <h1>D-2 (COIN) Stats</h1>
+        <div id = "d2Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
         <ul class="flexcol">
             <li>Mean (Avg)</li>
             <li>Meadian (Middle Number)</li>
@@ -33,8 +38,93 @@
             <li>Put Streak Numbers HERE</li>
         </ul>
         <br>
-        <h1>2D Dice Stats</h1>
-        <canvas id="d20Chart"></canvas>
+
+        <h1>D-3 (Fate) Stats</h1>
+        <div id = "d3Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
+
+        <br>
+        
+        <h1>D-4 Stats</h1>
+        <div id = "d4Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
+
+        <br>
+        
+        <h1>D-6 Stats</h1>
+        <div id = "d6Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
+
+        <br>
+        
+        <h1>D-8 Stats</h1>
+        <div id = "d8Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
+
+        <br>
+        
+        <h1>D-10 Stats</h1>
+        <div id = "d10Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
+
+        <br>
+        
+        <h1>D-12 Stats</h1>
+        <div id = "d12Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
+
+        <br>
+        
+        <h1>D-20 Stats</h1>
+        <div id = "d20Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+        <ul class="flexcol">
+            <li>Mean (Avg)</li>
+            <li>Meadian (Middle Number)</li>
+            <li>Mode (Most Common)</li>
+            <li>Longest Streak</li>
+            <li>Put Streak Numbers HERE</li>
+        </ul>
+
+        <br>
+        
+        <h1>D-100 Stats</h1>
+        <div id = "d100Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
         <ul class="flexcol">
             <li>Mean (Avg)</li>
             <li>Meadian (Middle Number)</li>
@@ -44,33 +134,58 @@
         </ul>
     </div>
 
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
+    <script language = "JavaScript">
+        function drawChartd2() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+                ['Die Number', 'Number Of rolls'],
+                ['1',  5],
+                ['2',  9]
+            ]);
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            var options = {title: 'D-2 Roll Data'}; 
 
-    <script>
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-        }]
-        },
-        options: {
-        scales: {
-            y: {
-            beginAtZero: true
-            }
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d2Chart'));
+            chart.draw(data, options);
         }
+
+        function drawChartd3() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+                ['Die Number', 'Number Of rolls'],
+                ['1',  5],
+                ['2',  2],
+                ['3',  2]
+            ]);
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d3Chart'));
+            chart.draw(data);
         }
-    });
+
+        /*
+        function drawChartd4() {}
+        function drawChartd6() {}
+        function drawChartd8() {}
+        function drawChartd10() {}
+        function drawChartd12() {}
+        function drawChartd20() {}
+        function drawChartd100() {}
+        */
+
+        google.charts.setOnLoadCallback(drawChartd2);
+        google.charts.setOnLoadCallback(drawChartd3);
+
+        /*
+        google.charts.setOnLoadCallback(drawChartd4);
+        google.charts.setOnLoadCallback(drawChartd6);
+        google.charts.setOnLoadCallback(drawChartd8);
+        google.charts.setOnLoadCallback(drawChartd10);
+        google.charts.setOnLoadCallback(drawChartd12);
+        google.charts.setOnLoadCallback(drawChartd20);
+        google.charts.setOnLoadCallback(drawChartd100);
+        */
     </script>
 
 </form>
