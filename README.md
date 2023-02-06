@@ -53,6 +53,7 @@ Streaks are included in both plater and global data displays
 ## Planned Features  
 - Bar Graph to display Dice Results (In Progress)  
 - Output to Chat how many Nat1 & 20's have been rolled by that player when one gets rolled  
+- Output to chat Lows and Highs for some other die types. Maybe just milestone numbers? EX Multiple of 5's on a d4 or d6 (10th 1, 15th 5)?  
 - Streaks in Both Direction  
 - Implement Google charts better (Add as Lib instead?)  
 - Export data to be saved (Prolly Export as JSON)  
