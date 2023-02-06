@@ -57,6 +57,7 @@ Streaks are included in both plater and global data displays
 - Implement Google charts better (Add as Lib instead?)  
 - Export data to be saved (Prolly Export as JSON)  
 - Import Data to reload old values?  
-- Player Loads history if they join game late  
+- Player Loads history if they join game late
+- Setting to choose which dice are tracked
 
 
