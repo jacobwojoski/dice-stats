@@ -6,14 +6,21 @@ class DATA_PACKAGER
     PLAYER_HNDL_INFO = 
     {
         //Arrays Use DIE_TYPE to get values for specific dice
-        MEAN:[],
-        MEDIAN:[],
-        MODE:[],
-        STREAK:[], //Array of strings
-        S_IS_B:[],
+        MEAN:   [],
+        MEDIAN: [],
+        MODE:   [],
+        STREAK: [], //Array of strings
+        S_IS_B: [],
 
-        //2D array to hold Dice Roll Data
-        DICE_ROLL_DATA:[[],[],[],[],[],[],[],[],[]]
+        D2_ROLL_DATA:   [],
+        D3_ROLL_DATA:   [],
+        D4_ROLL_DATA:   [],
+        D6_ROLL_DATA:   [],
+        D8_ROLL_DATA:   [],
+        D10_ROLL_DATA:  [],
+        D12_ROLL_DATA:  [],
+        D20_ROLL_DATA:  [],
+        D100_ROLL_DATA: [],
     }
 
     GLOBAL_HNDL_INFO = 
@@ -32,24 +39,49 @@ class DATA_PACKAGER
         ROLLED_MOST_MIN_PLAYER:[],
         ROLLED_MOST_MIN_ROLLCOUNT:[],
 
-        //2D array to hold Dice Roll Data
-        DICE_ROLL_DATA:[[],[],[],[],[],[],[],[],[]]
+        D2_ROLL_DATA:   [],
+        D3_ROLL_DATA:   [],
+        D4_ROLL_DATA:   [],
+        D6_ROLL_DATA:   [],
+        D8_ROLL_DATA:   [],
+        D10_ROLL_DATA:  [],
+        D12_ROLL_DATA:  [],
+        D20_ROLL_DATA:  [],
+        D100_ROLL_DATA: [],
     }
 
     //Turn PLAYER Object into Handlebars Readable data Object
     //Unsed in player.hbs
     static packagePlayerData(playerInfo)
     {   
-        packedData = new PLAYER_HNDL_INFO;
-        for(die in DIE_TYPE){
+        let packedData = {};
+        Object.assign(packedData, this.PLAYER_HNDL_INFO);
+
+        packedData.D2_ROLL_DATA =      [...playerInfo.PLAYER_DICE[0].ROLLS];
+        packedData.D3_ROLL_DATA =      [...playerInfo.PLAYER_DICE[1].ROLLS];
+        packedData.D4_ROLL_DATA =      [...playerInfo.PLAYER_DICE[2].ROLLS];
+        packedData.D6_ROLL_DATA =      [...playerInfo.PLAYER_DICE[3].ROLLS];
+        packedData.D8_ROLL_DATA =      [...playerInfo.PLAYER_DICE[4].ROLLS];
+        packedData.D10_ROLL_DATA =     [...playerInfo.PLAYER_DICE[5].ROLLS];
+        packedData.D12_ROLL_DATA =     [...playerInfo.PLAYER_DICE[6].ROLLS];
+        packedData.D20_ROLL_DATA =     [...playerInfo.PLAYER_DICE[7].ROLLS];
+        packedData.D100_ROLL_DATA =    [...playerInfo.PLAYER_DICE[8].ROLLS];
+
+        packedData.MEAN =   new Array(9);
+        packedData.MEDIAN = new Array(9);
+        packedData.MODE =   new Array(9);
+        packedData.STREAK = new Array(9);
+        packedData.S_IS_B = new Array(9);
+
+        for(let die=0; die<9; die++){
             playerInfo.PLAYER_DICE[die].calculate();
             packedData.MEAN[die] = playerInfo.PLAYER_DICE[die].MEAN;
             packedData.MEDIAN[die] = playerInfo.PLAYER_DICE[die].MEDIAN;
             packedData.MODE[die] = playerInfo.PLAYER_DICE[die].MODE;
-            packedData.DICE_ROLL_DATA[die] = [...playerInfo.PLAYER_DICE[die].ROLLS];
             packedData.STREAK[die] = playerInfo.getStreakString(die);
             packedData.S_IS_B[die] = playerInfo.PLAYER_DICE[die].STREAK_ISBLIND;
         }
+        
         return packedData;
     }
 

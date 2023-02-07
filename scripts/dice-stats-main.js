@@ -117,17 +117,14 @@ class DIE_INFO {
 
     addRoll(roll, isBlind){
         this.RECENTROLL = roll;
-        this.ROLLS[roll-1] = this.ROLLS[roll-1]++;
+        this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
         this.updateStreak(roll, isBlind)
-
-        //Return number of those rolls
-        return this.ROLLS[roll-1];
     }
 
     calculate(){
-        this.MEAN = ROLL_MATH.getMean(this.ROLLS);
-        this.MEDIAN = ROLL_MATH.getMedian(this.ROLLS);
-        this.MODE = ROLL_MATH.getMode(this.ROLLS);
+        this.MEAN = DICE_STATS_UTILS.getMean(this.ROLLS);
+        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ROLLS);
+        this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
     }
 }
 
@@ -179,17 +176,17 @@ class PLAYER {
 
 class DiceStatsTracker {
 
-    static ALLPLAYERDATA = new Map();  //Map of all Players <PlayerID, PLAYER> 
+    ALLPLAYERDATA;  //Map of all Players <PlayerID, PLAYER> 
 
     ID = 'die-stats'
     IMGM = false;
     SYSTEM;
     
-    static async updateMap(){
+    updateMap(){
         //Add Everyone to storage. Were tracking all even if we dont need
         for (let user of game.users) {
             if(!this.ALLPLAYERDATA.has(user.id)){
-                this.ALLPLAYERDATA.set(user.id,new PLAYER(user.id))    
+                this.ALLPLAYERDATA.set(user.id, new PLAYER(user.id))    
             }
         }
     }
@@ -199,6 +196,7 @@ class DiceStatsTracker {
         // Store the current system, for settings purposes. It has to be set here, and not in the parent
         // class, because the system needs to initialize on foundry boot up before we can get its id
         this.SYSTEM = `${game.system.id}`
+        this.ALLPLAYERDATA = new Map();
 
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
@@ -262,18 +260,18 @@ class DiceStatsTracker {
     }
 
     parseMessage(msg){
-        isBlind = msg.isBlind;
+        let isBlind = msg.blind;
 
         //Get die type
-        sides = rolls[0]?.dice[0].faces
-        type = MAX_TO_DIE.get(sides);
-        newNumbers = [];
+        let sides = msg.rolls[0]?.dice[0].faces
+        let dieType = MAX_TO_DIE.get(sides);
+        let newNumbers = [];
 
-        //TODO add check if we should store other ppls data?. Could help with player perf
+        //TODO add check here if we should store other ppls data?. Could help with player performance?
 
         //In case there's more than one die rolled in a single instance as in fortune/misfortune rolls or multiple hit dice
-        newNumbers = rollData.dice[0].results.map(result => result.result)
-        playerInfo = this.ALLPLAYERDATA.get(msg.user.id);
+        newNumbers = msg.rolls[0].dice[0].results.map(result => result.result)
+        let playerInfo = this.ALLPLAYERDATA.get(msg.user.id);
 
         newNumbers.forEach(element => {
             playerInfo.saveRoll(isBlind, element, dieType)
@@ -288,6 +286,7 @@ class DiceStatsTracker {
 class PlayerStatusPage extends FormApplication {
     static TESTSTATS;
     static TESTROLLS;
+    SEL_PLAYER = 0;
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
@@ -309,27 +308,17 @@ class PlayerStatusPage extends FormApplication {
     constructor(userId, options={}, dataObject = null) {  
         // the first argument is the object, the second are the options
         super(userId, options)
+        this.SEL_PLAYER = userId;
         //this.PLAYERDATA = dataObject;
     }
 
     getData(){
-        this.TESTROLLS = new Array(20);
-        this.TESTSTATS = new PLAYER();
-
-        let playerRollsAry = this.TESTSTATS.PLAYER_DICE[DIE_TYPE.D20].ROLLS;
-        let tempver = 50;
-        for (let i = 0; i < 20; i++) {
-            playerRollsAry[i] = tempver;
-            this.TESTROLLS[i] = tempver;
-            tempver--;
-            tempver--;
+        if(CLASSOBJ.ALLPLAYERDATA.has(this.SEL_PLAYER)){
+            let playerObj = CLASSOBJ.ALLPLAYERDATA.get(this.SEL_PLAYER);
+            var dataObject = DATA_PACKAGER.packagePlayerData(playerObj);
+            return dataObject;
         }
-
-        var dataObject = 
-        {
-            testhandle : playerRollsAry[15].toString()
-        }
-        return dataObject;
+        return DATA_PACKAGER.PLAYER_HNDL_INFO;
     }
     //Player Data * x         
         //D2 Info
@@ -351,7 +340,6 @@ Hooks.on('createChatMessage', (chatMessage) => {
     //check if fate (3 sided) and coin (2 sided) count as rolls or if somethign special is needed
     if (chatMessage.isRoll) {
         CLASSOBJ.parseMessage(chatMessage)
-        CLASSOBJ.displayStreak();
     }
 })
 
@@ -364,14 +352,18 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     //TODO Incorperate Settings
 
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
-    DiceStatsTracker.updateMap();
+    CLASSOBJ.updateMap();
     // This add icon to ALL players on the player list
     const tooltip = game.i18n.localize('ROLL-DICE_STATS_TEXT.player-stats-button-title')
     for (let user of game.users) {
+
+        //add user ID to associated button
         const buttonPlacement = html.find(`[data-user-id="${user.id}"]`)
         buttonPlacement.append(
             `<button type="button" title='${tooltip}' class="stats flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
         )
+
+        //Create button with eacu user id 
         html.on('click', `#${user.id}`, (event) => {
             new PlayerStatusPage(user.id).render(true);
         })

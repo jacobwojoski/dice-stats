@@ -71,7 +71,7 @@ class DICE_STATS_UTILS {
     //Find middle index
     //Return value at index
     static getMedian(RollsAry){
-        tempAry = [];
+        let tempAry = [];
 
         for(let i=0; i<RollsAry.length; i++){
             var value = RollsAry[i]; //Number of that roll (i+1)
@@ -84,7 +84,7 @@ class DICE_STATS_UTILS {
         var middleIndex = tempAry.length/2;
 
         if(tempAry.length>=middleIndex){
-            return tempAry[i];
+            return tempAry[middleIndex];
         }else{
             return 0
         }
