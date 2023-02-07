@@ -374,7 +374,13 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 })
 
 
-//Helper that is {{testHandle}} var is foubd in handlebars code this callback gets called
-// Handlebars.registerHelper('testhandle', function (value) {
-//     return "--TEMP TEST VAL--";
-// });
+//handlebars fn used to tell if a die was rolled. 
+//If not display something different then charts and dice stats
+Handlebars.registerHelper('ifDieUsed', function (var1, options) {
+    if(var1 != 0){
+        return options.fn(this);
+    }else{
+        return options.inverse(this);
+    }
+    return "--TEMP TEST VAL--";
+});
