@@ -12,6 +12,7 @@ class DATA_PACKAGER
         STREAK: [], //Array of strings
         S_IS_B: [],
 
+        TOTAL_ROLLS:    [],
         D2_ROLL_DATA:   [],
         D3_ROLL_DATA:   [],
         D4_ROLL_DATA:   [],
@@ -67,6 +68,7 @@ class DATA_PACKAGER
         packedData.D20_ROLL_DATA =     [...playerInfo.PLAYER_DICE[7].ROLLS];
         packedData.D100_ROLL_DATA =    [...playerInfo.PLAYER_DICE[8].ROLLS];
 
+        packedData.TOTAL_ROLLS = new Array(9);
         packedData.MEAN =   new Array(9);
         packedData.MEDIAN = new Array(9);
         packedData.MODE =   new Array(9);
@@ -74,6 +76,7 @@ class DATA_PACKAGER
         packedData.S_IS_B = new Array(9);
 
         for(let die=0; die<9; die++){
+            packedData.TOTAL_ROLLS[die] = playerInfo.PLAYER_DICE[0].TOTAL_ROLLS;
             playerInfo.PLAYER_DICE[die].calculate();
             packedData.MEAN[die] = playerInfo.PLAYER_DICE[die].MEAN;
             packedData.MEDIAN[die] = playerInfo.PLAYER_DICE[die].MEDIAN;

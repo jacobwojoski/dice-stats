@@ -67,6 +67,7 @@ MAX_TO_DIE.set(100, DIE_TYPE.D100);
 //Ex, D20 roll was 16 -> Rolls[(16-1)]++;
 class DIE_INFO {
     TYPE =          0;  //Type of die <DIE_TYPE> varable
+    TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
     RECENTROLL =    -1;
     STREAK_SIZE =   -1;
@@ -118,6 +119,7 @@ class DIE_INFO {
     addRoll(roll, isBlind){
         this.RECENTROLL = roll;
         this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
+        this.TOTAL_ROLLS++;
         this.updateStreak(roll, isBlind)
     }
 
