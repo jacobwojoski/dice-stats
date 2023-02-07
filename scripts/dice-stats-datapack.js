@@ -10,6 +10,7 @@ class DATA_PACKAGER
         MEDIAN:[],
         MODE:[],
         STREAK:[], //Array of strings
+        S_IS_B:[],
 
         //2D array to hold Dice Roll Data
         DICE_ROLL_DATA:[[],[],[],[],[],[],[],[],[]]
@@ -23,7 +24,8 @@ class DATA_PACKAGER
         MODE:[],
 
         STREAK_PLAYER:[],//Array of Player Names
-        STREAK:[], //Array of Strings [..."3,4,5,6", "4,5,6,7"...] 
+        STREAK:[], //Array of Strings [..."3,4,5,6", "4,5,6,7"...]
+        S_IS_B:[], //Array of boolians to indicate if streak is blind 
 
         ROLLED_MOST_MAX_PLAYER:[],
         ROLLED_MOST_MAX_ROLLCOUNT:[],
@@ -37,8 +39,18 @@ class DATA_PACKAGER
     //Turn PLAYER Object into Handlebars Readable data Object
     //Unsed in player.hbs
     static packagePlayerData(playerInfo)
-    {
-        return PLAYER_HNDL_INFO;
+    {   
+        packedData = new PLAYER_HNDL_INFO;
+        for(die in DIE_TYPE){
+            playerInfo.PLAYER_DICE[die].calculate();
+            packedData.MEAN[die] = playerInfo.PLAYER_DICE[die].MEAN;
+            packedData.MEDIAN[die] = playerInfo.PLAYER_DICE[die].MEDIAN;
+            packedData.MODE[die] = playerInfo.PLAYER_DICE[die].MODE;
+            packedData.DICE_ROLL_DATA[die] = [...playerInfo.PLAYER_DICE[die].ROLLS];
+            packedData.STREAK[die] = playerInfo.getStreakString(die);
+            packedData.S_IS_B[die] = playerInfo.PLAYER_DICE[die].STREAK_ISBLIND;
+        }
+        return packedData;
     }
 
 

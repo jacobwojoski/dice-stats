@@ -17,8 +17,7 @@
         "scripts/chartImport.js"
     ],
     "styles": [
-        "styles/dice-stats.css",
-        "styles/roll-tracker.css"
+        "styles/dice-stats.css"
     ],
     "languages": [
         {

@@ -61,37 +61,6 @@ MAX_TO_DIE.set(20,  DIE_TYPE.D20);
 MAX_TO_DIE.set(100, DIE_TYPE.D100);
 //---- END GLOBAL CONST ----
 
-//Class that defines a player. Players are all connected people to server including gm
-//Player has Die Info for each die type they roll & some other misc data
-class PLAYER {
-    PLAYER_DICE = new Array(NUM_DIE_TYPES); //Aray of type<DIE_INFO>
-    USERNAME = '';
-    USERID = 0;
-    GM = false;
-
-    constructor(){
-        this.USERID = game.user.id;
-        this.USERNAME = game.user.name;
-        for (let i = 0; i < this.PLAYER_DICE.length; i++) {
-            this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
-        }
-    }
-
-    getRolls(dieType){
-        return this.PLAYER_DICE[dieType-1].ROLLS;
-    }
-
-    getDieInfo(dieType){
-        return this.PLAYER_DICE[dieType-1];
-    }
-
-    saveRoll(isBlind, rollVal, dieType){
-        this.PLAYER_DICE[dieType-1].addRoll(rollVal,isBlind)
-    }
-
-}
-
-
 //Storage Class for Each Die
 //Die rolls are stored in array thats size of the die type 
 //That way can just incrament each position rather then store array of increasing size
@@ -160,6 +129,52 @@ class DIE_INFO {
         this.MEDIAN = ROLL_MATH.getMedian(this.ROLLS);
         this.MODE = ROLL_MATH.getMode(this.ROLLS);
     }
+}
+
+//Class that defines a player. Players are all connected people to server including gm
+//Player has Die Info for each die type they roll & some other misc data
+class PLAYER {
+    PLAYER_DICE = new Array(NUM_DIE_TYPES); //Aray of type<DIE_INFO>
+    USERNAME = '';
+    USERID = 0;
+    GM = false;
+
+    constructor(){
+        this.USERID = game.user.id;
+        this.USERNAME = game.user.name;
+        for (let i = 0; i < this.PLAYER_DICE.length; i++) {
+            this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
+        }
+    }
+
+    getStreakString(dieType){
+        let len = this.PLAYER_DICE[dieType].LONGEST_STREAK
+        let initNum = this.PLAYER_DICE[dieType].LONGEST_STREAK_INIT
+        let nextNum = 0;
+        if(len === -1){
+            return "NO DICE ROLLED"
+        }else{
+            let tempStr = initNum.toString();
+            for(let i=0; i<len; i++){
+                nextNum = initNum+i+1;
+                tempStr = tempStr+','+nextNum.toString();
+            }
+            return tempStr;
+        }
+    }
+
+    getRolls(dieType){
+        return this.PLAYER_DICE[dieType].ROLLS;
+    }
+
+    getDieInfo(dieType){
+        return this.PLAYER_DICE[dieType];
+    }
+
+    saveRoll(isBlind, rollVal, dieType){
+        this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind)
+    }
+
 }
 
 class DiceStatsTracker {
@@ -301,7 +316,7 @@ class PlayerStatusPage extends FormApplication {
         this.TESTROLLS = new Array(20);
         this.TESTSTATS = new PLAYER();
 
-        let playerRollsAry = this.TESTSTATS.PLAYER_DICE[DIE_TYPE.D20-1].ROLLS;
+        let playerRollsAry = this.TESTSTATS.PLAYER_DICE[DIE_TYPE.D20].ROLLS;
         let tempver = 50;
         for (let i = 0; i < 20; i++) {
             playerRollsAry[i] = tempver;
@@ -355,7 +370,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     for (let user of game.users) {
         const buttonPlacement = html.find(`[data-user-id="${user.id}"]`)
         buttonPlacement.append(
-            `<button type="button" title='${tooltip}' class="flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
+            `<button type="button" title='${tooltip}' class="stats flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
         )
         html.on('click', `#${user.id}`, (event) => {
             new PlayerStatusPage(user.id).render(true);
