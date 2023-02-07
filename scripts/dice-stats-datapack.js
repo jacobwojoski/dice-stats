@@ -76,8 +76,9 @@ class DATA_PACKAGER
         packedData.S_IS_B = new Array(9);
 
         for(let die=0; die<9; die++){
-            packedData.TOTAL_ROLLS[die] = playerInfo.PLAYER_DICE[0].TOTAL_ROLLS;
             playerInfo.PLAYER_DICE[die].calculate();
+            
+            packedData.TOTAL_ROLLS[die] = playerInfo.PLAYER_DICE[die].TOTAL_ROLLS;
             packedData.MEAN[die] = playerInfo.PLAYER_DICE[die].MEAN;
             packedData.MEDIAN[die] = playerInfo.PLAYER_DICE[die].MEDIAN;
             packedData.MODE[die] = playerInfo.PLAYER_DICE[die].MODE;

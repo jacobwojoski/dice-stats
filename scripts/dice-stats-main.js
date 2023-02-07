@@ -382,5 +382,14 @@ Handlebars.registerHelper('ifDieUsed', function (var1, options) {
     }else{
         return options.inverse(this);
     }
-    return "--TEMP TEST VAL--";
+});
+
+//Handlebars fn used to see if a streak had a blind roll in it.
+//If there was a blind roll we dont want to potentally point the result so dont display it for now
+Handlebars.registerHelper('ifStreakIsBlind', function (var1, options) {
+    if(var1 != true){
+        return options.fn(this);
+    }else{
+        return options.inverse(this);
+    }
 });

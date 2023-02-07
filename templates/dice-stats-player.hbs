@@ -16,161 +16,204 @@
     </div>
 
     <div class="col">
-        <h1>D-2 (COIN) Stats</h1>
         {{#ifDieUsed TOTAL_ROLLS.[0] }}
+        <h1>D-2 (COIN) Stats</h1>
             <div id = "d2Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[0]}}</li>
                 <li>Mean (Avg)              {{MEAN.[0]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[0]}}</li>
                 <li>Mode (Most Common)      {{MODE.[0]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[0]}}
                     <li>Longest Streak          {{STREAK.[0]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
         <br>
 
-        <h1>D-3 (Fate) Stats</h1>
         {{#ifDieUsed TOTAL_ROLLS.[1] }}
+        <h1>D-3 (Fate) Stats</h1>
             <div id = "d3Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[1]}}</li>
                 <li>Mean (Avg)              {{MEAN.[1]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[1]}}</li>
                 <li>Mode (Most Common)      {{MODE.[1]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[1]}}
                     <li>Longest Streak          {{STREAK.[1]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
         <br>
         
-        <h1>D-4 Stats</h1>
         {{#ifDieUsed TOTAL_ROLLS.[2] }}
+        <h1>D-4 Stats</h1>
             <div id = "d4Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[2]}}</li>
                 <li>Mean (Avg)              {{MEAN.[2]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[2]}}</li>
                 <li>Mode (Most Common)      {{MODE.[2]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[2]}}
                     <li>Longest Streak          {{STREAK.[2]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
         <br>
         
-        <h1>D-6 Stats</h1>
         {{#ifDieUsed TOTAL_ROLLS.[3] }}
+        <h1>D-6 Stats</h1>
             <div id = "d6Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[3]}}</li>
                 <li>Mean (Avg)              {{MEAN.[3]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[3]}}</li>
                 <li>Mode (Most Common)      {{MODE.[3]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[3]}}
                     <li>Longest Streak          {{STREAK.[3]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
         <br>
         
-        <h1>D-8 Stats</h1>
         {{#ifDieUsed TOTAL_ROLLS.[4] }}
+        <h1>D-8 Stats</h1>
             <div id = "d8Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[4]}}</li>
                 <li>Mean (Avg)              {{MEAN.[4]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[4]}}</li>
                 <li>Mode (Most Common)      {{MODE.[4]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[4]}}
                     <li>Longest Streak          {{STREAK.[4]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
         <br>
         
+        {{#ifDieUsed TOTAL_ROLLS.[5] }}
         <h1>D-10 Stats</h1>
-        <div id = "d10Chart" style = "width: 550px; height: 400px; margin: 0 auto"></div>
-        <ul class="flexcol">
-            <li>Mean (Avg)              {{MEAN.[5]}}</li>
-            <li>Meadian (Middle Number) {{MEDIAN.[5]}}</li>
-            <li>Mode (Most Common)      {{MODE.[5]}}</li>
-            <li>Longest Streak          {{STREAK.[5]}}</li>
-        </ul>
+            <div id = "d10Chart" class="chart-dice-stats"></div>
+            <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[5]}}</li>
+                <li>Mean (Avg)              {{MEAN.[5]}}</li>
+                <li>Meadian (Middle Number) {{MEDIAN.[5]}}</li>
+                <li>Mode (Most Common)      {{MODE.[5]}}</li>
+                {{#ifStreakIsBlind S_IS_B.[5]}}
+                    <li>Longest Streak          {{STREAK.[5]}}</li>
+                {{else}}
+                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                {{/ifStreakIsBlind}}
+            </ul>
+        {{/ifDieUsed}}
         <br>
         
+        {{#ifDieUsed TOTAL_ROLLS.[6] }}
         <h1>D-12 Stats</h1>
-        {{#ifDieUsed TOTAL_ROLLS.[0] }}
             <div id = "d12Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[6]}}</li>
                 <li>Mean (Avg)              {{MEAN.[6]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[6]}}</li>
                 <li>Mode (Most Common)      {{MODE.[6]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[6]}}
                     <li>Longest Streak          {{STREAK.[6]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
         <br>
         
+        {{#ifDieUsed TOTAL_ROLLS.[7] }}
         <h1>D-20 Stats</h1>
-        {{#ifDieUsed TOTAL_ROLLS.[0] }}
             <div id = "d20Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[7]}}</li>
                 <li>Mean (Avg)              {{MEAN.[7]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[7]}}</li>
                 <li>Mode (Most Common)      {{MODE.[7]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[7]}}
                     <li>Longest Streak          {{STREAK.[7]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
         <br>
         
-        <h1>D-100 Stats</h1>
         {{#ifDieUsed TOTAL_ROLLS.[8] }}
+        <h1>D-20 Stats</h1>
             <div id = "d100Chart" class="chart-dice-stats"></div>
             <ul class="flexcol">
+                <li>Total Rolls             {{TOTAL_ROLLS.[8]}}</li>
                 <li>Mean (Avg)              {{MEAN.[8]}}</li>
                 <li>Meadian (Middle Number) {{MEDIAN.[8]}}</li>
                 <li>Mode (Most Common)      {{MODE.[8]}}</li>
-                {{#ifStreakIsBlind}}
+                {{#ifStreakIsBlind S_IS_B.[8]}}
                     <li>Longest Streak          {{STREAK.[8]}}</li>
                 {{else}}
                     <li>Streak Has Blind Rolls. Hideing Streak Info</li>
-                {{/ifStreak}}
+                {{/ifStreakIsBlind}}
             </ul>
-        {{else}}
-            <p>Die Was Never Rolled</p>
         {{/ifDieUsed}}
     </div>
 
     <script language = "JavaScript">
+        var chartOptions = {
+            //NOTE:Couldn't adjust "hAxis.baseline" to make it thicker
+            backgroundColor:{
+                fill: '#faf0e1',
+                fillOpacity: 0.1,
+            },
+            chartArea:{
+                backgroundColor:{
+                //stroke: 'black',
+                //strokeWidth: 5,
+                fill: '#faf0e1',
+                fillOpacity: 0.1,
+                },
+            },
+            hAxis: {
+                title: 'Die Number',
+                titleTextStyle:{
+                    fontSize:20,
+                },
+                textStyle:{
+                    fontSize: 12,
+                },
+                gridlines:{
+                    color:'black',
+                },
+            },
+            vAxis: {
+                title: 'Number Of Rolls',
+                titleTextStyle:{
+                    fontSize:20,
+                },
+                textStyle:{
+                    fontSize: 15,
+                },
+                gridlines:{
+                    color:'black',
+                },
+                minorGridlines:{
+                    color:'black',
+                },
+            },
+            legend: 'none',
+        }
+
         function drawChartd2() {
             // Define the chart to be drawn.
             var data = google.visualization.arrayToDataTable([
@@ -197,7 +240,7 @@
 
             // Instantiate and draw the chart.
             var chart = new google.visualization.ColumnChart(document.getElementById('d3Chart'));
-            chart.draw(data);
+            chart.draw(data, chartOptions);
         }
 
         function drawChartd4() {
@@ -211,8 +254,8 @@
             ]);
 
             // Instantiate and draw the chart.
-            var chart = new google.visualization.ColumnChart(document.getElementById('d20Chart'));
-            chart.draw(data);
+            var chart = new google.visualization.ColumnChart(document.getElementById('d4Chart'));
+            chart.draw(data, chartOptions);
         }
 
         function drawChartd20() {
@@ -243,7 +286,7 @@
 
             // Instantiate and draw the chart.
             var chart = new google.visualization.ColumnChart(document.getElementById('d20Chart'));
-            chart.draw(data);
+            chart.draw(data, chartOptions);
         }
 
         /*

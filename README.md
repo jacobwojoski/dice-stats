@@ -1,4 +1,4 @@
-# Dice Stats (In Development)
+# Dice Stats (In Development) Settings Dont Work Yet
 A foundry vtt module to view dice stats of every player including the gm.  
 Currently stats are stored by parsing chat. If the user joins the game late  
 they will only get data from that point on  
@@ -31,6 +31,8 @@ The user can <b>hand</b> edit the dice types saved by editing the following (pla
  * main/MAX_TO_DIE
  * datapack/PLAYER_HANDL_INFO/DICE_ROLL_DATA
  * datapack/GLOBAL_HANDL_INFO/DICE_ROLL_DATA
+ * dice-stats-player //Lots of changes would need to be made here as I dont know good way to implement loops in handlebars 
+    * (Could prolly make a fn that returns an HTML string or some shit tho)
   
 ## Module Settings options  
 - PLAYERS_SEE_SELF:       Allow Player to see their own data  
