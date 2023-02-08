@@ -62,7 +62,8 @@ Streaks are included in both plater and global data displays
 ![Streaks]()  
   
 ## Planned Features  
-- Bar Graph to display Dice Results (In Progress)  
+- ~~ Add Charts~~ (Done)
+- Global Stats
 - Output to Chat how many Nat1 & 20's have been rolled by that player when one gets rolled  
 - Output to chat Lows and Highs for some other die types. Maybe just milestone numbers? EX Multiple of 5's on a d4 or d6 (10th 1, 15th 5)?  
 - Streaks in Both Direction  
@@ -70,6 +71,17 @@ Streaks are included in both plater and global data displays
 - Export data to be saved (Prolly Export as JSON)  
 - Import Data to reload old values?  
 - Player Loads history if they join game late
-- Setting to choose which dice are tracked
+- Setting to choose which dice are tracked (checkboxes w/ grayed out checks if no dice of that type are rolled)
+- Add Refresh button on dice stats page
+- Support more die types
+- Implement Settings
+    - PLAYERS_SEE_SELF
+    - PLAYERS_SEE_PLAYERS 
+    - ~~PLAYERS_SEE_GM~~ (Done)
+    - PLAYERS_SEE_GLOBAL  
+    - DISABLE_STREAKS    
+    - SEE_BLIND_STREAK
+- ~~Make Settings have their own tab instead of being under "undefined"~~ (Done)
+- Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though
 
 

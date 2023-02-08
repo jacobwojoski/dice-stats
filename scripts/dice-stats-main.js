@@ -3,6 +3,8 @@ CLASSOBJ = null;
 
 //----GLOBAL CONST VALUES----
 
+const MODULE_ID = 'DiceStats'
+
 //Get access to handlebars stuff
 const TEMPLATES = {
     GLOBALDATAFORM:     'modules/DiceStats/templates/dice-stats-global.hbs',
@@ -179,7 +181,7 @@ class PLAYER {
 class DiceStatsTracker {
     ALLPLAYERDATA;  //Map of all Players <PlayerID, PLAYER> 
 
-    ID = 'die-stats'
+    ID = 'DiceStats'
     IMGM = false;
     SYSTEM;
     
@@ -204,8 +206,8 @@ class DiceStatsTracker {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_SELF}.Name`,
             default: true,
             type: Boolean,
-            scope: 'world',
-            config: true,
+            scope: 'world', //world = db, client = local
+            config: true,   // show in module config
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_SELF}.Hint`,
         })
 
@@ -358,7 +360,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
         //Create button with eacu user id 
         html.on('click', `#${user.id}`, (event) => {
-            let canSeeGM = game.settings.get('die-stats',SETTINGS.PLAYERS_SEE_GM);
+            let canSeeGM = game.settings.get(MODULE_ID,SETTINGS.PLAYERS_SEE_GM);
             let amIGM = game.users.get(game.userId)?.isGM;
             if(canSeeGM === false && user.isGM && !amIGM){
                 //do nothing, Dont allow ability to see gm data if setting is off
