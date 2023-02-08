@@ -2,6 +2,10 @@
 
 class DATA_PACKAGER
 {
+    //======================================================
+    //================ Handlebars Data =====================
+    //======================================================
+    
     //Data displayed on the Player Handlebars Template Page
     PLAYER_HNDL_INFO = 
     {
@@ -37,11 +41,14 @@ class DATA_PACKAGER
         STREAK:[], //Array of Strings [..."3,4,5,6", "4,5,6,7"...]
         S_IS_B:[], //Array of boolians to indicate if streak is blind 
 
-        ROLLED_MOST_MAX_PLAYER:[],
+        // String of playername per die. 
+        // Could have tie's so String is format of "NAME_ONE NAME_TWO NAME_THREE" (Space Delinated)
+        ROLLED_MOST_MAX_PLAYER:[], 
         ROLLED_MOST_MAX_ROLLCOUNT:[],
         ROLLED_MOST_MIN_PLAYER:[],
         ROLLED_MOST_MIN_ROLLCOUNT:[],
 
+        TOTAL_ROLLS:    [], // total number of times each die type was rolled
         D2_ROLL_DATA:   [],
         D3_ROLL_DATA:   [],
         D4_ROLL_DATA:   [],
@@ -53,6 +60,10 @@ class DATA_PACKAGER
         D100_ROLL_DATA: [],
     }
 
+    //======================================================
+    //================= Player Package =====================
+    //======================================================
+    
     //Turn PLAYER Object into Handlebars Readable data Object
     //Unsed in player.hbs
     static packagePlayerData(playerInfo)
@@ -92,39 +103,54 @@ class DATA_PACKAGER
         return packedData;
     }
 
-
+    //======================================================
+    //================= Global Package =====================
+    //======================================================
+    
+    //Get stats from the global data (Mean median mode)
+    static getGlobalMathStatsData(handlebarsData)
+    {
+        return handlebarsData;
+    }
+    
+    //Get global streak data from players
+    static getGlobalStreakData(players, handlebarsData)
+    {
+        return handlebarsData;
+    }
+    
+    //Get Max and min values from player data
+    static getGlobalMaxMinData(players, handlebarsData)
+    {
+        return handlebarsData;
+    }
+    
     //Create Combined Arrays of all players rolls
     //Save Most Max and Most min Roll Data
-    static createCombinedArrays(playersAry)
+    static getGlobalRollData(players, handlebarsData)
     {
-        combinedAry = [];
-        return combinedAry;
-    }
-
-    //Create Streak Data for whoever got longest streaks
-    //For tie's Return Player with Larger Numbers (19,20,21 beats a 4,5,6)
-    static createStreakData(playersAry)
-    {
-    
-    }
-
-    //User Object of combined arrays to get mean median and mode for each die type
-    static createMathStats(dataObject)
-    {
-
+        return handlebarsData;
     }
 
     //Turn PLAYER[] into Handlebars Readable data object
     //Used in global.hbs
     static packageGlobalData(playersArry)
     {
-        globalData = new PLAYER_HNDL_INFO
-        for(player in playersArry)
-        {
-
-        }
+        let packedData = {};
+        Object.assign(packedData, this.PLAYER_HNDL_INFO);
+        
+        packedData = getGlobalRollData(playersArry,packedData);
+        packedData = getGlobalMaxMinData(playersArry,packedData);
+        packedData = getGlobalStreakData(playersArry,packedData);
+        packedData = getGlobalMathStatsData(packedData);
+        
+        return packedData;
     }
 
+    //======================================================
+    //================= Global Package =====================
+    //======================================================
+    
     //Save Global Data to a file to keep track of
     static exportGlobalData(playersArry)
     {
