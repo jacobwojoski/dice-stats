@@ -30,7 +30,12 @@
             
         },
         "player_data_form":{
-
+            "total_rolls":  "Total Dice Rolled:         ",
+            "mean":         "Mean (Avg):                ",
+            "median":       "Meadian (Middle Number):   ",
+            "mode":         "Mode (Most Common):        ",
+            "streak":       "Longest Streak:        ",
+            "streak_blind": "Streak has blind rolls. Blind streak only available to GM"
         },
         "roll_chat_form":{
 

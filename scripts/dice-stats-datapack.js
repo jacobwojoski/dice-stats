@@ -5,6 +5,8 @@ class DATA_PACKAGER
     //Data displayed on the Player Handlebars Template Page
     PLAYER_HNDL_INFO = 
     {
+        PLAYER_NAME: '',
+
         //Arrays Use DIE_TYPE to get values for specific dice
         MEAN:   [],
         MEDIAN: [],
@@ -58,6 +60,7 @@ class DATA_PACKAGER
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 
+        packedData.PLAYER_NAME = playerInfo.USERNAME;
         packedData.D2_ROLL_DATA =      [...playerInfo.PLAYER_DICE[0].ROLLS];
         packedData.D3_ROLL_DATA =      [...playerInfo.PLAYER_DICE[1].ROLLS];
         packedData.D4_ROLL_DATA =      [...playerInfo.PLAYER_DICE[2].ROLLS];

@@ -138,9 +138,9 @@ class PLAYER {
     USERID = 0;
     GM = false;
 
-    constructor(){
-        this.USERID = game.user.id;
-        this.USERNAME = game.user.name;
+    constructor(userid){
+        this.USERID = userid;
+        this.USERNAME = game.users.get(userid)?.name;
         for (let i = 0; i < this.PLAYER_DICE.length; i++) {
             this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
         }
@@ -297,8 +297,8 @@ class PlayerStatusPage extends FormApplication {
           height: 'auto',
           id: 'player-data',
           template: TEMPLATES.PLAYERDATAFORM,
-          title: 'Player Roll Data',
           userId: game.userId,
+          title: 'Roll Tracker Data',
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
