@@ -222,11 +222,12 @@ class DiceStatsTracker {
         // A setting to determine whether players can see gm data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Name`,
-            default: true,
+            default: false,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Hint`
+            //restricted: true    // Restric item to gamemaster only
         })
 
         // A setting to determine whether players can see global data
@@ -357,7 +358,13 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
         //Create button with eacu user id 
         html.on('click', `#${user.id}`, (event) => {
-            new PlayerStatusPage(user.id).render(true);
+            let canSeeGM = game.settings.get('die-stats',SETTINGS.PLAYERS_SEE_GM);
+            let amIGM = game.users.get(game.userId)?.isGM;
+            if(canSeeGM === false && user.isGM && !amIGM){
+                //do nothing, Dont allow ability to see gm data if setting is off
+            }else{
+                new PlayerStatusPage(user.id).render(true);
+            }
         })
     }
     
