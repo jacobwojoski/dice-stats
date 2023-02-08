@@ -77,7 +77,7 @@ Streaks are included in both plater and global data displays
     - DISABLE_STREAKS    
     - SEE_BLIND_STREAK
 - ~~Make Settings have their own tab instead of being under "undefined"~~ (Done)
-- Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though
+- ~~Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though~~ (Done)
 
 ## Longterm Goals
 - Better UI design
