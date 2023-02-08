@@ -80,8 +80,10 @@ Streaks are included in both plater and global data displays
 - Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though
 
 ## Longterm Goals
-- Better UI design (Change button pos?)
-- Implement Google charts better, potentally move to different charting sw (Add as Lib instead?)  
+- Better UI design
+    - Change Button Positions
+    - Implement Google charts better, potentally move to different charting sw (Add as Lib instead?) 
+    - Better format for stats, Tabs? 
 - Export data to be saved (Prolly Export and import as JSON)  
 - Import Data to reload old values? (use JSON format)
     - Import just global data? User data, Ability to choose?
