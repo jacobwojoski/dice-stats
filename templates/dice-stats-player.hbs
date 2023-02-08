@@ -2,7 +2,6 @@
 <!-- Displays Specific Player info -->
 
 <!-- class values associate to css file-->
-
 <form>
     <head>
         <script type = "text/javascript">
@@ -15,185 +14,298 @@
 
     <div class="col">
         <h1 class="dice-type-title">{{PLAYER_NAME}} Roll Data</h1>
-        {{#ifDieUsed TOTAL_ROLLS.[0] }}
+
+        {{#ifDieUsed TOTAL_ROLLS.[0] }} <!-- Associated Helper in Main -->
         <h1 class="dice-type-title">D-2 (COIN) Stats</h1>
-            <div id = "d2Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>{{localize DICE_STATS_TEXT.player_data_form.total_rolls}}   {{TOTAL_ROLLS.[0]}}</li>
-                <li>{{localize DICE_STATS_TEXT.player_data_form.mean}}          {{MEAN.[0]}}</li>
-                <li>{{localize DICE_STATS_TEXT.player_data_form.median}}        {{MEDIAN.[0]}}</li>
-                <li>{{localize DICE_STATS_TEXT.player_data_form.mode}}          {{MODE.[0]}}</li>
-                {{#ifStreakIsBlind S_IS_B.[0]}}
-                    <li>{{localize DICE_STATS_TEXT.player_data_form.streak}}    {{STREAK.[0]}}</li>
+        <div id = "d2Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[0]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[0]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[0]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[0]}}</th>
+            </tr>
+            <tr>
+                {{#ifStreakIsBlind S_IS_B.[0]}} <!-- Associated Helper in Main -->
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[0]}}<td>
                 {{else}}
-                    <li>{{localize DICE_STATS_TEXT.player_data_form.streak_blind}}</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
 
         {{#ifDieUsed TOTAL_ROLLS.[1] }}
         <h1>D-3 (Fate) Stats</h1>
-            <div id = "d3Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>Total Rolls             {{TOTAL_ROLLS.[1]}}</li>
-                <li>Mean (Avg)              {{MEAN.[1]}}</li>
-                <li>Meadian (Middle Number) {{MEDIAN.[1]}}</li>
-                <li>Mode (Most Common)      {{MODE.[1]}}</li>
+        <div id = "d3Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[1]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[1]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[1]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[1]}}</th>
+            </tr>
+            <tr>
                 {{#ifStreakIsBlind S_IS_B.[1]}}
-                    <li>Longest Streak          {{STREAK.[1]}}</li>
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[1]}}<td>
                 {{else}}
-                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
         
         {{#ifDieUsed TOTAL_ROLLS.[2] }}
         <h1>D-4 Stats</h1>
-            <div id = "d4Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>Total Rolls             {{TOTAL_ROLLS.[2]}}</li>
-                <li>Mean (Avg)              {{MEAN.[2]}}</li>
-                <li>Meadian (Middle Number) {{MEDIAN.[2]}}</li>
-                <li>Mode (Most Common)      {{MODE.[2]}}</li>
+        <div id = "d4Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[2]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[2]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[2]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[2]}}</th>
+            </tr>
+            <tr>
                 {{#ifStreakIsBlind S_IS_B.[2]}}
-                    <li>Longest Streak          {{STREAK.[2]}}</li>
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[2]}}<td>
                 {{else}}
-                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
         
         {{#ifDieUsed TOTAL_ROLLS.[3] }}
         <h1>D-6 Stats</h1>
-            <div id = "d6Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>Total Rolls             {{TOTAL_ROLLS.[3]}}</li>
-                <li>Mean (Avg)              {{MEAN.[3]}}</li>
-                <li>Meadian (Middle Number) {{MEDIAN.[3]}}</li>
-                <li>Mode (Most Common)      {{MODE.[3]}}</li>
+        <div id = "d6Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[3]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[3]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[3]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[3]}}</th>
+            </tr>
+            <tr>
                 {{#ifStreakIsBlind S_IS_B.[3]}}
-                    <li>Longest Streak          {{STREAK.[3]}}</li>
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[3]}}<td>
                 {{else}}
-                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
         
         {{#ifDieUsed TOTAL_ROLLS.[4] }}
         <h1>D-8 Stats</h1>
-            <div id = "d8Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>Total Rolls             {{TOTAL_ROLLS.[4]}}</li>
-                <li>Mean (Avg)              {{MEAN.[4]}}</li>
-                <li>Meadian (Middle Number) {{MEDIAN.[4]}}</li>
-                <li>Mode (Most Common)      {{MODE.[4]}}</li>
+        <div id = "d8Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[4]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[4]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[4]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[4]}}</th>
+            </tr>
+            <tr>
                 {{#ifStreakIsBlind S_IS_B.[4]}}
-                    <li>Longest Streak          {{STREAK.[4]}}</li>
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[4]}}<td>
                 {{else}}
-                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
         
         {{#ifDieUsed TOTAL_ROLLS.[5] }}
         <h1>D-10 Stats</h1>
-            <div id = "d10Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>Total Rolls             {{TOTAL_ROLLS.[5]}}</li>
-                <li>Mean (Avg)              {{MEAN.[5]}}</li>
-                <li>Meadian (Middle Number) {{MEDIAN.[5]}}</li>
-                <li>Mode (Most Common)      {{MODE.[5]}}</li>
+        <div id = "d10Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[5]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[5]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[5]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[5]}}</th>
+            </tr>
+            <tr>
                 {{#ifStreakIsBlind S_IS_B.[5]}}
-                    <li>Longest Streak          {{STREAK.[5]}}</li>
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[5]}}<td>
                 {{else}}
-                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
         
         {{#ifDieUsed TOTAL_ROLLS.[6] }}
         <h1>D-12 Stats</h1>
-            <div id = "d12Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>Total Rolls             {{TOTAL_ROLLS.[6]}}</li>
-                <li>Mean (Avg)              {{MEAN.[6]}}</li>
-                <li>Meadian (Middle Number) {{MEDIAN.[6]}}</li>
-                <li>Mode (Most Common)      {{MODE.[6]}}</li>
+        <div id = "d12Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[6]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[6]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[6]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[6]}}</th>
+            </tr>
+            <tr>
                 {{#ifStreakIsBlind S_IS_B.[6]}}
-                    <li>Longest Streak          {{STREAK.[6]}}</li>
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[6]}}<td>
                 {{else}}
-                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
         
         {{#ifDieUsed TOTAL_ROLLS.[7] }}
         <h1 class="dice-type-title">D-20 Stats</h1>
-            <div id = "d20Chart" class="chart-dice-stats"></div>
-            <table>
-                <tr>
-                    <td>Total Rolls:</th>
-                    <td>{{TOTAL_ROLLS.[7]}}</th>
-                    <td></th>
-                </tr>
-                <tr>
-                    <td>Mean (Avg):</th>
-                    <td>{{MEAN.[7]}}</th>
-                    <td></th>
-                </tr>
-                <tr>
-                    <td>Meadian (Middle Number)</th>
-                    <td>{{MEDIAN.[7]}}</th>
-                    <td></th>
-                </tr>
-                <tr>
-                    <td>Mode (Most Common)</th>
-                    <td>{{MODE.[7]}}</th>
-                    <td></th>
-                </tr>
-                <tr>
-                    {{#ifStreakIsBlind S_IS_B.[7]}}
-                    <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[7]}}<td>
-                    {{else}}
-                    <td>Streak Is Blind, No Streak Data Visible<td>
-                    {{/ifStreakIsBlind}}
-                </tr>
-            </table>
+        <div id = "d20Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[7]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[7]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[7]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[7]}}</th>
+            </tr>
+            <tr>
+                {{#ifStreakIsBlind S_IS_B.[7]}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[7]}}<td>
+                {{else}}
+                <td>Streak Is Blind, No Streak Data Visible<td>
+                {{/ifStreakIsBlind}}
+            </tr>
+        </table>
         <br>
         {{/ifDieUsed}}
         
         
         {{#ifDieUsed TOTAL_ROLLS.[8] }}
         <h1>D-20 Stats</h1>
-            <div id = "d100Chart" class="chart-dice-stats"></div>
-            <ul class="flexcol">
-                <li>Total Rolls             {{TOTAL_ROLLS.[8]}}</li>
-                <li>Mean (Avg)              {{MEAN.[8]}}</li>
-                <li>Meadian (Middle Number) {{MEDIAN.[8]}}</li>
-                <li>Mode (Most Common)      {{MODE.[8]}}</li>
+        <div id = "d100Chart" class="chart-dice-stats"></div>
+        <table>
+            <tr>
+                <td>Total Rolls:</th>
+                <td>{{TOTAL_ROLLS.[8]}}</th>
+            </tr>
+            <tr>
+                <td>Mean (Avg):</th>
+                <td>{{MEAN.[8]}}</th>
+            </tr>
+            <tr>
+                <td>Meadian (Middle Number)</th>
+                <td>{{MEDIAN.[8]}}</th>
+            </tr>
+            <tr>
+                <td>Mode (Most Common)</th>
+                <td>{{MODE.[8]}}</th>
+            </tr>
+            <tr>
                 {{#ifStreakIsBlind S_IS_B.[8]}}
-                    <li>Longest Streak          {{STREAK.[8]}}</li>
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[8]}}<td>
                 {{else}}
-                    <li>Streak Has Blind Rolls. Hideing Streak Info</li>
+                <td>Streak Is Blind, No Streak Data Visible<td>
                 {{/ifStreakIsBlind}}
-            </ul>
+            </tr>
+        </table>
         {{/ifDieUsed}}
     </div>
 
+
+<!-- ============================================================= -->
+<!-- =============End HTML, Start Chart Code ===================== -->
+<!-- ============================================================= -->
     <script language = "JavaScript">
         var chartOptions = {
             //NOTE:Couldn't adjust "hAxis.baseline" to make it thicker

@@ -177,7 +177,6 @@ class PLAYER {
 }
 
 class DiceStatsTracker {
-
     ALLPLAYERDATA;  //Map of all Players <PlayerID, PLAYER> 
 
     ID = 'die-stats'
@@ -185,7 +184,7 @@ class DiceStatsTracker {
     SYSTEM;
     
     updateMap(){
-        //Add Everyone to storage. Were tracking all even if we dont need
+        //Add everyplayer to storage. Were tracking all even if we dont need
         for (let user of game.users) {
             if(!this.ALLPLAYERDATA.has(user.id)){
                 this.ALLPLAYERDATA.set(user.id, new PLAYER(user.id))    
@@ -322,15 +321,6 @@ class PlayerStatusPage extends FormApplication {
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
     }
-    //Player Data * x         
-        //D2 Info
-            //Graph of number of each rolls
-            //Mean, Median, Mode
-            //Longest Streak
-        //D3 Info
-            //Graph of number of each rolls
-            //Mean, Median, Mode
-            //Longest Streak
 }
 
 //==========================================================
@@ -373,6 +363,11 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     
 })
 
+
+
+//==========================================================
+//================== HANDLEBARS SHIT =======================
+//==========================================================
 
 //handlebars fn used to tell if a die was rolled. 
 //If not display something different then charts and dice stats
