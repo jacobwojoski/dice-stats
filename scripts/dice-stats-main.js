@@ -155,8 +155,10 @@ class PLAYER {
         if(len === -1){
             return "NO DICE ROLLED"
         }else{
-            let tempStr = initNum.toString();
-            for(let i=0; i<len; i++){
+            // this value is index 0, loop starts at 1
+            // User can have a streak of 1 
+            let tempStr = initNum.toString(); 
+            for(let i=1; i<len; i++){
                 nextNum = initNum+i+1;
                 tempStr = tempStr+','+nextNum.toString();
             }
