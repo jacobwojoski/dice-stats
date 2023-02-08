@@ -90,5 +90,6 @@ Streaks are included in both plater and global data displays
 - Player Loads history if they join game late
 - Setting to choose which dice are tracked (checkboxes w/ grayed out checks if no dice of that type are rolled)
 - Make sure it works for other systems
+- Comparison Tool, Show a few players info size by side
 
 
