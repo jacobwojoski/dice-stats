@@ -357,7 +357,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
         //add user ID to associated button
         const buttonPlacement = html.find(`[data-user-id="${user.id}"]`)
         buttonPlacement.append(
-            `<button type="button" title='${tooltip}' class="stats flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
+            `<button type="button" title='${tooltip}' class="open-player-stats-button flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
         )
 
         //Create button with eacu user id 
