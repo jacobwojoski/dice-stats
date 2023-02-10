@@ -354,11 +354,9 @@
             // Define the chart to be drawn.
             var data = google.visualization.arrayToDataTable([
                 ['Die Number', 'Number Of rolls'],
-                ['1',  5],
-                ['2',  9]
+                ['1',  {{D2_ROLL_DATA.[0]}}],
+                ['2',  {{D2_ROLL_DATA.[0]}}]
             ]);
-
-            var options = {title: 'D-2 Roll Data'}; 
 
             // Instantiate and draw the chart.
             var chart = new google.visualization.ColumnChart(document.getElementById('d2Chart'));
@@ -369,9 +367,9 @@
             // Define the chart to be drawn.
             var data = google.visualization.arrayToDataTable([
                 ['Die Number', 'Number Of rolls'],
-                ['1',  5],
-                ['2',  2],
-                ['3',  2]
+                ['1',  {{D3_ROLL_DATA.[0]}}],
+                ['2',  {{D3_ROLL_DATA.[1]}}],
+                ['3',  {{D3_ROLL_DATA.[2]}}]
             ]);
 
             // Instantiate and draw the chart.
@@ -391,6 +389,87 @@
 
             // Instantiate and draw the chart.
             var chart = new google.visualization.ColumnChart(document.getElementById('d4Chart'));
+            chart.draw(data, chartOptions);
+        }
+
+        function drawChartd6() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+                ['Die Number', 'Number Of rolls'],
+                ['1',   {{D6_ROLL_DATA.[0]}}],
+                ['2',   {{D6_ROLL_DATA.[1]}}],
+                ['3',   {{D6_ROLL_DATA.[2]}}],
+                ['4',   {{D6_ROLL_DATA.[3]}}],
+                ['5',   {{D6_ROLL_DATA.[4]}}],
+                ['6',   {{D6_ROLL_DATA.[5]}}]
+            ]);
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d6Chart'));
+            chart.draw(data, chartOptions);
+        }
+
+        function drawChartd8() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+                ['Die Number', 'Number Of rolls'],
+                ['1',   {{D8_ROLL_DATA.[0]}}],
+                ['2',   {{D8_ROLL_DATA.[1]}}],
+                ['3',   {{D8_ROLL_DATA.[2]}}],
+                ['4',   {{D8_ROLL_DATA.[3]}}],
+                ['5',   {{D8_ROLL_DATA.[4]}}],
+                ['6',   {{D8_ROLL_DATA.[5]}}],
+                ['7',   {{D8_ROLL_DATA.[6]}}],
+                ['8',   {{D8_ROLL_DATA.[7]}}]
+                
+            ]);
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d8Chart'));
+            chart.draw(data, chartOptions);
+        }
+
+        function drawChartd10() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+                ['Die Number', 'Number Of rolls'],
+                ['1',   {{D10_ROLL_DATA.[0]}}],
+                ['2',   {{D10_ROLL_DATA.[1]}}],
+                ['3',   {{D10_ROLL_DATA.[2]}}],
+                ['4',   {{D10_ROLL_DATA.[3]}}],
+                ['5',   {{D10_ROLL_DATA.[4]}}],
+                ['6',   {{D10_ROLL_DATA.[5]}}],
+                ['7',   {{D10_ROLL_DATA.[6]}}],
+                ['8',   {{D10_ROLL_DATA.[7]}}],
+                ['9',   {{D10_ROLL_DATA.[8]}}],
+                ['10',   {{D10_ROLL_DATA.[9]}}]
+            ]);
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d10Chart'));
+            chart.draw(data, chartOptions);
+        }
+
+        function drawChartd12() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+                ['Die Number', 'Number Of rolls'],
+                ['1',   {{D12_ROLL_DATA.[0]}}],
+                ['2',   {{D12_ROLL_DATA.[1]}}],
+                ['3',   {{D12_ROLL_DATA.[2]}}],
+                ['4',   {{D12_ROLL_DATA.[3]}}],
+                ['5',   {{D12_ROLL_DATA.[4]}}],
+                ['6',   {{D12_ROLL_DATA.[5]}}],
+                ['7',   {{D12_ROLL_DATA.[6]}}],
+                ['8',   {{D12_ROLL_DATA.[7]}}],
+                ['9',   {{D12_ROLL_DATA.[8]}}],
+                ['10',  {{D12_ROLL_DATA.[9]}}],
+                ['11',  {{D12_ROLL_DATA.[10]}}],
+                ['12',  {{D12_ROLL_DATA.[11]}}]
+            ]);
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d12Chart'));
             chart.draw(data, chartOptions);
         }
 
@@ -425,29 +504,15 @@
             chart.draw(data, chartOptions);
         }
 
-        /*
-        function drawChartd4() {}
-        function drawChartd6() {}
-        function drawChartd8() {}
-        function drawChartd10() {}
-        function drawChartd12() {}
-        function drawChartd100() {}
-        */
-
         google.charts.setOnLoadCallback(drawChartd2);
         google.charts.setOnLoadCallback(drawChartd3);
-        google.charts.setOnLoadCallback(drawChartd4);
-        google.charts.setOnLoadCallback(drawChartd20);
-
-        /*
         google.charts.setOnLoadCallback(drawChartd4);
         google.charts.setOnLoadCallback(drawChartd6);
         google.charts.setOnLoadCallback(drawChartd8);
         google.charts.setOnLoadCallback(drawChartd10);
         google.charts.setOnLoadCallback(drawChartd12);
         google.charts.setOnLoadCallback(drawChartd20);
-        google.charts.setOnLoadCallback(drawChartd100);
-        */
+
     </script>
 
 </form>
