@@ -108,47 +108,53 @@ class DATA_PACKAGER
     //======================================================
     
     //Get stats from the global data (Mean median mode)
-    static getGlobalMathStatsData(handlebarsData)
+    static getGlobalMathStatsData(handlebarsData,includeGMrolls)
     {
         return handlebarsData;
     }
     
     //Get global streak data from players
-    static getGlobalStreakData(players, handlebarsData)
+    static getGlobalStreakData(players, handlebarsData,includeGMrolls)
     {
         return handlebarsData;
     }
     
     //Get Max and min values from player data
-    static getGlobalMaxMinData(players, handlebarsData)
+    static getGlobalMaxMinData(players, handlebarsData,includeGMrolls)
     {
         return handlebarsData;
     }
     
     //Create Combined Arrays of all players rolls
     //Save Most Max and Most min Roll Data
-    static getGlobalRollData(players, handlebarsData)
+    static getGlobalRollData(players, handlebarsData,includeGMrolls)
     {
+        for(plyr in players){
+            //Skip adding gm data if told too
+            if(plyr.GM && !includeGMrolls){continue};
+            
+
+        }
         return handlebarsData;
     }
 
     //Turn PLAYER[] into Handlebars Readable data object
     //Used in global.hbs
-    static packageGlobalData(playersArry)
+    static packageGlobalData(playersArry, includeGMrolls)
     {
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
         
-        packedData = getGlobalRollData(playersArry,packedData);
-        packedData = getGlobalMaxMinData(playersArry,packedData);
-        packedData = getGlobalStreakData(playersArry,packedData);
-        packedData = getGlobalMathStatsData(packedData);
+        packedData = getGlobalRollData(playersArry,packedData,includeGMrolls);
+        packedData = getGlobalMaxMinData(playersArry,packedData,includeGMrolls);
+        packedData = getGlobalStreakData(playersArry,packedData,includeGMrolls);
+        packedData = getGlobalMathStatsData(packedData,includeGMrolls);
         
         return packedData;
     }
 
     //======================================================
-    //================= Global Package =====================
+    //================= Export Package =====================
     //======================================================
     
     //Save Global Data to a file to keep track of

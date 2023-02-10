@@ -144,6 +144,7 @@ class PLAYER {
     constructor(userid){
         this.USERID = userid;
         this.USERNAME = game.users.get(userid)?.name;
+        this.GM = game.users.get(userid)?.isGM;
         for (let i = 0; i < this.PLAYER_DICE.length; i++) {
             this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
         }
@@ -363,8 +364,8 @@ class GlobalStatusPage extends FormApplication{
     }
 
     getData(){
-        let playersAry = ;
-        let dataObject = DATA_PACKAGER.getGlobalData(this.INCLUDE_GM_ROLLS);
+        let playersAry = CLASSOBJ.ALLPLAYERDATA;
+        let dataObject = DATA_PACKAGER.getGlobalData(playersAry, this.INCLUDE_GM_ROLLS);
         return dataObject;
     }
 }
