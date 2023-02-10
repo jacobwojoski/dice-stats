@@ -21,6 +21,7 @@ const SETTINGS = {
     PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either
     PLAYERS_SEE_GM:     'players_see_gm',
     PLAYERS_SEE_GLOBAL: 'players_see_global',
+    INCLUDE_GM_IN_GLOBAL: 'include_gm_in_global',
     DISABLE_STREAKS: 'disable_streak',
     SEE_BLIND_STREAK: 'see_blind_streaks'              
 }
@@ -244,6 +245,16 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
         })
 
+        // A setting to determine whether players can see global data
+        game.settings.register(this.ID, SETTINGS.INCLUDE_GM_IN_GLOBAL, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.INCLUDE_GM_IN_GLOBAL}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.INCLUDE_GM_IN_GLOBAL}.Hint`,
+        })
+
         // A setting to determine whether players can see streaks at all
         game.settings.register(this.ID, SETTINGS.DISABLE_STREAKS, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.DISABLE_STREAKS}.Name`,
@@ -302,7 +313,7 @@ class PlayerStatusPage extends FormApplication {
           id: 'player-data',
           template: TEMPLATES.PLAYERDATAFORM,
           userId: game.userId,
-          title: 'Roll Tracker Data',
+          title: 'Player Dice Stats',
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -325,6 +336,36 @@ class PlayerStatusPage extends FormApplication {
             return dataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
+    }
+}
+
+class GlobalStatusPage extends FormApplication{
+    INCLUDE_GM_ROLLS = false;
+
+    static get defaultOptions() {
+        const defaults = super.defaultOptions;
+      
+        const overrides = {
+          height: 'auto',
+          id: 'global-data',
+          template: TEMPLATES.GLOBALDATAFORM,
+          userId: game.userId,
+          title: 'Global Dice Stats',
+        };
+      
+        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
+        
+        return mergedOptions;
+    }
+
+    constructor(options={}, dataObject = null) {
+        this.INCLUDE_GM_ROLLS = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL);
+    }
+
+    getData(){
+        let playersAry = ;
+        let dataObject = DATA_PACKAGER.getGlobalData(this.INCLUDE_GM_ROLLS);
+        return dataObject;
     }
 }
 
@@ -371,7 +412,43 @@ Hooks.on('renderPlayerList', (playerList, html) => {
             }
         })
     }
-    
+
+
+    let buttons = super._getHeaderButtons();
+
+
+    //Get Global w/o Gm Data
+    buttons.splice(0, 0, {
+        class: "roll-tracker-form-export",
+        icon: "fas fa-download",
+        onclick: ev => {
+            //Check Setting to see if global settings include gm rolls
+            new GlobalStatusPage().render(true);
+        }
+    })
+
+
+    //Export data button
+    buttons.splice(1, 0, {
+        class: "roll-tracker-form-export",
+        icon: "fas fa-download",
+        onclick: ev => {
+            
+        }
+    })
+
+
+     //If I am GM
+     if(game.user.isGM){
+        //Get Global Stats (Stats include GM Rolls)
+        buttons.splice(2, 0, {
+            class: "roll-tracker-form-export",
+            icon: "fas fa-download",
+            onclick: ev => {
+                
+            }
+        })
+    }
 })
 
 
@@ -394,8 +471,16 @@ Handlebars.registerHelper('ifDieUsed', function (var1, options) {
 //If there was a blind roll we dont want to potentally point the result so dont display it for now
 Handlebars.registerHelper('ifStreakIsBlind', function (var1, options) {
     if(var1 != true){
-        return options.fn(this);
+        
     }else{
         return options.inverse(this);
     }
 });
+
+
+Handlebars.registerHelper('ifUserHasData', function (var1, options) {
+    ui.notifications.warn("No roll data to export");
+    return options.inverse(this);
+});
+
+return ui.notifications.warn("No roll data to export")
