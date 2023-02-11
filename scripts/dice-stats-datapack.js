@@ -131,12 +131,30 @@ class DATA_PACKAGER
         return handlebarsData;
     }
     
+    static globalStreakDataHelper(dieType, player, handlebarsData, lengthData){
+        if(player.PLAYER_DICE[dieType].LONGEST_STREAK > lengthData[dieType])
+        {
+            lengthData[dieType] = player.PLAYER_DICE[dieType].LONGEST_STREAK;
+            handlebarsData.STREAK_PLAYER[dieType] = player.USERNAME;
+            handlebarsData.STREAK[dieType] = player.getStreakString(dieType);
+        }
+    }
+
     //Get global streak data from players
     static getGlobalStreakData(players, handlebarsData,includeGMrolls)
     {
+        var streakLength = new Array(9);
+        streakLength.fill(0);
+        //Player.getStreakString(dieType)
+
         for(plyr in players){
-            //See if we should skip adding ply data becasue its GM's stats
+            //See if we should skip adding data becasue its GM's
             if(plyr.GM && !includeGMrolls){continue};
+
+            //For every die type
+            for (let i = 0; i < 9; i++) {
+                globalStreakDataHelper(i,plyr,handlebarsData,streakLength);
+            }
         }
         return handlebarsData;
     }
@@ -332,6 +350,7 @@ class DATA_PACKAGER
     //Used in global.hbs
     static packageGlobalData(playersArry, includeGMrolls)
     {
+        //TODO. packedData should be passed By ref so update fn's for that behavior
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
         packedData = this.setGlobalDefaultData(packedData);
