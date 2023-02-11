@@ -285,10 +285,13 @@ class DiceStatsTracker {
         let dieType = MAX_TO_DIE.get(sides);
         let newNumbers = [];
 
-        //TODO add check here if we should store other ppls data?. Could help with player performance?
+        //TODO add check here if we should store other ppls data?. Could potentally help with player performance?
 
-        //In case there's more than one die rolled in a single instance as in fortune/misfortune rolls or multiple hit dice
+        //In case there's more than one die rolled in a single instance as in 
+        //  fortune/misfortune rolls or multiple hit dice save each roll
         newNumbers = msg.rolls[0].dice[0].results.map(result => result.result)
+        
+        //Get Associated player object
         let playerInfo = this.ALLPLAYERDATA.get(msg.user.id);
 
         newNumbers.forEach(element => {

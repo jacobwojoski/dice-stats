@@ -126,19 +126,71 @@ class DATA_PACKAGER
     //Get Max and min values from player data
     static getGlobalMaxMinData(players, handlebarsData,includeGMrolls)
     {
+        //NOTE Cant use loops to pack data because Global Data Obj cant use 2d Arrays (Handlbars is lame)
         /**
         ROLLED_MOST_MAX_PLAYER:[], //Array of String
         ROLLED_MOST_MAX_ROLLCOUNT:[], //Array of ints
         ROLLED_MOST_MIN_PLAYER:[],  //Array of Strings
         ROLLED_MOST_MIN_ROLLCOUNT:[], //Array of Ints
          */
+        let minRoll = 0;
+        let maxRoll = 0;
         for(plyr in players){
             //See if we should skip adding ply data becasue its GM's stats
             if(plyr.GM && !includeGMrolls){continue};
+                //D2 Data
+                    minRoll = plyr.PLAYER_DICE[0].ROLLS[0];
+                    maxRoll = plyr.PLAYER_DICE[0].ROLLS[1];
+                    //Most Min Rolls
+                    if(minRoll != 0){
+                        if(minRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
+                            handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0] = minRoll;
+                            handlebarsData.ROLLED_MOST_MIN_PLAYER[0] = plyr.USERNAME;
+                        }else if(minRoll === handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
+                            //Tied For Most Min Rolls, Append username
+                            handlebarsData.ROLLED_MOST_MIN_PLAYER[0] += " "+plyr.USERNAME;
+                        }
+                    }
+
+                    //Most Max Rolls
+                    if(maxRoll != 0){
+                        if(maxRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
+                            handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[0] = maxRoll;
+                            handlebarsData.ROLLED_MOST_MAX_PLAYER[0] += plyr.USERNAME;
+                        }else if(maxRoll === handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[0]){
+                            //Tied For Most Min Rolls, Append username
+                            handlebarsData.ROLLED_MOST_MAX_PLAYER[0] += " "+plyr.USERNAME;
+                        }
+                    }
+                //D3 Data
+                    minRoll = plyr.PLAYER_DICE[1].ROLLS[0];
+                    maxRoll = plyr.PLAYER_DICE[1].ROLLS[2];
+                    //Most Min Rolls
+                    if(minRoll != 0){
+                        if(minRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[1]){
+                            handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[1] = minRoll;
+                            handlebarsData.ROLLED_MOST_MIN_PLAYER[1] = plyr.USERNAME;
+                        }else if(minRoll === handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
+                            //Tied For Most Min Rolls, Append username
+                            handlebarsData.ROLLED_MOST_MIN_PLAYER[1] += " "+plyr.USERNAME;
+                        }
+                    }
+
+                    //Most Max Rolls
+                    if(maxRoll != 0){
+                        if(maxRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[1]){
+                            handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[1] = maxRoll;
+                            handlebarsData.ROLLED_MOST_MAX_PLAYER[1] = plyr.USERNAME;
+                        }else if(maxRoll === handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[1]){
+                            //Tied For Most Min Rolls, Append username
+                            handlebarsData.ROLLED_MOST_MAX_PLAYER[1] += " "+plyr.USERNAME;
+                        }
+                    }
         }
         return handlebarsData;
     }
 
+    /*
     //TODO, Same info as global min max but its most rolled bassed on percentage of total rolls
     //Most Nat 20 EX: 2 nat 20's of 100 rolls vs 1 nat 20 of 2 rolls
     static getGlobalMinMaxDataPercentage(players, handlebarsData,includeGMrolls)
@@ -149,6 +201,7 @@ class DATA_PACKAGER
         }
         return handlebarsData;
     }
+    */
     
     //Create Combined Arrays of all players rolls
     //Save Most Max and Most min Roll Data
