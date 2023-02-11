@@ -408,6 +408,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
             let amIGM = game.users.get(game.userId)?.isGM;
             if(canSeeGM === false && user.isGM && !amIGM){
                 //do nothing, Dont allow ability to see gm data if setting is off
+                ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
             }else{
                 new PlayerStatusPage(user.id).render(true);
             }
@@ -420,7 +421,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
     //Get Global w/o Gm Data
     buttons.splice(0, 0, {
-        class: "roll-tracker-form-export",
+        class: "fa-solid fa-earth-americas",
         icon: "fas fa-download",
         onclick: ev => {
             //Check Setting to see if global settings include gm rolls
@@ -429,12 +430,13 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     })
 
 
+    /* TODO
     //Export data button
     buttons.splice(1, 0, {
         class: "roll-tracker-form-export",
         icon: "fas fa-download",
         onclick: ev => {
-            
+            //TODO
         }
     })
 
@@ -446,10 +448,11 @@ Hooks.on('renderPlayerList', (playerList, html) => {
             class: "roll-tracker-form-export",
             icon: "fas fa-download",
             onclick: ev => {
-                
+                //TODO
             }
         })
     }
+    */
 })
 
 
@@ -478,10 +481,8 @@ Handlebars.registerHelper('ifStreakIsBlind', function (var1, options) {
     }
 });
 
-
+//TODO Display Warning and close popup if user Has no roll data
 Handlebars.registerHelper('ifUserHasData', function (var1, options) {
     ui.notifications.warn("No roll data to export");
     return options.inverse(this);
 });
-
-return ui.notifications.warn("No roll data to export")

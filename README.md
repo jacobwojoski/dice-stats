@@ -40,7 +40,8 @@ The user can <b>hand</b> edit the dice types saved by editing the following (pla
 - PLAYERS_SEE_GM:         Allow players to see GM stats  
 - PLAYERS_SEE_GLOBAL:     Allow player to see global values  
 - DISABLE_STREAKS:        Disable displaying of streaks in chat. Still Stored in data  
-- SEE_BLIND_STREAK:       Allow player to view blind streaks (If a die rolled in the streak was blind dont display value)  
+- SEE_BLIND_STREAK:       Allow player to view blind streaks (If a die rolled in the streak was blind dont display value) 
+- INCLUDE_GM_IN_GLOBAL:   When viewing global stats should it include or not include rolls from the gm 
 
 ## Install  
 [Downlaod Zip]() and add to module folder in  
@@ -61,9 +62,10 @@ View Each Players info by selecting icon next to the player in the bottom left
 Streaks are included in both plater and global data displays  
 ![Streaks]()  
   
-## Planned Features  
+## Planned Features (Short Term) 
 - ~~Add Charts~~ (Done)
 - Global Stats
+    - Most Max val and Most min values rolls Adjusted for % of total rolls
 - Output to Chat how many Nat1 & 20's have been rolled by that player when one gets rolled  
 - Output to chat Lows and Highs for some other die types. Maybe just milestone numbers? EX Multiple of 5's on a d4 or d6 (10th 1, 15th 5)?  
 - Streaks in Both Direction  
@@ -74,22 +76,28 @@ Streaks are included in both plater and global data displays
     - PLAYERS_SEE_PLAYERS 
     - ~~PLAYERS_SEE_GM~~ (Done)
     - PLAYERS_SEE_GLOBAL  
+    - INCLUDE_GM_IN_GLOBAL
     - DISABLE_STREAKS    
     - SEE_BLIND_STREAK
 - ~~Make Settings have their own tab instead of being under "undefined"~~ (Done)
 - ~~Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though~~ (Done)
 
 ## Longterm Goals
+- Comparison Tool, Show a few players info size by side
+- Setting to choose which dice are tracked (checkboxes w/ grayed out checks if no dice of that type are rolled)
+- Make sure it works for other systems
+- Incorperate Lang page
+
+## Stretch Goals
+- Player Loads history if they join game late
 - Better UI design
     - Change Button Positions
     - Implement Google charts better, potentally move to different charting sw (Add as Lib instead?) 
     - Better format for stats, Tabs? 
-- Export data to be saved (Prolly Export and import as JSON)  
+- Export data to be saved (Use JSON format)  
 - Import Data to reload old values? (use JSON format)
     - Import just global data? User data, Ability to choose?
-- Player Loads history if they join game late
-- Setting to choose which dice are tracked (checkboxes w/ grayed out checks if no dice of that type are rolled)
-- Make sure it works for other systems
-- Comparison Tool, Show a few players info size by side
+
+
 
 
