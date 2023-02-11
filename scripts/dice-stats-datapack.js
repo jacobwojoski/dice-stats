@@ -261,30 +261,39 @@ class DATA_PACKAGER
             if(plyr.GM && !includeGMrolls){continue};
             
             for (let i = 0; i < handlebarsData.D2_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[0] += plyr.PLAYER_DICE[0].ROLLS[i];
                 handlebarsData.D2_ROLL_DATA[i] = handlebarsData.D2_ROLL_DATA[i] + plyr.PLAYER_DICE[0].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D3_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[1] += plyr.PLAYER_DICE[1].ROLLS[i];
                 handlebarsData.D3_ROLL_DATA[i] = handlebarsData.D3_ROLL_DATA[i] + plyr.PLAYER_DICE[1].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D4_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[2] += plyr.PLAYER_DICE[2].ROLLS[i];
                 handlebarsData.D4_ROLL_DATA[i] = handlebarsData.D4_ROLL_DATA[i] + plyr.PLAYER_DICE[2].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D6_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[3] += plyr.PLAYER_DICE[3].ROLLS[i];
                 handlebarsData.D6_ROLL_DATA[i] = handlebarsData.D6_ROLL_DATA[i] + plyr.PLAYER_DICE[3].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D8_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[4] += plyr.PLAYER_DICE[4].ROLLS[i];
                 handlebarsData.D8_ROLL_DATA[i] = handlebarsData.D8_ROLL_DATA[i] + plyr.PLAYER_DICE[4].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D10_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[5] += plyr.PLAYER_DICE[5].ROLLS[i];
                 handlebarsData.D10_ROLL_DATA[i] = handlebarsData.D10_ROLL_DATA[i] + plyr.PLAYER_DICE[5].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D12_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[6] += plyr.PLAYER_DICE[6].ROLLS[i];
                 handlebarsData.D12_ROLL_DATA[i] = handlebarsData.D12_ROLL_DATA[i] + plyr.PLAYER_DICE[6].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D20_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[7] += plyr.PLAYER_DICE[7].ROLLS[i];
                 handlebarsData.D20_ROLL_DATA[i] = handlebarsData.D20_ROLL_DATA[i] + plyr.PLAYER_DICE[7].ROLLS[i];
             }
             for (let i = 0; i < handlebarsData.D100_ROLL_DATA.length; i++) {
+                handlebarsData.TOTAL_ROLLS[8] += plyr.PLAYER_DICE[8].ROLLS[i];
                 handlebarsData.D100_ROLL_DATA[i] = handlebarsData.D100_ROLL_DATA[i] + plyr.PLAYER_DICE[8].ROLLS[i];
             }
         }
