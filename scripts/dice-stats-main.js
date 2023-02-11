@@ -290,7 +290,7 @@ class DiceStatsTracker {
         //In case there's more than one die rolled in a single instance as in 
         //  fortune/misfortune rolls or multiple hit dice save each roll
         newNumbers = msg.rolls[0].dice[0].results.map(result => result.result)
-        
+
         //Get Associated player object
         let playerInfo = this.ALLPLAYERDATA.get(msg.user.id);
 
@@ -367,6 +367,7 @@ class GlobalStatusPage extends FormApplication{
     }
 
     getData(){
+        this.INCLUDE_GM_ROLLS = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL); //TODO Can prolly just leave in constructor
         let playersAry = CLASSOBJ.ALLPLAYERDATA;
         let dataObject = DATA_PACKAGER.getGlobalData(playersAry, this.INCLUDE_GM_ROLLS);
         return dataObject;
@@ -418,11 +419,10 @@ Hooks.on('renderPlayerList', (playerList, html) => {
         })
     }
 
-
+    //ADD Other Buttons (Global Stats & Export)
     let buttons = super._getHeaderButtons();
 
-
-    //Get Global w/o Gm Data
+    //Button That Allows user to get global stats
     buttons.splice(0, 0, {
         class: "fa-solid fa-earth-americas",
         icon: "fas fa-download",
@@ -431,7 +431,6 @@ Hooks.on('renderPlayerList', (playerList, html) => {
             new GlobalStatusPage().render(true);
         }
     })
-
 
     /* TODO
     //Export data button
