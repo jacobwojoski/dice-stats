@@ -123,6 +123,32 @@ class DATA_PACKAGER
         return handlebarsData;
     }
     
+    static globalMaxMinDataHelper(minRoll, maxRoll, dieType, username, handlebarsData){
+        //If num Rolls is 0, Number wasnt rolled by user so skip processing data
+        //Most Min Rolls
+        if(minRoll != 0){
+            if(minRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[dieType]){
+                handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[dieType] = minRoll;
+                handlebarsData.ROLLED_MOST_MIN_PLAYER[dieType] = username;
+            }else if(minRoll === handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[dieType]){
+                //Tied For Most Min Rolls, Append username
+                handlebarsData.ROLLED_MOST_MIN_PLAYER[dieType] += " "+username;
+            }
+        }
+
+        //Most Max Rolls
+        if(maxRoll != 0){
+            if(maxRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[dieType]){
+                handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[dieType] = maxRoll;
+                handlebarsData.ROLLED_MOST_MAX_PLAYER[dieType] = username;
+            }else if(maxRoll === handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[dieType]){
+                //Tied For Most Min Rolls, Append username
+                handlebarsData.ROLLED_MOST_MAX_PLAYER[dieType] += " "+username;
+            }
+        }
+        return handlebarsData;
+    }
+    
     //Get Max and min values from player data
     static getGlobalMaxMinData(players, handlebarsData,includeGMrolls)
     {
@@ -138,70 +164,57 @@ class DATA_PACKAGER
         for(plyr in players){
             //See if we should skip adding ply data becasue its GM's stats
             if(plyr.GM && !includeGMrolls){continue};
-                //D2 Data
-                    minRoll = plyr.PLAYER_DICE[0].ROLLS[0];
-                    maxRoll = plyr.PLAYER_DICE[0].ROLLS[1];
-                    //Most Min Rolls
-                    if(minRoll != 0){
-                        if(minRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
-                            handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0] = minRoll;
-                            handlebarsData.ROLLED_MOST_MIN_PLAYER[0] = plyr.USERNAME;
-                        }else if(minRoll === handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
-                            //Tied For Most Min Rolls, Append username
-                            handlebarsData.ROLLED_MOST_MIN_PLAYER[0] += " "+plyr.USERNAME;
-                        }
-                    }
 
-                    //Most Max Rolls
-                    if(maxRoll != 0){
-                        if(maxRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
-                            handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[0] = maxRoll;
-                            handlebarsData.ROLLED_MOST_MAX_PLAYER[0] += plyr.USERNAME;
-                        }else if(maxRoll === handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[0]){
-                            //Tied For Most Min Rolls, Append username
-                            handlebarsData.ROLLED_MOST_MAX_PLAYER[0] += " "+plyr.USERNAME;
-                        }
-                    }
-                //D3 Data
-                    minRoll = plyr.PLAYER_DICE[1].ROLLS[0];
-                    maxRoll = plyr.PLAYER_DICE[1].ROLLS[2];
-                    //Most Min Rolls
-                    if(minRoll != 0){
-                        if(minRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[1]){
-                            handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[1] = minRoll;
-                            handlebarsData.ROLLED_MOST_MIN_PLAYER[1] = plyr.USERNAME;
-                        }else if(minRoll === handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[0]){
-                            //Tied For Most Min Rolls, Append username
-                            handlebarsData.ROLLED_MOST_MIN_PLAYER[1] += " "+plyr.USERNAME;
-                        }
-                    }
+            myUsername = plyr.USERNAME;
+            //D2 Data
+                minRoll = plyr.PLAYER_DICE[0].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[0].ROLLS[1];
 
-                    //Most Max Rolls
-                    if(maxRoll != 0){
-                        if(maxRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[1]){
-                            handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[1] = maxRoll;
-                            handlebarsData.ROLLED_MOST_MAX_PLAYER[1] = plyr.USERNAME;
-                        }else if(maxRoll === handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[1]){
-                            //Tied For Most Min Rolls, Append username
-                            handlebarsData.ROLLED_MOST_MAX_PLAYER[1] += " "+plyr.USERNAME;
-                        }
-                    }
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)
+            //D3 Data
+                minRoll = plyr.PLAYER_DICE[1].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[1].ROLLS[2];
+                
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 1, myUsername, handlebarsData)
+            //D4 Data
+                minRoll = plyr.PLAYER_DICE[2].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[2].ROLLS[3];
+                
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 2, myUsername, handlebarsData)
+            //D6 Data
+                minRoll = plyr.PLAYER_DICE[3].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[3].ROLLS[5];
+                
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 3, myUsername, handlebarsData)
+            //D8 Data
+                minRoll = plyr.PLAYER_DICE[4].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[4].ROLLS[7];
+                
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 4, myUsername, handlebarsData)
+            //D10 Data
+                minRoll = plyr.PLAYER_DICE[5].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[5].ROLLS[9];
+                
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 5, myUsername, handlebarsData)
+            //D12 Data
+                minRoll = plyr.PLAYER_DICE[6].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[6].ROLLS[11];
+                
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 6, myUsername, handlebarsData)
+            //D20 Data
+                minRoll = plyr.PLAYER_DICE[7].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[7].ROLLS[19];
+    
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)
+            //D100 Data
+                minRoll = plyr.PLAYER_DICE[8].ROLLS[0];
+                maxRoll = plyr.PLAYER_DICE[8].ROLLS[99];
+
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)
+                    
         }
         return handlebarsData;
     }
-
-    /*
-    //TODO, Same info as global min max but its most rolled bassed on percentage of total rolls
-    //Most Nat 20 EX: 2 nat 20's of 100 rolls vs 1 nat 20 of 2 rolls
-    static getGlobalMinMaxDataPercentage(players, handlebarsData,includeGMrolls)
-    {
-        for(plyr in players){
-            //See if we should skip adding ply data becasue its GM's stats
-            if(plyr.GM && !includeGMrolls){continue};
-        }
-        return handlebarsData;
-    }
-    */
     
     //Create Combined Arrays of all players rolls
     //Save Most Max and Most min Roll Data
@@ -307,7 +320,6 @@ class DATA_PACKAGER
         
         packedData = getGlobalRollData(playersArry,packedData,includeGMrolls);
         packedData = getGlobalMaxMinData(playersArry,packedData,includeGMrolls);
-        //packedData = getGlobalMinMaxDataPercentage(playersArry,packedData,includeGMrolls);
         packedData = getGlobalStreakData(playersArry,packedData,includeGMrolls);
         packedData = getGlobalMathStatsData(packedData);
         
