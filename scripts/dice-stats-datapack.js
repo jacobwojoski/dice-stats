@@ -246,8 +246,7 @@ class DATA_PACKAGER
                 minRoll = plyr.PLAYER_DICE[8].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[8].ROLLS[99];
 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)
-                    
+                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)   
         }
         return handlebarsData;
     }

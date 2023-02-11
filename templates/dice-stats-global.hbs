@@ -19,6 +19,14 @@
         <div id = "d2Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[0]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[0]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 2's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[0]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[0]}} Rolls</td>
+            </tr>    
+            <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[0]}}</th>
             </tr>
@@ -35,11 +43,7 @@
                 <td>{{MODE.[0]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[0]}} <!-- Associated Helper in Main -->
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[0]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[0]}}&nbsp;{{STREAK.[0]}}<td>
             </tr>
         </table>
         <br>
@@ -50,6 +54,14 @@
         <h1>D-3 (Fate) Stats</h1>
         <div id = "d3Chart" class="chart-dice-stats"></div>
         <table>
+            <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[1]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[1]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 3's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[1]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[1]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[1]}}</th>
@@ -67,11 +79,7 @@
                 <td>{{MODE.[1]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[1]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[1]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[1]}}&nbsp;{{STREAK.[1]}}<td>
             </tr>
         </table>
         <br>
@@ -82,6 +90,14 @@
         <h1>D-4 Stats</h1>
         <div id = "d4Chart" class="chart-dice-stats"></div>
         <table>
+            <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[2]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[2]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 4's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[2]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[2]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[2]}}</th>
@@ -99,11 +115,7 @@
                 <td>{{MODE.[2]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[2]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[2]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[2]}}&nbsp;{{STREAK.[2]}}<td>
             </tr>
         </table>
         <br>
@@ -114,6 +126,14 @@
         <h1>D-6 Stats</h1>
         <div id = "d6Chart" class="chart-dice-stats"></div>
         <table>
+            <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[3]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[3]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 6's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[3]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[3]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[3]}}</th>
@@ -131,11 +151,7 @@
                 <td>{{MODE.[3]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[3]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[3]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[3]}}&nbsp;{{STREAK.[3]}}<td>
             </tr>
         </table>
         <br>
@@ -146,6 +162,14 @@
         <h1>D-8 Stats</h1>
         <div id = "d8Chart" class="chart-dice-stats"></div>
         <table>
+            <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[4]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[4]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 8's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[4]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[4]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[4]}}</th>
@@ -163,11 +187,7 @@
                 <td>{{MODE.[4]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[4]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[4]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[4]}}&nbsp;{{STREAK.[4]}}<td>
             </tr>
         </table>
         <br>
@@ -178,6 +198,14 @@
         <h1>D-10 Stats</h1>
         <div id = "d10Chart" class="chart-dice-stats"></div>
         <table>
+           <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[5]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[5]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 10's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[5]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[5]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[5]}}</th>
@@ -195,11 +223,7 @@
                 <td>{{MODE.[5]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[5]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[5]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[5]}}&nbsp;{{STREAK.[5]}}<td>
             </tr>
         </table>
         <br>
@@ -210,6 +234,14 @@
         <h1>D-12 Stats</h1>
         <div id = "d12Chart" class="chart-dice-stats"></div>
         <table>
+            <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[6]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[6]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 12's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[6]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[6]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[6]}}</th>
@@ -227,11 +259,7 @@
                 <td>{{MODE.[6]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[6]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[6]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[6]}}&nbsp;{{STREAK.[6]}}<td>
             </tr>
         </table>
         <br>
@@ -242,6 +270,14 @@
         <h1 class="dice-type-title">D-20 Stats</h1>
         <div id = "d20Chart" class="chart-dice-stats"></div>
         <table>
+            <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[7]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[7]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 20's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[7]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[7]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[7]}}</th>
@@ -259,11 +295,7 @@
                 <td>{{MODE.[7]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[7]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[7]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[7]}}&nbsp;{{STREAK.[7]}}<td>
             </tr>
         </table>
         <br>
@@ -274,6 +306,14 @@
         <h1>D-20 Stats</h1>
         <div id = "d100Chart" class="chart-dice-stats"></div>
         <table>
+            <tr>
+                <td>Most Rolled 1's</td>
+                <td>{{ROLLED_MOST_MIN_PLAYER.[8]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[8]}} Rolls</td>
+            </tr>
+            <tr>
+                <td>Most Rolled 100's</td>
+                <td>{{ROLLED_MOST_MAX_PLAYER.[8]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[8]}} Rolls</td>
+            </tr>    
             <tr>
                 <td>Total Rolls:</th>
                 <td>{{TOTAL_ROLLS.[8]}}</th>
@@ -291,11 +331,7 @@
                 <td>{{MODE.[8]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[8]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[8]}}<td>
-                {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
-                {{/ifStreakIsBlind}}
+                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[8]}}&nbsp;{{STREAK.[8]}}<td>
             </tr>
         </table>
         {{/ifDieUsed}}
