@@ -108,8 +108,26 @@ class DATA_PACKAGER
     //======================================================
     
     //Get stats from the global data (Mean median mode)
+    static globalMathStatsHelpter(dieType,rollAry,handlebarsData)
+    {
+        handlebarsData.MEAN[dieType] = DICE_STATS_UTILS.getMean(rollAry);
+        handlebarsData.MEDIAN[dieType] = DICE_STATS_UTILS.getMedian(rollAry);
+        handlebarsData.MODE[dieType] = DICE_STATS_UTILS.getMode(rollAry);
+        return handlebarsData;
+    }
+
     static getGlobalMathStatsData(handlebarsData)
     {
+        //For Every die type get stats
+        handlebarsData = globalMathStatsHelpter(0,handlebarsData.D2_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(1,handlebarsData.D3_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(2,handlebarsData.D4_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(3,handlebarsData.D6_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(4,handlebarsData.D8_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(5,handlebarsData.D10_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(6,handlebarsData.D12_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(7,handlebarsData.D20_ROLL_DATA,handlebarsData); 
+        handlebarsData = globalMathStatsHelpter(8,handlebarsData.D100_ROLL_DATA,handlebarsData);
         return handlebarsData;
     }
     
@@ -148,7 +166,7 @@ class DATA_PACKAGER
         }
         return handlebarsData;
     }
-    
+
     //Get Max and min values from player data
     static getGlobalMaxMinData(players, handlebarsData,includeGMrolls)
     {
