@@ -119,15 +119,15 @@ class DATA_PACKAGER
     static getGlobalMathStatsData(handlebarsData)
     {
         //For Every die type get stats
-        handlebarsData = globalMathStatsHelpter(0,handlebarsData.D2_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(1,handlebarsData.D3_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(2,handlebarsData.D4_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(3,handlebarsData.D6_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(4,handlebarsData.D8_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(5,handlebarsData.D10_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(6,handlebarsData.D12_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(7,handlebarsData.D20_ROLL_DATA,handlebarsData); 
-        handlebarsData = globalMathStatsHelpter(8,handlebarsData.D100_ROLL_DATA,handlebarsData);
+        handlebarsData = this.globalMathStatsHelpter(0,handlebarsData.D2_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(1,handlebarsData.D3_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(2,handlebarsData.D4_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(3,handlebarsData.D6_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(4,handlebarsData.D8_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(5,handlebarsData.D10_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(6,handlebarsData.D12_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(7,handlebarsData.D20_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelpter(8,handlebarsData.D100_ROLL_DATA,handlebarsData);
         return handlebarsData;
     }
     
@@ -147,13 +147,14 @@ class DATA_PACKAGER
         streakLength.fill(0);
         //Player.getStreakString(dieType)
 
-        for(plyr in players){
+        for(let itr = 0; itr < players.length; itr++){
+            let plyr = players[itr];
             //See if we should skip adding data becasue its GM's
             if(plyr.GM && !includeGMrolls){continue};
 
             //For every die type
             for (let i = 0; i < 9; i++) {
-                globalStreakDataHelper(i,plyr,handlebarsData,streakLength);
+                this.globalStreakDataHelper(i,plyr,handlebarsData,streakLength);
             }
         }
         return handlebarsData;
@@ -197,56 +198,57 @@ class DATA_PACKAGER
          */
         let minRoll = 0;
         let maxRoll = 0;
-        for(plyr in players){
+        for(let itr = 0; itr < players.length; itr++){
+            let plyr = players[itr];
             //See if we should skip adding ply data becasue its GM's stats
             if(plyr.GM && !includeGMrolls){continue};
 
-            myUsername = plyr.USERNAME;
+            let myUsername = plyr.USERNAME;
             //D2 Data
                 minRoll = plyr.PLAYER_DICE[0].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[0].ROLLS[1];
 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)
             //D3 Data
                 minRoll = plyr.PLAYER_DICE[1].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[1].ROLLS[2];
                 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 1, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 1, myUsername, handlebarsData)
             //D4 Data
                 minRoll = plyr.PLAYER_DICE[2].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[2].ROLLS[3];
                 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 2, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 2, myUsername, handlebarsData)
             //D6 Data
                 minRoll = plyr.PLAYER_DICE[3].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[3].ROLLS[5];
                 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 3, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 3, myUsername, handlebarsData)
             //D8 Data
                 minRoll = plyr.PLAYER_DICE[4].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[4].ROLLS[7];
                 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 4, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 4, myUsername, handlebarsData)
             //D10 Data
                 minRoll = plyr.PLAYER_DICE[5].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[5].ROLLS[9];
                 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 5, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 5, myUsername, handlebarsData)
             //D12 Data
                 minRoll = plyr.PLAYER_DICE[6].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[6].ROLLS[11];
                 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 6, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 6, myUsername, handlebarsData)
             //D20 Data
                 minRoll = plyr.PLAYER_DICE[7].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[7].ROLLS[19];
     
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 7, myUsername, handlebarsData)
             //D100 Data
                 minRoll = plyr.PLAYER_DICE[8].ROLLS[0];
                 maxRoll = plyr.PLAYER_DICE[8].ROLLS[99];
 
-                handlebarsData = globalMaxMinHelper(minRoll, maxRoll, 0, myUsername, handlebarsData)   
+                handlebarsData = this.globalMaxMinDataHelper(minRoll, maxRoll, 8, myUsername, handlebarsData)   
         }
         return handlebarsData;
     }
@@ -255,7 +257,8 @@ class DATA_PACKAGER
     //Save Most Max and Most min Roll Data
     static getGlobalRollData(players, handlebarsData,includeGMrolls)
     {
-        for(plyr in players){
+        for(let itr = 0; itr < players.length; itr++){
+            let plyr = players[itr];
             //See if we should skip adding ply data becasue its GM's stats
             if(plyr.GM && !includeGMrolls){continue};
             
@@ -312,19 +315,19 @@ class DATA_PACKAGER
         handlebarsData.D20_ROLL_DATA = new Array(20);
         handlebarsData.D100_ROLL_DATA = new Array(100);
 
-        packedData.TOTAL_ROLLS = new Array(9);
-        packedData.MEAN =   new Array(9);
-        packedData.MEDIAN = new Array(9);
-        packedData.MODE =   new Array(9);
+        handlebarsData.TOTAL_ROLLS = new Array(9);
+        handlebarsData.MEAN =   new Array(9);
+        handlebarsData.MEDIAN = new Array(9);
+        handlebarsData.MODE =   new Array(9);
 
-        packedData.STREAK_PLAYER = new Array(9),
-        packedData.STREAK = new Array(9);
-        packedData.S_IS_B = new Array(9);
+        handlebarsData.STREAK_PLAYER = new Array(9),
+        handlebarsData.STREAK = new Array(9);
+        handlebarsData.S_IS_B = new Array(9);
 
-        packedData.ROLLED_MOST_MAX_PLAYER =     new Array(9), 
-        packedData.ROLLED_MOST_MAX_ROLLCOUNT =  new Array(9),
-        packedData.ROLLED_MOST_MIN_PLAYER =     new Array(9),
-        packedData.ROLLED_MOST_MIN_ROLLCOUNT =  new Array(9)
+        handlebarsData.ROLLED_MOST_MAX_PLAYER =     new Array(9), 
+        handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT =  new Array(9),
+        handlebarsData.ROLLED_MOST_MIN_PLAYER =     new Array(9),
+        handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT =  new Array(9)
 
         //Set default Values in Arrays
         handlebarsData.D2_ROLL_DATA.fill(0);
@@ -337,19 +340,19 @@ class DATA_PACKAGER
         handlebarsData.D20_ROLL_DATA.fill(0);
         handlebarsData.D100_ROLL_DATA.fill(0);
 
-        packedData.TOTAL_ROLLS.fill(0);
-        packedData.MEAN.fill(0);
-        packedData.MEDIAN.fill(0);
-        packedData.MODE.fill(0);
+        handlebarsData.TOTAL_ROLLS.fill(0);
+        handlebarsData.MEAN.fill(0);
+        handlebarsData.MEDIAN.fill(0);
+        handlebarsData.MODE.fill(0);
 
-        packedData.STREAK_PLAYER.fill("");
-        packedData.STREAK.fill(0);
-        packedData.S_IS_B.fill(0);
+        handlebarsData.STREAK_PLAYER.fill("");
+        handlebarsData.STREAK.fill(0);
+        handlebarsData.S_IS_B.fill(0);
 
-        packedData.ROLLED_MOST_MAX_PLAYER.fill(""), 
-        packedData.ROLLED_MOST_MAX_ROLLCOUNT.fill(0),
-        packedData.ROLLED_MOST_MIN_PLAYER.fill(""),
-        packedData.ROLLED_MOST_MIN_ROLLCOUNT.fill(0);
+        handlebarsData.ROLLED_MOST_MAX_PLAYER.fill(""), 
+        handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT.fill(0),
+        handlebarsData.ROLLED_MOST_MIN_PLAYER.fill(""),
+        handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT.fill(0);
 
         return handlebarsData;
     }
@@ -363,10 +366,10 @@ class DATA_PACKAGER
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
         packedData = this.setGlobalDefaultData(packedData);
         
-        packedData = getGlobalRollData(playersArry,packedData,includeGMrolls);
-        packedData = getGlobalMaxMinData(playersArry,packedData,includeGMrolls);
-        packedData = getGlobalStreakData(playersArry,packedData,includeGMrolls);
-        packedData = getGlobalMathStatsData(packedData);
+        packedData = this.getGlobalRollData(playersArry,packedData,includeGMrolls);
+        packedData = this.getGlobalMaxMinData(playersArry,packedData,includeGMrolls);
+        packedData = this.getGlobalStreakData(playersArry,packedData,includeGMrolls);
+        packedData = this.getGlobalMathStatsData(packedData);
         
         return packedData;
     }

@@ -156,12 +156,14 @@ class PLAYER {
         let nextNum = 0;
         if(len === -1){
             return "NO DICE ROLLED"
+        }else if(len === 1){
+            return "No Strings Made"
         }else{
             // this value is index 0, loop starts at 1
             // User can have a streak of 1 
             let tempStr = initNum.toString(); 
             for(let i=1; i<len; i++){
-                nextNum = initNum+i+1;
+                nextNum = initNum+i;
                 tempStr = tempStr+','+nextNum.toString();
             }
             return tempStr;
@@ -344,7 +346,7 @@ class PlayerStatusPage extends FormApplication {
 }
 
 class GlobalStatusPage extends FormApplication{
-    INCLUDE_GM_ROLLS = false;
+    //INCLUDE_GM_ROLLS = false;
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
@@ -362,14 +364,20 @@ class GlobalStatusPage extends FormApplication{
         return mergedOptions;
     }
 
-    constructor(options={}, dataObject = null) {
-        this.INCLUDE_GM_ROLLS = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL);
-    }
+    // constructor(options={}, dataObject = null) {
+    //     //this.INCLUDE_GM_ROLLS = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL);
+    // }
 
     getData(){
-        this.INCLUDE_GM_ROLLS = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL); //TODO Can prolly just leave in constructor
-        let playersAry = CLASSOBJ.ALLPLAYERDATA;
-        let dataObject = DATA_PACKAGER.getGlobalData(playersAry, this.INCLUDE_GM_ROLLS);
+        var includeGM = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL); //TODO Can prolly just leave in constructor
+
+        //Convert Map of PLayers to Array
+        let playersAry = [];
+        CLASSOBJ.ALLPLAYERDATA.forEach(value => {
+            playersAry.push(value);
+        })
+
+        let dataObject = DATA_PACKAGER.packageGlobalData(playersAry, includeGM);
         return dataObject;
     }
 }
@@ -417,21 +425,19 @@ Hooks.on('renderPlayerList', (playerList, html) => {
                 new PlayerStatusPage(user.id).render(true);
             }
         })
-    }
+    } 
 
-    //ADD Other Buttons (Global Stats & Export)
-    let buttons = super._getHeaderButtons();
+    const btn = html.find(`[data-user-id="${game.userId}"]`)
+    btn.append(
+        `<button type="button" title='Global Stats' class="open-player-stats-button flex0" id="globalStatsBtn"><i class="fa-solid fa-earth-americas"></i></button>`
+    )
 
-    //Button That Allows user to get global stats
-    buttons.splice(0, 0, {
-        class: "fa-solid fa-earth-americas",
-        icon: "fas fa-download",
-        onclick: ev => {
-            //Check Setting to see if global settings include gm rolls
-            new GlobalStatusPage().render(true);
-        }
+    html.on('click', `#globalStatsBtn`, (event) => {
+        new GlobalStatusPage().render(true);
     })
 
+    //aside.players.h3
+    //playerList.super.append
     /* TODO
     //Export data button
     buttons.splice(1, 0, {

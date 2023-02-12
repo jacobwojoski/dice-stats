@@ -43,7 +43,7 @@
                 <td>{{MODE.[0]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[0]}}&nbsp;{{STREAK.[0]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[0]}} with a streak of: {{STREAK.[0]}}<td>            
             </tr>
         </table>
         <br>
@@ -79,7 +79,7 @@
                 <td>{{MODE.[1]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[1]}}&nbsp;{{STREAK.[1]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[1]}} with a streak of: {{STREAK.[1]}}<td>            
             </tr>
         </table>
         <br>
@@ -115,7 +115,7 @@
                 <td>{{MODE.[2]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[2]}}&nbsp;{{STREAK.[2]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[2]}} with a streak of: {{STREAK.[2]}}<td>            
             </tr>
         </table>
         <br>
@@ -151,7 +151,7 @@
                 <td>{{MODE.[3]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[3]}}&nbsp;{{STREAK.[3]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[3]}} with a streak of: {{STREAK.[3]}}<td>            
             </tr>
         </table>
         <br>
@@ -187,7 +187,7 @@
                 <td>{{MODE.[4]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[4]}}&nbsp;{{STREAK.[4]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[4]}} with a streak of: {{STREAK.[4]}}<td>            
             </tr>
         </table>
         <br>
@@ -223,7 +223,7 @@
                 <td>{{MODE.[5]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[5]}}&nbsp;{{STREAK.[5]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[5]}} with a streak of: {{STREAK.[5]}}<td>            
             </tr>
         </table>
         <br>
@@ -259,7 +259,7 @@
                 <td>{{MODE.[6]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[6]}}&nbsp;{{STREAK.[6]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[6]}} with a streak of: {{STREAK.[6]}}<td>            
             </tr>
         </table>
         <br>
@@ -295,7 +295,7 @@
                 <td>{{MODE.[7]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[7]}}&nbsp;{{STREAK.[7]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[7]}} with a streak of: {{STREAK.[7]}}<td>            
             </tr>
         </table>
         <br>
@@ -331,7 +331,7 @@
                 <td>{{MODE.[8]}}</th>
             </tr>
             <tr>
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{STREAK_PLAYER.[8]}}&nbsp;{{STREAK.[8]}}<td>
+                <td>Longest Streak is {{STREAK_PLAYER.[8]}} with a streak of: {{STREAK.[8]}}<td>            
             </tr>
         </table>
         {{/ifDieUsed}}
@@ -540,14 +540,50 @@
             chart.draw(data, chartOptions);
         }
 
-        google.charts.setOnLoadCallback(drawChartd2);
-        google.charts.setOnLoadCallback(drawChartd3);
-        google.charts.setOnLoadCallback(drawChartd4);
-        google.charts.setOnLoadCallback(drawChartd6);
-        google.charts.setOnLoadCallback(drawChartd8);
-        google.charts.setOnLoadCallback(drawChartd10);
-        google.charts.setOnLoadCallback(drawChartd12);
-        google.charts.setOnLoadCallback(drawChartd20);
+         if({{TOTAL_ROLLS.[0]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd2);
+        }
+
+        if({{TOTAL_ROLLS.[1]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd3);
+        }
+
+        if({{TOTAL_ROLLS.[2]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd4);
+        }
+
+        if({{TOTAL_ROLLS.[3]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd6);
+        }
+
+        if({{TOTAL_ROLLS.[4]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd8);
+        }
+
+        if({{TOTAL_ROLLS.[5]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd10);
+        }
+
+        if({{TOTAL_ROLLS.[6]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd12);
+        }
+
+        if({{TOTAL_ROLLS.[7]}} > 0)
+        {
+            google.charts.setOnLoadCallback(drawChartd20);
+        }
+
+        if({{TOTAL_ROLLS.[8]}} > 0)
+        {
+            //google.charts.setOnLoadCallback(drawChartd100);
+        }
 
     </script>
 
