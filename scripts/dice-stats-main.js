@@ -21,6 +21,7 @@ const SETTINGS = {
     PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either
     PLAYERS_SEE_GM:     'players_see_gm',
     PLAYERS_SEE_GLOBAL: 'players_see_global',
+    INCLUDE_GM_IN_GLOBAL: 'include_gm_in_global',
     DISABLE_STREAKS: 'disable_streak',
     SEE_BLIND_STREAK: 'see_blind_streaks'              
 }
@@ -143,6 +144,7 @@ class PLAYER {
     constructor(userid){
         this.USERID = userid;
         this.USERNAME = game.users.get(userid)?.name;
+        this.GM = game.users.get(userid)?.isGM;
         for (let i = 0; i < this.PLAYER_DICE.length; i++) {
             this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
         }
@@ -154,12 +156,14 @@ class PLAYER {
         let nextNum = 0;
         if(len === -1){
             return "NO DICE ROLLED"
+        }else if(len === 1){
+            return "No Strings Made"
         }else{
             // this value is index 0, loop starts at 1
             // User can have a streak of 1 
             let tempStr = initNum.toString(); 
             for(let i=1; i<len; i++){
-                nextNum = initNum+i+1;
+                nextNum = initNum+i;
                 tempStr = tempStr+','+nextNum.toString();
             }
             return tempStr;
@@ -244,6 +248,16 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
         })
 
+        // A setting to determine whether players can see global data
+        game.settings.register(this.ID, SETTINGS.INCLUDE_GM_IN_GLOBAL, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.INCLUDE_GM_IN_GLOBAL}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.INCLUDE_GM_IN_GLOBAL}.Hint`,
+        })
+
         // A setting to determine whether players can see streaks at all
         game.settings.register(this.ID, SETTINGS.DISABLE_STREAKS, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.DISABLE_STREAKS}.Name`,
@@ -273,10 +287,13 @@ class DiceStatsTracker {
         let dieType = MAX_TO_DIE.get(sides);
         let newNumbers = [];
 
-        //TODO add check here if we should store other ppls data?. Could help with player performance?
+        //TODO add check here if we should store other ppls data?. Could potentally help with player performance?
 
-        //In case there's more than one die rolled in a single instance as in fortune/misfortune rolls or multiple hit dice
+        //In case there's more than one die rolled in a single instance as in 
+        //  fortune/misfortune rolls or multiple hit dice save each roll
         newNumbers = msg.rolls[0].dice[0].results.map(result => result.result)
+
+        //Get Associated player object
         let playerInfo = this.ALLPLAYERDATA.get(msg.user.id);
 
         newNumbers.forEach(element => {
@@ -302,7 +319,7 @@ class PlayerStatusPage extends FormApplication {
           id: 'player-data',
           template: TEMPLATES.PLAYERDATAFORM,
           userId: game.userId,
-          title: 'Roll Tracker Data',
+          title: 'Player Dice Stats',
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -325,6 +342,43 @@ class PlayerStatusPage extends FormApplication {
             return dataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
+    }
+}
+
+class GlobalStatusPage extends FormApplication{
+    //INCLUDE_GM_ROLLS = false;
+
+    static get defaultOptions() {
+        const defaults = super.defaultOptions;
+      
+        const overrides = {
+          height: 'auto',
+          id: 'global-data',
+          template: TEMPLATES.GLOBALDATAFORM,
+          userId: game.userId,
+          title: 'Global Dice Stats',
+        };
+      
+        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
+        
+        return mergedOptions;
+    }
+
+    // constructor(options={}, dataObject = null) {
+    //     //this.INCLUDE_GM_ROLLS = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL);
+    // }
+
+    getData(){
+        var includeGM = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL); //TODO Can prolly just leave in constructor
+
+        //Convert Map of PLayers to Array
+        let playersAry = [];
+        CLASSOBJ.ALLPLAYERDATA.forEach(value => {
+            playersAry.push(value);
+        })
+
+        let dataObject = DATA_PACKAGER.packageGlobalData(playersAry, includeGM);
+        return dataObject;
     }
 }
 
@@ -366,12 +420,47 @@ Hooks.on('renderPlayerList', (playerList, html) => {
             let amIGM = game.users.get(game.userId)?.isGM;
             if(canSeeGM === false && user.isGM && !amIGM){
                 //do nothing, Dont allow ability to see gm data if setting is off
+                ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
             }else{
                 new PlayerStatusPage(user.id).render(true);
             }
         })
+    } 
+
+    const btn = html.find(`[data-user-id="${game.userId}"]`)
+    btn.append(
+        `<button type="button" title='Global Stats' class="open-player-stats-button flex0" id="globalStatsBtn"><i class="fa-solid fa-earth-americas"></i></button>`
+    )
+
+    html.on('click', `#globalStatsBtn`, (event) => {
+        new GlobalStatusPage().render(true);
+    })
+
+    //aside.players.h3
+    //playerList.super.append
+    /* TODO
+    //Export data button
+    buttons.splice(1, 0, {
+        class: "roll-tracker-form-export",
+        icon: "fas fa-download",
+        onclick: ev => {
+            //TODO
+        }
+    })
+
+
+     //If I am GM
+     if(game.user.isGM){
+        //Get Global Stats (Stats include GM Rolls)
+        buttons.splice(2, 0, {
+            class: "roll-tracker-form-export",
+            icon: "fas fa-download",
+            onclick: ev => {
+                //TODO
+            }
+        })
     }
-    
+    */
 })
 
 
@@ -398,4 +487,20 @@ Handlebars.registerHelper('ifStreakIsBlind', function (var1, options) {
     }else{
         return options.inverse(this);
     }
+});
+
+//Handlebars uses this to check if the user has a streak
+Handlebars.registerHelper('ifHaveStreak', function (streakValue, options) {
+    //If the string has more then 1 number
+    if(streakValue.length > 1){
+        return options.fn(this);
+    }else{
+        return options.inverse(this);
+    }
+});
+
+//TODO Display Warning and close popup if user Has no roll data
+Handlebars.registerHelper('ifUserHasData', function (var1, options) {
+    ui.notifications.warn("No roll data to export");
+    return options.inverse(this);
 });
