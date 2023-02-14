@@ -483,7 +483,17 @@ Handlebars.registerHelper('ifDieUsed', function (var1, options) {
 //If there was a blind roll we dont want to potentally point the result so dont display it for now
 Handlebars.registerHelper('ifStreakIsBlind', function (var1, options) {
     if(var1 != true){
-        
+        return options.fn(this);
+    }else{
+        return options.inverse(this);
+    }
+});
+
+//Handlebars uses this to check if the user has a streak
+Handlebars.registerHelper('ifHaveStreak', function (streakValue, options) {
+    //If the string has more then 1 number
+    if(streakValue.length > 1){
+        return options.fn(this);
     }else{
         return options.inverse(this);
     }

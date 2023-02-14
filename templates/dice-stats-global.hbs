@@ -20,11 +20,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[0]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[0]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[0]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[0]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 2's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[0]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[0]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[0]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[0]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -43,7 +43,11 @@
                 <td>{{MODE.[0]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[0]}} with a streak of: {{STREAK.[0]}}<td>            
+                {{#ifHaveStreak STREAK.[0]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[0]}}</b> with a streak of: <b>{{STREAK.[0]}}</b><td> 
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}             
             </tr>
         </table>
         <br>
@@ -56,11 +60,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[1]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[1]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[1]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[1]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 3's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[1]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[1]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[1]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[1]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -79,7 +83,11 @@
                 <td>{{MODE.[1]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[1]}} with a streak of: {{STREAK.[1]}}<td>            
+                {{#ifHaveStreak STREAK.[1]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[1]}}</b> with a streak of: <b>{{STREAK.[1]}}</b><td> 
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}             
             </tr>
         </table>
         <br>
@@ -92,11 +100,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[2]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[2]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[2]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[2]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 4's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[2]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[2]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[2]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[2]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -115,7 +123,11 @@
                 <td>{{MODE.[2]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[2]}} with a streak of: {{STREAK.[2]}}<td>            
+                {{#ifHaveStreak STREAK.[2]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[2]}}</b> with a streak of: <b>{{STREAK.[2]}}</b><td> 
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}             
             </tr>
         </table>
         <br>
@@ -128,11 +140,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[3]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[3]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[3]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[3]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 6's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[3]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[3]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[3]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[3]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -151,7 +163,11 @@
                 <td>{{MODE.[3]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[3]}} with a streak of: {{STREAK.[3]}}<td>            
+                {{#ifHaveStreak STREAK.[3]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[3]}}</b> with a streak of: <b>{{STREAK.[3]}}</b><td> 
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}             
             </tr>
         </table>
         <br>
@@ -164,11 +180,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[4]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[4]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[4]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[4]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 8's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[4]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[4]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[4]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[4]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -187,7 +203,11 @@
                 <td>{{MODE.[4]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[4]}} with a streak of: {{STREAK.[4]}}<td>            
+                {{#ifHaveStreak STREAK.[4]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[4]}}</b> with a streak of: <b>{{STREAK.[4]}}</b><td> 
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}            
             </tr>
         </table>
         <br>
@@ -200,11 +220,11 @@
         <table>
            <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[5]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[5]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[5]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[5]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 10's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[5]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[5]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[5]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[5]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -223,7 +243,11 @@
                 <td>{{MODE.[5]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[5]}} with a streak of: {{STREAK.[5]}}<td>            
+                {{#ifHaveStreak STREAK.[5]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[5]}}</b> with a streak of: <b>{{STREAK.[5]}}</b><td>
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}             
             </tr>
         </table>
         <br>
@@ -236,11 +260,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[6]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[6]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[6]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[6]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 12's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[6]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[6]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[6]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[6]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -259,7 +283,11 @@
                 <td>{{MODE.[6]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[6]}} with a streak of: {{STREAK.[6]}}<td>            
+                {{#ifHaveStreak STREAK.[6]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[6]}}</b> with a streak of: <b>{{STREAK.[6]}}</b><td> 
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}             
             </tr>
         </table>
         <br>
@@ -272,11 +300,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[7]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[7]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[7]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[7]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 20's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[7]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[7]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[7]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[7]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -295,7 +323,11 @@
                 <td>{{MODE.[7]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[7]}} with a streak of: {{STREAK.[7]}}<td>            
+                {{#ifHaveStreak STREAK.[7]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[7]}}</b> with a streak of: <b>{{STREAK.[7]}}</b><td> 
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}           
             </tr>
         </table>
         <br>
@@ -308,11 +340,11 @@
         <table>
             <tr>
                 <td>Most Rolled 1's</td>
-                <td>{{ROLLED_MOST_MIN_PLAYER.[8]}} with {{ROLLED_MOST_MIN_ROLLCOUNT.[8]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MIN_PLAYER.[8]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[8]}}</b> Rolls</td>
             </tr>
             <tr>
                 <td>Most Rolled 100's</td>
-                <td>{{ROLLED_MOST_MAX_PLAYER.[8]}} with {{ROLLED_MOST_MAX_ROLLCOUNT.[8]}} Rolls</td>
+                <td><b>{{ROLLED_MOST_MAX_PLAYER.[8]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[8]}}</b> Rolls</td>
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -331,7 +363,11 @@
                 <td>{{MODE.[8]}}</th>
             </tr>
             <tr>
-                <td>Longest Streak is {{STREAK_PLAYER.[8]}} with a streak of: {{STREAK.[8]}}<td>            
+                {{#ifHaveStreak STREAK.[8]}}
+                    <td>Longest Streak is <b>{{STREAK_PLAYER.[8]}}</b> with a streak of: <b>{{STREAK.[8]}}</b><td>
+                {{else}}
+                    <td>No Streak was made</td>
+                {{/ifHaveStreak}}        
             </tr>
         </table>
         {{/ifDieUsed}}

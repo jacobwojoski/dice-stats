@@ -175,7 +175,7 @@ class DATA_PACKAGER
 
         //Most Max Rolls
         if(maxRoll != 0){
-            if(maxRoll > handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT[dieType]){
+            if(maxRoll > handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[dieType]){
                 handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[dieType] = maxRoll;
                 handlebarsData.ROLLED_MOST_MAX_PLAYER[dieType] = username;
             }else if(maxRoll === handlebarsData.ROLLED_MOST_MAX_ROLLCOUNT[dieType]){

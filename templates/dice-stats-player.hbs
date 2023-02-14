@@ -35,10 +35,15 @@
                 <td>{{MODE.[0]}}</th>
             </tr>
             <tr>
-                {{#ifStreakIsBlind S_IS_B.[0]}} <!-- Associated Helper in Main -->
-                <td>Longest Streak:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[0]}}<td>
+                {{#ifStreakIsBlind S_IS_B.[0]}}     <!--Associated helper in main-->
+                    {{#ifHaveStreak STREAK.[0]}}    <!--Associated helper in main-->
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[0]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -68,9 +73,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[1]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[1]}}<td>
+                    {{#ifHaveStreak STREAK.[1]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[1]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -100,9 +110,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[2]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[2]}}<td>
+                    {{#ifHaveStreak STREAK.[2]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[2]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -132,9 +147,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[3]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[3]}}<td>
+                    {{#ifHaveStreak STREAK.[3]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[3]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -164,9 +184,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[4]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[4]}}<td>
+                    {{#ifHaveStreak STREAK.[4]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[4]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -196,9 +221,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[5]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[5]}}<td>
+                    {{#ifHaveStreak STREAK.[5]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[5]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -228,9 +258,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[6]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[6]}}<td>
+                    {{#ifHaveStreak STREAK.[6]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[6]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -260,9 +295,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[7]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[7]}}<td>
+                    {{#ifHaveStreak STREAK.[7]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[7]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>
@@ -292,9 +332,14 @@
             </tr>
             <tr>
                 {{#ifStreakIsBlind S_IS_B.[8]}}
-                <td>Streak Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{STREAK.[8]}}<td>
+                    {{#ifHaveStreak STREAK.[8]}}
+                        <td>Streak Data:</td>
+                        <td>{{STREAK.[8]}}</td> 
+                    {{else}}
+                        <td>No Streak was made</td>
+                    {{/ifHaveStreak}}
                 {{else}}
-                <td>Streak Is Blind, No Streak Data Visible<td>
+                    <td>Streak Is Blind, No Streak Data Visible</td>
                 {{/ifStreakIsBlind}}
             </tr>
         </table>

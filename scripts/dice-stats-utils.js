@@ -67,26 +67,27 @@ class DICE_STATS_UTILS {
     }
 
     //Middle number
-    //Make array of every number we have
-    //Find middle index
-    //Return value at index
+    //Find Total Number of rolls/2 ()
+    //Go through array subtracting each roll untill we find our middle number
     static getMedian(RollsAry){
-        let tempAry = [];
-
+        let totalRolls = 0;
         for(let i=0; i<RollsAry.length; i++){
-            var value = RollsAry[i]; //Number of that roll (i+1)
-            while(value!=0){
-                tempAry.push(i+1);
-                value--;
+            totalRolls += RollsAry[i];
+        }
+
+        if(totalRolls > 1){
+            let middleIndex = Math.round(totalRolls/2);
+            for(let i=0; i<RollsAry.length; i++){
+                var value = RollsAry[i]; //Number of that roll (i+1)
+                while(value!=0){
+                    if(middleIndex === 0){
+                        return i+1; //index+1 = die number
+                    }
+                    middleIndex--;
+                    value--;
+                }
             }
         }
-
-        var middleIndex = tempAry.length/2;
-
-        if(tempAry.length>=middleIndex){
-            return tempAry[middleIndex];
-        }else{
-            return 0
-        }
+        return 0;
     }
 }
