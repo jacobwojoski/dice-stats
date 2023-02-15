@@ -21,8 +21,10 @@ const SETTINGS = {
     PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either
     PLAYERS_SEE_GM:     'players_see_gm',
     PLAYERS_SEE_GLOBAL: 'players_see_global',
-    INCLUDE_GM_IN_GLOBAL: 'include_gm_in_global',
-    DISABLE_STREAKS: 'disable_streak',
+    PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',
+    DISABLE_STREAKS_MSGS: 'disable_streak',
+    DISABLE_CRIT_MSGS: 'disable_crits',
+    DISABLE_ALL_CHAT_MSGS: 'disable_all_chat_msgs',
     SEE_BLIND_STREAK: 'see_blind_streaks'              
 }
 
@@ -207,6 +209,39 @@ class DiceStatsTracker {
         this.SYSTEM = `${game.system.id}`
         this.ALLPLAYERDATA = new Map();
 
+        // A setting to determine whether players can see gm data
+        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Hint`
+            //restricted: true    // Restric item to gamemaster only 
+            //Only used for non world lvl items. All World items are already gm only
+        })
+
+        // A setting to determine whether players can see global data
+        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GLOBAL, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Name`,
+            default: true,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
+        })
+
+        // A setting to determine whether players can see global data
+        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Hint`,
+        })
+
+        /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_SELF}.Name`,
@@ -225,37 +260,6 @@ class DiceStatsTracker {
             scope: 'world',
             config: true,
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Hint`,
-        })
-
-        // A setting to determine whether players can see gm data
-        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Name`,
-            default: false,
-            type: Boolean,
-            scope: 'world',
-            config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Hint`
-            //restricted: true    // Restric item to gamemaster only
-        })
-
-        // A setting to determine whether players can see global data
-        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GLOBAL, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Name`,
-            default: true,
-            type: Boolean,
-            scope: 'world',
-            config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
-        })
-
-        // A setting to determine whether players can see global data
-        game.settings.register(this.ID, SETTINGS.INCLUDE_GM_IN_GLOBAL, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.INCLUDE_GM_IN_GLOBAL}.Name`,
-            default: false,
-            type: Boolean,
-            scope: 'world',
-            config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.INCLUDE_GM_IN_GLOBAL}.Hint`,
         })
 
         // A setting to determine whether players can see streaks at all
@@ -277,6 +281,7 @@ class DiceStatsTracker {
             config: true,
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.SEE_BLIND_STREAK}.Hint`
         })
+        */
     }
 
     parseMessage(msg){
@@ -346,7 +351,6 @@ class PlayerStatusPage extends FormApplication {
 }
 
 class GlobalStatusPage extends FormApplication{
-    //INCLUDE_GM_ROLLS = false;
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
@@ -364,12 +368,9 @@ class GlobalStatusPage extends FormApplication{
         return mergedOptions;
     }
 
-    // constructor(options={}, dataObject = null) {
-    //     //this.INCLUDE_GM_ROLLS = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL);
-    // }
 
     getData(){
-        var includeGM = game.settings.get(MODULE_ID,SETTINGS.INCLUDE_GM_IN_GLOBAL); //TODO Can prolly just leave in constructor
+        var includeGM = game.settings.get(MODULE_ID,SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
 
         //Convert Map of PLayers to Array
         let playersAry = [];

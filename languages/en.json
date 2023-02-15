@@ -17,9 +17,21 @@
                 "Name" : "See GLOBAL roll data?",
                 "Hint" : "If enabled, the player can see the global stats. Reccomended On"
             },
-            "disable_streak": {
-                "Name" : "Stop all streaks from being printed to chat?",
+            "players_see_gm_in_global": {
+                "Name" : "Allow ability to see GM rolls in global data (NOTE: this impacts GM's Global Data Screen too)",
+                "Hint" : "If enabled it will allow the user to see the GM stats in the global data popup"
+            },
+            "disable_streak_msgs": {
+                "Name" : "Stop all streaks messages from being printed to chat",
                 "Hint" : "If enabled, streak messages will not be printed to the chat. Streaks can still be seen in data card. Reccomended On"
+            },
+            "disable_crit_msgs": {
+                "Name" : "",
+                "Hint" : ""
+            },
+            "disable_all_msgs": {
+                "Name" : "disable the printing of both crit rolls and streak rolls to chat",
+                "Hint" : ""
             },
             "see_blind_streaks": {
                 "Name" : "Let blind roll streaks be printed to chat",
@@ -35,7 +47,7 @@
             "median":       "Meadian (Middle Number):   ",
             "mode":         "Mode (Most Common):        ",
             "streak":       "Longest Streak:        ",
-            "streak_blind": "Streak has blind rolls. Blind streak only available to GM"
+            "streak_blind": "Streak has blind rolls. Blind streaks are only available to GM"
         },
         "roll_chat_form":{
 
