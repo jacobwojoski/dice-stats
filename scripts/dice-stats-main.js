@@ -17,15 +17,15 @@ const TEMPLATES = {
 
 //Currently Every user will store everyone elses data
 const SETTINGS = {
-    PLAYERS_SEE_SELF: 'players_see_self',       //If players are allowed to view their stats
-    PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either
-    PLAYERS_SEE_GM:     'players_see_gm',
-    PLAYERS_SEE_GLOBAL: 'players_see_global',
-    PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',
-    DISABLE_STREAKS_MSGS: 'disable_streak',
-    DISABLE_CRIT_MSGS: 'disable_crits',
-    DISABLE_ALL_CHAT_MSGS: 'disable_all_chat_msgs',
-    SEE_BLIND_STREAK: 'see_blind_streaks'              
+    PLAYERS_SEE_SELF: 'players_see_self',       //If players are allowed to view their stats               [Def: True]      (Global)
+    PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either     [Def: True]      (Global)
+    PLAYERS_SEE_GM:     'players_see_gm',       //If Players can see GM dice roll stats                    [Def: False]     (Global)
+    PLAYERS_SEE_GLOBAL: 'players_see_global',   //If Players Can  Global Dice Stats                        [Def: True]      (Global)
+    PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global)
+    ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global)    
+    ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
+    TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
+    ENABLE_STREAK_MSGS: 'enable_streak_msgs'   //Choose what dice to display streak msgs for    [Default : d20]             (Local)     
 }
 
 /**

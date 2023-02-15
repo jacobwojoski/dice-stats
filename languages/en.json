@@ -21,21 +21,25 @@
                 "Name" : "Allow ability to see GM rolls in global data (NOTE: this impacts GM's Global Data Screen too)",
                 "Hint" : "If enabled it will allow the user to see the GM stats in the global data popup"
             },
-            "disable_streak_msgs": {
-                "Name" : "Stop all streaks messages from being printed to chat",
-                "Hint" : "If enabled, streak messages will not be printed to the chat. Streaks can still be seen in data card. Reccomended On"
+            "enable_crit_msgs": {
+                "Name" : "Stop All Crit Messages From Being Displayed To chat",
+                "Hint" : "Empty = Disabled | 20, 4 = Crits for d20 and d4's are printed"
             },
-            "disable_crit_msgs": {
-                "Name" : "",
-                "Hint" : ""
+            "types_of_crit_msgs": {
+                "Name" : "Select Type of Crits to Display",
+                "Hint" : "Choose what crit vales you want to display",
+                "Option 0" : "NA",
+                "Option1" : "Both",
+                "Option2" : "Only Crit Fails",
+                "Option3" : "Only Crit Success"
             },
-            "disable_all_msgs": {
-                "Name" : "disable the printing of both crit rolls and streak rolls to chat",
-                "Hint" : ""
+            "enable_streak_msgs": {
+                "Name" : "List Die types to have streaks printed to chat",
+                "Hint" : "Empty = Disabled | 20, 4 = Streaks for d20 and d4's are printed"
             },
-            "see_blind_streaks": {
-                "Name" : "Let blind roll streaks be printed to chat",
-                "Hint" : "If enabled, streaks with blind rolls will be able to be printed in chat. Reccomended Off"
+            "enable_blind_streak_msgs": {
+                "Name" : "See blind streaks",
+                "Hint" : "If a streak has a blind roll in it its not printed to chat unless this is enabled"
             }
         },
         "global_data_form":{
