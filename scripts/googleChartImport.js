@@ -1,3 +1,10 @@
+/**
+ * This is a copy paste of the google chart lib. I couldn't find A better way to get a chart lib into the program.
+ * Could't import using the CDN. If someone has a better way lmk!
+ * Charts.js didnt work due too it using similar class names as some built in foundry classes.
+ * One being "Canvas" and Another being "Color"
+*/
+
 (function(){/*
 
  Copyright The Closure Library Authors.

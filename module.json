@@ -14,7 +14,7 @@
         "scripts/dice-stats-main.js",
         "scripts/dice-stats-utils.js",
         "scripts/dice-stats-datapack.js",
-        "scripts/chartImport.js"
+        "scripts/googleChartImport.js"
     ],
     "styles": [
         "styles/dice-stats.css"
