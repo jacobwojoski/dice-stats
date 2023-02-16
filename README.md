@@ -1,4 +1,4 @@
-# Dice Stats (In Development) Settings Dont Work Yet
+# Dice Stats
 A foundry vtt module to view dice stats of every player including the gm.  
 Currently stats are stored by parsing chat. If the user joins the game late  
 they will only get data from that point on. Original Idea was from ![Catan Online](https://colonist.io/)  
