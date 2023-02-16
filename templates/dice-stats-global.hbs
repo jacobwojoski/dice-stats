@@ -19,7 +19,7 @@
         <div id = "d2Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[0]}}
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[0]}} <!-- Associated Helper in Main -->
                     <td>Most Rolled 1's</td>
                     <td><b>{{ROLLED_MOST_MIN_PLAYER.[0]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[0]}}</b> Rolls</td>
                 {{else}}
@@ -53,7 +53,7 @@
                 <td>{{MODE.[0]}}</th>
             </tr>
             <tr>
-                {{#ifHaveStreak STREAK.[0]}}
+                {{#ifHaveStreak STREAK.[0]}} <!-- Associated Helper in Main -->
                     <td>Longest Streak is <b>{{STREAK_PLAYER.[0]}}</b> with a streak of: <b>{{STREAK.[0]}}</b><td> 
                 {{else}}
                     <td>No Streak was made</td>
