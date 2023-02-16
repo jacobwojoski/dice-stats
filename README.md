@@ -57,24 +57,24 @@ Global Settings are restricted to gm only my default
 $/Path_to_foundry_Data/Sources/Modules
 ```  
 ### Usage  
-- View Each Players info by selecting icon next to the player in the bottom left  
+- View Each Players info by selecting icon next to the player in the bottom left    
 ![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
 
-- PLAYERS_SEE_GM = False
+- PLAYERS_SEE_GM = False  
 ![PLAYERS_SEE_GM = False](https://i.imgur.com/sGELoCJ.png)  
   
 ### Player Info Form
-- Player D4 Info
+- Player D4 Info  
 ![Player D4 Info](https://i.imgur.com/MAnKo9g.png)   
 
-- Player D20 Info
+- Player D20 Info  
 ![Player D20 Info](https://i.imgur.com/3R4r9XF.png)
   
 ### Access Global Stats by slecting this icon by player list 
-- Global D4 Info
+- Global D4 Info  
 ![Global D4 info](https://i.imgur.com/upUhLaT.png)
 
-- Global D20 Info
+- Global D20 Info  
 ![Global D20 info](https://i.imgur.com/R7LmFus.png)
   
 ### Streak Info 
