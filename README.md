@@ -24,7 +24,7 @@ Module also allows to view dice stats of the full game (Global stats)
 Tracks multiple dice types. Currently supporting types are:  
 - D2, D3, D4, D6, D8, D10, D12, D20, D100
 
-### Editing Dice Types
+## Editing Dice Types
 The user can <b>hand edit</b> the dice types saved by editing the following
  * main/NUM_DIE_TYPES 
  * main/DIE_TYPE
@@ -56,7 +56,7 @@ Global Settings are restricted to gm only my default
 ```bash
 $/Path_to_foundry_Data/Sources/Modules
 ```  
-## Usage  
+### Usage  
 View Each Players info by selecting icon next to the player in the bottom left  
 ![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
 
