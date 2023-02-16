@@ -3,16 +3,16 @@ CLASSOBJ = null;
 
 //----GLOBAL CONST VALUES----
 
-const MODULE_ID = 'DiceStats'
+const MODULE_ID = 'dice-stats'
 
 //Get access to handlebars stuff
 const TEMPLATES = {
-    GLOBALDATAFORM:     'modules/DiceStats/templates/dice-stats-global.hbs',
-    PLAYERDATAFORM:     'modules/DiceStats/templates/dice-stats-player.hbs',
+    GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
+    PLAYERDATAFORM:     'modules/dice-stats/templates/dice-stats-player.hbs',
     
     //TODO
-    STREAKCHATMSGFORM:  'modules/DiceStats/templates/dice-stats-global.hbs',
-    ROLLCHATMSGFORM:    'modules/DiceStats/templates/dice-stats-global.hbs'
+    STREAKCHATMSGFORM:  'modules/dice-stats/templates/dice-stats-global.hbs',
+    ROLLCHATMSGFORM:    'modules/dice-stats/templates/dice-stats-global.hbs'
 }
 
 //Currently Every user will store everyone elses data
@@ -189,7 +189,7 @@ class PLAYER {
 class DiceStatsTracker {
     ALLPLAYERDATA;  //Map of all Players <PlayerID, PLAYER> 
 
-    ID = 'DiceStats'
+    ID = 'dice-stats'
     IMGM = false;
     SYSTEM;
     

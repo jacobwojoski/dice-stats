@@ -1,5 +1,5 @@
 {
-  "title": "DiceStats",
+  "title": "Dice Stats",
   "description": "A module which tracks all dice rolls of every dice type and allows player to see end of session stats.",
   "authors": [
     {
@@ -7,33 +7,34 @@
       "flags": {}
     }
   ],
-    "version": "1.0",
-    "minimumCoreVersion": "10.0.0",
-    "compatibleCoreVersion": "10.0.0",
-    "scripts": [
-        "scripts/dice-stats-main.js",
-        "scripts/dice-stats-utils.js",
-        "scripts/dice-stats-datapack.js",
-        "scripts/googleChartImport.js"
-    ],
-    "styles": [
-        "styles/dice-stats.css"
-    ],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
+  "version": "1.0",
+  "minimumCoreVersion": "10.0.0",
+  "compatibleCoreVersion": "10.0.0",
+  "compatibility": {
+    "minimum": "10.0.0",
+    "verified": "10.0.0"
+  },
+  "scripts": [
+      "scripts/dice-stats-main.js",
+      "scripts/dice-stats-utils.js",
+      "scripts/dice-stats-datapack.js",
+      "scripts/googleChartImport.js"
+  ],
+  "styles": [
+      "styles/dice-stats.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
       "path": "languages/en.json",
       "flags": {}
     }
   ],
   "socket": true,
-  "url": "https://github.com/jacobwojoski/DiceStats",
-  "manifest": "",
-  "download": "",
-  "id": "DiceStats",
-  "compatibility": {
-    "minimum": "10.0.0",
-    "verified": "10.0.0"
-  }
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.0.0.zip",
+  "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
+  "readme": "https://github.com/jacobwojoski/dice-stats",
+  "url": "https://github.com/jacobwojoski/dice-stats",
+  "id": "dice-stats"
 }
