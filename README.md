@@ -57,7 +57,7 @@ Global Settings are restricted to gm only my default
 - ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def : d20]     (Local)  
 
 ## Install  
-Can add to module folder by hand by placing it in   
+If prerelease version is desired the user can add to module folder by hand by placing it   
 ```bash
 $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ```  
