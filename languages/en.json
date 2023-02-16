@@ -18,8 +18,8 @@
                 "Hint" : "If enabled, the player can see the global stats. Reccomended On"
             },
             "players_see_gm_in_global": {
-                "Name" : "Allow ability to see GM rolls in global data (NOTE: this impacts GM's Global Data Screen too)",
-                "Hint" : "If enabled it will allow the user to see the GM stats in the global data popup"
+                "Name" : "See GM Stats In Global Roll Data?",
+                "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacys GM global stats button too)"
             },
             "enable_crit_msgs": {
                 "Name" : "Stop All Crit Messages From Being Displayed To chat",
