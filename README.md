@@ -1,10 +1,12 @@
 # Dice Stats
-A foundry vtt module to view dice stats of every player including the gm.  
-Currently stats are stored by parsing chat. If the user joins the game late  
+A foundry vtt module to view dice stats (Number of each roll in a Chart! See Below)  
+Currently stats are stored by parsing chat. If the user joins the game late after rolls were made  
 they will only get data from that point on. Original Idea was from ![Catan Online](https://colonist.io/)  
-end of game dice stats screen. Used ![Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as insperation.    
-Wanted the ability to track multiple dice types and basically took a full rewrite as I didn't 
-like how data was stored.
+end-of-game dice stats screen and wanted something similar to let players look at during or the end of a session.   
+
+Used Google Charts as a charting library. (MIT License)
+Used ![Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
+wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
   
 ## Stats Tracked (Each Player)  
 - Number of each roll (Plans to make roll data as a bar chart)  
@@ -60,7 +62,9 @@ Can add to module folder by hand by placing it in
 $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ```  
 ### Usage  
-- View Each Players info by selecting icon next to the player in the bottom left    
+- View Each Players info by selecting icon next to the player in the bottom left
+  - Press D20 For Player Stats
+  - Press Globe for Global Stats (Should only have 1 globe by clients username)
 ![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
 
 - PLAYERS_SEE_GM = False  
