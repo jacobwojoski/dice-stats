@@ -19,12 +19,22 @@
         <div id = "d2Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[0]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[0]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[0]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[0]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[0]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 2's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[0]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[0]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[0]}}
+                    <td>Most Rolled 2's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[0]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[0]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 2's</td>
+                    <td>No 2's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -59,12 +69,22 @@
         <div id = "d3Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[1]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[1]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[1]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[1]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[1]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 3's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[1]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[1]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[1]}}
+                    <td>Most Rolled 3's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[1]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[1]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 3's</td>
+                    <td>No 3's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -99,12 +119,22 @@
         <div id = "d4Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[2]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[2]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[2]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[2]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[2]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 4's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[2]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[2]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[2]}}
+                    <td>Most Rolled 4's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[2]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[2]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 4's</td>
+                    <td>No 4's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -139,12 +169,22 @@
         <div id = "d6Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[3]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[3]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[3]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[3]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[3]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 6's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[3]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[3]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[3]}}
+                    <td>Most Rolled 6's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[3]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[3]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 6's</td>
+                    <td>No 6's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -179,12 +219,22 @@
         <div id = "d8Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[4]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[4]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[4]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[4]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[4]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 8's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[4]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[4]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[4]}}
+                    <td>Most Rolled 8's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[4]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[4]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 8's</td>
+                    <td>No 8's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -219,12 +269,22 @@
         <div id = "d10Chart" class="chart-dice-stats"></div>
         <table>
            <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[5]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[5]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[5]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[5]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[5]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 10's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[5]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[5]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[5]}}
+                    <td>Most Rolled 10's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[5]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[5]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 10's</td>
+                    <td>No 10's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -259,12 +319,22 @@
         <div id = "d12Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[6]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[6]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[6]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[6]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[6]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 12's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[6]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[6]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[6]}}
+                    <td>Most Rolled 12's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[6]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[6]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 12's</td>
+                    <td>No 12's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -299,12 +369,22 @@
         <div id = "d20Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[7]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[7]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[7]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[7]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[7]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 20's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[7]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[7]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[7]}}
+                    <td>Most Rolled 20's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[7]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[7]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 20's</td>
+                    <td>No 20's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>
@@ -339,12 +419,22 @@
         <div id = "d100Chart" class="chart-dice-stats"></div>
         <table>
             <tr>
-                <td>Most Rolled 1's</td>
-                <td><b>{{ROLLED_MOST_MIN_PLAYER.[8]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[8]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MIN_PLAYER.[8]}}
+                    <td>Most Rolled 1's</td>
+                    <td><b>{{ROLLED_MOST_MIN_PLAYER.[8]}}</b> with <b>{{ROLLED_MOST_MIN_ROLLCOUNT.[8]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 1's</td>
+                    <td>No 1's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>
             <tr>
-                <td>Most Rolled 100's</td>
-                <td><b>{{ROLLED_MOST_MAX_PLAYER.[8]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[8]}}</b> Rolls</td>
+                {{#ifRolledCrit ROLLED_MOST_MAX_PLAYER.[8]}}
+                    <td>Most Rolled 100's</td>
+                    <td><b>{{ROLLED_MOST_MAX_PLAYER.[8]}}</b> with <b>{{ROLLED_MOST_MAX_ROLLCOUNT.[8]}}</b> Rolls</td>
+                {{else}}
+                    <td>Most Rolled 100's</td>
+                    <td>No 100's Rolled</td>
+                {{/ifRolledCrit}}
             </tr>    
             <tr>
                 <td>Total Rolls:</th>

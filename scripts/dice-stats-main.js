@@ -500,6 +500,15 @@ Handlebars.registerHelper('ifHaveStreak', function (streakValue, options) {
     }
 });
 
+//Handlebars if Used to check if A Max Or Min Number of the die Was rolled
+Handlebars.registerHelper('ifRolledCrit', function (rollCount, options) {
+    if(rollCount > 0){
+        return options.fn(this);
+    }else{
+        return options.inverse(this);
+    }
+});
+
 //TODO Display Warning and close popup if user Has no roll data
 Handlebars.registerHelper('ifUserHasData', function (var1, options) {
     ui.notifications.warn("No roll data to export");
