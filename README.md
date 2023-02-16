@@ -3,7 +3,7 @@ A foundry vtt module to view dice stats of every player including the gm.
 Currently stats are stored by parsing chat. If the user joins the game late  
 they will only get data from that point on. Original Idea was from ![Catan Online](https://colonist.io/)  
 end of game dice stats screen. Used ![Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker)
-as insperation. Wanted the ability to track multiple dice types and basically took a full rewrite as I didn't 
+as insperation.  Wanted the ability to track multiple dice types and basically took a full rewrite as I didn't 
 like how data was stored.
   
 ## Stats Tracked (Each Player)  
