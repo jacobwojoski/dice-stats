@@ -46,15 +46,15 @@ The user can <b>hand edit</b> the dice types saved by editing the following
 ## Module Settings options  
 Def = Default | (Global) & (Local) = setting scope 
 Global Settings are restricted to gm only my default
-- PLAYERS_SEE_SELF          //If players are allowed to view their stats                [Def: True]     (Global)
-- PLAYERS_SEE_PLAYERS       //if players cant see self they cant see others either      [Def: True]     (Global)
-- PLAYERS_SEE_GM            //If Players can see GM dice roll stats                     [Def: False]    (Global)
-- PLAYERS_SEE_GLOBAL        //If Players Can  Global Dice Stats                         [Def: True]     (Global)
-- PLAYERS_SEE_GM_IN_GLOBAL  //If GM roll stats get added into global stats              [Def: False]    (Global)
-- ENABLE_BLIND_STREAK_MSGS  //Allow strk from a blind roll to be prnt to chat           [Def: false]    (Global)    
-- ENABLE_CRIT_MSGS          //Choose what dice print crit msgs                          [Def: d20]      (Local)
-- TYPES_OF_CRIT_MSGS        //Choose Type of crits to print                             [Def: Both]     (Local)
-- ENABLE_STREAK_MSGS        //Choose what dice to display streak msgs for               [Def : d20]     (Local)  
+- PLAYERS_SEE_SELF -------------- If players are allowed to view their stats -----------[Def: True]     (Global)
+- PLAYERS_SEE_PLAYERS --------- If players cant see self they cant see others either -[Def: True]     (Global)
+- PLAYERS_SEE_GM -------------- If Players can see GM dice roll stats ----------------[Def: False]    (Global)
+- PLAYERS_SEE_GLOBAL --------  If Players Can  Global Dice Stats --------------------[Def: True]     (Global)
+- PLAYERS_SEE_GM_IN_GLOBAL - If GM roll stats get added into global stats ---------[Def: False]    (Global)
+- ENABLE_BLIND_STREAK_MSGS - Allow strk from a blind roll to be prnt to chat ------[Def: false]    (Global)    
+- ENABLE_CRIT_MSGS ------------  Choose what dice print crit msgs ---------------------[Def: d20]      (Local)
+- TYPES_OF_CRIT_MSGS ---------- Choose Type of crits to print ------------------------[Def: Both]     (Local)
+- ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def : d20]     (Local)  
 
 ## Install  
 Can add to module folder by hand by placing it in   
