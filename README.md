@@ -58,19 +58,19 @@ $/Path_to_foundry_Data/Sources/Modules
 ```  
 ## Usage  
 View Each Players info by selecting icon next to the player in the bottom left  
-![Player List Buttons](https://imgur.com/a/8NzLAyz)  
+![Player List Buttons](https://imgur.com/QhwLQOX)
 
-![PLAYERS_SEE_GM = False](https://imgur.com/a/cfyA4V5)
+![PLAYERS_SEE_GM = False](https://imgur.com/sGELoCJ)  
   
 ### Player Info Form  
-![Player D4 Info](https://imgur.com/a/3RMYj9J)  
+![Player D4 Info](https://imgur.com/MAnKo9g)   
 
-![Player D20 Info](https://imgur.com/a/Q6YPtpe) 
+![Player D20 Info](https://imgur.com/3R4r9XF)  
   
 ### Access Global Stats by slecting this icon by player list  
-![Global D4 info](https://imgur.com/a/s325h8t)  
+![Global D4 info](https://imgur.com/a/s325h8t)   
 
-![Global D20 info](https://imgur.com/a/L0laXdS) 
+![Global D20 info](https://imgur.com/lFM4vv6)
   
 ### Streak Info 
 Streaks are included in both plater and global data displays  
