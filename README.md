@@ -75,11 +75,7 @@ $/Path_to_foundry_Data/Sources/Modules
 ![Global D4 info](https://i.imgur.com/upUhLaT.png)
 
 - Global D20 Info  
-![Global D20 info](https://i.imgur.com/R7LmFus.png)
-  
-### Streak Info 
-Streaks are included in both plater and global data displays  
-![Streaks]()  
+![Global D20 info](https://i.imgur.com/R7LmFus.png) 
   
 ## Planned Features
 - ~~Add Charts~~ (Done)
