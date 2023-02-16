@@ -32,7 +32,7 @@
     }
   ],
   "socket": true,
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.0.0.zip",
+  "download": "https://github.com/jacobwojoski/dice-stats/releases/tag/v1.0.0/module.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "readme": "https://github.com/jacobwojoski/dice-stats",
   "url": "https://github.com/jacobwojoski/dice-stats",
