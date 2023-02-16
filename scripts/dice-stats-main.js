@@ -401,7 +401,15 @@ Hooks.once('init', () => {
 })
 
 Hooks.on('renderPlayerList', (playerList, html) => {
-    //TODO Incorperate Settings
+
+    const btn = html.find(`[data-user-id="${game.userId}"]`)
+    btn.append(
+        `<button type="button" title='Global Stats' class="open-player-stats-button flex0" id="globalStatsBtn"><i class="fa-solid fa-earth-americas"></i></button>`
+    )
+
+    html.on('click', `#globalStatsBtn`, (event) => {
+        new GlobalStatusPage().render(true);
+    })
 
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
     CLASSOBJ.updateMap();
@@ -427,15 +435,6 @@ Hooks.on('renderPlayerList', (playerList, html) => {
             }
         })
     } 
-
-    const btn = html.find(`[data-user-id="${game.userId}"]`)
-    btn.append(
-        `<button type="button" title='Global Stats' class="open-player-stats-button flex0" id="globalStatsBtn"><i class="fa-solid fa-earth-americas"></i></button>`
-    )
-
-    html.on('click', `#globalStatsBtn`, (event) => {
-        new GlobalStatusPage().render(true);
-    })
 
     //aside.players.h3
     //playerList.super.append
