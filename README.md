@@ -1,7 +1,10 @@
 # Dice Stats (In Development) Settings Dont Work Yet
 A foundry vtt module to view dice stats of every player including the gm.  
 Currently stats are stored by parsing chat. If the user joins the game late  
-they will only get data from that point on  
+they will only get data from that point on. Original Idea was from ![Catan Online](https://colonist.io/)  
+end of game dice stats screen. Used ![Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as insperation.    
+Wanted the ability to track multiple dice types and basically took a full rewrite as I didn't 
+like how data was stored.
   
 ## Stats Tracked (Each Player)  
 - Number of each roll (Plans to make roll data as a bar chart)  
@@ -24,7 +27,7 @@ Module also allows to view dice stats of the full game (Global stats)
 Tracks multiple dice types. Currently supporting types are:  
 - D2, D3, D4, D6, D8, D10, D12, D20, D100
 
-### Editing Dice Types
+## Editing Dice Types
 The user can <b>hand edit</b> the dice types saved by editing the following
  * main/NUM_DIE_TYPES 
  * main/DIE_TYPE
@@ -56,25 +59,26 @@ Global Settings are restricted to gm only my default
 ```bash
 $/Path_to_foundry_Data/Sources/Modules
 ```  
-## Usage  
-View Each Players info by selecting icon next to the player in the bottom left  
-![Player List Buttons](https://imgur.com/a/8NzLAyz)  
+### Usage  
+- View Each Players info by selecting icon next to the player in the bottom left    
+![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
 
-![PLAYERS_SEE_GM = False](https://imgur.com/a/cfyA4V5)
+- PLAYERS_SEE_GM = False  
+![PLAYERS_SEE_GM = False](https://i.imgur.com/sGELoCJ.png)  
   
-### Player Info Form  
-![Player D4 Info](https://imgur.com/a/3RMYj9J)  
+### Player Info Form
+- Player D4 Info  
+![Player D4 Info](https://i.imgur.com/MAnKo9g.png)   
 
-![Player D20 Info](https://imgur.com/a/Q6YPtpe) 
+- Player D20 Info  
+![Player D20 Info](https://i.imgur.com/3R4r9XF.png)
   
-### Access Global Stats by slecting this icon by player list  
-![Global D4 info](https://imgur.com/a/s325h8t)  
+### Access Global Stats by slecting this icon by player list 
+- Global D4 Info  
+![Global D4 info](https://i.imgur.com/upUhLaT.png)
 
-![Global D20 info](https://imgur.com/a/L0laXdS) 
-  
-### Streak Info 
-Streaks are included in both plater and global data displays  
-![Streaks]()  
+- Global D20 Info  
+![Global D20 info](https://i.imgur.com/R7LmFus.png) 
   
 ## Planned Features
 - ~~Add Charts~~ (Done)
