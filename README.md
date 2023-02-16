@@ -85,10 +85,11 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ![Global D20 info](https://i.imgur.com/R7LmFus.png) 
   
 ## Planned Features
-- ~~Add Charts~~ (Done)
-- ~~Make Settings have their own tab instead of being under "undefined"~~ (Done)
-- ~~Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though~~ (Done)
-- ~~Global Stats~~ (Done)
+Planned and implemented features
+- ~~Add Charts~~ (Done v1.0.0)
+- ~~Make Settings have their own tab instead of being under "undefined"~~ (Done v1.0.0)
+- ~~Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though~~ (Done v1.0.0)
+- ~~Global Stats~~ (Done v1.0.0)
 - Add Refresh button on dice stats page
 - Streaks in Both Direction  
 - Setting to choose which dice Stats are displayed (checkboxes w/ grayed out checks if no dice of that type are rolled)
@@ -102,8 +103,8 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Make sure it works for other systems
 
 - Settings
-    - ~~PLAYERS_SEE_GM~~            (Done)   
-    - ~~PLAYERS_SEE_GLOBAL~~        (Done) 
+    - ~~PLAYERS_SEE_GM~~            (Done v1.0.0)   
+    - ~~PLAYERS_SEE_GLOBAL~~        (Done v1.0.0) 
     - PLAYERS_SEE_SELF          
     - PLAYERS_SEE_PLAYERS           
     - PLAYERS_SEE_GM_IN_GLOBAL  
