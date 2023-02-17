@@ -89,7 +89,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - ~~Make Settings have their own tab instead of being under "undefined"~~ (Done)
 - ~~Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though~~ (Done)
 - ~~Global Stats~~ (Done)
-- Add Refresh button on dice stats page
+- ~~Add Refresh button on dice stats page~~ (Done)
 - Streaks in Both Direction  
 - Setting to choose which dice Stats are displayed (checkboxes w/ grayed out checks if no dice of that type are rolled)
 - Add Most Max val and Most min values rolls Adjusted for % of total rolls
@@ -100,6 +100,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Deal w/ Multiple of same values (Streak or same length streak | Multiple with max number of rolls)
 - Support more die types
 - Make sure it works for other systems
+- Update Refresh Button to use this modifier instead of a global
 
 - Settings
     - ~~PLAYERS_SEE_GM~~            (Done)   
