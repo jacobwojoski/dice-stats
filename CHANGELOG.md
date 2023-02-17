@@ -1,6 +1,6 @@
 # CHANGELOG  
 
-## [ UNRELEASED ]  
+## [ 1.1.0 ]  2/16/2023
 ### Added  
 - Refresh Button added to forms
 
