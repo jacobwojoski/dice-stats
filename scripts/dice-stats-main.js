@@ -1,5 +1,7 @@
 //----GLOBAL VALUES----
 CLASSOBJ = null;
+GLOBALFORMOBJ = null;
+PLAYERFORMOBJ = null;
 
 //----GLOBAL CONST VALUES----
 
@@ -348,6 +350,25 @@ class PlayerStatusPage extends FormApplication {
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
     }
+
+
+    _handleButtonClick(event){
+        const clickedElement = $(event.currentTarget);
+        const action = clickedElement.data().action;
+
+        switch(action){
+            case 'refresh':
+                PLAYERFORMOBJ.render();
+                break;
+            default:
+                return;
+        }
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+        html.on('click', "[data-action]", this._handleButtonClick);
+    }
 }
 
 class GlobalStatusPage extends FormApplication{
@@ -381,6 +402,24 @@ class GlobalStatusPage extends FormApplication{
         let dataObject = DATA_PACKAGER.packageGlobalData(playersAry, includeGM);
         return dataObject;
     }
+
+    _handleButtonClick(event){
+        const clickedElement = $(event.currentTarget);
+        const action = clickedElement.data().action;
+
+        switch(action){
+            case 'refresh':
+                GLOBALFORMOBJ.render();
+                break;
+            default:
+                return;
+        }
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+        html.on('click', "[data-action]", this._handleButtonClick);
+    }
 }
 
 //==========================================================
@@ -408,7 +447,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     )
 
     html.on('click', `#globalStatsBtn`, (event) => {
-        new GlobalStatusPage().render(true);
+        GLOBALFORMOBJ = new GlobalStatusPage().render(true);
     })
 
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
@@ -431,7 +470,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
                 //do nothing, Dont allow ability to see gm data if setting is off
                 ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
             }else{
-                new PlayerStatusPage(user.id).render(true);
+                PLAYERFORMOBJ = new PlayerStatusPage(user.id).render(true);
             }
         })
     } 
@@ -513,3 +552,11 @@ Handlebars.registerHelper('ifUserHasData', function (var1, options) {
     ui.notifications.warn("No roll data to export");
     return options.inverse(this);
 });
+
+//Handlebars 
+Handlebars.registerHelper('refreshHelper', function (options) {
+    if(PLAYERFORMOBJ){
+        PLAYERFORMOBJ.getData();
+    }
+});
+
