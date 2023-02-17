@@ -7,13 +7,23 @@
       "flags": {}
     }
   ],
-  "version": "1.0",
+  "version": "1.1",
   "minimumCoreVersion": "10.0.0",
   "compatibleCoreVersion": "10.0.0",
   "compatibility": {
-    "minimum": "10.0.0",
-    "verified": "10.0.0"
+    "minimum": "10",
+    "verified": "10"
   },
+  "relationships": {
+    "systems": [{
+        "id": "pf2e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "4.0.0",
+          "verified": "4.7.1"
+        }
+    }]
+  },   
   "scripts": [
       "scripts/dice-stats-main.js",
       "scripts/dice-stats-utils.js",
@@ -32,7 +42,7 @@
     }
   ],
   "socket": true,
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.0.0.zip",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.1.0.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "readme": "https://github.com/jacobwojoski/dice-stats",
   "url": "https://github.com/jacobwojoski/dice-stats",
