@@ -57,7 +57,7 @@ Global Settings are restricted to gm only my default
 - ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def : d20]     (Local)  
 
 ## Install  
-Can add to module folder by hand by placing it in   
+If prerelease version is desired the user can add to module folder by hand by placing it   
 ```bash
 $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ```  
@@ -103,8 +103,8 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Update Refresh Button to use this modifier instead of a global
 
 - Settings
-    - ~~PLAYERS_SEE_GM~~            (Done)   
-    - ~~PLAYERS_SEE_GLOBAL~~        (Done) 
+    - ~~PLAYERS_SEE_GM~~            (Done v1.0.0)   
+    - ~~PLAYERS_SEE_GLOBAL~~        (Done v1.0.0) 
     - PLAYERS_SEE_SELF          
     - PLAYERS_SEE_PLAYERS           
     - PLAYERS_SEE_GM_IN_GLOBAL  
