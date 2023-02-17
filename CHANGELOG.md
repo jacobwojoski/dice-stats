@@ -1,6 +1,6 @@
 # CHANGELOG  
 
-## [ 1.1.1 ]  2/17/2023 
+## [ 1.1.1 ]  2/17/2023  
 ### Fixed 
 - Removed only allowing for pf2e. Should work for All msystems that post rolls to chat
 
