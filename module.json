@@ -7,7 +7,6 @@
       "flags": {}
     }
   ],
-  "version": "1.1",
   "minimumCoreVersion": "10.0.0",
   "compatibleCoreVersion": "10.0.0",
   "compatibility": {
@@ -32,6 +31,7 @@
     }
   ],
   "socket": true,
+  "version": "1.1.1",
   "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.1.1.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "readme": "https://github.com/jacobwojoski/dice-stats",
