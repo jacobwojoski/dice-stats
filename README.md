@@ -7,7 +7,10 @@ end-of-game dice stats screen and wanted something similar to let players look a
 Used Google Charts as a charting library. (MIT License)
 Used ![Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
 wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
-  
+
+## INCOMPATABILITIES
+- Any system that doesnt print rolls to chat
+- Midi-Qol if **Merge Rolls to 1 Card** is enabled (Easiest solution would if Midi added an OnChatMessageUpdated Hook)
 ## Stats Tracked (Each Player)  
 - Number of each roll (Plans to make roll data as a bar chart)  
 - Total Number of rolls
