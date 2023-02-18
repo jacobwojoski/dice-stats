@@ -4,7 +4,6 @@ GLOBALFORMOBJ = null;
 PLAYERFORMOBJ = null;
 
 //----GLOBAL CONST VALUES----
-
 const MODULE_ID = 'dice-stats'
 
 //Get access to handlebars stuff
