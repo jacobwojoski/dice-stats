@@ -306,6 +306,14 @@ class DiceStatsTracker {
             playerInfo.saveRoll(isBlind, element, dieType)
         });
     }
+
+    addRoll(dieType=7, rolls=[], user=game.user.id, isBlind=false){
+        let playerInfo = this.ALLPLAYERDATA.get(user);
+
+        rolls.forEach(element => {
+            playerInfo.saveRoll(isBlind, element, dieType)
+        });
+    }
 }
 
 //==========================================================
@@ -424,21 +432,6 @@ class GlobalStatusPage extends FormApplication{
 //==========================================================
 //===================== HOOKS SHIT =========================
 //==========================================================
-function handleChatMsgHook(chatMessage){
-    //TODO
-    //check if fate (3 sided) and coin (2 sided) count as rolls or if somethign special is needed
-    if (chatMessage.isRoll) {
-        CLASSOBJ.parseMessage(chatMessage)
-    }
-}
-
-Hooks.on('createChatMessage', handleChatMsgHook(chatMessage));
-
-// Initialize dialog and settings on foundry boot up
-Hooks.once('init', () => {
-    CLASSOBJ = new DiceStatsTracker();
-})
-
 Hooks.on('renderPlayerList', (playerList, html) => {
 
     const btn = html.find(`[data-user-id="${game.userId}"]`)
@@ -503,7 +496,71 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 })
 
 
+function midiQolSupport(){
+    /*MIDI-QOL SUPPORT */
+    if(game.modules.get("midi-qol")?.active){
+        /*Remove Hook from Normal Dice rolling so we dont record rolls twice*/
+        //Hooks.off('createChatMessage', handleChatMsgHook(chatMessage));
 
+        /*Add Hook for Midi-QoL */
+        Hooks.on("midi-qol.RollComplete", (workflow) => {
+            //Deal with Attack Rolls
+            if(workflow.attackRollCount > 0){
+                let dieType = workflow.attackRoll.terms[0].faces
+                let isBlind = false;
+
+                if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
+                    isBlind = true;
+                }
+
+                let rolls = [];
+                for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
+                    rolls.push(workflow.attackRoll.terms[0].results[0].result);
+                }
+
+                //TODO Get Associated Player
+                let usersID = 
+                CLASSOBJ.addRoll(dieType, rolls, usersID, isBlind)
+            }
+              
+            //Deal with dmg rolls
+            if(workflow.damageRollCount > 0){
+                let dieType = workflow.damageRoll.terms[0].faces
+                let isBlind = false;
+
+                if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
+                    isBlind = true;
+                }
+
+                let rolls = []
+                for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
+                    rolls.push(workflow.damageRoll.terms[0].results[0].result);
+                }
+            }
+            //Deal With Saves
+
+            //Deal With Misc Rolls
+        })
+    }
+}
+
+handleChatMsgHook = (chatMessage) => {
+    //TODO
+    //check if fate (3 sided) and coin (2 sided) count as rolls or if somethign special is needed
+
+    if (chatMessage.isRoll) {
+        CLASSOBJ.parseMessage(chatMessage)
+    }
+}
+
+Hooks.on('createChatMessage', handleChatMsgHook);
+
+// Initialize dialog and settings on foundry boot up
+Hooks.once('init', () => {
+    CLASSOBJ = new DiceStatsTracker();
+
+    midiQolSupport();
+})
 //==========================================================
 //================== HANDLEBARS SHIT =======================
 //==========================================================
