@@ -432,6 +432,7 @@ class GlobalStatusPage extends FormApplication{
 //==========================================================
 //===================== HOOKS SHIT =========================
 //==========================================================
+
 Hooks.on('renderPlayerList', (playerList, html) => {
 
     const btn = html.find(`[data-user-id="${game.userId}"]`)
@@ -467,32 +468,6 @@ Hooks.on('renderPlayerList', (playerList, html) => {
             }
         })
     } 
-
-    //aside.players.h3
-    //playerList.super.append
-    /* TODO
-    //Export data button
-    buttons.splice(1, 0, {
-        class: "roll-tracker-form-export",
-        icon: "fas fa-download",
-        onclick: ev => {
-            //TODO
-        }
-    })
-
-
-     //If I am GM
-     if(game.user.isGM){
-        //Get Global Stats (Stats include GM Rolls)
-        buttons.splice(2, 0, {
-            class: "roll-tracker-form-export",
-            icon: "fas fa-download",
-            onclick: ev => {
-                //TODO
-            }
-        })
-    }
-    */
 })
 
 
@@ -554,9 +529,6 @@ function midiQolSupport(){
                  
                 CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
             }
-            //Deal With Saves
-
-            //Deal With Misc Rolls
         })
     }
 }
@@ -578,6 +550,7 @@ Hooks.once('init', () => {
 
     midiQolSupport();
 })
+
 //==========================================================
 //================== HANDLEBARS SHIT =======================
 //==========================================================

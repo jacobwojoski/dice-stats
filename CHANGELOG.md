@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.1.3 ]  2/19/2023  
+### Fixed 
+- Partial fix for midi-qol, merge to 1 card. look at readme incompatabilities section
+
 ## [ 1.1.2 ]  2/17/2023  
 ### Fixed 
 - Fix version number not working
