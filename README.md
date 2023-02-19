@@ -7,7 +7,15 @@ end-of-game dice stats screen and wanted something similar to let players look a
 Used Google Charts as a charting library. (MIT License)
 Used ![Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
 wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
-  
+
+## INCOMPATABILITIES
+- Any system that doesnt print rolls to chat
+- **Midi-Qol** if **Merge Rolls to 1 Card** is enabled partial fix. 
+    - Midi-qol.rollComplete hook Doesnt have a way to trace back to the Player that rolled. Only the actor
+    - I Used actor.owner property to find out who to associate the roll with but that makes the following issues
+        - If an actor has >1 owner it will not track the roll to the right player. 
+        - If the GM rolls for a player is will count as the players roll Not the GM's
+
 ## Stats Tracked (Each Player)  
 - Number of each roll (Plans to make roll data as a bar chart)  
 - Total Number of rolls
@@ -122,7 +130,3 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Export data to be saved (Use JSON format)  
 - Import Data to reload old values? (use JSON format)
     - Import just global data? User data, Ability to choose?
-
-
-
-
