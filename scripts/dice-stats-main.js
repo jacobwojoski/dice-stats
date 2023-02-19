@@ -506,7 +506,7 @@ function midiQolSupport(){
         Hooks.on("midi-qol.RollComplete", (workflow) => {
             //Deal with Attack Rolls
             if(workflow.attackRollCount > 0){
-                let dieType = workflow.attackRoll.terms[0].faces
+                let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
                 let isBlind = false;
 
                 if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
@@ -518,14 +518,21 @@ function midiQolSupport(){
                     rolls.push(workflow.attackRoll.terms[0].results[0].result);
                 }
 
-                //TODO Get Associated Player
-                let usersID = 
-                CLASSOBJ.addRoll(dieType, rolls, usersID, isBlind)
+                //Get Associated Player
+                let myId = game.userId;
+                let owners = Object.keys(workflow.actor.ownership);
+                let owner = owners[owners.length-1];
+                //If no owner found first pos should be GM ID
+                if(owner === undefined){
+                    owner = owners[1];
+                }
+                 
+                CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
             }
               
             //Deal with dmg rolls
             if(workflow.damageRollCount > 0){
-                let dieType = workflow.damageRoll.terms[0].faces
+                let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
                 let isBlind = false;
 
                 if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
@@ -536,6 +543,16 @@ function midiQolSupport(){
                 for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
                     rolls.push(workflow.damageRoll.terms[0].results[0].result);
                 }
+
+                //Get Associated Player
+                let owners = Object.keys(workflow.actor.ownership);
+                let owner = owners[owners.length-1];
+                //If no owner found first pos should be GM ID
+                if(owner === undefined){
+                    owner = owners[1];
+                }
+                 
+                CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
             }
             //Deal With Saves
 
