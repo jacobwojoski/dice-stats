@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.1.4 ]  2/19/2023  
+### Fixed 
+- Fix Copy Paste error in MidiQol Fix
+
 ## [ 1.1.3 ]  2/19/2023  
 ### Fixed 
 - Partial fix for midi-qol, merge to 1 card. look at readme incompatabilities section
