@@ -490,7 +490,7 @@ function midiQolSupport(){
 
                 let rolls = [];
                 for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.attackRoll.terms[0].results[0].result);
+                    rolls.push(workflow.attackRoll.terms[0].results[i].result);
                 }
 
                 //Get Associated Player
@@ -516,7 +516,7 @@ function midiQolSupport(){
 
                 let rolls = []
                 for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.damageRoll.terms[0].results[0].result);
+                    rolls.push(workflow.damageRoll.terms[0].results[i].result);
                 }
 
                 //Get Associated Player
