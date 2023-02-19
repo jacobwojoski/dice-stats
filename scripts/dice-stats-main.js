@@ -548,6 +548,8 @@ Hooks.on('createChatMessage', handleChatMsgHook);
 Hooks.once('init', () => {
     CLASSOBJ = new DiceStatsTracker();
 
+    //Updates for Other system support. 
+    //Needs to be after init hook to see active system and modules
     midiQolSupport();
 })
 
