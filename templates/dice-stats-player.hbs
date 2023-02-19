@@ -10,6 +10,11 @@
     </head>
 
     <!-- Example of using en.json values <li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{testhandle}}</li>-->
+    <div class="row">
+        <input type="checkbox" data-action="d2checkbox"     {{IS_DIE_DISPLAYED.[0]}}>D-2</input>
+        <input type="checkbox" data-action="d4checkbox"     {{IS_DIE_DISPLAYED.[2]}}>D-4</input>
+        <input type="checkbox" data-action="d20checkbox"    {{IS_DIE_DISPLAYED.[7]}}>D-20</input>
+    </div>
 
     <div class="col">
         <h1 class="dice-type-title">{{PLAYER_NAME}} Roll Data</h1>

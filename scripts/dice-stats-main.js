@@ -193,6 +193,7 @@ class DiceStatsTracker {
     ID = 'dice-stats'
     IMGM = false;
     SYSTEM;
+    DICE_CHECKBOXS = [];
     
     updateMap(){
         //Add everyplayer to storage. Were tracking all even if we dont need
@@ -209,6 +210,9 @@ class DiceStatsTracker {
         // class, because the system needs to initialize on foundry boot up before we can get its id
         this.SYSTEM = `${game.system.id}`
         this.ALLPLAYERDATA = new Map();
+        
+        this.DICE_CHECKBOXS = new Array(NUM_DIE_TYPES);
+        this.DICE_CHECKBOXS.fill(true);
 
         // A setting to determine whether players can see gm data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM, {
@@ -353,6 +357,7 @@ class PlayerStatusPage extends FormApplication {
         if(CLASSOBJ.ALLPLAYERDATA.has(this.SEL_PLAYER)){
             let playerObj = CLASSOBJ.ALLPLAYERDATA.get(this.SEL_PLAYER);
             var dataObject = DATA_PACKAGER.packagePlayerData(playerObj);
+            dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.DICE_CHECKBOXS];
             return dataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
@@ -365,6 +370,19 @@ class PlayerStatusPage extends FormApplication {
 
         switch(action){
             case 'refresh':
+                PLAYERFORMOBJ.render();
+                break;
+
+            case 'd2checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[0] = !CLASSOBJ.DICE_CHECKBOXS[0];
+                PLAYERFORMOBJ.render();
+                break;
+            case 'd4checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[2] = !CLASSOBJ.DICE_CHECKBOXS[2];
+                PLAYERFORMOBJ.render();
+                break;
+            case 'd20checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[7] = !CLASSOBJ.DICE_CHECKBOXS[7];
                 PLAYERFORMOBJ.render();
                 break;
             default:
