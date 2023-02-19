@@ -525,7 +525,7 @@ function midiQolSupport(){
               
             //Deal with dmg rolls
             if(workflow.damageRollCount > 0){
-                let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
+                let dieType = MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
                 let isBlind = false;
 
                 if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
