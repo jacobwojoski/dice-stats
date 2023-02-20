@@ -1,11 +1,11 @@
 # Dice Stats
 A foundry vtt module to view dice stats (Number of each roll in a Chart! See Below)  
 Currently stats are stored by parsing chat. If the user joins the game late after rolls were made  
-they will only get data from that point on. Original Idea was from ![Catan Online](https://colonist.io/)  
+they will only get data from that point on. Original Idea was from [Catan Online](https://colonist.io/)  
 end-of-game dice stats screen and wanted something similar to let players look at during or the end of a session.   
 
 Used Google Charts as a charting library. (MIT License)
-Used ![Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
+Used [Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
 wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
 
 ## INCOMPATABILITIES
