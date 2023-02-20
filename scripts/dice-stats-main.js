@@ -508,7 +508,7 @@ function midiQolSupport(){
 
                 let rolls = [];
                 for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.attackRoll.terms[0].results[0].result);
+                    rolls.push(workflow.attackRoll.terms[0].results[i].result);
                 }
 
                 //Get Associated Player
@@ -525,7 +525,7 @@ function midiQolSupport(){
               
             //Deal with dmg rolls
             if(workflow.damageRollCount > 0){
-                let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
+                let dieType = MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
                 let isBlind = false;
 
                 if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
@@ -534,7 +534,7 @@ function midiQolSupport(){
 
                 let rolls = []
                 for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.damageRoll.terms[0].results[0].result);
+                    rolls.push(workflow.damageRoll.terms[0].results[i].result);
                 }
 
                 //Get Associated Player
