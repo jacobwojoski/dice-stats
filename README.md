@@ -72,7 +72,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ### Usage  
 - View Each Players info by selecting icon next to the player in the bottom left
   - Press D20 For Player Stats
-  - Press Globe for Global Stats (Should only have 1 globe by clients username)
+  - Press Globe for Global Stats (Should only have 1 globe by clients username)  
 ![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
 
 - PLAYERS_SEE_GM = False  
