@@ -578,47 +578,48 @@
             chart.draw(data, chartOptions);
         }
 
-        if({{TOTAL_ROLLS.[0]}} > 0)
+        //TODO THIS NEEDS TO INCLUDE CHECK FOR IF WE WANT TO DRAW CHARTS FROM CHECKBOXES
+        if({{TOTAL_ROLLS.[0]}} > 0 && {{IS_DIE_DISPLAYED.[0]}})
         {
             google.charts.setOnLoadCallback(drawChartd2);
         }
 
-        if({{TOTAL_ROLLS.[1]}} > 0)
+        if({{TOTAL_ROLLS.[1]}} > 0 && {{IS_DIE_DISPLAYED.[1]}})
         {
             google.charts.setOnLoadCallback(drawChartd3);
         }
 
-        if({{TOTAL_ROLLS.[2]}} > 0)
+        if({{TOTAL_ROLLS.[2]}} > 0 && {{IS_DIE_DISPLAYED.[2]}})
         {
             google.charts.setOnLoadCallback(drawChartd4);
         }
 
-        if({{TOTAL_ROLLS.[3]}} > 0)
+        if({{TOTAL_ROLLS.[3]}} > 0 && {{IS_DIE_DISPLAYED.[3]}})
         {
             google.charts.setOnLoadCallback(drawChartd6);
         }
 
-        if({{TOTAL_ROLLS.[4]}} > 0)
+        if({{TOTAL_ROLLS.[4]}} > 0 && {{IS_DIE_DISPLAYED.[4]}})
         {
             google.charts.setOnLoadCallback(drawChartd8);
         }
 
-        if({{TOTAL_ROLLS.[5]}} > 0)
+        if({{TOTAL_ROLLS.[5]}} > 0 && {{IS_DIE_DISPLAYED.[5]}})
         {
             google.charts.setOnLoadCallback(drawChartd10);
         }
 
-        if({{TOTAL_ROLLS.[6]}} > 0)
+        if({{TOTAL_ROLLS.[6]}} > 0 && {{IS_DIE_DISPLAYED.[6]}})
         {
             google.charts.setOnLoadCallback(drawChartd12);
         }
 
-        if({{TOTAL_ROLLS.[7]}} > 0)
+        if({{TOTAL_ROLLS.[7]}} > 0 && {{IS_DIE_DISPLAYED.[7]}})
         {
             google.charts.setOnLoadCallback(drawChartd20);
         }
 
-        if({{TOTAL_ROLLS.[8]}} > 0)
+        if({{TOTAL_ROLLS.[8]}} > 0 && {{IS_DIE_DISPLAYED.[8]}})
         {
             //google.charts.setOnLoadCallback(drawChartd100);
         }
