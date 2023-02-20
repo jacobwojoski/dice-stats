@@ -37,7 +37,7 @@ Module also allows to view dice stats of the full game (Global stats)
 Tracks multiple dice types. Currently supporting types are:  
 - D2, D3, D4, D6, D8, D10, D12, D20, D100
 
-## Editing Dice Types
+## Editing Dice Types (Reccomended: Submit Issue Req to add Die Type Instead)
 The user can <b>hand edit</b> the dice types saved by editing the following
  * main/NUM_DIE_TYPES 
  * main/DIE_TYPE
@@ -65,7 +65,7 @@ Global Settings are restricted to gm only my default
 - ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def : d20]     (Local)  
 
 ## Install  
-If prerelease version is desired the user can add to module folder by hand by placing it   
+If prerelease version is desired the user can add to module folder by hand by placing it in   
 ```bash
 $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ```  
@@ -108,7 +108,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Deal w/ Multiple of same values (Streak or same length streak | Multiple with max number of rolls)
 - Support more die types
 - Make sure it works for other systems
-- Update Refresh Button to use this modifier instead of a global
+- Update Refresh Button to use "this" modifier instead of a global
 
 - Settings
     - ~~PLAYERS_SEE_GM~~            (Done v1.0.0)   
