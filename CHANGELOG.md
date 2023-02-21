@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.1.5 ]  2/19/2023  
+### Fixed 
+- Fix multiple dice in midi-qol
+
 ## [ 1.1.4 ]  2/19/2023  
 ### Fixed 
 - Fix Copy Paste error in MidiQol Fix

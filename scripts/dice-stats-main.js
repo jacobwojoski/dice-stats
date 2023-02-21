@@ -372,17 +372,40 @@ class PlayerStatusPage extends FormApplication {
             case 'refresh':
                 PLAYERFORMOBJ.render();
                 break;
-
             case 'd2checkbox':
                 CLASSOBJ.DICE_CHECKBOXS[0] = !CLASSOBJ.DICE_CHECKBOXS[0];
+                PLAYERFORMOBJ.render();
+                break;
+            case 'd3checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[1] = !CLASSOBJ.DICE_CHECKBOXS[1];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd4checkbox':
                 CLASSOBJ.DICE_CHECKBOXS[2] = !CLASSOBJ.DICE_CHECKBOXS[2];
                 PLAYERFORMOBJ.render();
                 break;
+            case 'd6checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[3] = !CLASSOBJ.DICE_CHECKBOXS[3];
+                PLAYERFORMOBJ.render();
+                break;
+            case 'd8checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[4] = !CLASSOBJ.DICE_CHECKBOXS[4];
+                PLAYERFORMOBJ.render();
+                break;
+            case 'd10checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[5] = !CLASSOBJ.DICE_CHECKBOXS[5];
+                PLAYERFORMOBJ.render();
+                break;
+            case 'd12checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[6] = !CLASSOBJ.DICE_CHECKBOXS[6];
+                PLAYERFORMOBJ.render();
+                break;
             case 'd20checkbox':
                 CLASSOBJ.DICE_CHECKBOXS[7] = !CLASSOBJ.DICE_CHECKBOXS[7];
+                PLAYERFORMOBJ.render();
+                break;
+            case 'd100checkbox':
+                CLASSOBJ.DICE_CHECKBOXS[8] = !CLASSOBJ.DICE_CHECKBOXS[8];
                 PLAYERFORMOBJ.render();
                 break;
             default:
@@ -508,7 +531,7 @@ function midiQolSupport(){
 
                 let rolls = [];
                 for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.attackRoll.terms[0].results[0].result);
+                    rolls.push(workflow.attackRoll.terms[0].results[i].result);
                 }
 
                 //Get Associated Player
@@ -534,7 +557,7 @@ function midiQolSupport(){
 
                 let rolls = []
                 for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.damageRoll.terms[0].results[0].result);
+                    rolls.push(workflow.damageRoll.terms[0].results[i].result);
                 }
 
                 //Get Associated Player
@@ -620,10 +643,19 @@ Handlebars.registerHelper('ifUserHasData', function (var1, options) {
     return options.inverse(this);
 });
 
-//Handlebars 
-Handlebars.registerHelper('refreshHelper', function (options) {
-    if(PLAYERFORMOBJ){
-        PLAYERFORMOBJ.getData();
+
+//Handlebars helper used to display check on or off on the checkboxes
+Handlebars.registerHelper('isChecked', function (bool, options) {
+    if(bool){
+        return 'checked="checked"'
     }
+    return ""
 });
 
+//Handlebars helper used to see if we should render die info.
+Handlebars.registerHelper('ifDisplayDieInfo', function (bool, options) {
+    if(bool){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
