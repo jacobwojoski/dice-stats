@@ -193,7 +193,8 @@ class DiceStatsTracker {
     ID = 'dice-stats'
     IMGM = false;
     SYSTEM;
-    DICE_CHECKBOXS = [];
+    PLAYER_DICE_CHECKBOXES = [];
+    GLOBAL_DICE_CHECKBOXES = [];
     
     updateMap(){
         //Add everyplayer to storage. Were tracking all even if we dont need
@@ -211,8 +212,10 @@ class DiceStatsTracker {
         this.SYSTEM = `${game.system.id}`
         this.ALLPLAYERDATA = new Map();
         
-        this.DICE_CHECKBOXS = new Array(NUM_DIE_TYPES);
-        this.DICE_CHECKBOXS.fill(true);
+        this.PLAYER_DICE_CHECKBOXES = new Array(NUM_DIE_TYPES);
+        this.GLOBAL_DICE_CHECKBOXES = new Array(NUM_DIE_TYPES);
+        this.PLAYER_DICE_CHECKBOXES.fill(true);
+        this.GLOBAL_DICE_CHECKBOXES.fill(true);
 
         // A setting to determine whether players can see gm data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM, {
@@ -357,7 +360,7 @@ class PlayerStatusPage extends FormApplication {
         if(CLASSOBJ.ALLPLAYERDATA.has(this.SEL_PLAYER)){
             let playerObj = CLASSOBJ.ALLPLAYERDATA.get(this.SEL_PLAYER);
             var dataObject = DATA_PACKAGER.packagePlayerData(playerObj);
-            dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.DICE_CHECKBOXS];
+            dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
             return dataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
@@ -373,39 +376,39 @@ class PlayerStatusPage extends FormApplication {
                 PLAYERFORMOBJ.render();
                 break;
             case 'd2checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[0] = !CLASSOBJ.DICE_CHECKBOXS[0];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[0] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[0];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd3checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[1] = !CLASSOBJ.DICE_CHECKBOXS[1];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[1] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[1];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd4checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[2] = !CLASSOBJ.DICE_CHECKBOXS[2];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[2] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[2];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd6checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[3] = !CLASSOBJ.DICE_CHECKBOXS[3];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[3] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[3];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd8checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[4] = !CLASSOBJ.DICE_CHECKBOXS[4];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[4] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[4];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd10checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[5] = !CLASSOBJ.DICE_CHECKBOXS[5];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[5] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[5];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd12checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[6] = !CLASSOBJ.DICE_CHECKBOXS[6];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[6] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[6];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd20checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[7] = !CLASSOBJ.DICE_CHECKBOXS[7];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[7] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[7];
                 PLAYERFORMOBJ.render();
                 break;
             case 'd100checkbox':
-                CLASSOBJ.DICE_CHECKBOXS[8] = !CLASSOBJ.DICE_CHECKBOXS[8];
+                CLASSOBJ.PLAYER_DICE_CHECKBOXES[8] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[8];
                 PLAYERFORMOBJ.render();
                 break;
             default:
@@ -448,6 +451,7 @@ class GlobalStatusPage extends FormApplication{
         })
 
         let dataObject = DATA_PACKAGER.packageGlobalData(playersAry, includeGM);
+        dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.GLOBAL_DICE_CHECKBOXES];
         return dataObject;
     }
 
@@ -457,6 +461,42 @@ class GlobalStatusPage extends FormApplication{
 
         switch(action){
             case 'refresh':
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd2checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd3checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[1] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[1];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd4checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[2] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[2];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd6checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[3] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[3];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd8checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[4] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[4];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd10checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[5] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[5];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd12checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[6] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[6];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd20checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[7] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[7];
+                GLOBALFORMOBJ.render();
+                break;
+            case 'd100checkbox':
+                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[8] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[8];
                 GLOBALFORMOBJ.render();
                 break;
             default:

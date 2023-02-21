@@ -35,6 +35,8 @@ class DATA_PACKAGER
 
     GLOBAL_HNDL_INFO = 
     {
+        IS_DIE_DISPLAYED: [],
+        
         //Arrays Use DIE_TYPE to get values for specific dice
         MEAN:[],
         MEDIAN:[],
