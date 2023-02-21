@@ -11,6 +11,9 @@ class DATA_PACKAGER
     {
         PLAYER_NAME: '',
 
+        //array<bools>[num_of_dice] 
+        IS_DIE_DISPLAYED: [],
+
         //Arrays Use DIE_TYPE to get values for specific dice
         MEAN:   [],
         MEDIAN: [],
@@ -32,6 +35,8 @@ class DATA_PACKAGER
 
     GLOBAL_HNDL_INFO = 
     {
+        IS_DIE_DISPLAYED: [],
+        
         //Arrays Use DIE_TYPE to get values for specific dice
         MEAN:[],
         MEDIAN:[],
@@ -70,6 +75,9 @@ class DATA_PACKAGER
     {   
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
+
+        packedData.IS_DIE_DISPLAYED = new Array(9);
+        packedData.IS_DIE_DISPLAYED.fill(true);
 
         packedData.PLAYER_NAME = playerInfo.USERNAME;
         packedData.D2_ROLL_DATA =      [...playerInfo.PLAYER_DICE[0].ROLLS];
