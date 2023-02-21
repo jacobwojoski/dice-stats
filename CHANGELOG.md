@@ -1,5 +1,10 @@
 # CHANGELOG  
 
+## [ 1.2.0 ]  2/20/2023
+### Added
+- Added Checkboxes on forms page to allow users to disable displaying of certain stats if desired.
+- Checkboxes are client side
+
 ## [ 1.1.5 ]  2/19/2023  
 ### Fixed 
 - Fix multiple dice in midi-qol

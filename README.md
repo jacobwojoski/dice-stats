@@ -91,23 +91,25 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 
 - Global D20 Info  
 ![Global D20 info](https://i.imgur.com/R7LmFus.png) 
-  
+
+## Ongoing Issues
+- Support Other Systems  
+
 ## Planned Features
 - ~~Add Charts~~ (Done)
 - ~~Make Settings have their own tab instead of being under "undefined"~~ (Done)
 - ~~Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though~~ (Done)
 - ~~Global Stats~~ (Done)
 - ~~Add Refresh button on dice stats page~~ (Done)
+- ~~Setting to choose which dice Stats are displayed (checkboxes w/ grayed out checks if no dice of that type are rolled)~~ (Done)
 - Streaks in Both Direction  
-- Setting to choose which dice Stats are displayed (checkboxes w/ grayed out checks if no dice of that type are rolled)
-- Add Most Max val and Most min values rolls Adjusted for % of total rolls
-- Incorperate Lang page
-- Comparison Tool, Show a few players info size by side
+- Add Most Max val and Most min values rolls Adjusted for % of total rolls  
+- Comparison Tool, Show a few players info size by side  
+- Deal w/ Multiple of same values (Streak or same length streak | Multiple with max number of rolls)  
+- Incorperate Lang page  
 - Output to Chat how many Nat1 & 20's have been rolled by that player when one gets rolled  
 - Output to chat Lows and Highs for some other die types. Maybe just milestone numbers? EX Multiple of 5's on a d4 or d6 (10th 1, 15th 5)?  
-- Deal w/ Multiple of same values (Streak or same length streak | Multiple with max number of rolls)
-- Support more die types
-- Make sure it works for other systems
+- Support more die types    
 - Update Refresh Button to use "this" modifier instead of a global
 
 - Settings

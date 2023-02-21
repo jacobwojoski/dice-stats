@@ -578,7 +578,7 @@
             chart.draw(data, chartOptions);
         }
 
-        //TODO THIS NEEDS TO INCLUDE CHECK FOR IF WE WANT TO DRAW CHARTS FROM CHECKBOXES
+        //Checks to See if charts callback should be made
         if({{TOTAL_ROLLS.[0]}} > 0 && {{IS_DIE_DISPLAYED.[0]}})
         {
             google.charts.setOnLoadCallback(drawChartd2);

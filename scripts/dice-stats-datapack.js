@@ -11,7 +11,7 @@ class DATA_PACKAGER
     {
         PLAYER_NAME: '',
 
-        //array<bools>[num_of_dice] 
+        //array<bools>[num_of_dice] Used by checkboxes on UI
         IS_DIE_DISPLAYED: [],
 
         //Arrays Use DIE_TYPE to get values for specific dice
@@ -35,6 +35,7 @@ class DATA_PACKAGER
 
     GLOBAL_HNDL_INFO = 
     {
+        //array<bools>[num_of_dice] Used by checkboxes on UI
         IS_DIE_DISPLAYED: [],
         
         //Arrays Use DIE_TYPE to get values for specific dice

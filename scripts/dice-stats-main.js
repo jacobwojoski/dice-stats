@@ -371,6 +371,7 @@ class PlayerStatusPage extends FormApplication {
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
 
+        //Handle button events made on the form
         switch(action){
             case 'refresh':
                 PLAYERFORMOBJ.render();
@@ -455,6 +456,7 @@ class GlobalStatusPage extends FormApplication{
         return dataObject;
     }
 
+    //Handle button events made on the form
     _handleButtonClick(event){
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
