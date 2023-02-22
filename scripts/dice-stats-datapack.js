@@ -31,10 +31,12 @@ class DATA_PACKAGER
         D12_ROLL_DATA:  [],
         D20_ROLL_DATA:  [],
         D100_ROLL_DATA: [],
+
+        BLIND_ROLL_COUNT: 0,
     }
 
     GLOBAL_HNDL_INFO = 
-    {
+    {   
         //array<bools>[num_of_dice] Used by checkboxes on UI
         IS_DIE_DISPLAYED: [],
         
@@ -64,6 +66,8 @@ class DATA_PACKAGER
         D12_ROLL_DATA:  [],
         D20_ROLL_DATA:  [],
         D100_ROLL_DATA: [],
+
+        TOTAL_BLIND_ROLL_COUNT: 0,
     }
 
     //======================================================

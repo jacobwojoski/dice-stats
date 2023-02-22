@@ -45,3 +45,18 @@ span.form-checkboxes{
     vertical-align: middle;
     font-size: 18px
 }
+
+.blind-roll-rollcount{
+    margin: auto;
+    text-align: center;
+}
+
+button.blind-roll-rollcount{
+    background: transparent;
+    color: white;
+    border: 0;
+    padding: 0;
+    line-height: 0;
+    align-self: center;
+    margin: 0 2%;
+}

@@ -75,7 +75,8 @@ class DIE_INFO {
     TYPE =          0;  //Type of die <DIE_TYPE> varable
     TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
-    RECENTROLL =    -1;
+    BLIND_ROLLS = [];
+    RECENTROLL =    -1; //TODO Can prolly remove this var, Looks unused
     STREAK_SIZE =   -1;
     STREAK_INIT =   -1;
     STREAK_ISBLIND = false;
@@ -98,6 +99,9 @@ class DIE_INFO {
 
         this.ROLLS = new Array(dieMax);
         this.ROLLS.fill(0);
+
+        this.BLIND_ROLLS = new Array(dieMax);
+        this.BLIND_ROLLS.fill(0);
     }
 
     //Streak count how many incramenting die Rolls are made 1234, 456789 ect. 
@@ -124,15 +128,35 @@ class DIE_INFO {
 
     addRoll(roll, isBlind){
         this.RECENTROLL = roll;
-        this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
         this.TOTAL_ROLLS++;
         this.updateStreak(roll, isBlind)
+
+        if(!isBlind){
+            this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
+        }else{
+            this.BLIND_ROLLS[roll-1] = this.BLIND_ROLLS[roll-1]+1; 
+        }
     }
 
     calculate(){
         this.MEAN = DICE_STATS_UTILS.getMean(this.ROLLS);
         this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ROLLS);
         this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
+    }
+
+    pushBlindRolls(){
+        for(let i=0; i<this.BLIND_ROLLS.length; i++){
+            this.ROLLS[i] = this.ROLLS[i]+this.BLIND_ROLLS[i];
+        }
+    }
+
+    getBlindRollsCount(){
+        let tempRollCount = 0;
+        for(let i=0; i<this.BLIND_ROLLS.length; i++){
+            tempRollCount += this.BLIND_ROLLS[i];
+        }
+
+        return tempRollCount;
     }
 }
 
@@ -185,6 +209,19 @@ class PLAYER {
         this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind)
     }
 
+    pushBlindRolls(){
+        for(let i=0; i<this.PLAYER_DICE.length; i++){
+            this.PLAYER_DICE[i].pushBlindRolls();
+        }
+    }
+
+    getBlindRollsCount(){
+        let tempRollCount = 0;
+        for(let i=0; i<this.PLAYER_DICE.length; i++){
+            tempRollCount += tempRollCount.getBlindRollsCount();
+        }
+        return tempRollCount;
+    }
 }
 
 class DiceStatsTracker {
@@ -195,7 +232,7 @@ class DiceStatsTracker {
     SYSTEM;
     PLAYER_DICE_CHECKBOXES = [];
     GLOBAL_DICE_CHECKBOXES = [];
-    
+
     updateMap(){
         //Add everyplayer to storage. Were tracking all even if we dont need
         for (let user of game.users) {
@@ -320,6 +357,12 @@ class DiceStatsTracker {
         rolls.forEach(element => {
             playerInfo.saveRoll(isBlind, element, dieType)
         });
+    }
+
+    pushBlindRolls(){
+        for (let user of game.users) {
+            this.ALLPLAYERDATA.get(user.id)?.pushBlindRolls();
+        }
     }
 }
 
@@ -464,6 +507,12 @@ class GlobalStatusPage extends FormApplication{
         switch(action){
             case 'refresh':
                 GLOBALFORMOBJ.render();
+                break;
+            case 'pushBlindRolls':
+                socket.executeForEveryone(pushPlayerBlindRolls);
+                socket.executeForEveryone("push");
+                CLASSOBJ.pushBlindRolls();
+                PLAYERFORMOBJ.render();
                 break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
@@ -701,3 +750,33 @@ Handlebars.registerHelper('ifDisplayDieInfo', function (bool, options) {
     }
     return options.inverse(this);
 });
+
+//Handlebars helper used to check if the client is the GM
+Handlebars.registerHelper('ifIsGM', function (options){
+    if(game.user.isGM){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+Handlebars.registerHelper('ifHaveBlindRolls', function (blindRollCount, options){
+    if(blindRollCount > 0){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+//==========================================================
+//==================== SOCKET SHIT =========================
+//==========================================================
+
+let socket;
+
+Hooks.once("socketlib.ready", () => {
+	socket = socketlib.registerModule("dice-stats");
+	socket.register("push", pushPlayerBlindRolls);
+});
+
+function pushPlayerBlindRolls() {
+	CLASSOBJ.pushBlindRolls();
+}

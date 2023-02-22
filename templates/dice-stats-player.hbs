@@ -22,6 +22,12 @@
         <input type="checkbox" class="form-checkboxes" data-action="d100checkbox"    {{{isChecked IS_DIE_DISPLAYED.[8]}}}><span class="form-checkboxes">D-100</span></input>
     </div>
 
+    {{#ifHaveBlindRolls BLIND_ROLL_COUNT}}
+    <div class="blind-roll-rollcount">
+        <h2>You have {{BLIND_ROLL_COUNT}} Blind Rolls Which are Not Tracked. Ask GM to Push Rolls</h2>
+    </div>
+    {{/ifHaveBlindRolls}}
+
     <div class="col">
         <h1 class="dice-type-title">{{PLAYER_NAME}} Roll Data</h1>
 
