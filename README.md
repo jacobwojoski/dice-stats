@@ -8,7 +8,7 @@ Used Google Charts as a charting library. (MIT License)
 Used [Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
 wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
 
-## INCOMPATABILITIES
+## INCOMPATABILITIES (Add Issue for any System Requests)
 - Any system that doesnt print rolls to chat
 - **Midi-Qol** if **Merge Rolls to 1 Card** is enabled partial fix. 
     - Midi-qol.rollComplete hook Doesnt have a way to trace back to the Player that rolled. Only the actor
