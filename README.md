@@ -108,6 +108,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - ~~Add Refresh button on dice stats page~~ (Done)
 - ~~Setting to choose which dice Stats are displayed (checkboxes w/ grayed out checks if no dice of that type are rolled)~~ (Done)
 - ~~Add feature to hide blind rolls~~
+- Get player history when joining [Req History From GM]
 - Streaks in Both Direction  
 - Add Most Max val and Most min values rolls Adjusted for % of total rolls  
 - Comparison Tool, Show a few players info size by side  
