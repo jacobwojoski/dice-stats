@@ -8,7 +8,11 @@ Used Google Charts as a charting library. (MIT License)
 Used [Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
 wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
 
-## INCOMPATABILITIES
+## DEPENDENCIES
+[socketlib](https://github.com/manuelVo/foundryvtt-socketlib)
+Socketlib needs to be active to be able to push users blind rolls
+
+## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
 - **Midi-Qol** if **Merge Rolls to 1 Card** is enabled partial fix. 
     - Midi-qol.rollComplete hook Doesnt have a way to trace back to the Player that rolled. Only the actor
@@ -59,7 +63,8 @@ Global Settings are restricted to gm only my default
 - PLAYERS_SEE_GM -------------- If Players can see GM dice roll stats ----------------[Def: False]    (Global)
 - PLAYERS_SEE_GLOBAL --------  If Players Can  Global Dice Stats --------------------[Def: True]     (Global)
 - PLAYERS_SEE_GM_IN_GLOBAL - If GM roll stats get added into global stats ---------[Def: False]    (Global)
-- ENABLE_BLIND_STREAK_MSGS - Allow strk from a blind roll to be prnt to chat ------[Def: false]    (Global)    
+- ENABLE_BLIND_STREAK_MSGS - Allow strk from a blind roll to be prnt to chat ------[Def: false]    (Global) 
+- SHOW_BLIND_ROLLS_IMMEDIATE -- let Blind Rolls be added to player stats immediately ---[Def: false] (Global)
 - ENABLE_CRIT_MSGS ------------  Choose what dice print crit msgs ---------------------[Def: d20]      (Local)
 - TYPES_OF_CRIT_MSGS ---------- Choose Type of crits to print ------------------------[Def: Both]     (Local)
 - ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def : d20]     (Local)  
@@ -102,6 +107,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - ~~Global Stats~~ (Done)
 - ~~Add Refresh button on dice stats page~~ (Done)
 - ~~Setting to choose which dice Stats are displayed (checkboxes w/ grayed out checks if no dice of that type are rolled)~~ (Done)
+- ~~Add feature to hide blind rolls~~
 - Streaks in Both Direction  
 - Add Most Max val and Most min values rolls Adjusted for % of total rolls  
 - Comparison Tool, Show a few players info size by side  
@@ -115,9 +121,10 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Settings
     - ~~PLAYERS_SEE_GM~~            (Done v1.0.0)   
     - ~~PLAYERS_SEE_GLOBAL~~        (Done v1.0.0) 
+    - ~~PLAYERS_SEE_GM_IN_GLOBAL~~ 
+    - ~~SHOW_BLIND_ROLLS_IMMEDIATE~~
     - PLAYERS_SEE_SELF          
     - PLAYERS_SEE_PLAYERS           
-    - PLAYERS_SEE_GM_IN_GLOBAL  
     - ENABLE_BLIND_STREAK_MSGS    
     - ENABLE_CRIT_MSGS         
     - TYPES_OF_CRIT_MSGS       

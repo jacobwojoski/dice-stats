@@ -2,6 +2,7 @@
 CLASSOBJ = null;
 GLOBALFORMOBJ = null;
 PLAYERFORMOBJ = null;
+let socket;
 
 //----GLOBAL CONST VALUES----
 const MODULE_ID = 'dice-stats'
@@ -23,7 +24,8 @@ const SETTINGS = {
     PLAYERS_SEE_GM:     'players_see_gm',       //If Players can see GM dice roll stats                    [Def: False]     (Global)
     PLAYERS_SEE_GLOBAL: 'players_see_global',   //If Players Can  Global Dice Stats                        [Def: True]      (Global)
     PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global)
-    ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global)    
+    ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
+    SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
     ENABLE_STREAK_MSGS: 'enable_streak_msgs'   //Choose what dice to display streak msgs for    [Default : d20]             (Local)     
@@ -75,7 +77,8 @@ class DIE_INFO {
     TYPE =          0;  //Type of die <DIE_TYPE> varable
     TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
-    RECENTROLL =    -1;
+    BLIND_ROLLS = [];
+    RECENTROLL =    -1; //TODO Can prolly remove this var, Looks unused
     STREAK_SIZE =   -1;
     STREAK_INIT =   -1;
     STREAK_ISBLIND = false;
@@ -98,6 +101,9 @@ class DIE_INFO {
 
         this.ROLLS = new Array(dieMax);
         this.ROLLS.fill(0);
+
+        this.BLIND_ROLLS = new Array(dieMax);
+        this.BLIND_ROLLS.fill(0);
     }
 
     //Streak count how many incramenting die Rolls are made 1234, 456789 ect. 
@@ -124,15 +130,40 @@ class DIE_INFO {
 
     addRoll(roll, isBlind){
         this.RECENTROLL = roll;
-        this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
         this.TOTAL_ROLLS++;
         this.updateStreak(roll, isBlind)
+
+        var dontHideBlindRolls = game.settings.get(MODULE_ID,SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE);
+        if(!isBlind || dontHideBlindRolls){
+            this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
+        }else{
+            this.BLIND_ROLLS[roll-1] = this.BLIND_ROLLS[roll-1]+1; 
+        }
     }
 
     calculate(){
         this.MEAN = DICE_STATS_UTILS.getMean(this.ROLLS);
         this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ROLLS);
         this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
+    }
+
+    //method to take blind roll data and push it into normal roll data
+    //Reset blind roll data once pushed
+    pushBlindRolls(){
+        for(let i=0; i<this.BLIND_ROLLS.length; i++){
+            this.ROLLS[i] = this.ROLLS[i]+this.BLIND_ROLLS[i];
+            this.BLIND_ROLLS[i]=0;
+        }
+    }
+
+    //method to get total number of blind rolls
+    getBlindRollsCount(){
+        let tempRollCount = 0;
+        for(let i=0; i<this.BLIND_ROLLS.length; i++){
+            tempRollCount += this.BLIND_ROLLS[i];
+        }
+
+        return tempRollCount;
     }
 }
 
@@ -185,6 +216,19 @@ class PLAYER {
         this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind)
     }
 
+    pushBlindRolls(){
+        for(let i=0; i<this.PLAYER_DICE.length; i++){
+            this.PLAYER_DICE[i].pushBlindRolls();
+        }
+    }
+
+    getBlindRollsCount(){
+        let tempRollCount = 0;
+        for(let i=0; i<this.PLAYER_DICE.length; i++){
+            tempRollCount += this.PLAYER_DICE[i].getBlindRollsCount();
+        }
+        return tempRollCount;
+    }
 }
 
 class DiceStatsTracker {
@@ -195,7 +239,7 @@ class DiceStatsTracker {
     SYSTEM;
     PLAYER_DICE_CHECKBOXES = [];
     GLOBAL_DICE_CHECKBOXES = [];
-    
+
     updateMap(){
         //Add everyplayer to storage. Were tracking all even if we dont need
         for (let user of game.users) {
@@ -249,6 +293,15 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Hint`,
         })
 
+                // A setting to determine whether players can see global data
+        game.settings.register(this.ID, SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Hint`,
+        })
         /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
@@ -320,6 +373,12 @@ class DiceStatsTracker {
         rolls.forEach(element => {
             playerInfo.saveRoll(isBlind, element, dieType)
         });
+    }
+
+    pushBlindRolls(){
+        for (let user of game.users) {
+            this.ALLPLAYERDATA.get(user.id)?.pushBlindRolls();
+        }
     }
 }
 
@@ -465,6 +524,11 @@ class GlobalStatusPage extends FormApplication{
             case 'refresh':
                 GLOBALFORMOBJ.render();
                 break;
+            case 'pushBlindRolls':
+                socket.executeForEveryone(pushPlayerBlindRolls, game.userId);
+                socket.executeForEveryone("push", game.userId);
+                GLOBALFORMOBJ.render();
+                break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
                 GLOBALFORMOBJ.render();
@@ -555,11 +619,6 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
 
 function midiQolSupport(){
-    /*MIDI-QOL SUPPORT */
-    if(game.modules.get("midi-qol")?.active){
-        /*Remove Hook from Normal Dice rolling so we dont record rolls twice*/
-        //Hooks.off('createChatMessage', handleChatMsgHook(chatMessage));
-
         /*Add Hook for Midi-QoL */
         Hooks.on("midi-qol.RollComplete", (workflow) => {
             //Deal with Attack Rolls
@@ -613,7 +672,6 @@ function midiQolSupport(){
                 CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
             }
         })
-    }
 }
 
 handleChatMsgHook = (chatMessage) => {
@@ -633,7 +691,10 @@ Hooks.once('init', () => {
 
     //Updates for Other system support. 
     //Needs to be after init hook to see active system and modules
-    midiQolSupport();
+    /*MIDI-QOL SUPPORT */
+    if(game.modules.get("midi-qol")?.active){
+        midiQolSupport();
+    }
 })
 
 //==========================================================
@@ -701,3 +762,31 @@ Handlebars.registerHelper('ifDisplayDieInfo', function (bool, options) {
     }
     return options.inverse(this);
 });
+
+//Handlebars helper used to check if the client is the GM
+Handlebars.registerHelper('ifIsGM', function (options){
+    if(game.user.isGM){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+Handlebars.registerHelper('ifHaveBlindRolls', function (blindRollCount, options){
+    if(blindRollCount > 0){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+//==========================================================
+//==================== SOCKET SHIT =========================
+//==========================================================
+
+Hooks.once("socketlib.ready", () => {
+	socket = socketlib.registerModule("dice-stats");
+	socket.register("push", pushPlayerBlindRolls);
+});
+
+function pushPlayerBlindRolls(userid) {
+	CLASSOBJ.pushBlindRolls();
+}

@@ -19,7 +19,11 @@
             },
             "players_see_gm_in_global": {
                 "Name" : "See GM Stats In Global Roll Data?",
-                "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacys GM global stats button too)"
+                "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacts GM global stats button too)"
+            },
+            "enable_blind_rolls_immediate": {
+                "Name" : "Allow blind rolls to be immediately added to player stats",
+                "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
             },
             "enable_crit_msgs": {
                 "Name" : "Stop All Crit Messages From Being Displayed To chat",
