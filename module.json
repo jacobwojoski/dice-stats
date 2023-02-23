@@ -7,20 +7,18 @@
       "flags": {}
     }
   ],
-  "minimumCoreVersion": "10.0.0",
-  "compatibleCoreVersion": "10.0.0",
   "compatibility": {
     "minimum": "10",
     "verified": "10"
-  },  
+  },
   "scripts": [
-      "scripts/dice-stats-main.js",
-      "scripts/dice-stats-utils.js",
-      "scripts/dice-stats-datapack.js",
-      "scripts/googleChartImport.js"
+    "scripts/dice-stats-main.js",
+    "scripts/dice-stats-utils.js",
+    "scripts/dice-stats-datapack.js",
+    "scripts/googleChartImport.js"
   ],
   "styles": [
-      "styles/dice-stats.css"
+    "styles/dice-stats.css"
   ],
   "languages": [
     {
@@ -36,5 +34,15 @@
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "readme": "https://github.com/jacobwojoski/dice-stats",
   "url": "https://github.com/jacobwojoski/dice-stats",
-  "id": "dice-stats"
+  "id": "dice-stats",
+  "relationships": {
+    "requires": [
+      {
+        "id": "socketlib",
+        "type": "module",
+        "manifest": "https://github.com/manuelVo/foundryvtt-socketlib/releases/latest/download/module.json",
+        "compatibility": {}
+      }
+    ]
+  }
 }

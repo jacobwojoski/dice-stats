@@ -113,6 +113,7 @@ class DATA_PACKAGER
             packedData.S_IS_B[die] = playerInfo.PLAYER_DICE[die].STREAK_ISBLIND;
         }
         
+        packedData.BLIND_ROLL_COUNT = playerInfo.getBlindRollsCount();
         return packedData;
     }
 
@@ -367,6 +368,8 @@ class DATA_PACKAGER
         handlebarsData.ROLLED_MOST_MIN_PLAYER.fill(""),
         handlebarsData.ROLLED_MOST_MIN_ROLLCOUNT.fill(0);
 
+        handlebarsData.TOTAL_BLIND_ROLL_COUNT = 0;
+
         return handlebarsData;
     }
 
@@ -384,6 +387,10 @@ class DATA_PACKAGER
         packedData = this.getGlobalStreakData(playersArry,packedData,includeGMrolls);
         packedData = this.getGlobalMathStatsData(packedData);
         
+        for(let itr = 0; itr < playersArry.length; itr++){
+            packedData.TOTAL_BLIND_ROLL_COUNT += playersArry[itr].getBlindRollsCount();
+        }
+
         return packedData;
     }
 

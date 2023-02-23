@@ -8,6 +8,9 @@ Used Google Charts as a charting library. (MIT License)
 Used [Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
 wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
 
+## DEPENDENCIES
+[socketlib](https://github.com/manuelVo/foundryvtt-socketlib)
+
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
 - **Midi-Qol** if **Merge Rolls to 1 Card** is enabled partial fix. 

@@ -60,3 +60,8 @@ button.blind-roll-rollcount{
     align-self: center;
     margin: 0 2%;
 }
+
+.blind-roll-heading{
+    margin: auto;
+    text-align: center;
+}

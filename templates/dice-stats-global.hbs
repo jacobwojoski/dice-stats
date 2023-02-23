@@ -21,16 +21,21 @@
         <input type="checkbox" class="form-checkboxes" data-action="d20checkbox"    {{{isChecked IS_DIE_DISPLAYED.[7]}}}><span class="form-checkboxes">D-20</span></input>
         <input type="checkbox" class="form-checkboxes" data-action="d100checkbox"    {{{isChecked IS_DIE_DISPLAYED.[8]}}}><span class="form-checkboxes">D-100</span></input>
     </div>
+    <br>
 
     {{#ifIsGM}}
-    <div class="blind-roll-rollcount">
-        <h2>There Are {{BLIND_ROLL_COUNT}} Total Blind rolls between all players</h2>
-        <button type="button" data-action="pushBlindRolls" class="blind-roll-rollcount">Push Blind Rolls to Player Data</button>
+    {{#ifHaveBlindRolls TOTAL_BLIND_ROLL_COUNT}}
+    <div>
+        <h2 class="blind-roll-heading">There Are {{TOTAL_BLIND_ROLL_COUNT}} Blind rolls between all players</h2>
+        <button type="button" data-action="pushBlindRolls">Push Blind Rolls to Player Data</button>
     </div>
+    <br>
+    {{/ifHaveBlindRolls}}
     {{/ifIsGM}}
+    
 
     <div class="col">
-        <h1 class="dice-type-title"> GLOBAL Roll Data</h1>
+        <h1 class="dice-type-title">GLOBAL Roll Data</h1>
 
         {{#ifDisplayDieInfo IS_DIE_DISPLAYED.[0]}}
         {{#ifDieUsed TOTAL_ROLLS.[0] }} <!-- Associated Helper in Main -->

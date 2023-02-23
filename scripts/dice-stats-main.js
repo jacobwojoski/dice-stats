@@ -2,6 +2,7 @@
 CLASSOBJ = null;
 GLOBALFORMOBJ = null;
 PLAYERFORMOBJ = null;
+let socket;
 
 //----GLOBAL CONST VALUES----
 const MODULE_ID = 'dice-stats'
@@ -144,12 +145,16 @@ class DIE_INFO {
         this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
     }
 
+    //method to take blind roll data and push it into normal roll data
+    //Reset blind roll data once pushed
     pushBlindRolls(){
         for(let i=0; i<this.BLIND_ROLLS.length; i++){
             this.ROLLS[i] = this.ROLLS[i]+this.BLIND_ROLLS[i];
+            this.BLIND_ROLLS[i]=0;
         }
     }
 
+    //method to get total number of blind rolls
     getBlindRollsCount(){
         let tempRollCount = 0;
         for(let i=0; i<this.BLIND_ROLLS.length; i++){
@@ -218,7 +223,7 @@ class PLAYER {
     getBlindRollsCount(){
         let tempRollCount = 0;
         for(let i=0; i<this.PLAYER_DICE.length; i++){
-            tempRollCount += tempRollCount.getBlindRollsCount();
+            tempRollCount += this.PLAYER_DICE[i].getBlindRollsCount();
         }
         return tempRollCount;
     }
@@ -509,10 +514,9 @@ class GlobalStatusPage extends FormApplication{
                 GLOBALFORMOBJ.render();
                 break;
             case 'pushBlindRolls':
-                socket.executeForEveryone(pushPlayerBlindRolls);
-                socket.executeForEveryone("push");
-                CLASSOBJ.pushBlindRolls();
-                PLAYERFORMOBJ.render();
+                socket.executeForEveryone(pushPlayerBlindRolls, game.userId);
+                socket.executeForEveryone("push", game.userId);
+                GLOBALFORMOBJ.render();
                 break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
@@ -604,11 +608,6 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
 
 function midiQolSupport(){
-    /*MIDI-QOL SUPPORT */
-    if(game.modules.get("midi-qol")?.active){
-        /*Remove Hook from Normal Dice rolling so we dont record rolls twice*/
-        //Hooks.off('createChatMessage', handleChatMsgHook(chatMessage));
-
         /*Add Hook for Midi-QoL */
         Hooks.on("midi-qol.RollComplete", (workflow) => {
             //Deal with Attack Rolls
@@ -662,7 +661,6 @@ function midiQolSupport(){
                 CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
             }
         })
-    }
 }
 
 handleChatMsgHook = (chatMessage) => {
@@ -682,7 +680,10 @@ Hooks.once('init', () => {
 
     //Updates for Other system support. 
     //Needs to be after init hook to see active system and modules
-    midiQolSupport();
+    /*MIDI-QOL SUPPORT */
+    if(game.modules.get("midi-qol")?.active){
+        midiQolSupport();
+    }
 })
 
 //==========================================================
@@ -770,13 +771,11 @@ Handlebars.registerHelper('ifHaveBlindRolls', function (blindRollCount, options)
 //==================== SOCKET SHIT =========================
 //==========================================================
 
-let socket;
-
 Hooks.once("socketlib.ready", () => {
 	socket = socketlib.registerModule("dice-stats");
 	socket.register("push", pushPlayerBlindRolls);
 });
 
-function pushPlayerBlindRolls() {
+function pushPlayerBlindRolls(userid) {
 	CLASSOBJ.pushBlindRolls();
 }
