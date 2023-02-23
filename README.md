@@ -122,6 +122,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - ~~PLAYERS_SEE_GM~~            (Done v1.0.0)   
     - ~~PLAYERS_SEE_GLOBAL~~        (Done v1.0.0) 
     - ~~PLAYERS_SEE_GM_IN_GLOBAL~~ 
+    - ~~SHOW_BLIND_ROLLS_IMMEDIATE~~
     - PLAYERS_SEE_SELF          
     - PLAYERS_SEE_PLAYERS           
     - ENABLE_BLIND_STREAK_MSGS    
