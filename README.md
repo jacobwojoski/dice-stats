@@ -99,19 +99,19 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
   
 ## FORM PHOTOS
 ### Player D20  
-![PL D20](https://imgur.com/Sszy3bk)   
+![PL D20](https://i.imgur.com/Sszy3bk.png)   
 
 ### Player D20 BLIND
-![PL D20 B](https://imgur.com/EOYY6y6) 
+![PL D20 B](https://i.imgur.com/EOYY6y6.png) 
 
 ### GLOBAL D20
 ![GLB D20](https://i.imgur.com/MAnKo9g.png) 
 
 ### GLOBAL D20 BLIND
-![GLB D20 B](https://imgur.com/mLXWWjm) 
+![GLB D20 B](https://i.imgur.com/mLXWWjm.png) 
 
 ### CHECKBOXES
-![CHK](https://imgur.com/pVFw0QE)
+![CHK](https://i.imgur.com/pVFw0QE.png)
 
 
 ## Ongoing Issues
