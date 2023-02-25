@@ -97,12 +97,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - PLAYERS_SEE_GM = False  (Warning displayed if trying to view GM values)
 ![PLAYERS_SEE_GM = False](https://i.imgur.com/sGELoCJ.png)  
   
-
-
-
-
-
-## PLAYER FORM
+## FORM PHOTOS
 ### Player D20  
 ![PL D20](https://imgur.com/Sszy3bk)   
 
@@ -150,6 +145,9 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - UI Changes
     - Is There A Better Way to format data?
     - Should Tabs be added?
+    - Make D100 Chart not look like shit?
+    - Change chart size
+    - Make Forms Resizeable
 
 ## Settings (Running List)
 - ~~PLAYERS_SEE_GM~~                (Implemented v1.0.0)   
