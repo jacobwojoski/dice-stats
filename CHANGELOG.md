@@ -1,6 +1,12 @@
 # CHANGELOG  
 
 ## [ 1.3.0 ]  2/20/2023
+### Fixed
+- Fixed D100 Charts not displaying properly
+- Updated Readme with more up to date images
+- Re organized and added new sections to Readme
+
+## [ 1.3.0 ]  2/20/2023
 ### Added
 - Added feature where blind rolls do not get displayed. Instead string of test appears on top of player stats indicating that they have X Number of blind rolls and should ask the GM to push the data.
 - GM has a **Push Blind Rolls** button on the global stats
