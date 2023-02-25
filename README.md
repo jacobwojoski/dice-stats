@@ -104,9 +104,6 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ### Player D20 BLIND
 ![PL D20 B](https://i.imgur.com/EOYY6y6.png) 
 
-### GLOBAL D20
-![GLB D20](https://i.imgur.com/MAnKo9g.png) 
-
 ### GLOBAL D20 BLIND
 ![GLB D20 B](https://i.imgur.com/mLXWWjm.png) 
 
