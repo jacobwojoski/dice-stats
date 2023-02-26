@@ -1,6 +1,15 @@
 # CHANGELOG  
 
-## [ 1.3.0 ]  2/20/2023
+## [ 1.4.1 ]  2/26/2023
+### Fixed
+- Fixed spelling of Median (Spelt it wrong on the table but variables in code were spelt corrently... Classic)
+- Fixed Median not always displaying correctly Will always display middle of odd number of rolls or left-middle for even
+- Updated README to explain median
+- Updated streak table to better explain what streaks are
+- Added : to some table enteries that were missing it
+- Fixed changelog values being wrong
+
+## [ 1.4.0 ]  2/25/2023
 ### Fixed
 - Fixed D100 Charts not displaying properly
 - Updated Readme with more up to date images
