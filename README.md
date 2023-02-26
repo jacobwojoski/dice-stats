@@ -115,15 +115,6 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Support Other Systems  
 
 ## Planned Features
-- ~~Add Charts~~ (Done)
-- ~~Make Settings have their own tab instead of being under "undefined"~~ (Done)
-- ~~Fix Streaks, Streaks are off by 1 rn. 1 extra value at the end. They Start correctly though~~ (Done)
-- ~~Global Stats~~ (Done)
-- ~~Add Refresh button on dice stats page~~ (Done)
-- ~~Setting to choose which dice Stats are displayed (checkboxes w/ grayed out checks if no dice of that type are rolled)~~ (Done)
-- ~~Add feature to hide blind rolls~~
-- ~~D100 Charts~~
-- Setting to add warning & keep popup hidden if no Rolls have been made yet
 - Get player history when joining [Req History From GM]
 - Streaks in Both Direction  
 - Add Most Max val and Most min values rolls Adjusted for % of total rolls  
@@ -147,8 +138,8 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - Make Forms Resizeable
 
 ## Settings (Running List)
-- ~~PLAYERS_SEE_GM~~                (Implemented v1.0.0)   
-- ~~PLAYERS_SEE_GLOBAL~~            (Implemented v1.0.0) 
+- ~~PLAYERS_SEE_GM~~                (Implemented)   
+- ~~PLAYERS_SEE_GLOBAL~~            (Implemented) 
 - ~~PLAYERS_SEE_GM_IN_GLOBAL~~      (Implemented)
 - ~~SHOW_BLIND_ROLLS_IMMEDIATE~~    (Implemented)
 - PLAYERS_SEE_SELF          
