@@ -37,7 +37,7 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 - Number of each roll 
 - Total Number of rolls
 - Mean  
-- Median  
+- Median (true-Middle for Odd or left-middle for Even number of rolls)
 - Mode  
 - Streaks (Incrementing die rolls in a row) 4,5,6,7 ect  
   
@@ -46,7 +46,7 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 - Refresh Button To update stats if a new roll is made while screen if open 
 - Total Number of each roll
 - Globa Mean
-- Global Median
+- Global Median (true-Middle for Odd or left-middle for Even number of rolls)
 - Global Mode
 - Global Longest Streaks (Player Name and Streak Value)
 - Most Min and Most Max values Rolled (Player Name and Number)
