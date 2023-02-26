@@ -136,6 +136,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - Make D100 Chart not look like shit?
     - Change chart size
     - Make Forms Resizeable
+    - Format Text in tables better
 
 ## Settings (Running List)
 - ~~PLAYERS_SEE_GM~~                (Implemented)   
