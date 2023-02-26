@@ -76,15 +76,32 @@ class DICE_STATS_UTILS {
         }
 
         if(totalRolls > 1){
-            let middleIndex = Math.round(totalRolls/2);
+            //Get Middle roll number
+            let middleIndex = 0;
+            if(totalRolls%2 === 0){
+                //Even Number of rolls
+                middleIndex = Math.floor(totalRolls/2);
+            }else{
+                //Odd Number of rolls
+                middleIndex = Math.floor(totalRolls/2)+1;
+            }
+
             for(let i=0; i<RollsAry.length; i++){
-                var value = RollsAry[i]; //Number of that roll (i+1)
-                while(value!=0){
-                    if(middleIndex === 0){
-                        return i+1; //index+1 = die number
-                    }
+                var indxlValue = RollsAry[i]; //Number of that roll (i+1) is die number
+                while(indxlValue!=0 && middleIndex!=0){
                     middleIndex--;
-                    value--;
+                    indxlValue--;
+                }
+
+                if(middleIndex===0){
+                    return i+1; //index+1 = die number
+                }
+            }
+
+        }else if(totalRolls === 1){
+            for(let i=0; i<RollsAry.length; i++){
+                if(RollsAry[i] === 1){
+                    return i+1;
                 }
             }
         }
