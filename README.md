@@ -69,9 +69,10 @@ The user can **hand edit** the dice types saved by editing the following
 <b> Its Alot of work if adding a die between current die options as all UI's Would need to be updated by hand </b>
 <b> Planned Feature to add more dice types </b>
   
-## Module Settings options  
-Def = Default | (Global) & (Local) = setting scope 
-Global Settings are restricted to gm only my default
+## Module Settings (Not All are Implemented Yet)
+[Def: XX] = Default value for setting  
+(Global) & (Local) = setting scope  
+Global Settings are restricted to GM only by default
 - PLAYERS_SEE_SELF -------------- If players are allowed to view their stats -----------[Def: True]     (Global)
 - PLAYERS_SEE_PLAYERS --------- If players cant see self they cant see others either -[Def: True]     (Global)
 - PLAYERS_SEE_GM -------------- If Players can see GM dice roll stats ----------------[Def: False]    (Global)
@@ -138,7 +139,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - Make Forms Resizeable
     - Format Text in tables better
 
-## Settings (Running List)
+## TODO Settings (Running List)
 - ~~PLAYERS_SEE_GM~~                (Implemented)   
 - ~~PLAYERS_SEE_GLOBAL~~            (Implemented) 
 - ~~PLAYERS_SEE_GM_IN_GLOBAL~~      (Implemented)
