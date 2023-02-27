@@ -348,23 +348,30 @@ class DiceStatsTracker {
     parseMessage(msg){
         let isBlind = msg.blind;
 
-        //Get die type
-        let sides = msg.rolls[0]?.dice[0].faces
-        let dieType = MAX_TO_DIE.get(sides);
-        let newNumbers = [];
-
-        //TODO add check here if we should store other ppls data?. Could potentally help with player performance?
-
-        //In case there's more than one die rolled in a single instance as in 
-        //  fortune/misfortune rolls or multiple hit dice save each roll
-        newNumbers = msg.rolls[0].dice[0].results.map(result => result.result)
-
         //Get Associated player object
         let playerInfo = this.ALLPLAYERDATA.get(msg.user.id);
 
-        newNumbers.forEach(element => {
-            playerInfo.saveRoll(isBlind, element, dieType)
-        });
+        //For multiple rolls in chat
+        for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
+            
+            //For multiple dice types per roll
+            for(let tempDie=0; tempDie<msg.rolls[tempRoll]?.dice.length ; tempDie++){
+
+                //Get die type
+                let sides = msg.rolls[tempRoll]?.dice[tempDie].faces
+                let dieType = MAX_TO_DIE.get(sides);
+                let newNumbers = [];
+
+                //In case there's more than one die rolled in a single instance as in 
+                //  fortune/misfortune rolls or multiple hit dice save each roll
+                newNumbers = msg.rolls[tempRoll].dice[tempDie].results.map(result => result.result)
+
+                newNumbers.forEach(element => {
+                    playerInfo.saveRoll(isBlind, element, dieType)
+                });
+            }
+            
+        }
     }
 
     addRoll(dieType=7, rolls=[], user=game.user.id, isBlind=false){
