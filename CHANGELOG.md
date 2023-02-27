@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.5.0 ]  2/26/2023
+### Added
+- Added feature to record if multiple dice types are rolled at once (1d10+1d20)
+
 ## [ 1.4.1 ]  2/26/2023
 ### Fixed
 - Fixed spelling of Median (Spelt it wrong on the table but variables in code were spelt corrently... Classic)
