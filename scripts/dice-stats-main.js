@@ -710,7 +710,7 @@ Hooks.once('init', () => {
 
 //handlebars fn used to tell if a die was rolled. 
 //If not display something different then charts and dice stats
-Handlebars.registerHelper('ifDieUsed', function (var1, options) {
+Handlebars.registerHelper('diceStats_ifDieUsed', function (var1, options) {
     if(var1 != 0){
         return options.fn(this);
     }else{
@@ -720,7 +720,7 @@ Handlebars.registerHelper('ifDieUsed', function (var1, options) {
 
 //Handlebars fn used to see if a streak had a blind roll in it.
 //If there was a blind roll we dont want to potentally point the result so dont display it for now
-Handlebars.registerHelper('ifStreakIsBlind', function (var1, options) {
+Handlebars.registerHelper('diceStats_ifStreakIsBlind', function (var1, options) {
     if(var1 != true){
         return options.fn(this);
     }else{
@@ -729,7 +729,7 @@ Handlebars.registerHelper('ifStreakIsBlind', function (var1, options) {
 });
 
 //Handlebars uses this to check if the user has a streak
-Handlebars.registerHelper('ifHaveStreak', function (streakValue, options) {
+Handlebars.registerHelper('diceStats_ifHaveStreak', function (streakValue, options) {
     //If the string has more then 1 number
     if(streakValue.length > 1){
         return options.fn(this);
@@ -739,7 +739,7 @@ Handlebars.registerHelper('ifHaveStreak', function (streakValue, options) {
 });
 
 //Handlebars if Used to check if A Max Or Min Number of the die Was rolled
-Handlebars.registerHelper('ifRolledCrit', function (rollCount, options) {
+Handlebars.registerHelper('diceStats_ifRolledCrit', function (rollCount, options) {
     if(rollCount > 0){
         return options.fn(this);
     }else{
@@ -748,14 +748,14 @@ Handlebars.registerHelper('ifRolledCrit', function (rollCount, options) {
 });
 
 //TODO Display Warning and close popup if user Has no roll data
-Handlebars.registerHelper('ifUserHasData', function (var1, options) {
+Handlebars.registerHelper('diceStats_ifUserHasData', function (var1, options) {
     ui.notifications.warn("No roll data to export");
     return options.inverse(this);
 });
 
 
 //Handlebars helper used to display check on or off on the checkboxes
-Handlebars.registerHelper('isChecked', function (bool, options) {
+Handlebars.registerHelper('diceStats_IsChecked', function (bool, options) {
     if(bool){
         return 'checked="checked"'
     }
@@ -763,7 +763,7 @@ Handlebars.registerHelper('isChecked', function (bool, options) {
 });
 
 //Handlebars helper used to see if we should render die info.
-Handlebars.registerHelper('ifDisplayDieInfo', function (bool, options) {
+Handlebars.registerHelper('diceStats_ifDisplayDieInfo', function (bool, options) {
     if(bool){
         return options.fn(this);
     }
@@ -771,14 +771,14 @@ Handlebars.registerHelper('ifDisplayDieInfo', function (bool, options) {
 });
 
 //Handlebars helper used to check if the client is the GM
-Handlebars.registerHelper('ifIsGM', function (options){
+Handlebars.registerHelper('diceStats_ifIsGM', function (options){
     if(game.user.isGM){
         return options.fn(this);
     }
     return options.inverse(this);
 });
 
-Handlebars.registerHelper('ifHaveBlindRolls', function (blindRollCount, options){
+Handlebars.registerHelper('diceStats_ifHaveBlindRolls', function (blindRollCount, options){
     if(blindRollCount > 0){
         return options.fn(this);
     }
