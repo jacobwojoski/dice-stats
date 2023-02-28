@@ -1,5 +1,11 @@
 # CHANGELOG  
 
+## [ 1.5.1 ]  2/28/2023
+### Fixed
+- Updates Templates to use en.json page rather then hard coded values
+- Fixed issue with incompatability with token health
+- SWADE Compatability confirmed
+
 ## [ 1.5.0 ]  2/26/2023
 ### Added
 - Added feature to record if multiple dice types are rolled at once (1d10+1d20)
