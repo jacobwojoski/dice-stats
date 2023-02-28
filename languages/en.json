@@ -74,18 +74,47 @@
                 "mean":         "Mean (Avg):                ",
                 "median":       "Median (Middle Number):   ",
                 "mode":         "Mode (Most Common):        "
-            }
+            },
+            "refresh_btn":  "Refresh Stats"
         },
         "global_data_form":{
+            "title":        "GLOBAL Roll Data",
+            "blind_rolls":  "There Are {ui_rollcount} Blind rolls between all players",
+            "blind_roll_btn": "Push Players Blind Rolls to Graph",
             
+            "player_roll_count": "<b>{ui_player}</b> with <b>{ui_lowRollCnt}</b> Rolls",
+            
+            "most_low_roll":"Most Rolled 1's",
+            "no_low_roll":"No 1's Rolled",
+            
+            "most_high_roll_2":"Most 2's Rolled",
+            "no_high_roll_2":"No 2's Rolled",
+            "most_high_roll_3":"Most 3's Rolled",
+            "no_high_roll_3":"No 3's Rolled",
+            "most_high_roll_4":"Most 4's Rolled",
+            "no_high_roll_4":"No 4's Rolled",
+            "most_high_roll_6":"Most 6's Rolled",
+            "no_high_roll_6":"No 6's Rolled",
+            "most_high_roll_8":"Most 8's Rolled",
+            "no_high_roll_8":"No 8's Rolled",
+            "most_high_roll_10":"Most 10's Rolled",
+            "no_high_roll_10":"No 10's Rolled",
+            "most_high_roll_12":"Most 12's Rolled",
+            "no_high_roll_12":"No 12's Rolled",
+            "most_high_roll_20":"Most 20's Rolled",
+            "no_high_roll_20":"No 20's Rolled",
+            "most_high_roll_100":"Most 100's Rolled",
+            "no_high_roll_100":"No 100's Rolled",
+
+            "streak_label":"Longest Streak is <b>{ui_player}</b> (Sequential incrementing rolls):",
+            "no_streak_label":"No Streak was made"
         },
         "player_data_form":{
             "blind_rolls": "You have {ui_rolls} Blind Rolls Which are Not Tracked. Ask GM to Push Rolls",
             "player_name":  "Roll Data",
             "streak":       "Streak Data (Sequential incrementing rolls):",
             "no_streak":    "No Streak was made",
-            "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
-            "refresh_btn":  "Refresh Stats"
+            "streak_blind": "Streak Includes a Blind Roll, Data Hidden"
         },
         "roll_chat_form":{
 
