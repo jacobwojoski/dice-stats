@@ -91,7 +91,7 @@
 
         {{#ifDisplayDieInfo IS_DIE_DISPLAYED.[1]}}
         {{#ifDieUsed TOTAL_ROLLS.[1] }}
-        <h1>D-3 (Fate) Stats</h1>
+        <h1 class="dice-type-title">D-3 (Fate) Stats</h1>
         <div id = "d3ChartGlobal" class="chart-dice-stats"></div>
         <table>
             <tr>
@@ -143,7 +143,7 @@
         
         {{#ifDisplayDieInfo IS_DIE_DISPLAYED.[2]}}
         {{#ifDieUsed TOTAL_ROLLS.[2] }}
-        <h1>D-4 Stats</h1>
+        <h1 class="dice-type-title">D-4 Stats</h1>
         <div id = "d4ChartGlobal" class="chart-dice-stats"></div>
         <table>
             <tr>
@@ -195,7 +195,7 @@
         
         {{#ifDisplayDieInfo IS_DIE_DISPLAYED.[3]}}
         {{#ifDieUsed TOTAL_ROLLS.[3] }}
-        <h1>D-6 Stats</h1>
+        <h1 class="dice-type-title">D-6 Stats</h1>
         <div id = "d6ChartGlobal" class="chart-dice-stats"></div>
         <table>
             <tr>
@@ -247,7 +247,7 @@
         
         {{#ifDisplayDieInfo IS_DIE_DISPLAYED.[4]}}
         {{#ifDieUsed TOTAL_ROLLS.[4] }}
-        <h1>D-8 Stats</h1>
+        <h1 class="dice-type-title">D-8 Stats</h1>
         <div id = "d8ChartGlobal" class="chart-dice-stats"></div>
         <table>
             <tr>
@@ -299,7 +299,7 @@
 
         {{#ifDisplayDieInfo IS_DIE_DISPLAYED.[5]}}
         {{#ifDieUsed TOTAL_ROLLS.[5] }}
-        <h1>D-10 Stats</h1>
+        <h1 class="dice-type-title">D-10 Stats</h1>
         <div id = "d10ChartGlobal" class="chart-dice-stats"></div>
         <table>
            <tr>
@@ -351,7 +351,7 @@
         
         {{#ifDisplayDieInfo IS_DIE_DISPLAYED.[6]}}
         {{#ifDieUsed TOTAL_ROLLS.[6] }}
-        <h1>D-12 Stats</h1>
+        <h1 class="dice-type-title">D-12 Stats</h1>
         <div id = "d12ChartGlobal" class="chart-dice-stats"></div>
         <table>
             <tr>
@@ -562,12 +562,12 @@
             var data = google.visualization.arrayToDataTable([
                 ['Die Number', 'Number Of rolls'],
                 ['1',  {{D2_ROLL_DATA.[0]}}],
-                ['2',  {{D2_ROLL_DATA.[0]}}]
+                ['2',  {{D2_ROLL_DATA.[1]}}]
             ]);
 
             // Instantiate and draw the chart.
             var chart = new google.visualization.ColumnChart(document.getElementById('d2ChartGlobal'));
-            chart.draw(data, options);
+            chart.draw(data, chartOptions);
         }
 
         function drawChartd3() {

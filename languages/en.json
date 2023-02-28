@@ -46,16 +46,46 @@
                 "Hint" : "If a streak has a blind roll in it its not printed to chat unless this is enabled"
             }
         },
+        "both_forms":{
+            "checkboxes":{
+                "d2": "D-2",
+                "d3": "D-3", 
+                "d4": "D-4", 
+                "d6": "D-6",
+                "d8": "D-8",
+                "d10": "D-10",
+                "d12": "D-12",
+                "d20": "D-20",
+                "d100": "D-100" 
+            },
+            "section_headings":{
+                "d2": "D-2 (COIN) Stats",
+                "d3": "D-3 (Fate) Stats", 
+                "d4": "D-4 Stats", 
+                "d6": "D-6 Stats",
+                "d8": "D-8 Stats",
+                "d10": "D-10 Stats",
+                "d12": "D-12 Stats",
+                "d20": "D-20 Stats",
+                "d100": "D-100 Stats"
+            },
+            "table_values":{
+                "total_rolls":  "Total Dice Rolled:         ",
+                "mean":         "Mean (Avg):                ",
+                "median":       "Median (Middle Number):   ",
+                "mode":         "Mode (Most Common):        "
+            }
+        },
         "global_data_form":{
             
         },
         "player_data_form":{
-            "total_rolls":  "Total Dice Rolled:         ",
-            "mean":         "Mean (Avg):                ",
-            "median":       "Meadian (Middle Number):   ",
-            "mode":         "Mode (Most Common):        ",
-            "streak":       "Longest Streak:        ",
-            "streak_blind": "Streak has blind rolls. Blind streaks are only available to GM"
+            "blind_rolls": "You have {ui_rolls} Blind Rolls Which are Not Tracked. Ask GM to Push Rolls",
+            "player_name":  "Roll Data",
+            "streak":       "Streak Data (Sequential incrementing rolls):",
+            "no_streak":    "No Streak was made",
+            "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
+            "refresh_btn":  "Refresh Stats"
         },
         "roll_chat_form":{
 
