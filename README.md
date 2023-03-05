@@ -22,6 +22,7 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
+    - Shadow Of The Demon Lord (Rolls are printed but not as normal roll objects.
 - Systems that change how they print rolls in that (Looking at you SWADE and your exploding die -__-)
 - **Midi-Qol** if **Merge Rolls to 1 Card** is enabled partial fix. 
     - Midi-qol.rollComplete hook Doesnt have a way to trace back to the Player that rolled. Only the actor
