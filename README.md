@@ -18,6 +18,7 @@ The original design philosophy was a way to view SESSION stats. Rolls will alway
 
 ## DEPENDENCIES
 [socketlib](https://github.com/manuelVo/foundryvtt-socketlib)
+[socketlib Foundry Page](https://foundryvtt.com/packages/socketlib)
 Socketlib needs to be active allow GM to tell other users to push blind rolls.
 
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
