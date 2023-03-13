@@ -40,8 +40,10 @@
       {
         "id": "socketlib",
         "type": "module",
-        "manifest": "https://github.com/manuelVo/foundryvtt-socketlib/releases/latest/download/module.json",
-        "compatibility": {}
+        "compatibility": {
+          "minimum": "10",
+          "verified": "10"
+        }
       }
     ]
   }
