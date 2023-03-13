@@ -29,7 +29,7 @@
     }
   ],
   "socket": true,
-  "version": "1.5.1",
+  "version": "1.5.2",
   "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.5.1.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "readme": "https://github.com/jacobwojoski/dice-stats",

@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.5.2 ]  3/13/2023
+### Fixed
+- Update to allow dependency install if user doesnt have it
+
 ## [ 1.5.1 ]  2/28/2023
 ### Fixed
 - Updates Templates to use en.json page rather then hard coded values
