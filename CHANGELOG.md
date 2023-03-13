@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.5.3 ]  3/13/2023
+### Fixed
+- Same As below but for real this time
+
 ## [ 1.5.2 ]  3/13/2023
 ### Fixed
 - Update to allow dependency install if user doesnt have it
