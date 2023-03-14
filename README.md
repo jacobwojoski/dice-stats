@@ -6,7 +6,7 @@ end-of-game dice stats screen and wanted something similar to let players look a
 
 Used Google Charts as a charting library. (MIT License)
 Used [Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
-wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
+Wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
 
 ## MISC Design Settings
 - GM's Rolls for player will count as GM Rolls (Unless Midi Qol is active)
