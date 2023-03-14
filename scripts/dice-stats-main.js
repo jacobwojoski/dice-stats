@@ -78,7 +78,6 @@ class DIE_INFO {
     TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
     BLIND_ROLLS = [];
-    RECENTROLL =    -1; //TODO Can prolly remove this var, Looks unused
     STREAK_SIZE =   -1;
     STREAK_INIT =   -1;
     STREAK_ISBLIND = false;
@@ -93,7 +92,6 @@ class DIE_INFO {
     //Variable passed in should be max value
     constructor(dieMax = 100){
         this.TYPE = MAX_TO_DIE.get(dieMax);
-        this.RECENTROLL =  -1;
         this.STREAK_SIZE = -1;
         this.STREAK_INIT = -1;
         this.LONGEST_STREAK = 0;
@@ -128,8 +126,23 @@ class DIE_INFO {
         }
     }
 
+    clearData(){
+        this.TOTAL_ROLLS =   0;
+        this.ROLLS.fill(0);
+        this.BLIND_ROLLS.fill(0);
+
+        this.STREAK_SIZE =   -1;
+        this.STREAK_INIT =   -1;
+        this.STREAK_ISBLIND = false;
+        this.LONGEST_STREAK =        -1;
+        this.LONGEST_STREAK_INIT =   -1;
+
+        this.MEAN =      0;
+        this.MEDIAN =    0;
+        this.MODE =      0;
+    }
+
     addRoll(roll, isBlind){
-        this.RECENTROLL = roll;
         this.TOTAL_ROLLS++;
         this.updateStreak(roll, isBlind)
 
@@ -228,6 +241,16 @@ class PLAYER {
             tempRollCount += this.PLAYER_DICE[i].getBlindRollsCount();
         }
         return tempRollCount;
+    }
+
+    clearAllRollData(){
+        for(let i=0; i<this.PLAYER_DICE.length; i++){
+            this.PLAYER_DICE[i].clearData();
+        }
+    }
+
+    clearDieData(DiceType){
+        this.PLAYER_DICE[DiceType].clearData();
     }
 }
 
@@ -533,7 +556,7 @@ class GlobalStatusPage extends FormApplication{
                 break;
             case 'pushBlindRolls':
                 socket.executeForEveryone(pushPlayerBlindRolls, game.userId);
-                socket.executeForEveryone("push", game.userId);
+                socket.executeForEveryone("pushBlindRolls", game.userId);
                 GLOBALFORMOBJ.render();
                 break;
             case 'd2checkbox':
@@ -789,11 +812,53 @@ Handlebars.registerHelper('diceStats_ifHaveBlindRolls', function (blindRollCount
 //==================== SOCKET SHIT =========================
 //==========================================================
 
+// Global Method to load socket stuff
 Hooks.once("socketlib.ready", () => {
 	socket = socketlib.registerModule("dice-stats");
-	socket.register("push", pushPlayerBlindRolls);
+	socket.register("pushBlindRolls", pushPlayerBlindRolls);
+
+    socket.register("updateDB", pushPlayerInfoToDB);
+    socket.register("loadFromDB", pullPlayerInfoFromDB);
+    socket.register("clearDB", clearPlayerInfoFromDB);
 });
 
+//Socket fn call. This funtion is triggered by the gm to tell all users that they can 
+//  inclide the blind roll data to the charts
 function pushPlayerBlindRolls(userid) {
 	CLASSOBJ.pushBlindRolls();
+}
+
+//On player connecting 
+//  1.) Ask all Connected players to save data to db
+//  2.) Pull Updated DB Data
+
+//On Clear DB
+//  1.) Clear DB INFO
+//  2.) Ask all players to clear their current data
+
+//socket.executeForEveryone("updateDB", game.userId);
+function pushPlayerInfoToDB(userId)
+{
+    if( CLASSOBJ.ALLPLAYERDATA.get(userId))
+    {
+        let plyrInfo = CLASSOBJ.ALLPLAYERDATA.get(userId);
+        DB_INTERACTION.saveUserData(plyrInfo);
+    }
+}
+
+function pullPlayerInfoFromDB()
+{
+    for(user in users)
+    {
+        var plyrInfo = DB_INTERACTION.loadPlayerData(user.id);
+        if(plyrInfo)
+        {
+            
+        }
+    }
+}
+
+function clearPlayerInfoFromDB()
+{
+
 }
