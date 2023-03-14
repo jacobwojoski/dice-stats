@@ -17,7 +17,7 @@ wanted the ability to track multiple dice types. This Basically lead to a full r
 The original design philosophy was a way to view SESSION stats. Rolls will always avg out over long periods of time so personaly I only wanted to look at per session data. Because of this the implementation resets stats when leaving in joining. Im currently Looking into adding a DB like feature where persistant stats can be saved if the user would like it as well as allowing resetting the DB for session only stats [View Issue #19](https://github.com/jacobwojoski/dice-stats/issues/19)
 
 ## DEPENDENCIES
-[socketlib](https://github.com/manuelVo/foundryvtt-socketlib)
+[socketlib](https://github.com/manuelVo/foundryvtt-socketlib) | 
 [socketlib Foundry Page](https://foundryvtt.com/packages/socketlib)
 Socketlib needs to be active allow GM to tell other users to push blind rolls.
 
