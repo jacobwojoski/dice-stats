@@ -1,5 +1,10 @@
 # CHANGELOG  
 
+## [ 1.5.4 ]  3/15/2023
+### Fixed
+- Fix Download link for Dependency
+- Fix Download link for My module
+
 ## [ 1.5.3 ]  3/13/2023
 ### Fixed
 - Same As below but for real this time

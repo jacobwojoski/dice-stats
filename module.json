@@ -40,11 +40,7 @@
     "requires": [
       {
         "id": "socketlib",
-        "type": "module",
-        "compatibility": {
-          "minimum": "10",
-          "verified": "10"
-        }
+        "type": "module"
       }
     ]
   }
