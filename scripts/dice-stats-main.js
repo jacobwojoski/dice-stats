@@ -709,9 +709,6 @@ function midiQolSupport(){
 }
 
 handleChatMsgHook = (chatMessage) => {
-    //TODO
-    //check if fate (3 sided) and coin (2 sided) count as rolls or if somethign special is needed
-
     if (chatMessage.isRoll) {
         CLASSOBJ.parseMessage(chatMessage)
     }

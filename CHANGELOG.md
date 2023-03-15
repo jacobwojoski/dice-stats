@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.5.4 ]  3/15/2023
+### Fixed
+- Release Didnt have correct module.json in the zip. Updated to include correct module.json file in the zip
+
 ## [ 1.5.3 ]  3/13/2023
 ### Fixed
 - Same As below but for real this time
