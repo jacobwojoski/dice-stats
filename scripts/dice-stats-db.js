@@ -7,9 +7,9 @@ class DB_INTERACTION
     {
         for(let user in game.users)
         {
-            if(!hasProperty(user, 'data.flags.'+MODULE_ID+'.player_roll_data'))
+            if(!hasProperty(user, 'data.flags.'+MODULE_ID+'.'+ROLLDATAFLAG))
             {
-                user.setFlag(MODULE_ID,'player_roll_data',{});
+                user.setFlag(MODULE_ID,ROLLDATAFLAG,{});
             }
         }
     }

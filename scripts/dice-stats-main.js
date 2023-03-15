@@ -17,6 +17,10 @@ const TEMPLATES = {
     ROLLCHATMSGFORM:    'modules/dice-stats/templates/dice-stats-global.hbs'
 }
 
+const FLAGS = {
+    ROLLDATAFLAG:'player_roll_data'
+}
+
 //Currently Every user will store everyone elses data
 const SETTINGS = {
     PLAYERS_SEE_SELF: 'players_see_self',       //If players are allowed to view their stats               [Def: True]      (Global)
@@ -727,6 +731,26 @@ Hooks.once('init', () => {
     }
 })
 
+Hooks.on('userConnected', (userid, isConnecting) => {
+    //Emit Socket Save 
+    socket.executeForEveryone("updateDB", game.userId);
+
+    //If isConnecting===true, User is connecting
+    //We want to load other players data locally
+    if(isConnecting)
+    {
+        //Get all player data
+        for (let user in game.users) 
+        {
+            //Load Player Data from db
+            var playerData = loadPlayerData(user.id);
+
+            //Replace local value in map wtih playerData
+            CLASSOBJ.ALLPLAYERDATA.set(user.id, playerData);
+        }
+    }
+});
+
 //==========================================================
 //================== HANDLEBARS SHIT =======================
 //==========================================================
@@ -837,9 +861,9 @@ function pushPlayerBlindRolls(userid) {
 //  2.) Ask all players to clear their current data
 
 //socket.executeForEveryone("updateDB", game.userId);
-function pushPlayerInfoToDB(userId)
+function pushPlayerInfoToDB(userid)
 {
-    if( CLASSOBJ.ALLPLAYERDATA.get(userId))
+    if( CLASSOBJ.ALLPLAYERDATA.get(game.userId))
     {
         let plyrInfo = CLASSOBJ.ALLPLAYERDATA.get(userId);
         DB_INTERACTION.saveUserData(plyrInfo);
