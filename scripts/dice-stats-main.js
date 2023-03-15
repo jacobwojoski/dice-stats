@@ -78,7 +78,6 @@ class DIE_INFO {
     TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
     BLIND_ROLLS = [];
-    RECENTROLL =    -1; //TODO Can prolly remove this var, Looks unused
     STREAK_SIZE =   -1;
     STREAK_INIT =   -1;
     STREAK_ISBLIND = false;
@@ -93,7 +92,6 @@ class DIE_INFO {
     //Variable passed in should be max value
     constructor(dieMax = 100){
         this.TYPE = MAX_TO_DIE.get(dieMax);
-        this.RECENTROLL =  -1;
         this.STREAK_SIZE = -1;
         this.STREAK_INIT = -1;
         this.LONGEST_STREAK = 0;
@@ -129,7 +127,6 @@ class DIE_INFO {
     }
 
     addRoll(roll, isBlind){
-        this.RECENTROLL = roll;
         this.TOTAL_ROLLS++;
         this.updateStreak(roll, isBlind)
 
