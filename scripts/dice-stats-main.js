@@ -162,6 +162,22 @@ class DIE_INFO {
 
         return tempRollCount;
     }
+
+    clearData(){
+        this.TOTAL_ROLLS =   0;
+        this.ROLLS.fill(0);
+        this.BLIND_ROLLS.fill(0);
+
+        this.STREAK_SIZE =   -1;
+        this.STREAK_INIT =   -1;
+        this.STREAK_ISBLIND = false;
+        this.LONGEST_STREAK =        -1;
+        this.LONGEST_STREAK_INIT =   -1;
+
+        this.MEAN =      0;
+        this.MEDIAN =    0;
+        this.MODE =      0;
+    }
 }
 
 //Class that defines a player. Players are all connected people to server including gm
@@ -225,6 +241,18 @@ class PLAYER {
             tempRollCount += this.PLAYER_DICE[i].getBlindRollsCount();
         }
         return tempRollCount;
+    }
+
+    //Clear all dice roll data
+    clearDiceData(){
+        for(let i=0; i<this.PLAYER_DICE.length; i++){
+            this.PLAYER_DICE[i].clearData();
+        }
+    }
+
+    //clear a specific die's roll data
+    clearDieData(DiceType){
+        this.PLAYER_DICE[DiceType].clearData();
     }
 }
 
@@ -384,6 +412,20 @@ class DiceStatsTracker {
             this.ALLPLAYERDATA.get(user.id)?.pushBlindRolls();
         }
     }
+
+    clearAllRollData(){
+        for (let user of game.users) {
+            this.ALLPLAYERDATA.get(user.id)?.clearDiceData();
+        }
+    }
+
+    clearUserRollData(userid){
+        this.ALLPLAYERDATA.get(userid)?.clearDiceData();
+    }
+
+    clearUsersDieData(userid,dietype){
+        this.ALLPLAYERDATA.get(userid)?.clearDieData(dietype);
+    }
 }
 
 //==========================================================
@@ -520,7 +562,7 @@ class GlobalStatusPage extends FormApplication{
     }
 
     //Handle button events made on the form
-    _handleButtonClick(event){
+    async _handleButtonClick(event){
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
 
@@ -529,9 +571,17 @@ class GlobalStatusPage extends FormApplication{
                 GLOBALFORMOBJ.render();
                 break;
             case 'pushBlindRolls':
-                socket.executeForEveryone(pushPlayerBlindRolls, game.userId);
-                socket.executeForEveryone("push", game.userId);
+                socket.executeForEveryone("push_sock", game.userId);
                 GLOBALFORMOBJ.render();
+                break;
+            case 'clearRollData':
+                const confirmation = await Dialog.prompt({
+                    content: "Are you sure?"
+                });
+                if (confirmation) {
+                    socket.executeForEveryone("clear_sock", {});
+                    GLOBALFORMOBJ.render();
+                }
                 break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
@@ -788,9 +838,30 @@ Handlebars.registerHelper('diceStats_ifHaveBlindRolls', function (blindRollCount
 
 Hooks.once("socketlib.ready", () => {
 	socket = socketlib.registerModule("dice-stats");
-	socket.register("push", pushPlayerBlindRolls);
+	socket.register("push_sock", pushPlayerBlindRolls_sock);
+    socket.register("clear_sock", clearRollData_sock);
 });
 
-function pushPlayerBlindRolls(userid) {
+function pushPlayerBlindRolls_sock(userid) {
 	CLASSOBJ.pushBlindRolls();
+    if(GLOBALFORMOBJ){
+        GLOBALFORMOBJ.render();
+    }
+        
+    if(PLAYERFORMOBJ){
+        PLAYERFORMOBJ.render();
+    }
+}
+
+function clearRollData_sock() {
+    CLASSOBJ.clearAllRollData();
+
+    if(GLOBALFORMOBJ){
+        GLOBALFORMOBJ.render();
+    }
+        
+    if(PLAYERFORMOBJ){
+        PLAYERFORMOBJ.render();
+    }
+        
 }

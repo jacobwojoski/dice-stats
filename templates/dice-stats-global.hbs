@@ -28,6 +28,12 @@
     <div>
         <h2 class="blind-roll-heading">{{localize "DICE_STATS_TEXT.global_data_form.blind_rolls" ui_rollcount=TOTAL_BLIND_ROLL_COUNT}}</h2>
         <button type="button" data-action="pushBlindRolls">{{localize "DICE_STATS_TEXT.global_data_form.blind_roll_btn"}}</button>
+        <button type="button" data-action="clearRollData">{{localize "DICE_STATS_TEXT.global_data_form.clear_roll_data_btn"}}</button>
+    </div>
+    <br>
+    {{else}}
+    <div>
+        <button type="button" data-action="clearRollData">{{localize "DICE_STATS_TEXT.global_data_form.clear_roll_data_btn"}}</button>
     </div>
     <br>
     {{/diceStats_ifHaveBlindRolls}}
