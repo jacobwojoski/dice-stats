@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.6.0 ]  3/18/2023
+### Added
+- Button to allow clearing of all roll data
+
 ## [ 1.5.4 ]  3/15/2023
 ### Fixed
 - Fix Download link for Dependency
