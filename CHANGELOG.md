@@ -1,8 +1,13 @@
 # CHANGELOG  
 
+## [ 1.6.0 ]  3/18/2023
+### Added
+- Button to allow clearing of all roll data
+
 ## [ 1.5.4 ]  3/15/2023
 ### Fixed
-- Release Didnt have correct module.json in the zip. Updated to include correct module.json file in the zip
+- Fix Download link for Dependency
+- Fix Download link for My module
 
 ## [ 1.5.3 ]  3/13/2023
 ### Fixed

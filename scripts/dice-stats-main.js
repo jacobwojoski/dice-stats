@@ -256,6 +256,18 @@ class PLAYER {
     clearDieData(DiceType){
         this.PLAYER_DICE[DiceType].clearData();
     }
+
+    //Clear all dice roll data
+    clearDiceData(){
+        for(let i=0; i<this.PLAYER_DICE.length; i++){
+            this.PLAYER_DICE[i].clearData();
+        }
+    }
+
+    //clear a specific die's roll data
+    clearDieData(DiceType){
+        this.PLAYER_DICE[DiceType].clearData();
+    }
 }
 
 class DiceStatsTracker {
@@ -561,6 +573,7 @@ class GlobalStatusPage extends FormApplication{
             case 'pushBlindRolls':
                 socket.executeForEveryone(pushPlayerBlindRolls, game.userId);
                 socket.executeForEveryone("pushBlindRolls", game.userId);
+                socket.executeForEveryone("push_sock", game.userId);
                 GLOBALFORMOBJ.render();
                 break;
             case 'd2checkbox':
@@ -836,17 +849,39 @@ Handlebars.registerHelper('diceStats_ifHaveBlindRolls', function (blindRollCount
 // Global Method to load socket stuff
 Hooks.once("socketlib.ready", () => {
 	socket = socketlib.registerModule("dice-stats");
-	socket.register("pushBlindRolls", pushPlayerBlindRolls);
 
-    socket.register("updateDB", pushPlayerInfoToDB);
-    socket.register("loadFromDB", pullPlayerInfoFromDB);
-    socket.register("clearDB", clearPlayerInfoFromDB);
+    socket.register("push_sock", pushPlayerBlindRolls_sock);
+    socket.register("clear_sock", clearRollData_sock);
+
+    socket.register("updateDB_sock", pushPlayerInfoToDB_sock);
+    socket.register("loadFromDB_sock", pullPlayerInfoFromDB_sock);
+    socket.register("clearDB_sock", clearPlayerInfoFromDB_sock);
 });
 
 //Socket fn call. This funtion is triggered by the gm to tell all users that they can 
 //  inclide the blind roll data to the charts
-function pushPlayerBlindRolls(userid) {
+function pushPlayerBlindRolls_sock(userid) {
 	CLASSOBJ.pushBlindRolls();
+    if(GLOBALFORMOBJ){
+        GLOBALFORMOBJ.render();
+    }
+        
+    if(PLAYERFORMOBJ){
+        PLAYERFORMOBJ.render();
+    }
+}
+
+function clearRollData_sock() {
+    CLASSOBJ.clearAllRollData();
+
+    if(GLOBALFORMOBJ){
+        GLOBALFORMOBJ.render();
+    }
+        
+    if(PLAYERFORMOBJ){
+        PLAYERFORMOBJ.render();
+    }
+        
 }
 
 //On player connecting 
@@ -858,7 +893,7 @@ function pushPlayerBlindRolls(userid) {
 //  2.) Ask all players to clear their current data
 
 //socket.executeForEveryone("updateDB", game.userId);
-function pushPlayerInfoToDB(userid)
+function pushPlayerInfoToDB_sock(userid)
 {
     if( CLASSOBJ.ALLPLAYERDATA.get(game.userId))
     {
@@ -867,7 +902,7 @@ function pushPlayerInfoToDB(userid)
     }
 }
 
-function pullPlayerInfoFromDB()
+function pullPlayerInfoFromDB_sock()
 {
     for(user in users)
     {
@@ -879,7 +914,7 @@ function pullPlayerInfoFromDB()
     }
 }
 
-function clearPlayerInfoFromDB()
+function clearPlayerInfoFromDB_sock()
 {
 
 }
