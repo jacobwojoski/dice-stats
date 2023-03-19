@@ -24,12 +24,11 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
     - Shadow Of The Demon Lord (Rolls are printed but not as normal roll objects.
-- Systems that change how they print rolls in that (Looking at you SWADE and your exploding die -__-)
-- **Midi-Qol** if **Merge Rolls to 1 Card** is enabled partial fix. 
+- **Midi-Qol** if **Merge Rolls to 1 Card** is enabled but have a partial fix. 
     - Midi-qol.rollComplete hook Doesnt have a way to trace back to the Player that rolled. Only the actor
     - I Used actor.owner property to find out who to associate the roll with but that makes the following issues
-        - If an actor has >1 owner it will not track the roll to the right player. 
-        - If the GM rolls for a player is will count as the players roll Not the GM's
+        - If an actor has >1 owner it might not track the roll to the right player. 
+        - If the GM rolls for a player is will count as the players roll Not the GM's where normally this isnt the case
 
 # Features 
 
