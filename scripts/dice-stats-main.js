@@ -575,9 +575,14 @@ class GlobalStatusPage extends FormApplication{
                 GLOBALFORMOBJ.render();
                 break;
             case 'clearRollData':
-                const confirmation = await Dialog.prompt({
-                    content: "Are you sure?"
-                });
+                const confirmation = await Dialog.confirm({
+                    title: "Confirm Clear",
+                    content: "Are you sure wou would like to clear ALL roll data?",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                  });
+
                 if (confirmation) {
                     socket.executeForEveryone("clear_sock", {});
                     GLOBALFORMOBJ.render();
