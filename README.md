@@ -124,6 +124,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Deal w/ Multiple of same values (Streak or same length streak | Multiple with max number of rolls)  
 - Actually Incorperate Lang page instead of hard coded strings 
 - Output to Chat how many Nat1 & 20's have been rolled by that player when one gets rolled  
+- Output to Chat when multiple max's get rolled in a row
 - Output to chat Lows and Highs for some other die types. Maybe just milestone numbers? EX Multiple of 5's on a d4 or d6 (10th 1, 15th 5)?  
 - Support more die types   
 - Export and Import Data (Prolly W/ JSON Formatting)
