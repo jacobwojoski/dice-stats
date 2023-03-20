@@ -28,6 +28,9 @@ const SETTINGS = {
     PLAYERS_SEE_GM:     'players_see_gm',       //If Players can see GM dice roll stats                    [Def: False]     (Global)
     PLAYERS_SEE_GLOBAL: 'players_see_global',   //If Players Can  Global Dice Stats                        [Def: True]      (Global)
     PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global)
+
+    ENABLE_PERSISTANT_DATA: 'enable_persistant_data', //Allow data to be saved between sessions            [Def: False]     (Global)
+
     ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
     SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
@@ -332,7 +335,7 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Hint`,
         })
 
-                // A setting to determine whether players can see global data
+        // A setting to determine whether players can see global data
         game.settings.register(this.ID, SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Name`,
             default: false,
@@ -341,6 +344,18 @@ class DiceStatsTracker {
             config: true,
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Hint`,
         })
+
+        // A Setting to enable database saving between sessions
+        game.settings.register(this.ID, SETTINGS.ENABLE_PERSISTANT_DATA, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_PERSISTANT_DATA}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_PERSISTANT_DATA}.Hint`,
+        })
+
         /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
@@ -571,8 +586,6 @@ class GlobalStatusPage extends FormApplication{
                 GLOBALFORMOBJ.render();
                 break;
             case 'pushBlindRolls':
-                socket.executeForEveryone(pushPlayerBlindRolls, game.userId);
-                socket.executeForEveryone("pushBlindRolls", game.userId);
                 socket.executeForEveryone("push_sock", game.userId);
                 GLOBALFORMOBJ.render();
                 break;
@@ -742,6 +755,14 @@ Hooks.once('init', () => {
 })
 
 Hooks.on('userConnected', (userid, isConnecting) => {
+    
+    //
+    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_PERSISTANT_DATA) === false && game.users.get(userid)?.isGM)
+    {
+        socket.executeForEveryone();
+    };
+
+
     //Emit Socket Save 
     socket.executeForEveryone("updateDB", game.userId);
 

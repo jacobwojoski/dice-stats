@@ -21,6 +21,10 @@
                 "Name" : "See GM Stats In Global Roll Data?",
                 "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacts GM global stats button too)"
             },
+            "enable_persistant_data": {
+                "Name" : "Enable Database Saving?",
+                "Hint" : "If enabled stats will be saved between sessions"
+            },
             "enable_blind_rolls_immediate": {
                 "Name" : "Allow blind rolls to be immediately added to player stats",
                 "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
