@@ -577,7 +577,7 @@ class GlobalStatusPage extends FormApplication{
     }
 
     //Handle button events made on the form
-    _handleButtonClick(event){
+    async _handleButtonClick(event){
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
 
@@ -589,6 +589,20 @@ class GlobalStatusPage extends FormApplication{
                 socket.executeForEveryone("push_sock", game.userId);
                 GLOBALFORMOBJ.render();
                 break;
+            case 'clearRollData':
+                    const confirmation = await Dialog.confirm({
+                        title: "Confirm Clear",
+                        content: "Are you sure wou would like to clear ALL roll data?",
+                        yes: () => {return true},
+                        no: () => {return false},
+                        defaultYes: false
+                      });
+    
+                    if (confirmation) {
+                        socket.executeForEveryone("clear_sock", {});
+                        GLOBALFORMOBJ.render();
+                    }
+                    break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
                 GLOBALFORMOBJ.render();
