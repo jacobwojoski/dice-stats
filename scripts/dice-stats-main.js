@@ -769,30 +769,38 @@ Hooks.once('init', () => {
 })
 
 Hooks.on('userConnected', (userid, isConnecting) => {
-    
-    //
-    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_PERSISTANT_DATA) === false && game.users.get(userid)?.isGM)
-    {
-        socket.executeForEveryone();
-    };
 
-
-    //Emit Socket Save 
-    socket.executeForEveryone("updateDB", game.userId);
-
-    //If isConnecting===true, User is connecting
-    //We want to load other players data locally
     if(isConnecting)
     {
-        //Get all player data
-        for (let user in game.users) 
+        //If Gm Is connecting clear db if we dont want persistant data
+        if(game.users.get(userid)?.isGM && game.settings.get(MODULE_ID,SETTINGS.ENABLE_PERSISTANT_DATA) === false )
         {
-            //Load Player Data from db
-            var playerData = loadPlayerData(user.id);
-
-            //Replace local value in map wtih playerData
-            CLASSOBJ.ALLPLAYERDATA.set(user.id, playerData);
+            socket.executeForEveryone("clearDB_sock", {});
+            socket.executeForEveryone("clear_sock", {});
         }
+        else
+        {
+
+            //Emit Socket Save for everyone so we can load their data
+            socket.executeForEveryone("updateDB", game.userId);
+            
+            //We want to load other players data locally
+            //Get all player data
+            for (let user in game.users) 
+            {
+                //Load Player Data from db
+                var playerData = loadPlayerData(user.id);
+
+                //Replace local value in map wtih playerData
+                CLASSOBJ.ALLPLAYERDATA.set(user.id, playerData);
+            }
+        }
+    }
+    else
+    {
+        //TODO Make sure this works!!!
+        //Player is disconnecting so make sure to save their data
+        socket.executeForEveryone("updateDB", game.userId);
     }
 });
 
