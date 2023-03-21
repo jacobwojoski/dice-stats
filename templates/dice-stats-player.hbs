@@ -379,6 +379,14 @@
         <br>
         <div>
             <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
+            <h1></h1>
+            <br>
+            {{#diceStats_ifIsMe PLAYER_NAME}}
+            <button type="button" data-action="save">{{localize "DICE_STATS_TEXT.player_data_form.refresh_btn"}}</button>
+            <h1></h1>
+            <br>
+            <button type="button" data-action="load">{{localize "DICE_STATS_TEXT.player_data_form.refresh_btn"}}</button>
+            {{/diceStats_ifIsMe}}
         </div>
     </div>
 

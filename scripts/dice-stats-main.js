@@ -878,8 +878,17 @@ Handlebars.registerHelper('diceStats_ifIsGM', function (options){
     return options.inverse(this);
 });
 
+//Handlebars helper to see if there are any blind rolls stored
 Handlebars.registerHelper('diceStats_ifHaveBlindRolls', function (blindRollCount, options){
     if(blindRollCount > 0){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+//Handlebars helper to check if were opening our own dice stats
+Handlebars.registerHelper('diceStats_ifIsMe', function (plyrName, options){
+    if(plyrName === game.user.name){
         return options.fn(this);
     }
     return options.inverse(this);
@@ -936,7 +945,7 @@ function clearRollData_sock() {
 //  2.) Ask all players to clear their current data
 
 //socket.executeForEveryone("updateDB", game.userId);
-function pushPlayerInfoToDB_sock(userid)
+function savePlayerInfoToDB_sock(userid)
 {
     if( CLASSOBJ.ALLPLAYERDATA.get(game.userId))
     {
