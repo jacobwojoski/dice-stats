@@ -441,6 +441,30 @@ class DiceStatsTracker {
             this.ALLPLAYERDATA.get(user.id)?.pushBlindRolls();
         }
     }
+
+    SaveMyPlayerData(){
+        let myData = this.ALLPLAYERDATA.get(game.user.id)
+        if(myData)
+        {
+            DB_INTERACTION.saveUserData(myData);
+        }
+    }
+     
+    LoadAllPlayerData(){
+        for(let tempUser in game.users)
+        {
+            var dbInfo = DB_INTERACTION.loadPlayerData(tempUser.id);
+            if(dbInfo)
+            {
+                let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+                let plyrCpy;
+                Object.assign(plyrCpy,localPlayerInfo);
+                
+
+                this.ALLPLAYERDATA.set(tempUser.id,plyrCpy);
+            }
+        }
+    }
 }
 
 //==========================================================
@@ -495,6 +519,12 @@ class PlayerStatusPage extends FormApplication {
         switch(action){
             case 'refresh':
                 PLAYERFORMOBJ.render();
+                break;
+            case 'save':
+                CLASSOBJ.SaveMyPlayerData();
+                break;
+            case 'load':
+                CLASSOBJ.LoadAllPlayerData();
                 break;
             case 'd2checkbox':
                 CLASSOBJ.PLAYER_DICE_CHECKBOXES[0] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[0];
@@ -956,14 +986,7 @@ function savePlayerInfoToDB_sock(userid)
 
 function pullPlayerInfoFromDB_sock()
 {
-    for(user in users)
-    {
-        var plyrInfo = DB_INTERACTION.loadPlayerData(user.id);
-        if(plyrInfo)
-        {
-            
-        }
-    }
+    
 }
 
 function clearPlayerInfoFromDB_sock()
