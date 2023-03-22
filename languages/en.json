@@ -121,9 +121,10 @@
             "streak":       "Streak Data (Sequential incrementing rolls):",
             "no_streak":    "No Streak was made",
             "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
-            "load_data_btn": "Load ALL Player Data",
-            "save_data_btn": "Save YOUR Player Data",
-            "db_interact":  "Database Interaction"
+            "load_data_btn": "Load ALL player data From DB",
+            "load_data_btn_yours": "Load in ALL OTHER players data from DB",
+            "load_data_btn_others": "Load in YOUR player data from DB",
+            "save_data_btn": "Save YOUR Player Data To DB"
         },
         "roll_chat_form":{
 

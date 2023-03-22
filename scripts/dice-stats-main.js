@@ -482,6 +482,50 @@ class DiceStatsTracker {
             }
         }
     }
+
+    LoadYourPlayerData(){
+        var dbInfo = DB_INTERACTION.loadPlayerData(game.user.id);
+        if(dbInfo)
+        {
+            let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+
+            DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
+            this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
+
+            if(GLOBALFORMOBJ){
+                GLOBALFORMOBJ.render();
+            }
+
+            if(PLAYERFORMOBJ){
+                PLAYERFORMOBJ.render();
+            }
+        } 
+    }
+
+    LoadOthersPlayerData(){
+        for(let tempUser of game.users)
+        {
+            if(tempUser.id != game.user.id) //Dont load your data only other players
+            {
+                var dbInfo = DB_INTERACTION.loadPlayerData(tempUser.id);
+                if(dbInfo)
+                {
+                    let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+
+                    DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
+                    this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
+
+                    if(GLOBALFORMOBJ){
+                        GLOBALFORMOBJ.render();
+                    }
+
+                    if(PLAYERFORMOBJ){
+                        PLAYERFORMOBJ.render();
+                    }
+                }
+            }
+        }
+    }
 }
 
 //==========================================================
@@ -550,7 +594,7 @@ class PlayerStatusPage extends FormApplication {
                     CLASSOBJ.SaveMyPlayerData();
                 }
                 break;
-            case 'load':
+            case 'loadAllFromDB':
                 const loadConfirmation = await Dialog.confirm({
                     title: "Confirm Load",
                     content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
@@ -561,6 +605,32 @@ class PlayerStatusPage extends FormApplication {
 
                 if (loadConfirmation) {
                     CLASSOBJ.LoadAllPlayerData();
+                }
+                break;
+            case 'loadYoursFromDB':
+                const loadYoursConfirmation = await Dialog.confirm({
+                    title: "Confirm Load",
+                    content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (loadYoursConfirmation) {
+                    CLASSOBJ.LoadYourPlayerData();
+                }
+                break;
+            case 'loadOthersFromDB':
+                const loadOthersConfirmation = await Dialog.confirm({
+                    title: "Confirm Load",
+                    content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (loadOthersConfirmation) {
+                    CLASSOBJ.LoadOthersPlayerData();
                 }
                 break;
             case 'clearAllLocalRollData':
