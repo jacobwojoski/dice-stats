@@ -122,7 +122,8 @@
             "no_streak":    "No Streak was made",
             "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
             "load_data_btn": "Load ALL Player Data",
-            "save_data_btn": "Save YOUR Player Data"
+            "save_data_btn": "Save YOUR Player Data",
+            "db_interact":  "Data Base Interaction"
         },
         "roll_chat_form":{
 

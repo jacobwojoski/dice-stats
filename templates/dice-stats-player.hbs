@@ -381,11 +381,17 @@
             <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
             {{#diceStats_ifIsMe PLAYER_NAME}}
             <br>
-            <h1></h1>
-            <button type="button" data-action="save">{{localize "DICE_STATS_TEXT.player_data_form.save_data_btn"}}</button>
-            <br>
-            <h1></h1>
-            <button type="button" data-action="load">{{localize "DICE_STATS_TEXT.player_data_form.load_data_btn"}}</button>
+            <h1>{{localize "DICE_STATS_TEXT.player_data_form.db_interact"}}</h1>
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" data-action="save">{{localize "DICE_STATS_TEXT.player_data_form.save_data_btn"}}</button>
+                    </td>
+                    <td>
+                        <button type="button" data-action="load">{{localize "DICE_STATS_TEXT.player_data_form.load_data_btn"}}</button>
+                    </td>
+                </tr>
+            </table>
             {{/diceStats_ifIsMe}}
         </div>
     </div>
