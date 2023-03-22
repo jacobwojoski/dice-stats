@@ -459,9 +459,9 @@ class DiceStatsTracker {
                 let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
                 let plyrCpy;
                 Object.assign(plyrCpy,localPlayerInfo);
-                
+                let loadedPlayerData = DB_INTERACTION.createPlayerObject(plyrCpy,dbInfo);
 
-                this.ALLPLAYERDATA.set(tempUser.id,plyrCpy);
+                this.ALLPLAYERDATA.set(tempUser.id,loadedPlayerData);
             }
         }
     }
