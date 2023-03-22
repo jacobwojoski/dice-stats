@@ -86,6 +86,7 @@
             "blind_rolls":  "There Are {ui_rollcount} Blind rolls between all players",
             "blind_roll_btn": "Push Players Blind Rolls to Graph",
             "clear_roll_data_btn": "Clear All Tracked Rolls",
+            "clear_db_btn": "Clear Database",
             
             "player_roll_count": "<b>{ui_player}</b> with <b>{ui_lowRollCnt}</b> Rolls",
             

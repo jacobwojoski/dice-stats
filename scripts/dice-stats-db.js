@@ -20,7 +20,8 @@ class DB_INTERACTION
      */
     static saveUserData(playerInfo)
     {
-        game.user.setFlag(MODULE_ID,'player_roll_data', playerInfo)
+        game.user.setFlag(MODULE_ID,'player_roll_data', playerInfo);
+        ui.notifications.warn("Saved To Database");
     }
 
     /**
@@ -108,5 +109,6 @@ class DB_INTERACTION
                 user.unsetFlag(MODULE_ID,'player_roll_data');
             }
         }
+        ui.notifications.warn("Database Cleared");
     } 
 }

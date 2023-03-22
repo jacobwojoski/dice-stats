@@ -620,19 +620,31 @@ class GlobalStatusPage extends FormApplication{
                 GLOBALFORMOBJ.render();
                 break;
             case 'clearRollData':
-                    const confirmation = await Dialog.confirm({
-                        title: "Confirm Clear",
-                        content: "Are you sure wou would like to clear ALL roll data?",
-                        yes: () => {return true},
-                        no: () => {return false},
-                        defaultYes: false
-                      });
-    
-                    if (confirmation) {
-                        socket.executeForEveryone("clear_sock", {});
-                        GLOBALFORMOBJ.render();
-                    }
-                    break;
+                const rollConfirmation = await Dialog.confirm({
+                    title: "Confirm Clear",
+                    content: "Are you sure wou would like to clear ALL roll data?",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (rollConfirmation) {
+                    socket.executeForEveryone("clear_sock", {});
+                    GLOBALFORMOBJ.render();
+                }
+                break;
+            case 'clearDB':
+                const dbconfirmation = await Dialog.confirm({
+                    title: "Confirm Clear",
+                    content: "Are you sure wou would like to clear the Database?",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (dbconfirmation) {
+                    DB_INTERACTION.clearDB();
+                }
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
                 GLOBALFORMOBJ.render();
@@ -789,7 +801,8 @@ Hooks.on('createChatMessage', handleChatMsgHook);
 // Initialize dialog and settings on foundry boot up
 Hooks.once('init', () => {
     CLASSOBJ = new DiceStatsTracker();
-
+    DB_INTERACTION.createDB();
+    
     //Updates for Other system support. 
     //Needs to be after init hook to see active system and modules
     /*MIDI-QOL SUPPORT */
