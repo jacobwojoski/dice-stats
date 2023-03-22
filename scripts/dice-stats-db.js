@@ -22,7 +22,6 @@ class DB_INTERACTION
     {
         let objCpy = Object.assign({},playerInfo);
         game.user.setFlag(MODULE_ID,'player_roll_data', objCpy);
-        //game.user.setFlag(MODULE_ID,'player_roll_data', playerInfo);
         ui.notifications.warn("Saved To Database");
     }
 
