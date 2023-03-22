@@ -448,6 +448,10 @@ class DiceStatsTracker {
         }
     }
 
+    clearUsersRollData(userid){
+        this.ALLPLAYERDATA.get(userid)?.clearDiceData();
+    }
+
     SaveMyPlayerData(){
         let myData = this.ALLPLAYERDATA.get(game.user.id)
         if(myData)
@@ -559,6 +563,44 @@ class PlayerStatusPage extends FormApplication {
                     CLASSOBJ.LoadAllPlayerData();
                 }
                 break;
+            case 'clearAllLocalRollData':
+                const clearAllLocalConfirmation = await Dialog.confirm({
+                    title: "Confirm Clear",
+                    content: "Are you sure wou would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens.",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (clearAllLocalConfirmation) {
+                    CLASSOBJ.clearAllRollData();
+                    if(PLAYERFORMOBJ){
+                        PLAYERFORMOBJ.render();
+                    }
+                    if(GLOBALFORMOBJ){
+                        GLOBALFORMOBJ.render();
+                    } 
+                }
+                break;
+            case 'clearYourLocalRollData':
+                const clearYourLocalConfirmation = await Dialog.confirm({
+                    title: "Confirm Clear",
+                    content: "Are you sure wou would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens.",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (clearYourLocalConfirmation) {
+                    CLASSOBJ.clearUsersRollData(game.user.id);
+                    if(PLAYERFORMOBJ){
+                        PLAYERFORMOBJ.render();
+                    }
+                    if(GLOBALFORMOBJ){
+                        GLOBALFORMOBJ.render();
+                    } 
+                }
+                break;
             case 'd2checkbox':
                 CLASSOBJ.PLAYER_DICE_CHECKBOXES[0] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[0];
                 PLAYERFORMOBJ.render();
@@ -655,7 +697,7 @@ class GlobalStatusPage extends FormApplication{
             case 'clearRollData':
                 const rollConfirmation = await Dialog.confirm({
                     title: "Confirm Clear",
-                    content: "Are you sure wou would like to clear ALL roll data?",
+                    content: "Are you sure wou would like to clear ALL roll data? This will clear all locally stored data on EVERY client. DB Values are still saved.",
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false

@@ -378,11 +378,24 @@
 
         <br>
         <div>
-            <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
+            
             {{#diceStats_ifIsMe PLAYER_NAME}}
             <br>
             <h4 class="db-interaction-heading">{{localize "DICE_STATS_TEXT.player_data_form.db_interact"}}</h4>
             <table>
+                <tr>
+                    <td>
+                        <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" data-action="clearAllLocalRollData">Clear Your Locally Stored Data</button>
+                    </td>
+                    <td>
+                        <button type="button" data-action="clearYourLocalRollData">Clear All Locally Stored Data</button>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <button type="button" data-action="save">{{localize "DICE_STATS_TEXT.player_data_form.save_data_btn"}}</button>
@@ -392,6 +405,8 @@
                     </td>
                 </tr>
             </table>
+            {{else}}
+            <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
             {{/diceStats_ifIsMe}}
         </div>
     </div>
