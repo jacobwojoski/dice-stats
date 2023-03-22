@@ -120,8 +120,8 @@
             "streak":       "Streak Data (Sequential incrementing rolls):",
             "no_streak":    "No Streak was made",
             "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
-            "load_data_btn": "Save Player Data",
-            "save_data_btn": "Load Player Data"
+            "load_data_btn": "Save Your Player Data",
+            "save_data_btn": "Load All Player Data"
         },
         "roll_chat_form":{
 
