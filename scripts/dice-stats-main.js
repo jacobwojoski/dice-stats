@@ -819,12 +819,13 @@ Hooks.once('init', () => {
 
 Hooks.on('userConnected', (userid, isConnecting) => {
 
+    /*
     if(isConnecting)
     {
         //If Gm Is connecting clear db if we dont want persistant data
         if(game.users.get(userid)?.isGM && game.settings.get(MODULE_ID,SETTINGS.ENABLE_PERSISTANT_DATA) === false )
         {
-            socket.executeForEveryone("clearDB_sock", {});
+            //socket.executeForEveryone("clearDB_sock", {});
             socket.executeForEveryone("clear_sock", {});
         }
         else
@@ -851,6 +852,7 @@ Hooks.on('userConnected', (userid, isConnecting) => {
         //Player is disconnecting so make sure to save their data
         socket.executeForEveryone("updateDB", game.userId);
     }
+    */
 });
 
 //==========================================================
@@ -954,9 +956,9 @@ Hooks.once("socketlib.ready", () => {
     socket.register("push_sock", pushPlayerBlindRolls_sock);
     socket.register("clear_sock", clearRollData_sock);
 
-    socket.register("updateDB_sock", pushPlayerInfoToDB_sock);
-    socket.register("loadFromDB_sock", pullPlayerInfoFromDB_sock);
-    socket.register("clearDB_sock", clearPlayerInfoFromDB_sock);
+    // socket.register("updateDB_sock", pushPlayerInfoToDB_sock);
+    // socket.register("loadFromDB_sock", pullPlayerInfoFromDB_sock);
+    // socket.register("clearDB_sock", clearPlayerInfoFromDB_sock);
 });
 
 //Socket fn call. This funtion is triggered by the gm to tell all users that they can 
@@ -994,21 +996,21 @@ function clearRollData_sock() {
 //  2.) Ask all players to clear their current data
 
 //socket.executeForEveryone("updateDB", game.userId);
-function savePlayerInfoToDB_sock(userid)
-{
-    if( CLASSOBJ.ALLPLAYERDATA.get(game.userId))
-    {
-        let plyrInfo = CLASSOBJ.ALLPLAYERDATA.get(userId);
-        DB_INTERACTION.saveUserData(plyrInfo);
-    }
-}
+// function savePlayerInfoToDB_sock(userid)
+// {
+//     if( CLASSOBJ.ALLPLAYERDATA.get(game.userId))
+//     {
+//         let plyrInfo = CLASSOBJ.ALLPLAYERDATA.get(userId);
+//         DB_INTERACTION.saveUserData(plyrInfo);
+//     }
+// }
 
-function pullPlayerInfoFromDB_sock()
-{
+// function pullPlayerInfoFromDB_sock()
+// {
     
-}
+// }
 
-function clearPlayerInfoFromDB_sock()
-{
+// function clearPlayerInfoFromDB_sock()
+// {
 
-}
+// }
