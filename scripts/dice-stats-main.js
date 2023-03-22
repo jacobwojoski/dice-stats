@@ -456,6 +456,7 @@ class DiceStatsTracker {
         }
     }
      
+
     LoadAllPlayerData(){
         for(let tempUser of game.users)
         {
@@ -463,12 +464,8 @@ class DiceStatsTracker {
             if(dbInfo)
             {
                 let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
-                //let plyrCpy = Object.assign({},localPlayerInfo);
 
-                //let loadedPlayerData = DB_INTERACTION.createPlayerObject(plyrCpy,dbInfo);
                 DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
-
-                //this.ALLPLAYERDATA.set(tempUser.id,loadedPlayerData);
                 this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
 
                 if(GLOBALFORMOBJ){
@@ -527,7 +524,7 @@ class PlayerStatusPage extends FormApplication {
     }
 
 
-    _handleButtonClick(event){
+    async _handleButtonClick(event){
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
 
@@ -537,10 +534,30 @@ class PlayerStatusPage extends FormApplication {
                 PLAYERFORMOBJ.render();
                 break;
             case 'save':
-                CLASSOBJ.SaveMyPlayerData();
+                const saveConfirmation = await Dialog.confirm({
+                    title: "Confirm Save",
+                    content: "Are you sure you want to Save Values to database? This will overwrite your prev saved values.",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (saveConfirmation) {
+                    CLASSOBJ.SaveMyPlayerData();
+                }
                 break;
             case 'load':
-                CLASSOBJ.LoadAllPlayerData();
+                const loadConfirmation = await Dialog.confirm({
+                    title: "Confirm Load",
+                    content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (loadConfirmation) {
+                    CLASSOBJ.LoadAllPlayerData();
+                }
                 break;
             case 'd2checkbox':
                 CLASSOBJ.PLAYER_DICE_CHECKBOXES[0] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[0];
