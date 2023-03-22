@@ -470,6 +470,14 @@ class DiceStatsTracker {
 
                 //this.ALLPLAYERDATA.set(tempUser.id,loadedPlayerData);
                 this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
+
+                if(GLOBALFORMOBJ){
+                    GLOBALFORMOBJ.render();
+                }
+
+                if(PLAYERFORMOBJ){
+                    PLAYERFORMOBJ.render();
+                }
             }
         }
     }
