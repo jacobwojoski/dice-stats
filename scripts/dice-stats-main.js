@@ -457,17 +457,19 @@ class DiceStatsTracker {
     }
      
     LoadAllPlayerData(){
-        for(let tempUser in game.users)
+        for(let tempUser of game.users)
         {
             var dbInfo = DB_INTERACTION.loadPlayerData(tempUser.id);
             if(dbInfo)
             {
                 let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
-                let plyrCpy;
-                Object.assign(plyrCpy,localPlayerInfo);
-                let loadedPlayerData = DB_INTERACTION.createPlayerObject(plyrCpy,dbInfo);
+                //let plyrCpy = Object.assign({},localPlayerInfo);
 
-                this.ALLPLAYERDATA.set(tempUser.id,loadedPlayerData);
+                //let loadedPlayerData = DB_INTERACTION.createPlayerObject(plyrCpy,dbInfo);
+                DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
+
+                //this.ALLPLAYERDATA.set(tempUser.id,loadedPlayerData);
+                this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
             }
         }
     }
@@ -651,6 +653,7 @@ class GlobalStatusPage extends FormApplication{
                 if (dbconfirmation) {
                     DB_INTERACTION.clearDB();
                 }
+                break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
                 GLOBALFORMOBJ.render();

@@ -20,7 +20,9 @@ class DB_INTERACTION
      */
     static saveUserData(playerInfo)
     {
-        game.user.setFlag(MODULE_ID,'player_roll_data', playerInfo);
+        let objCpy = Object.assign({},playerInfo);
+        game.user.setFlag(MODULE_ID,'player_roll_data', objCpy);
+        //game.user.setFlag(MODULE_ID,'player_roll_data', playerInfo);
         ui.notifications.warn("Saved To Database");
     }
 
@@ -93,7 +95,7 @@ class DB_INTERACTION
             tempDieObj.MODE =      dbDieDataObj.MODE;
         }
 
-        return tempPlayerObj;
+        //return tempPlayerObj;
     }
 
     /**
