@@ -442,6 +442,12 @@ class DiceStatsTracker {
         }
     }
 
+    clearAllRollData(){
+        for (let user of game.users) {
+            this.ALLPLAYERDATA.get(user.id)?.clearDiceData();
+        }
+    }
+
     SaveMyPlayerData(){
         let myData = this.ALLPLAYERDATA.get(game.user.id)
         if(myData)
@@ -802,7 +808,7 @@ Hooks.on('createChatMessage', handleChatMsgHook);
 Hooks.once('init', () => {
     CLASSOBJ = new DiceStatsTracker();
     DB_INTERACTION.createDB();
-    
+
     //Updates for Other system support. 
     //Needs to be after init hook to see active system and modules
     /*MIDI-QOL SUPPORT */

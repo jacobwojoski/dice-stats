@@ -29,7 +29,7 @@ class DB_INTERACTION
      */
     static loadPlayerData(userId)
     {
-        let user = game.user.get(userId);
+        let user = game.users.get(userId);
         if(user)
         {
             if(hasProperty(user, 'data.flags.'+MODULE_ID+'.player_roll_data'))
