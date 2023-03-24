@@ -764,6 +764,9 @@ class GlobalStatusPage extends FormApplication{
     async _handleButtonClick(event){
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
+        
+        let title_txt;
+        let context_txt;
 
         switch(action){
             case 'refresh':
@@ -774,9 +777,11 @@ class GlobalStatusPage extends FormApplication{
                 GLOBALFORMOBJ.render();
                 break;
             case 'clearRollData':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_all_data.context');
                 const rollConfirmation = await Dialog.confirm({
-                    title: "Confirm Clear",
-                    content: "Are you sure wou would like to clear ALL roll data? This will clear all locally stored data on EVERY client. DB Values are still saved.",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
@@ -788,9 +793,11 @@ class GlobalStatusPage extends FormApplication{
                 }
                 break;
             case 'clearDB':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_db.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_db.context');
                 const dbconfirmation = await Dialog.confirm({
-                    title: "Confirm Clear",
-                    content: "Are you sure wou would like to clear the Database?",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false

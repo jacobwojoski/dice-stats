@@ -163,7 +163,14 @@
             }
         },
         "global_dialogs":{
-
+            "clear_all_data":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear ALL roll data? This will clear all locally stored data on EVERY client. DB Values are still saved."
+            },
+            "clear_db":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear the Database?"
+            }
         }
     }
 }
