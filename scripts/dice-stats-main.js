@@ -597,8 +597,8 @@ class PlayerStatusPage extends FormApplication {
                 title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_all_db.title');
                 context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_all_db.context');
                 const loadConfirmation = await Dialog.confirm({
-                    title: "Confirm Load",
-                    content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
@@ -612,8 +612,8 @@ class PlayerStatusPage extends FormApplication {
                 title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_your_db.title');
                 context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_your_db.context');
                 const loadYoursConfirmation = await Dialog.confirm({
-                    title: "Confirm Load",
-                    content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
@@ -627,8 +627,8 @@ class PlayerStatusPage extends FormApplication {
                 title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_others_db.title');
                 context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_others_db.context');
                 const loadOthersConfirmation = await Dialog.confirm({
-                    title: "Confirm Load",
-                    content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
@@ -642,8 +642,8 @@ class PlayerStatusPage extends FormApplication {
                 title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_all_db.title');
                 context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_all_db.context');
                 const clearAllLocalConfirmation = await Dialog.confirm({
-                    title: "Confirm Clear",
-                    content: "Are you sure wou would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens.",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
@@ -663,8 +663,8 @@ class PlayerStatusPage extends FormApplication {
                 title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
                 context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
                 const clearYourLocalConfirmation = await Dialog.confirm({
-                    title: "Confirm Clear",
-                    content: "Are you sure wou would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens.",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
