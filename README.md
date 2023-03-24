@@ -104,6 +104,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - All users need to **MANUALLY SAVE** their data to the DB. 
     - Cant save other players data
     - Added ability to clear local data for yourself and others
+![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
 
 ## FORM PHOTOS
 ### Player D20  
@@ -120,9 +121,6 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 
 ### Global Clear Local Data Button
 ![GLB CLR](https://i.imgur.com/GtGz0h4.png)
-
-### Local Clear, Load, and Save Buttons
-![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
 
 ## Ongoing Issues
 - Support Other Systems  
