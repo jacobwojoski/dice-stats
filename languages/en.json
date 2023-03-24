@@ -21,6 +21,10 @@
                 "Name" : "See GM Stats In Global Roll Data?",
                 "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacts GM global stats button too)"
             },
+            "enable_persistant_data": {
+                "Name" : "Enable Database Saving?",
+                "Hint" : "If enabled stats will be saved between sessions"
+            },
             "enable_blind_rolls_immediate": {
                 "Name" : "Allow blind rolls to be immediately added to player stats",
                 "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
@@ -82,6 +86,7 @@
             "blind_rolls":  "There Are {ui_rollcount} Blind rolls between all players",
             "blind_roll_btn": "Push Players Blind Rolls to Graph",
             "clear_roll_data_btn": "Clear All Tracked Rolls",
+            "clear_db_btn": "Clear Database",
             
             "player_roll_count": "<b>{ui_player}</b> with <b>{ui_lowRollCnt}</b> Rolls",
             
@@ -115,7 +120,13 @@
             "player_name":  "Roll Data",
             "streak":       "Streak Data (Sequential incrementing rolls):",
             "no_streak":    "No Streak was made",
-            "streak_blind": "Streak Includes a Blind Roll, Data Hidden"
+            "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
+            "load_data_btn": "Load ALL player data From DB",
+            "load_data_btn_yours": "Load in YOUR player data from DB",
+            "load_data_btn_others": "Load in ALL OTHER players data from DB",
+            "save_data_btn": "Save YOUR Player Data To DB",
+            "clear_all_local_data_btn":"Clear ALL locally stored data",
+            "clear_my_local_data_btn":"Clear YOUR locally stored data"
         },
         "roll_chat_form":{
 
@@ -124,6 +135,42 @@
 
         },
         "player-stats-button-title": "Player Rolls",
-        "global-stats-button-title": "Global Rolls"
+        "global-stats-button-title": "Global Rolls",
+        "player_dialogs":{
+            "save_to_db":{
+                "title":"Confirm Save",
+                "context":"Are you sure you want to save YOUR values to database? This will overwrite all your prev saved values."
+            },
+            "load_all_db":{
+                "title":"Confirm Load",
+                "context":"Are you sure you want to load Values from database? This will overwrite all players roll data including your own."
+            },
+            "load_your_db":{
+                "title":"Confirm Load",
+                "context":"Are you sure you want to load Values from database? This will overwrite all players roll data including your own."
+            },
+            "load_others_db":{
+                "title":"Confirm Load",
+                "context":"Are you sure you want to load Values from database? This will overwrite all players roll data including your own."
+            },
+            "clear_all_db":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens."
+            },
+            "clear_your_db":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens."
+            }
+        },
+        "global_dialogs":{
+            "clear_all_data":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear ALL roll data? This will clear all locally stored data on EVERY client. DB Values are still saved."
+            },
+            "clear_db":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear the Database?"
+            }
+        }
     }
 }

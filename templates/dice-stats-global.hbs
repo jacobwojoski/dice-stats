@@ -486,10 +486,21 @@
         {{/diceStats_ifDieUsed}}
         {{/diceStats_ifDisplayDieInfo}}
         <div>
-            <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
             {{#diceStats_ifIsGM}}
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
+                    </td>
+                    <td>
+                        <button type="button" data-action="clearRollData">{{localize "DICE_STATS_TEXT.global_data_form.clear_roll_data_btn"}}</button>
+                    </td>
+                </tr>
+            </table>
+            {{else}}
             <br>
-            <button type="button" data-action="clearRollData">{{localize "DICE_STATS_TEXT.global_data_form.clear_roll_data_btn"}}</button>
+            <h1></h1>
+            <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
             {{/diceStats_ifIsGM}}
         </div>
     </div>

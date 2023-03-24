@@ -378,7 +378,39 @@
 
         <br>
         <div>
-            <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
+            <tr>   
+                <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>    
+            </tr>
+            {{#diceStats_ifIsMe PLAYER_NAME}}
+            <br>
+            <h4 class="db-interaction-heading"></h4>
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" data-action="clearAllLocalRollData">{{localize "DICE_STATS_TEXT.player_data_form.clear_all_local_data_btn"}}</button>
+                    </td>
+                    <td>
+                        <button type="button" data-action="clearYourLocalRollData">{{localize "DICE_STATS_TEXT.player_data_form.clear_my_local_data_btn"}}</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" data-action="loadAllFromDB">{{localize "DICE_STATS_TEXT.player_data_form.load_data_btn"}}</button>
+                    </td>
+                    <td>
+                        <button type="button" data-action="save">{{localize "DICE_STATS_TEXT.player_data_form.save_data_btn"}}</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" data-action="loadOthersFromDB">{{localize "DICE_STATS_TEXT.player_data_form.load_data_btn_others"}}</button>
+                    </td>
+                    <td>
+                        <button type="button" data-action="loadYoursFromDB">{{localize "DICE_STATS_TEXT.player_data_form.load_data_btn_yours"}}</button>
+                    </td>
+                </tr>
+            </table>
+            {{/diceStats_ifIsMe}}
         </div>
     </div>
 
