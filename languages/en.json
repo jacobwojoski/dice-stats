@@ -122,8 +122,8 @@
             "no_streak":    "No Streak was made",
             "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
             "load_data_btn": "Load ALL player data From DB",
-            "load_data_btn_yours": "Load in ALL OTHER players data from DB",
-            "load_data_btn_others": "Load in YOUR player data from DB",
+            "load_data_btn_yours": "Load in YOUR player data from DB",
+            "load_data_btn_others": "Load in ALL OTHER players data from DB",
             "save_data_btn": "Save YOUR Player Data To DB",
             "clear_all_local_data_btn":"Clear ALL locally stored data",
             "clear_my_local_data_btn":"Clear YOUR locally stored data"
@@ -163,7 +163,7 @@
             }
         },
         "global_dialogs":{
-            
+
         }
     }
 }
