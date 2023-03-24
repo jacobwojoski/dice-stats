@@ -99,6 +99,12 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - PLAYERS_SEE_GM = False  (Warning displayed if trying to view GM values)
 ![PLAYERS_SEE_GM = False](https://i.imgur.com/sGELoCJ.png)  
   
+- Database Interaction
+    - Database buttons are on **YOUR** Player dice stats screen at the bottom
+    - All users need to **MANUALLY SAVE** their data to the DB. 
+    - Cant save other players data
+    - Added ability to clear local data for yourself and others
+
 ## FORM PHOTOS
 ### Player D20  
 ![PL D20](https://i.imgur.com/Sszy3bk.png)   
@@ -112,6 +118,11 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ### CHECKBOXES
 ![CHK](https://i.imgur.com/pVFw0QE.png)
 
+### Global Clear Local Data Button
+![GLB CLR](https://i.imgur.com/GtGz0h4.png)
+
+### Local Clear, Load, and Save Buttons
+![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
 
 ## Ongoing Issues
 - Support Other Systems  
