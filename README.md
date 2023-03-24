@@ -102,8 +102,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Database Interaction
     - Database buttons are on **YOUR** Player dice stats screen at the bottom
     - All users need to **MANUALLY SAVE** their data to the DB. 
-    - Cant save other players data
-    - Added ability to clear local data for yourself and others
+    - You Cant save other players data they must save it!
 ![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
 
 ## FORM PHOTOS
@@ -126,12 +125,10 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 - Support Other Systems  
 
 ## Planned Features
-- Get player history when joining [Req History From GM]
 - Streaks in Both Direction  
 - Add Most Max val and Most min values rolls Adjusted for % of total rolls  
 - Comparison Tool, Show a few players info size by side  
 - Deal w/ Multiple of same values (Streak or same length streak | Multiple with max number of rolls)  
-- Actually Incorperate Lang page instead of hard coded strings 
 - Output to Chat how many Nat1 & 20's have been rolled by that player when one gets rolled  
 - Output to Chat when multiple max's get rolled in a row
 - Output to chat Lows and Highs for some other die types. Maybe just milestone numbers? EX Multiple of 5's on a d4 or d6 (10th 1, 15th 5)?  
@@ -149,12 +146,9 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - Change chart size
     - Make Forms Resizeable
     - Format Text in tables better
+    - Button organization being mediocre
 
 ## TODO Settings (Running List)
-- ~~PLAYERS_SEE_GM~~                (Implemented)   
-- ~~PLAYERS_SEE_GLOBAL~~            (Implemented) 
-- ~~PLAYERS_SEE_GM_IN_GLOBAL~~      (Implemented)
-- ~~SHOW_BLIND_ROLLS_IMMEDIATE~~    (Implemented)
 - PLAYERS_SEE_SELF          
 - PLAYERS_SEE_PLAYERS           
 - ENABLE_BLIND_STREAK_MSGS    
