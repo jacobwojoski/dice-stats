@@ -28,9 +28,6 @@ const SETTINGS = {
     PLAYERS_SEE_GM:     'players_see_gm',       //If Players can see GM dice roll stats                    [Def: False]     (Global)
     PLAYERS_SEE_GLOBAL: 'players_see_global',   //If Players Can  Global Dice Stats                        [Def: True]      (Global)
     PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global)
-
-    ENABLE_PERSISTANT_DATA: 'enable_persistant_data', //Allow data to be saved between sessions            [Def: False]     (Global)
-
     ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
     SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
@@ -345,17 +342,6 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Hint`,
         })
 
-        // A Setting to enable database saving between sessions
-        game.settings.register(this.ID, SETTINGS.ENABLE_PERSISTANT_DATA, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_PERSISTANT_DATA}.Name`,
-            default: false,
-            type: Boolean,
-            scope: 'world',
-
-            config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_PERSISTANT_DATA}.Hint`,
-        })
-
         /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
@@ -399,6 +385,7 @@ class DiceStatsTracker {
         */
     }
 
+    //Method used that parses messages from the chat. This is how we know a roll has happened, what die was rolled, and the value
     parseMessage(msg){
         let isBlind = msg.blind;
 
@@ -428,6 +415,7 @@ class DiceStatsTracker {
         }
     }
 
+    //Method used to add toll to a specifc player
     addRoll(dieType=7, rolls=[], user=game.user.id, isBlind=false){
         let playerInfo = this.ALLPLAYERDATA.get(user);
 
@@ -436,23 +424,27 @@ class DiceStatsTracker {
         });
     }
 
+    //Tell user to move any blind rolls they have saved from the blid roll ary to the data aray so the user can see the rolls on the charts
     pushBlindRolls(){
         for (let user of game.users) {
             this.ALLPLAYERDATA.get(user.id)?.pushBlindRolls();
         }
     }
 
+    //Erase all locally stored data
     clearAllRollData(){
         for (let user of game.users) {
             this.ALLPLAYERDATA.get(user.id)?.clearDiceData();
         }
     }
 
+    //Erase a specific users locally stored data
     clearUsersRollData(userid){
         this.ALLPLAYERDATA.get(userid)?.clearDiceData();
     }
 
-    SaveMyPlayerData(){
+    //Save my players data to the DB
+    saveMyPlayerData(){
         let myData = this.ALLPLAYERDATA.get(game.user.id)
         if(myData)
         {
@@ -460,8 +452,8 @@ class DiceStatsTracker {
         }
     }
      
-
-    LoadAllPlayerData(){
+    //Load Every Players Data from the DB
+    loadAllPlayerData(){
         for(let tempUser of game.users)
         {
             var dbInfo = DB_INTERACTION.loadPlayerData(tempUser.id);
@@ -483,7 +475,8 @@ class DiceStatsTracker {
         }
     }
 
-    LoadYourPlayerData(){
+    //Load your players data from the data
+    loadYourPlayerData(){
         var dbInfo = DB_INTERACTION.loadPlayerData(game.user.id);
         if(dbInfo)
         {
@@ -502,7 +495,8 @@ class DiceStatsTracker {
         } 
     }
 
-    LoadOthersPlayerData(){
+    //Load other players data from the DB (Not yours)
+    loadOthersPlayerData(){
         for(let tempUser of game.users)
         {
             if(tempUser.id != game.user.id) //Dont load your data only other players
@@ -576,25 +570,32 @@ class PlayerStatusPage extends FormApplication {
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
 
+        let title_txt;
+        let context_txt;
+
         //Handle button events made on the form
         switch(action){
             case 'refresh':
                 PLAYERFORMOBJ.render();
                 break;
             case 'save':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.save_to_db.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.save_to_db.context');
                 const saveConfirmation = await Dialog.confirm({
-                    title: "Confirm Save",
-                    content: "Are you sure you want to Save Values to database? This will overwrite your prev saved values.",
+                    title: title_txt,
+                    content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
                     });
 
                 if (saveConfirmation) {
-                    CLASSOBJ.SaveMyPlayerData();
+                    CLASSOBJ.saveMyPlayerData();
                 }
                 break;
             case 'loadAllFromDB':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_all_db.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_all_db.context');
                 const loadConfirmation = await Dialog.confirm({
                     title: "Confirm Load",
                     content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
@@ -604,10 +605,12 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadConfirmation) {
-                    CLASSOBJ.LoadAllPlayerData();
+                    CLASSOBJ.loadAllPlayerData();
                 }
                 break;
             case 'loadYoursFromDB':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_your_db.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_your_db.context');
                 const loadYoursConfirmation = await Dialog.confirm({
                     title: "Confirm Load",
                     content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
@@ -617,10 +620,12 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadYoursConfirmation) {
-                    CLASSOBJ.LoadYourPlayerData();
+                    CLASSOBJ.loadYourPlayerData();
                 }
                 break;
             case 'loadOthersFromDB':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_others_db.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_others_db.context');
                 const loadOthersConfirmation = await Dialog.confirm({
                     title: "Confirm Load",
                     content: "Are you sure you want to load Values from database? This will overwrite all players roll data including your own.",
@@ -630,10 +635,12 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadOthersConfirmation) {
-                    CLASSOBJ.LoadOthersPlayerData();
+                    CLASSOBJ.loadOthersPlayerData();
                 }
                 break;
             case 'clearAllLocalRollData':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_all_db.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_all_db.context');
                 const clearAllLocalConfirmation = await Dialog.confirm({
                     title: "Confirm Clear",
                     content: "Are you sure wou would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens.",
@@ -653,6 +660,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearYourLocalRollData':
+                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
+                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
                 const clearYourLocalConfirmation = await Dialog.confirm({
                     title: "Confirm Clear",
                     content: "Are you sure wou would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens.",
@@ -959,40 +968,6 @@ Hooks.once('init', () => {
 
 Hooks.on('userConnected', (userid, isConnecting) => {
 
-    /*
-    if(isConnecting)
-    {
-        //If Gm Is connecting clear db if we dont want persistant data
-        if(game.users.get(userid)?.isGM && game.settings.get(MODULE_ID,SETTINGS.ENABLE_PERSISTANT_DATA) === false )
-        {
-            //socket.executeForEveryone("clearDB_sock", {});
-            socket.executeForEveryone("clear_sock", {});
-        }
-        else
-        {
-
-            //Emit Socket Save for everyone so we can load their data
-            socket.executeForEveryone("updateDB", game.userId);
-            
-            //We want to load other players data locally
-            //Get all player data
-            for (let user in game.users) 
-            {
-                //Load Player Data from db
-                var playerData = loadPlayerData(user.id);
-
-                //Replace local value in map wtih playerData
-                CLASSOBJ.ALLPLAYERDATA.set(user.id, playerData);
-            }
-        }
-    }
-    else
-    {
-        //TODO Make sure this works!!!
-        //Player is disconnecting so make sure to save their data
-        socket.executeForEveryone("updateDB", game.userId);
-    }
-    */
 });
 
 //==========================================================
@@ -1095,10 +1070,6 @@ Hooks.once("socketlib.ready", () => {
 
     socket.register("push_sock", pushPlayerBlindRolls_sock);
     socket.register("clear_sock", clearRollData_sock);
-
-    // socket.register("updateDB_sock", pushPlayerInfoToDB_sock);
-    // socket.register("loadFromDB_sock", pullPlayerInfoFromDB_sock);
-    // socket.register("clearDB_sock", clearPlayerInfoFromDB_sock);
 });
 
 //Socket fn call. This funtion is triggered by the gm to tell all users that they can 
@@ -1126,31 +1097,3 @@ function clearRollData_sock() {
     }
         
 }
-
-//On player connecting 
-//  1.) Ask all Connected players to save data to db
-//  2.) Pull Updated DB Data
-
-//On Clear DB
-//  1.) Clear DB INFO
-//  2.) Ask all players to clear their current data
-
-//socket.executeForEveryone("updateDB", game.userId);
-// function savePlayerInfoToDB_sock(userid)
-// {
-//     if( CLASSOBJ.ALLPLAYERDATA.get(game.userId))
-//     {
-//         let plyrInfo = CLASSOBJ.ALLPLAYERDATA.get(userId);
-//         DB_INTERACTION.saveUserData(plyrInfo);
-//     }
-// }
-
-// function pullPlayerInfoFromDB_sock()
-// {
-    
-// }
-
-// function clearPlayerInfoFromDB_sock()
-// {
-
-// }

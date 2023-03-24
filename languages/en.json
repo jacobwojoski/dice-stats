@@ -124,7 +124,9 @@
             "load_data_btn": "Load ALL player data From DB",
             "load_data_btn_yours": "Load in ALL OTHER players data from DB",
             "load_data_btn_others": "Load in YOUR player data from DB",
-            "save_data_btn": "Save YOUR Player Data To DB"
+            "save_data_btn": "Save YOUR Player Data To DB",
+            "clear_all_local_data_btn":"Clear ALL locally stored data",
+            "clear_my_local_data_btn":"Clear YOUR locally stored data"
         },
         "roll_chat_form":{
 
@@ -133,6 +135,35 @@
 
         },
         "player-stats-button-title": "Player Rolls",
-        "global-stats-button-title": "Global Rolls"
+        "global-stats-button-title": "Global Rolls",
+        "player_dialogs":{
+            "save_to_db":{
+                "title":"Confirm Save",
+                "context":"Are you sure you want to save YOUR values to database? This will overwrite all your prev saved values."
+            },
+            "load_all_db":{
+                "title":"Confirm Load",
+                "context":"Are you sure you want to load Values from database? This will overwrite all players roll data including your own."
+            },
+            "load_your_db":{
+                "title":"Confirm Load",
+                "context":"Are you sure you want to load Values from database? This will overwrite all players roll data including your own."
+            },
+            "load_others_db":{
+                "title":"Confirm Load",
+                "context":"Are you sure you want to load Values from database? This will overwrite all players roll data including your own."
+            },
+            "clear_all_db":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens."
+            },
+            "clear_your_db":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens."
+            }
+        },
+        "global_dialogs":{
+            
+        }
     }
 }
