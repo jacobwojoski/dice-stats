@@ -1,5 +1,16 @@
 # CHANGELOG  
 
+
+## [ 1.7.0 ]  3/24/2023
+### Added
+- Added DB interaction to allow user to
+  - Save Players Data
+  - Load Players Data
+  - Load All Data
+  - Load Other Players Data
+  - Clear Players Data
+  - Clear Other Players Data
+
 ## [ 1.6.0 ]  3/18/2023
 ### Added
 - Button to allow clearing of all roll data
