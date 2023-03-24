@@ -81,8 +81,8 @@ class DB_INTERACTION
 
             tempDieObj.TYPE =          dbDieDataObj.TYPE;
             tempDieObj.TOTAL_ROLLS =   dbDieDataObj.TOTAL_ROLLS;
-            tempDieObj.ROLLS =         dbDieDataObj.ROLLS;  
-            tempDieObj.BLIND_ROLLS =   dbDieDataObj.BLIND_ROLLS;
+            tempDieObj.ROLLS =         [... dbDieDataObj.ROLLS];  
+            tempDieObj.BLIND_ROLLS =   [... dbDieDataObj.BLIND_ROLLS];
             tempDieObj.STREAK_SIZE =   dbDieDataObj.STREAK_SIZE;
             tempDieObj.STREAK_INIT =   dbDieDataObj.STREAK_INIT;
             tempDieObj.STREAK_ISBLIND = dbDieDataObj.STREAK_ISBLIND;
