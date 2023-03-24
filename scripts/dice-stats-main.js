@@ -579,8 +579,8 @@ class PlayerStatusPage extends FormApplication {
                 PLAYERFORMOBJ.render();
                 break;
             case 'save':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.save_to_db.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.save_to_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.save_to_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.save_to_db.context');
                 const saveConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -594,8 +594,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'loadAllFromDB':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_all_db.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_all_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_all_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_all_db.context');
                 const loadConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -609,8 +609,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'loadYoursFromDB':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_your_db.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_your_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_your_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_your_db.context');
                 const loadYoursConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -624,8 +624,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'loadOthersFromDB':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_others_db.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.load_others_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_others_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_others_db.context');
                 const loadOthersConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -639,8 +639,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearAllLocalRollData':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_all_db.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_all_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_db.context');
                 const clearAllLocalConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -660,8 +660,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearYourLocalRollData':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
                 const clearYourLocalConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -777,8 +777,8 @@ class GlobalStatusPage extends FormApplication{
                 GLOBALFORMOBJ.render();
                 break;
             case 'clearRollData':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_all_data.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.context');
                 const rollConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -793,8 +793,8 @@ class GlobalStatusPage extends FormApplication{
                 }
                 break;
             case 'clearDB':
-                title_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_db.title');
-                context_txt = game.i18n.localize('ROLL-DICE_STATS_TEXT.global_dialogs.clear_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
                 const dbconfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -872,7 +872,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
     CLASSOBJ.updateMap();
     // This add icon to ALL players on the player list
-    const tooltip = game.i18n.localize('ROLL-DICE_STATS_TEXT.player-stats-button-title')
+    const tooltip = game.i18n.localize('DICE_STATS_TEXT.player-stats-button-title')
     for (let user of game.users) {
 
         //add user ID to associated button
