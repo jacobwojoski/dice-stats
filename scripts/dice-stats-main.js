@@ -31,7 +31,7 @@ const SETTINGS = {
     ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
     SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
     ENABLE_AUTO_DB_SAVING: 'enable_auto_db_saving',         //Let Player rolls be saved to db automatically   [Def: false]  (Global)
-    Enable_AUTO_DB_LOADING: 'enable_auto_de_loading',       //Players load DB values upon joining             [Def: false]  (Global)
+    ENABLE_AUTO_DB_LOADING: 'enable_auto_de_loading',       //Players load DB values upon joining             [Def: false]  (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
     ENABLE_STREAK_MSGS: 'enable_streak_msgs'   //Choose what dice to display streak msgs for    [Default : d20]             (Local)     
@@ -344,6 +344,25 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Hint`,
         })
 
+        // A setting to determine if roll data gets saved to DB immediately
+        game.settings.register(this.ID, SETTINGS.ENABLE_AUTO_DB_SAVING, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB_SAVING}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB_SAVING}.Hint`,
+        })
+
+        // A setting to determine whether players load from DB immediately
+        game.settings.register(this.ID, SETTINGS.ENABLE_AUTO_DB_LOADING, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB_LOADING}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB_LOADING}.Hint`,
+        })
         /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
@@ -414,6 +433,13 @@ class DiceStatsTracker {
                 });
             }
             
+        }
+
+        //If AutoSave is Enabled by GM
+        if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB_SAVING)) 
+        {
+            //If It was my Roll
+            this.saveMyPlayerData();
         }
     }
 
@@ -977,6 +1003,14 @@ Hooks.once('init', () => {
 
 Hooks.on('userConnected', (userid, isConnecting) => {
 
+    //If AutoLoad is Enabled by GM
+    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB_LOADING)) 
+    {
+        if(userid === game.user.id)
+        {
+            CLASSOBJ.loadAllPlayerData();
+        }
+    }
 });
 
 //==========================================================

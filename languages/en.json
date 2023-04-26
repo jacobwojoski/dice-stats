@@ -29,6 +29,14 @@
                 "Name" : "Allow blind rolls to be immediately added to player stats",
                 "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
             },
+            "enable_auto_db_saving": {
+                "Name" : "Allow roll data to be saved to DB Immediately",
+                "Hint" : "Active means data will be saved immedately otherwise button needs to be pressed"
+            },
+            "enable_auto_de_loading": {
+                "Name" : "Allow roll data to be loaded from DB Immediately upon joining",
+                "Hint" : "Active means data will be loaded when joining"
+            },
             "enable_crit_msgs": {
                 "Name" : "Stop All Crit Messages From Being Displayed To chat",
                 "Hint" : "Empty = Disabled | 20, 4 = Crits for d20 and d4's are printed"
