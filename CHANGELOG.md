@@ -1,5 +1,10 @@
 # CHANGELOG  
 
+## [ 1.8.0 ]  4/28/2023
+### Fixed
+- Added auto db feature
+- Added clear call button to clear local and bd at once
+- Remove Other DB buttons if auto DB is active
 
 ## [ 1.7.0 ]  3/24/2023
 ### Added

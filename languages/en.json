@@ -30,12 +30,12 @@
                 "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
             },
             "enable_auto_db_saving": {
-                "Name" : "Allow roll data to be saved to DB Immediately",
-                "Hint" : "Active means data will be saved immedately otherwise button needs to be pressed"
+                "Name" : "Auto Save data to DB",
+                "Hint" : "Enabled means data will be saved to DB whenever a roll is made"
             },
             "enable_auto_de_loading": {
-                "Name" : "Allow roll data to be loaded from DB Immediately upon joining",
-                "Hint" : "Active means data will be loaded when joining"
+                "Name" : "Auto Load Data from DB",
+                "Hint" : "Enabled means data will be loaded from DB when joining the game"
             },
             "enable_crit_msgs": {
                 "Name" : "Stop All Crit Messages From Being Displayed To chat",

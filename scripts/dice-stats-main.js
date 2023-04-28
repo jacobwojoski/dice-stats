@@ -476,7 +476,8 @@ class DiceStatsTracker {
         let myData = this.ALLPLAYERDATA.get(game.user.id)
         if(myData)
         {
-            DB_INTERACTION.saveUserData(myData);
+            ui.notifications.warn("Saved To Database");
+            DB_INTERACTION.saveUserData(myData); 
         }
     }
      
@@ -508,7 +509,7 @@ class DiceStatsTracker {
         var dbInfo = DB_INTERACTION.loadPlayerData(game.user.id);
         if(dbInfo)
         {
-            let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+            let localPlayerInfo = this.ALLPLAYERDATA.get(game.user.id);
 
             DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
             this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
@@ -1001,12 +1002,19 @@ Hooks.once('init', () => {
     }
 })
 
+Hooks.on('ready', () => {
+    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB_LOADING)) 
+    {
+        CLASSOBJ.loadAllPlayerData();
+    }
+});
+
 Hooks.on('userConnected', (userid, isConnecting) => {
 
     //If AutoLoad is Enabled by GM
     if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB_LOADING)) 
     {
-        if(userid === game.user.id)
+        if(userid == game.user.id)
         {
             CLASSOBJ.loadAllPlayerData();
         }
