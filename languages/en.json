@@ -29,6 +29,10 @@
                 "Name" : "Allow blind rolls to be immediately added to player stats",
                 "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
             },
+            "enable_auto_db": {
+                "Name" : "Automatically use DB",
+                "Hint" : "Enabled means rolls will get added and loaded from DB automatically."
+            },
             "enable_crit_msgs": {
                 "Name" : "Stop All Crit Messages From Being Displayed To chat",
                 "Hint" : "Empty = Disabled | 20, 4 = Crits for d20 and d4's are printed"
@@ -85,8 +89,9 @@
             "title":        "GLOBAL Roll Data",
             "blind_rolls":  "There Are {ui_rollcount} Blind rolls between all players",
             "blind_roll_btn": "Push Players Blind Rolls to Graph",
-            "clear_roll_data_btn": "Clear All Tracked Rolls",
-            "clear_db_btn": "Clear Database",
+            "clear_all_btn": "Clear All Roll Data",
+            "clear_all_local_btn":"Clear All Local Data",
+            "clear_all_db_btn":"Clear All DB Data",
             
             "player_roll_count": "<b>{ui_player}</b> with <b>{ui_lowRollCnt}</b> Rolls",
             
@@ -126,7 +131,9 @@
             "load_data_btn_others": "Load in ALL OTHER players data from DB",
             "save_data_btn": "Save YOUR Player Data To DB",
             "clear_all_local_data_btn":"Clear ALL locally stored data",
-            "clear_my_local_data_btn":"Clear YOUR locally stored data"
+            "clear_my_local_data_btn":"Clear YOUR locally stored data",
+            "clear_my_db_info":"Clear YOUR DB values",
+            "clear_your_both":"Clear YOUR Local And DB Values"
         },
         "roll_chat_form":{
 
@@ -155,21 +162,37 @@
             },
             "clear_all_db":{
                 "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens."
+                "context":"Are you sure you would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens."
             },
             "clear_your_db":{
                 "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens."
+                "context":"Are you sure you would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens."
+            },
+            "clear_all_local":{
+                "title": "Confirm Clear",
+                "context": "Are you sure you would like to clear all locally stored data?"
+            },
+            "clear_your_local":{
+                "title": "Confirm Clear",
+                "context": "Are you sure you would like to clear your locally stored data?"
+            },
+            "clear_both":{
+                "title": "Confirm Clear",
+                "context": "Are you sure you want to clear YOUR local and DB values?"
             }
         },
         "global_dialogs":{
+            "clear_all_local_data":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear all roll data? This will clear all locally stored data on EVERY client. DB Values are still saved."
+            },
+            "clear_all_db_data":{
+                "title":"Confirm Clear",
+                "context":"Are you sure you would like to clear all roll data? This will clear all players DB values. But local Data will stay."
+            },
             "clear_all_data":{
                 "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear ALL roll data? This will clear all locally stored data on EVERY client. DB Values are still saved."
-            },
-            "clear_db":{
-                "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear the Database?"
+                "context":"Are you sure you would like to clear all roll data? This will clear all players DB and locally stored values."
             }
         }
     }

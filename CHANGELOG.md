@@ -1,5 +1,11 @@
 # CHANGELOG  
 
+## [ 1.8.0 ]  4/28/2023
+### Added
+- Added auto db feature
+- Added clear call button to clear local and bd at once
+- Change Buttons on player Page when Auto DB is enabled
+- Added auto db feature. (Disabled by default)
 
 ## [ 1.7.0 ]  3/24/2023
 ### Added

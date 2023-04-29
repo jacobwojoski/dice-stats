@@ -11,6 +11,9 @@ class DATA_PACKAGER
     {
         PLAYER_NAME: '',
 
+        //Is Auto DB feature enabled (Auto Save & Load)
+        AUTO_DB_ACTIVE: false,
+
         //array<bools>[num_of_dice] Used by checkboxes on UI
         IS_DIE_DISPLAYED: [],
 
@@ -39,6 +42,9 @@ class DATA_PACKAGER
     {   
         //array<bools>[num_of_dice] Used by checkboxes on UI
         IS_DIE_DISPLAYED: [],
+
+        //Is Auto DB feature enabled (Auto Save & Load)
+        AUTO_DB_ACTIVE: false,
         
         //Arrays Use DIE_TYPE to get values for specific dice
         MEAN:[],
@@ -80,6 +86,8 @@ class DATA_PACKAGER
     {   
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
+
+        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB);
 
         packedData.IS_DIE_DISPLAYED = new Array(9);
         packedData.IS_DIE_DISPLAYED.fill(true);
@@ -380,6 +388,9 @@ class DATA_PACKAGER
         //TODO. packedData should be passed By ref so update fn's for that behavior
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
+
+        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB);
+        
         packedData = this.setGlobalDefaultData(packedData);
         
         packedData = this.getGlobalRollData(playersArry,packedData,includeGMrolls);

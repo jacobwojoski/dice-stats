@@ -30,6 +30,7 @@ const SETTINGS = {
     PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global)
     ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
     SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
+    ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: false] (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
     ENABLE_STREAK_MSGS: 'enable_streak_msgs'   //Choose what dice to display streak msgs for    [Default : d20]             (Local)     
@@ -342,6 +343,15 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Hint`,
         })
 
+        // A setting to let db interaction be automated
+        game.settings.register(this.ID, SETTINGS.ENABLE_AUTO_DB , {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB}.Hint`,
+        })
         /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
@@ -413,6 +423,13 @@ class DiceStatsTracker {
             }
             
         }
+
+        //If AutoSave is Enabled by GM
+        if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
+        {
+            //If It was my Roll
+            this.saveMyPlayerData();
+        }
     }
 
     //Method used to add toll to a specifc player
@@ -448,7 +465,7 @@ class DiceStatsTracker {
         let myData = this.ALLPLAYERDATA.get(game.user.id)
         if(myData)
         {
-            DB_INTERACTION.saveUserData(myData);
+            DB_INTERACTION.saveUserData(myData); 
         }
     }
      
@@ -480,7 +497,7 @@ class DiceStatsTracker {
         var dbInfo = DB_INTERACTION.loadPlayerData(game.user.id);
         if(dbInfo)
         {
-            let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+            let localPlayerInfo = this.ALLPLAYERDATA.get(game.user.id);
 
             DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
             this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
@@ -590,6 +607,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (saveConfirmation) {
+                    ui.notifications.warn("Your Data Saved");
                     CLASSOBJ.saveMyPlayerData();
                 }
                 break;
@@ -605,6 +623,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadConfirmation) {
+                    ui.notifications.warn("All Data Loaded");
                     CLASSOBJ.loadAllPlayerData();
                 }
                 break;
@@ -620,6 +639,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadYoursConfirmation) {
+                    ui.notifications.warn("Your Data Loaded");
                     CLASSOBJ.loadYourPlayerData();
                 }
                 break;
@@ -639,8 +659,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearAllLocalRollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_db.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_local.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_local.context');
                 const clearAllLocalConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -650,6 +670,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (clearAllLocalConfirmation) {
+                    ui.notifications.warn("All Local Data Cleared");
                     CLASSOBJ.clearAllRollData();
                     if(PLAYERFORMOBJ){
                         PLAYERFORMOBJ.render();
@@ -660,8 +681,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearYourLocalRollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_local.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_local.context');
                 const clearYourLocalConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -671,6 +692,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (clearYourLocalConfirmation) {
+                    ui.notifications.warn("Your Local Data Cleared");
                     CLASSOBJ.clearUsersRollData(game.user.id);
                     if(PLAYERFORMOBJ){
                         PLAYERFORMOBJ.render();
@@ -678,6 +700,45 @@ class PlayerStatusPage extends FormApplication {
                     if(GLOBALFORMOBJ){
                         GLOBALFORMOBJ.render();
                     } 
+                }
+                break;
+            case 'clearYourDBrollData':
+                    title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
+                    context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
+                    const dbcon = await Dialog.confirm({
+                        title: title_txt,
+                        content: context_txt,
+                        yes: () => {return true},
+                        no: () => {return false},
+                        defaultYes: false
+                        });
+    
+                    if (dbcon) {
+                        ui.notifications.warn("All Your DB Data Cleared");
+                        DB_INTERACTION.clearPlayer(game.user);
+                        if(PLAYERFORMOBJ){
+                            PLAYERFORMOBJ.render();
+                        }
+                    }
+                    break;
+            case 'clearAllPlayerData':
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_both.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_both.context');
+                const dbcon2 = await Dialog.confirm({
+                    title: title_txt,
+                    content: context_txt,
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (dbcon2) {
+                    ui.notifications.warn("All Your Data Cleared");
+                    CLASSOBJ.clearUsersRollData(game.user.id);
+                    DB_INTERACTION.clearPlayer(game.user);
+                    if(PLAYERFORMOBJ){
+                        PLAYERFORMOBJ.render();
+                    }
                 }
                 break;
             case 'd2checkbox':
@@ -767,6 +828,7 @@ class GlobalStatusPage extends FormApplication{
         
         let title_txt;
         let context_txt;
+        let dbconfirmation;
 
         switch(action){
             case 'refresh':
@@ -776,36 +838,53 @@ class GlobalStatusPage extends FormApplication{
                 socket.executeForEveryone("push_sock", game.userId);
                 GLOBALFORMOBJ.render();
                 break;
-            case 'clearRollData':
+            case 'clearAllRollData':
                 title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
                 context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.context');
-                const rollConfirmation = await Dialog.confirm({
+                const allClear = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
                     yes: () => {return true},
                     no: () => {return false},
                     defaultYes: false
                     });
-
-                if (rollConfirmation) {
+                if(allClear){
+                    ui.notifications.warn("All Player Data Cleared");
                     socket.executeForEveryone("clear_sock", {});
-                    GLOBALFORMOBJ.render();
-                }
-                break;
-            case 'clearDB':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
-                const dbconfirmation = await Dialog.confirm({
-                    title: title_txt,
-                    content: context_txt,
-                    yes: () => {return true},
-                    no: () => {return false},
-                    defaultYes: false
-                    });
-
-                if (dbconfirmation) {
                     DB_INTERACTION.clearDB();
                 }
+                break;
+            case 'clearAllLocalRollData':
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_local_data.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_local_data.context');
+                const localClear = await Dialog.confirm({
+                    title: title_txt,
+                    content: context_txt,
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (localClear) {
+                    ui.notifications.warn("All Local Data Cleared");
+                    socket.executeForEveryone("clear_sock", {});
+                }
+                break;
+            case 'clearAllDBrollData':
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.title');
+                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.context');
+                    const dbClear = await Dialog.confirm({
+                        title: title_txt,
+                        content: context_txt,
+                        yes: () => {return true},
+                        no: () => {return false},
+                        defaultYes: false
+                        });
+    
+                    if (dbClear) {
+                        ui.notifications.warn("All DB Data Cleared");
+                        DB_INTERACTION.clearDB();
+                    }
                 break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
@@ -973,8 +1052,16 @@ Hooks.once('init', () => {
     }
 })
 
-Hooks.on('userConnected', (userid, isConnecting) => {
+//Autoload DB info on connection if setting is checked
+Hooks.on('ready', () => {
+    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
+    {
+        CLASSOBJ.loadAllPlayerData();
+    }
+});
 
+Hooks.on('userConnected', (userid, isConnecting) => {
+    //Unused for now
 });
 
 //==========================================================
@@ -1062,6 +1149,13 @@ Handlebars.registerHelper('diceStats_ifHaveBlindRolls', function (blindRollCount
 //Handlebars helper to check if were opening our own dice stats
 Handlebars.registerHelper('diceStats_ifIsMe', function (plyrName, options){
     if(plyrName === game.user.name){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+Handlebars.registerHelper('diceStats_ifAutoDbActive', function (isAutoDBactive, options){
+    if(isAutoDBactive == true){
         return options.fn(this);
     }
     return options.inverse(this);
