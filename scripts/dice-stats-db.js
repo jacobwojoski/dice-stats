@@ -110,7 +110,6 @@ class DB_INTERACTION
                 user.unsetFlag(MODULE_ID,'player_roll_data');
             }
         }
-        ui.notifications.warn("Database Cleared");
     } 
 
     /**
@@ -121,7 +120,6 @@ class DB_INTERACTION
         if(hasProperty(user, 'data.flags.'+MODULE_ID+'.player_roll_data'))
         {
             user.unsetFlag(MODULE_ID,'player_roll_data');
-            ui.notifications.warn("Player Data Cleared");
         }
     }
 }

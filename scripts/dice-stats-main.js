@@ -465,7 +465,6 @@ class DiceStatsTracker {
         let myData = this.ALLPLAYERDATA.get(game.user.id)
         if(myData)
         {
-            ui.notifications.warn("Saved To Database");
             DB_INTERACTION.saveUserData(myData); 
         }
     }
@@ -608,6 +607,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (saveConfirmation) {
+                    ui.notifications.warn("Your Data Saved");
                     CLASSOBJ.saveMyPlayerData();
                 }
                 break;
@@ -623,6 +623,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadConfirmation) {
+                    ui.notifications.warn("All Data Loaded");
                     CLASSOBJ.loadAllPlayerData();
                 }
                 break;
@@ -638,6 +639,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadYoursConfirmation) {
+                    ui.notifications.warn("Your Data Loaded");
                     CLASSOBJ.loadYourPlayerData();
                 }
                 break;
@@ -668,6 +670,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (clearAllLocalConfirmation) {
+                    ui.notifications.warn("All Local Data Cleared");
                     CLASSOBJ.clearAllRollData();
                     if(PLAYERFORMOBJ){
                         PLAYERFORMOBJ.render();
@@ -689,6 +692,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (clearYourLocalConfirmation) {
+                    ui.notifications.warn("Your Local Data Cleared");
                     CLASSOBJ.clearUsersRollData(game.user.id);
                     if(PLAYERFORMOBJ){
                         PLAYERFORMOBJ.render();
@@ -710,6 +714,7 @@ class PlayerStatusPage extends FormApplication {
                         });
     
                     if (dbcon) {
+                        ui.notifications.warn("All Your DB Data Cleared");
                         DB_INTERACTION.clearPlayer(game.user);
                         if(PLAYERFORMOBJ){
                             PLAYERFORMOBJ.render();
@@ -728,6 +733,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (dbcon2) {
+                    ui.notifications.warn("All Your Data Cleared");
                     CLASSOBJ.clearUsersRollData(game.user.id);
                     DB_INTERACTION.clearPlayer(game.user);
                     if(PLAYERFORMOBJ){
@@ -843,6 +849,7 @@ class GlobalStatusPage extends FormApplication{
                     defaultYes: false
                     });
                 if(allClear){
+                    ui.notifications.warn("All Player Data Cleared");
                     socket.executeForEveryone("clear_sock", {});
                     DB_INTERACTION.clearDB();
                 }
@@ -859,6 +866,7 @@ class GlobalStatusPage extends FormApplication{
                     });
 
                 if (localClear) {
+                    ui.notifications.warn("All Local Data Cleared");
                     socket.executeForEveryone("clear_sock", {});
                 }
                 break;
@@ -874,6 +882,7 @@ class GlobalStatusPage extends FormApplication{
                         });
     
                     if (dbClear) {
+                        ui.notifications.warn("All DB Data Cleared");
                         DB_INTERACTION.clearDB();
                     }
                 break;
