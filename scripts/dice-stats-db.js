@@ -42,6 +42,7 @@ class DB_INTERACTION
     }
 
     //Method used to convert DB info to A player OBJ
+    //Objects are pass by ref so dont need to return
     static createPlayerObject(tempPlayerObj, dbDataObj)
     {
         /*
@@ -111,4 +112,16 @@ class DB_INTERACTION
         }
         ui.notifications.warn("Database Cleared");
     } 
+
+    /**
+     * Method used to clear a specific users data
+     */
+    static clearPlayer(user)
+    {
+        if(hasProperty(user, 'data.flags.'+MODULE_ID+'.player_roll_data'))
+        {
+            user.unsetFlag(MODULE_ID,'player_roll_data');
+            ui.notifications.warn("Player Data Cleared");
+        }
+    }
 }

@@ -33,7 +33,7 @@
                 "Name" : "Auto Save data to DB",
                 "Hint" : "Enabled means data will be saved to DB whenever a roll is made"
             },
-            "enable_auto_de_loading": {
+            "enable_auto_db_loading": {
                 "Name" : "Auto Load Data from DB",
                 "Hint" : "Enabled means data will be loaded from DB when joining the game"
             },
@@ -134,7 +134,8 @@
             "load_data_btn_others": "Load in ALL OTHER players data from DB",
             "save_data_btn": "Save YOUR Player Data To DB",
             "clear_all_local_data_btn":"Clear ALL locally stored data",
-            "clear_my_local_data_btn":"Clear YOUR locally stored data"
+            "clear_my_local_data_btn":"Clear YOUR locally stored data",
+            "clear_my_db_info":"CLear YOUR DB values"
         },
         "roll_chat_form":{
 

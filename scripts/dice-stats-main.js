@@ -796,6 +796,7 @@ class GlobalStatusPage extends FormApplication{
         
         let title_txt;
         let context_txt;
+        let dbconfirmation;
 
         switch(action){
             case 'refresh':
@@ -818,13 +819,28 @@ class GlobalStatusPage extends FormApplication{
 
                 if (rollConfirmation) {
                     socket.executeForEveryone("clear_sock", {});
+
+                    title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
+                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
+                    dbconfirmation = await Dialog.confirm({
+                        title: title_txt,
+                        content: context_txt,
+                        yes: () => {return true},
+                        no: () => {return false},
+                        defaultYes: false
+                        });
+    
+                    if (dbconfirmation) {
+                        DB_INTERACTION.clearDB();
+                    }
+
                     GLOBALFORMOBJ.render();
                 }
                 break;
             case 'clearDB':
                 title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
                 context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
-                const dbconfirmation = await Dialog.confirm({
+                dbconfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
                     yes: () => {return true},
@@ -834,6 +850,19 @@ class GlobalStatusPage extends FormApplication{
 
                 if (dbconfirmation) {
                     DB_INTERACTION.clearDB();
+                }
+                break;
+            case 'clearYourDBrollData':
+                dbconfirmation = await Dialog.confirm({
+                    title: title_txt,
+                    content: context_txt,
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (dbconfirmation) {
+                    DB_INTERACTION.clearPlayer(game.user);
                 }
                 break;
             case 'd2checkbox':
@@ -1099,6 +1128,13 @@ Handlebars.registerHelper('diceStats_ifHaveBlindRolls', function (blindRollCount
 //Handlebars helper to check if were opening our own dice stats
 Handlebars.registerHelper('diceStats_ifIsMe', function (plyrName, options){
     if(plyrName === game.user.name){
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
+Handlebars.registerHelper('diceStats_ifAutoDbActive', function (isAutoDBactive, options){
+    if(isAutoDBactive == true){
         return options.fn(this);
     }
     return options.inverse(this);
