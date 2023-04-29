@@ -1002,6 +1002,7 @@ Hooks.once('init', () => {
     }
 })
 
+//Autoload DB info on connection if setting is checked
 Hooks.on('ready', () => {
     if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB_LOADING)) 
     {
@@ -1010,15 +1011,7 @@ Hooks.on('ready', () => {
 });
 
 Hooks.on('userConnected', (userid, isConnecting) => {
-
-    //If AutoLoad is Enabled by GM
-    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB_LOADING)) 
-    {
-        if(userid == game.user.id)
-        {
-            CLASSOBJ.loadAllPlayerData();
-        }
-    }
+    //Unused for now
 });
 
 //==========================================================
