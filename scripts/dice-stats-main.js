@@ -703,8 +703,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearYourDBrollData':
-                    title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_your_db.title');
-                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_your_db.context');
+                    title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
+                    context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
                     const dbcon = await Dialog.confirm({
                         title: title_txt,
                         content: context_txt,
