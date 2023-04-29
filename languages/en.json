@@ -165,11 +165,23 @@
             },
             "clear_all_db":{
                 "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens."
+                "context":"Are you sure you would like to clear All Local roll data? This will clear All users roll data locally. It It will not impact the DB values or values on other players screens."
             },
             "clear_your_db":{
                 "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens."
+                "context":"Are you sure you would like to clear YOUR roll data? This will clear YOUR users roll data locally. It It will not impact the DB values or values on other players screens."
+            },
+            "clear_all_local":{
+                "title": "Confirm Clear",
+                "context": "Are you sure you would like to clear all locally stored data?"
+            },
+            "clear_your_local":{
+                "title": "Confirm Clear",
+                "context": "Are you sure you would like to clear your locally stored data?"
+            },
+            "clear_both":{
+                "title": "Confirm Clear",
+                "context": "Are you sure you want to clear YOUR local and DB values?"
             }
         },
         "global_dialogs":{

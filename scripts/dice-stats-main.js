@@ -668,8 +668,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearAllLocalRollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_db.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_local.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_all_local.context');
                 const clearAllLocalConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -689,8 +689,8 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearYourLocalRollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_db.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_local.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.clear_your_local.context');
                 const clearYourLocalConfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
@@ -710,9 +710,9 @@ class PlayerStatusPage extends FormApplication {
                 }
                 break;
             case 'clearYourDBrollData':
-                    title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
-                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
-                    dbconfirmation = await Dialog.confirm({
+                    title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_your_db.title');
+                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_your_db.context');
+                    const dbcon = await Dialog.confirm({
                         title: title_txt,
                         content: context_txt,
                         yes: () => {return true},
@@ -720,7 +720,7 @@ class PlayerStatusPage extends FormApplication {
                         defaultYes: false
                         });
     
-                    if (dbconfirmation) {
+                    if (dbcon) {
                         DB_INTERACTION.clearPlayer(game.user);
                         if(PLAYERFORMOBJ){
                             PLAYERFORMOBJ.render();
@@ -731,8 +731,8 @@ class PlayerStatusPage extends FormApplication {
                 //title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
                 //context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
                 title_txt = "Clear All Your Info";
-                context_txt = "Clear both DB and Local data";
-                const dbconfirmation = await Dialog.confirm({
+                context_txt = "Do you want to clear both your DB and local data";
+                const dbcon2 = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
                     yes: () => {return true},
@@ -740,7 +740,7 @@ class PlayerStatusPage extends FormApplication {
                     defaultYes: false
                     });
 
-                if (dbconfirmation) {
+                if (dbcon2) {
                     CLASSOBJ.clearUsersRollData(game.user.id);
                     DB_INTERACTION.clearPlayer(game.user);
                     if(PLAYERFORMOBJ){
