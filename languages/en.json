@@ -29,13 +29,9 @@
                 "Name" : "Allow blind rolls to be immediately added to player stats",
                 "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
             },
-            "enable_auto_db_saving": {
-                "Name" : "Auto Save data to DB",
-                "Hint" : "Enabled means data will be saved to DB whenever a roll is made"
-            },
-            "enable_auto_db_loading": {
-                "Name" : "Auto Load Data from DB",
-                "Hint" : "Enabled means data will be loaded from DB when joining the game"
+            "enable_auto_db": {
+                "Name" : "Automatically use DB",
+                "Hint" : "Enabled means rolls will get added and loaded from DB automatically."
             },
             "enable_crit_msgs": {
                 "Name" : "Stop All Crit Messages From Being Displayed To chat",
