@@ -89,8 +89,9 @@
             "title":        "GLOBAL Roll Data",
             "blind_rolls":  "There Are {ui_rollcount} Blind rolls between all players",
             "blind_roll_btn": "Push Players Blind Rolls to Graph",
-            "clear_roll_data_btn": "Clear All Tracked Rolls",
-            "clear_db_btn": "Clear Database",
+            "clear_all_btn": "Clear All Roll Data",
+            "clear_all_local_btn":"Clear All Local Data",
+            "clear_all_db_btn":"Clear All DB Data",
             
             "player_roll_count": "<b>{ui_player}</b> with <b>{ui_lowRollCnt}</b> Rolls",
             
@@ -181,13 +182,17 @@
             }
         },
         "global_dialogs":{
+            "clear_all_local_data":{
+                "title":"Confirm Clear",
+                "context":"Are you sure wou would like to clear aLL roll data? This will clear all locally stored data on EVERY client. DB Values are still saved."
+            },
+            "clear_all_db_data":{
+                "title":"Confirm Clear",
+                "context":"Are you sure you would like to clear all roll data? This will clear all players DB values. But local Data will stay."
+            },
             "clear_all_data":{
                 "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear ALL roll data? This will clear all locally stored data on EVERY client. DB Values are still saved."
-            },
-            "clear_db":{
-                "title":"Confirm Clear",
-                "context":"Are you sure wou would like to clear the Database?"
+                "context":"Are you sure you would like to clear all roll data? This will clear all players DB and locally stored values."
             }
         }
     }
