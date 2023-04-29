@@ -709,6 +709,45 @@ class PlayerStatusPage extends FormApplication {
                     } 
                 }
                 break;
+            case 'clearYourDBrollData':
+                    title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
+                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
+                    dbconfirmation = await Dialog.confirm({
+                        title: title_txt,
+                        content: context_txt,
+                        yes: () => {return true},
+                        no: () => {return false},
+                        defaultYes: false
+                        });
+    
+                    if (dbconfirmation) {
+                        CLASSOBJ.clearUsersRollData(game.user.id);
+                        DB_INTERACTION.clearPlayer(game.user);
+                        if(PLAYERFORMOBJ){
+                            PLAYERFORMOBJ.render();
+                        }
+                    }
+                    break;
+            case 'clearAllPlayerData':
+                //title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
+                //context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
+                title_txt = "Clear All Your Info";
+                context_txt = "Clear both DB and Local data";
+                dbconfirmation = await Dialog.confirm({
+                    title: title_txt,
+                    content: context_txt,
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (dbconfirmation) {
+                    DB_INTERACTION.clearPlayer(game.user);
+                    if(PLAYERFORMOBJ){
+                        PLAYERFORMOBJ.render();
+                    }
+                }
+                break;
             case 'd2checkbox':
                 CLASSOBJ.PLAYER_DICE_CHECKBOXES[0] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[0];
                 PLAYERFORMOBJ.render();
@@ -853,6 +892,8 @@ class GlobalStatusPage extends FormApplication{
                 }
                 break;
             case 'clearYourDBrollData':
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
                 dbconfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
