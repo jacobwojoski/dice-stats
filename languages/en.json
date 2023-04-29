@@ -135,7 +135,8 @@
             "save_data_btn": "Save YOUR Player Data To DB",
             "clear_all_local_data_btn":"Clear ALL locally stored data",
             "clear_my_local_data_btn":"Clear YOUR locally stored data",
-            "clear_my_db_info":"Clear YOUR DB values"
+            "clear_my_db_info":"Clear YOUR DB values",
+            "clear_your_both":"Clear Your Local And DB Values"
         },
         "roll_chat_form":{
 

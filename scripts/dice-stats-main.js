@@ -721,7 +721,6 @@ class PlayerStatusPage extends FormApplication {
                         });
     
                     if (dbconfirmation) {
-                        CLASSOBJ.clearUsersRollData(game.user.id);
                         DB_INTERACTION.clearPlayer(game.user);
                         if(PLAYERFORMOBJ){
                             PLAYERFORMOBJ.render();
@@ -733,7 +732,7 @@ class PlayerStatusPage extends FormApplication {
                 //context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
                 title_txt = "Clear All Your Info";
                 context_txt = "Clear both DB and Local data";
-                dbconfirmation = await Dialog.confirm({
+                const dbconfirmation = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
                     yes: () => {return true},
@@ -742,6 +741,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (dbconfirmation) {
+                    CLASSOBJ.clearUsersRollData(game.user.id);
                     DB_INTERACTION.clearPlayer(game.user);
                     if(PLAYERFORMOBJ){
                         PLAYERFORMOBJ.render();
@@ -889,21 +889,6 @@ class GlobalStatusPage extends FormApplication{
 
                 if (dbconfirmation) {
                     DB_INTERACTION.clearDB();
-                }
-                break;
-            case 'clearYourDBrollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_db.context');
-                dbconfirmation = await Dialog.confirm({
-                    title: title_txt,
-                    content: context_txt,
-                    yes: () => {return true},
-                    no: () => {return false},
-                    defaultYes: false
-                    });
-
-                if (dbconfirmation) {
-                    DB_INTERACTION.clearPlayer(game.user);
                 }
                 break;
             case 'd2checkbox':
