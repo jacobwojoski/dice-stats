@@ -1087,39 +1087,40 @@ playerToolsObj1 =
     toggle: true,
     active: false,
     button: true, 
-    onclick(){system.log("Test")}
+    onclick: () => {system.log("Test")}
 }
 
 playerToolsObj2 =
 {
-    name: 'jacob',
+    name: 'Jacob',
     title: 'Wojo Title',
     icon: 'fas fa-dice-d20',
     visible: true ,
     toggle: false,
     active: true,
     button: true, 
-    onclick(){system.log("Test")}
+    onclick: () => {system.log("Test")}
 }
 
 DiceStatsLayerObj =
 {
     name: 'dstats',
-    title: 'Player Stats',
+    title: 'diceStatsButton',
     layer: 'diceStatsButtons',
     icon: 'fas fa-dice-d20',
     visible: true,
     tools: [playerToolsObj1,playerToolsObj2],
-    activeTool : 'jacob'
+    activeTool : 'Jacob',
+    activate : () => {system.log("Test")}
 }
 
 Hooks.on("getSceneControlButtons", controls => {
     let newControl = DiceStatsLayerObj;
-    //controls[0].tools.push(newControl);
     controls.push(newControl)
     console.log(controls);
 });
 
+//controls[0].tools.push(newControl);
 //Autoload DB info on connection if setting is checked
 Hooks.on('ready', () => {
 
