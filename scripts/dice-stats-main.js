@@ -1087,7 +1087,7 @@ playerToolsObj1 =
     toggle: true,
     active: false,
     button: true, 
-    onclick: () => {system.log("Test")}
+    onClick: () => {console.log("Test1")}
 }
 
 playerToolsObj2 =
@@ -1099,24 +1099,49 @@ playerToolsObj2 =
     toggle: false,
     active: true,
     button: true, 
-    onclick: () => {system.log("Test")}
+    onClick: () => {console.log("Test2")}
+}
+
+playerToolsObj3 =
+{
+    name: 'Custom',
+    title: 'My Custom',
+    icon: 'fas fa-dice-d20',
+    visible: true ,
+    toggle: false,
+    //active: false,
+    button: true, 
+    onClick: () => {console.log("Test3")}
 }
 
 DiceStatsLayerObj =
 {
     name: 'dstats',
     title: 'diceStatsButton',
-    layer: 'diceStatsButtons',
+    layer: 'tokens',
     icon: 'fas fa-dice-d20',
     visible: true,
-    tools: [playerToolsObj1,playerToolsObj2],
-    activeTool : 'Jacob',
-    activate : () => {system.log("Test")}
+    tools: [playerToolsObj1,playerToolsObj2,playerToolsObj3],
+    button: true,
+    onClick: () => {
+        console.log("Test5");
+    },
+    //     if(GLOBALFORMOBJ){
+    //         GLOBALFORMOBJ.render();
+    //     }
+    // }
+    //activeTool : 'Jacob'
+    activate: () => {console.log("Test4")}
 }
 
 Hooks.on("getSceneControlButtons", controls => {
-    let newControl = DiceStatsLayerObj;
-    controls.push(newControl)
+    //var mylayer = new CanvasLayer();
+    //mylayer.name = 'diceStatsButtons';
+    //canvas.push(mylayer);
+
+    controls[0].tools.push(playerToolsObj3);
+
+    controls.push(DiceStatsLayerObj)
     console.log(controls);
 });
 
