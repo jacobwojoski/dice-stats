@@ -1125,19 +1125,80 @@ DiceStatsLayerObj =
     tools: [playerToolsObj1,playerToolsObj2,playerToolsObj3],
 }
 
-Hooks.on("getSceneControlButtons", controls => {
-    // var mylayer = new CanvasLayer();
-    // mylayer.name = 'diceStatsButtons';
-    // canvas.layers.push(mylayer);
+class CustomSceneControlToolGlobal 
+{
+    name= 'Custom';
+    title= 'My Custom';
+    icon= 'fas fa-dice-d20';
+    visible= true;
+    toggle= false;
+    active= false;
+    button= true; 
+    onClick(){
+        if(GLOBALFORMOBJ){
+            GLOBALFORMOBJ.render();
+        }else{
+            GLOBALFORMOBJ = new GlobalStatusPage().render(true);
+        }
+    }
+}
 
-    //mylayer = new CanvasLayer();
-    //mylayer.name = 'myButtonLayer';
-    //canvas.layers.push(mylayer);
-    
-    //controls[0].tools.push(playerToolsObj3);
+class CustomSceneControlToolPlayer
+{
+    name= 'Custom';
+    title= 'My Custom';
+    icon= 'fas fa-dice-d20';
+    visible= true;
+    toggle= false;
+    active= false;
+    button= true; 
+    onClick(){
+        let canSeeGM = game.settings.get(MODULE_ID,SETTINGS.PLAYERS_SEE_GM);
+        let amIGM = game.users.get(game.userId)?.isGM;
+        if(canSeeGM === false && user.isGM && !amIGM){
+            //do nothing, Dont allow ability to see gm data if setting is off
+            ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
+        }else{
+            PLAYERFORMOBJ = new PlayerStatusPage(user.id).render(true);
+        }
+    }
+
+    constructor(playerName, PlayerID, icon)
+    {
+
+    }
+}
+
+class CustomSceneControl
+{
+    name = 'dstats';
+    title = 'diceStatsButton';
+    layer = 'controls';
+    icon = 'fas fa-dice-d20';
+    visible = true;
+    tools = [];
+
+    constructor(customTools)
+    {
+        this.tools = [...customTools];
+    }
+}
+
+GLOBAL_CONTROLS_OBJ = null;
+Hooks.on("getSceneControlButtons", controls => {
+    if(GLOBAL_CONTROLS_OBJ == null)
+    {
+        myTools = []
+        myTools.push();
+        for()
+        {
+            myTools.push(new CustomSceneControlToolPlayer())
+        }
+        
+        GLOBAL_CONTROLS_OBJ = new CustomSceneControl(myTools);
+    }
 
     controls.push(DiceStatsLayerObj)
-    //mylayer.render();
     console.log(controls);
 });
 
