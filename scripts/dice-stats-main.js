@@ -1051,6 +1051,7 @@ handleChatMsgHook = (chatMessage) => {
 Hooks.on('createChatMessage', handleChatMsgHook);
 
 // Initialize dialog and settings on foundry boot up
+let mylayer;
 Hooks.once('init', () => {
     CLASSOBJ = new DiceStatsTracker();
     DB_INTERACTION.createDB();
@@ -1084,7 +1085,7 @@ playerToolsObj1 =
     title: 'Sadie Title',
     icon: 'fas fa-dice-d20',
     visible: true ,
-    toggle: true,
+    toggle: false,
     active: false,
     button: true, 
     onClick: () => {console.log("Test1")}
@@ -1109,7 +1110,7 @@ playerToolsObj3 =
     icon: 'fas fa-dice-d20',
     visible: true ,
     toggle: false,
-    //active: false,
+    active: false,
     button: true, 
     onClick: () => {console.log("Test3")}
 }
@@ -1118,30 +1119,25 @@ DiceStatsLayerObj =
 {
     name: 'dstats',
     title: 'diceStatsButton',
-    layer: 'tokens',
+    layer: 'controls',
     icon: 'fas fa-dice-d20',
     visible: true,
     tools: [playerToolsObj1,playerToolsObj2,playerToolsObj3],
-    button: true,
-    onClick: () => {
-        console.log("Test5");
-    },
-    //     if(GLOBALFORMOBJ){
-    //         GLOBALFORMOBJ.render();
-    //     }
-    // }
-    //activeTool : 'Jacob'
-    activate: () => {console.log("Test4")}
 }
 
 Hooks.on("getSceneControlButtons", controls => {
-    //var mylayer = new CanvasLayer();
-    //mylayer.name = 'diceStatsButtons';
-    //canvas.push(mylayer);
+    // var mylayer = new CanvasLayer();
+    // mylayer.name = 'diceStatsButtons';
+    // canvas.layers.push(mylayer);
 
-    controls[0].tools.push(playerToolsObj3);
+    //mylayer = new CanvasLayer();
+    //mylayer.name = 'myButtonLayer';
+    //canvas.layers.push(mylayer);
+    
+    //controls[0].tools.push(playerToolsObj3);
 
     controls.push(DiceStatsLayerObj)
+    //mylayer.render();
     console.log(controls);
 });
 
