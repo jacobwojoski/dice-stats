@@ -33,7 +33,8 @@ const SETTINGS = {
     ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: false] (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
-    ENABLE_STREAK_MSGS: 'enable_streak_msgs'   //Choose what dice to display streak msgs for    [Default : d20]             (Local)     
+    ENABLE_STREAK_MSGS: 'enable_streak_msgs',   //Choose what dice to display streak msgs for    [Default : d20]            (Local)
+    ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : false]          (Local)     
 }
 
 /**
@@ -351,6 +352,16 @@ class DiceStatsTracker {
             scope: 'world',
             config: true,
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB}.Hint`,
+        })
+
+        // A setting to let the user change access buttons to use something else
+        game.settings.register(this.ID, SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS , {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Hint`,
         })
         /*
         // A setting to determine whether players can see their own data
@@ -1052,8 +1063,66 @@ Hooks.once('init', () => {
     }
 })
 
+
+// class MySceneControl extends SceneControls {
+//     constructor() {
+//       super();
+//       this.icon = 'fas fa-dice-d20'; // Set the icon for your button
+//       this.label = 'My Dice Stats Button'; // Set the label for your button
+//       this.callback = () => console.log('My button clicked!'); // Set the callback function for your button
+//     }
+// }
+
+// Hooks.on('renderSceneControls', (controls, html) => {
+//   const control = new MySceneControl();
+//   controls.push(control);
+//   control.render(true);
+// });
+playerToolsObj1 =
+{
+    name: 'Sadie',
+    title: 'Sadie Title',
+    icon: 'fas fa-dice-d20',
+    visible: true ,
+    toggle: true,
+    active: false,
+    button: true, 
+    onclick(){system.log("Test")}
+}
+
+playerToolsObj2 =
+{
+    name: 'jacob',
+    title: 'Wojo Title',
+    icon: 'fas fa-dice-d20',
+    visible: true ,
+    toggle: false,
+    active: true,
+    button: true, 
+    onclick(){system.log("Test")}
+}
+
+DiceStatsLayerObj =
+{
+    name: 'dstats',
+    title: 'Player Stats',
+    layer: 'diceStatsButtons',
+    icon: 'fas fa-dice-d20',
+    visible: true,
+    tools: [playerToolsObj1,playerToolsObj2],
+    activeTool : 'jacob'
+}
+
+Hooks.on("getSceneControlButtons", controls => {
+    let newControl = DiceStatsLayerObj;
+    //controls[0].tools.push(newControl);
+    controls.push(newControl)
+    console.log(controls);
+});
+
 //Autoload DB info on connection if setting is checked
 Hooks.on('ready', () => {
+
     if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
     {
         CLASSOBJ.loadAllPlayerData();

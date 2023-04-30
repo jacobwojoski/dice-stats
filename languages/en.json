@@ -52,6 +52,10 @@
             "enable_blind_streak_msgs": {
                 "Name" : "See blind streaks",
                 "Hint" : "If a streak has a blind roll in it its not printed to chat unless this is enabled"
+            },
+            "enable_other_access_buttons":{
+                "Name" : "Use Other Access Buttons",
+                "Hint" : "Changes access buttons from the player list to XXXXX"
             }
         },
         "both_forms":{
