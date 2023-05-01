@@ -32,10 +32,12 @@ const SETTINGS = {
     ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
     SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
     ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: false] (Global)
+    OTHER_ACCESS_BUTTON_ICONS: 'player_access_icons', //Change player icons to use custom       [Default: fas fa-dice-d20]  (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
     ENABLE_STREAK_MSGS: 'enable_streak_msgs',   //Choose what dice to display streak msgs for    [Default : d20]            (Local)
-    ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : false]          (Local)     
+    ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : false]         (Local)
+
 }
 
 /**
@@ -364,6 +366,17 @@ class DiceStatsTracker {
             config: true,
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Hint`,
         })
+
+        // A Setting to change access icons when using the new access items
+        game.settings.register(this.ID, SETTINGS.OTHER_ACCESS_BUTTON_ICONS, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Name`,
+            default: false,
+            type: String,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Hint`,
+        })
+
         /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
