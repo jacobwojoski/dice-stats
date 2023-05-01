@@ -503,15 +503,18 @@ class DiceStatsTracker {
             {
                 let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
 
-                DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
-                this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
+                if(localPlayerInfo)
+                {
+                    DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
+                    this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
 
-                if(GLOBALFORMOBJ){
-                    GLOBALFORMOBJ.render();
-                }
+                    if(GLOBALFORMOBJ != null){
+                        GLOBALFORMOBJ.render();
+                    }
 
-                if(PLAYERFORMOBJ){
-                    PLAYERFORMOBJ.render();
+                    if(PLAYERFORMOBJ != null){
+                        PLAYERFORMOBJ.render();
+                    }
                 }
             }
         }
@@ -977,6 +980,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
     CLASSOBJ.updateMap();
+
     // This add icon to ALL players on the player list
     const tooltip = game.i18n.localize('DICE_STATS_TEXT.player-stats-button-title')
     for (let user of game.users) {
@@ -1112,7 +1116,10 @@ Hooks.on("getSceneControlButtons", controls => {
 
 //controls[0].tools.push(newControl);
 //Autoload DB info on connection if setting is checked
-Hooks.on('ready', () => {
+Hooks.once('ready', () => {
+    //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
+    CLASSOBJ.updateMap();
+
     if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
     {
         CLASSOBJ.loadAllPlayerData();
