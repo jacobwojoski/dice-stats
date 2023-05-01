@@ -2,6 +2,7 @@
 CLASSOBJ = null;
 GLOBALFORMOBJ = null;
 PLAYERFORMOBJ = null;
+GLOBALSCENECONTROLSOBJ = null;
 let socket;
 
 //----GLOBAL CONST VALUES----
@@ -1051,7 +1052,6 @@ handleChatMsgHook = (chatMessage) => {
 Hooks.on('createChatMessage', handleChatMsgHook);
 
 // Initialize dialog and settings on foundry boot up
-let mylayer;
 Hooks.once('init', () => {
     CLASSOBJ = new DiceStatsTracker();
     DB_INTERACTION.createDB();
@@ -1064,21 +1064,6 @@ Hooks.once('init', () => {
     }
 })
 
-
-// class MySceneControl extends SceneControls {
-//     constructor() {
-//       super();
-//       this.icon = 'fas fa-dice-d20'; // Set the icon for your button
-//       this.label = 'My Dice Stats Button'; // Set the label for your button
-//       this.callback = () => console.log('My button clicked!'); // Set the callback function for your button
-//     }
-// }
-
-// Hooks.on('renderSceneControls', (controls, html) => {
-//   const control = new MySceneControl();
-//   controls.push(control);
-//   control.render(true);
-// });
 playerToolsObj1 =
 {
     name: 'Sadie',
@@ -1125,87 +1110,49 @@ DiceStatsLayerObj =
     tools: [playerToolsObj1,playerToolsObj2,playerToolsObj3],
 }
 
-class CustomSceneControlToolGlobal 
-{
-    name= 'Custom';
-    title= 'My Custom';
-    icon= 'fas fa-dice-d20';
-    visible= true;
-    toggle= false;
-    active= false;
-    button= true; 
-    onClick(){
-        if(GLOBALFORMOBJ){
-            GLOBALFORMOBJ.render();
-        }else{
-            GLOBALFORMOBJ = new GlobalStatusPage().render(true);
-        }
-    }
-}
-
-class CustomSceneControlToolPlayer
-{
-    name= 'Custom';
-    title= 'My Custom';
-    icon= 'fas fa-dice-d20';
-    visible= true;
-    toggle= false;
-    active= false;
-    button= true; 
-    onClick(){
-        let canSeeGM = game.settings.get(MODULE_ID,SETTINGS.PLAYERS_SEE_GM);
-        let amIGM = game.users.get(game.userId)?.isGM;
-        if(canSeeGM === false && user.isGM && !amIGM){
-            //do nothing, Dont allow ability to see gm data if setting is off
-            ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
-        }else{
-            PLAYERFORMOBJ = new PlayerStatusPage(user.id).render(true);
-        }
-    }
-
-    constructor(playerName, PlayerID, icon)
-    {
-
-    }
-}
-
-class CustomSceneControl
-{
-    name = 'dstats';
-    title = 'diceStatsButton';
-    layer = 'controls';
-    icon = 'fas fa-dice-d20';
-    visible = true;
-    tools = [];
-
-    constructor(customTools)
-    {
-        this.tools = [...customTools];
-    }
-}
-
-GLOBAL_CONTROLS_OBJ = null;
 Hooks.on("getSceneControlButtons", controls => {
-    if(GLOBAL_CONTROLS_OBJ == null)
-    {
-        myTools = []
-        myTools.push();
-        for()
-        {
-            myTools.push(new CustomSceneControlToolPlayer())
-        }
+    
+    if(game && game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS)){
         
-        GLOBAL_CONTROLS_OBJ = new CustomSceneControl(myTools);
-    }
+ 
+        if(GLOBALSCENECONTROLSOBJ == null){
+            let toolsMade = 0;
+            playersAsTools = [];
 
-    controls.push(DiceStatsLayerObj)
-    console.log(controls);
+            playersAsTools.push(new CustomSceneControlToolGlobal());
+
+            for(user in game.users){
+                playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, 'fas fa-dice-d20'));
+                toolsMade++;
+            }
+            
+            GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
+        }
+
+        if(GLOBALSCENECONTROLSOBJ!=null && !controls.includes(DiceStatsLayerObj))
+        {
+            controls.push(DiceStatsLayerObj)
+        }
+    
+        console.log(controls);
+    }
+    
+    // if(GLOBAL_CONTROLS_OBJ == null)
+    // {
+    //     myTools = []
+    //     myTools.push();
+    //     for()
+    //     {
+    //         myTools.push(new CustomSceneControlToolPlayer())
+    //     }
+        
+    //     GLOBAL_CONTROLS_OBJ = new CustomSceneControl(myTools);
+    // }
 });
 
 //controls[0].tools.push(newControl);
 //Autoload DB info on connection if setting is checked
 Hooks.on('ready', () => {
-
     if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
     {
         CLASSOBJ.loadAllPlayerData();
