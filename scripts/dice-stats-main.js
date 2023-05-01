@@ -951,6 +951,8 @@ class GlobalStatusPage extends FormApplication{
 
 Hooks.on('renderPlayerList', (playerList, html) => {
 
+    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
+
     const btn = html.find(`[data-user-id="${game.userId}"]`)
     btn.append(
         `<button type="button" title='Global Stats' class="open-player-stats-button flex0" id="globalStatsBtn"><i class="fa-solid fa-earth-americas"></i></button>`
@@ -988,59 +990,59 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
 
 function midiQolSupport(){
-        /*Add Hook for Midi-QoL */
-        Hooks.on("midi-qol.RollComplete", (workflow) => {
-            //Deal with Attack Rolls
-            if(workflow.attackRollCount > 0){
-                let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
-                let isBlind = false;
+    /*Add Hook for Midi-QoL */
+    Hooks.on("midi-qol.RollComplete", (workflow) => {
+        //Deal with Attack Rolls
+        if(workflow.attackRollCount > 0){
+            let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
+            let isBlind = false;
 
-                if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
-                    isBlind = true;
-                }
-
-                let rolls = [];
-                for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.attackRoll.terms[0].results[i].result);
-                }
-
-                //Get Associated Player
-                let myId = game.userId;
-                let owners = Object.keys(workflow.actor.ownership);
-                let owner = owners[owners.length-1];
-                //If no owner found first pos should be GM ID
-                if(owner === undefined){
-                    owner = owners[1];
-                }
-                 
-                CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+            if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
+                isBlind = true;
             }
-              
-            //Deal with dmg rolls
-            if(workflow.damageRollCount > 0){
-                let dieType = MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
-                let isBlind = false;
 
-                if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
-                    isBlind = true;
-                }
-
-                let rolls = []
-                for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.damageRoll.terms[0].results[i].result);
-                }
-
-                //Get Associated Player
-                let owners = Object.keys(workflow.actor.ownership);
-                let owner = owners[owners.length-1];
-                //If no owner found first pos should be GM ID
-                if(owner === undefined){
-                    owner = owners[1];
-                }
-                 
-                CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+            let rolls = [];
+            for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
+                rolls.push(workflow.attackRoll.terms[0].results[i].result);
             }
-        })
+
+            //Get Associated Player
+            let myId = game.userId;
+            let owners = Object.keys(workflow.actor.ownership);
+            let owner = owners[owners.length-1];
+            //If no owner found first pos should be GM ID
+            if(owner === undefined){
+                owner = owners[1];
+            }
+                
+            CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+        }
+            
+        //Deal with dmg rolls
+        if(workflow.damageRollCount > 0){
+            let dieType = MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
+            let isBlind = false;
+
+            if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
+                isBlind = true;
+            }
+
+            let rolls = []
+            for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
+                rolls.push(workflow.damageRoll.terms[0].results[i].result);
+            }
+
+            //Get Associated Player
+            let owners = Object.keys(workflow.actor.ownership);
+            let owner = owners[owners.length-1];
+            //If no owner found first pos should be GM ID
+            if(owner === undefined){
+                owner = owners[1];
+            }
+                
+            CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+        }
+    })
 }
 
 handleChatMsgHook = (chatMessage) => {
@@ -1064,90 +1066,35 @@ Hooks.once('init', () => {
     }
 })
 
-playerToolsObj1 =
-{
-    name: 'Sadie',
-    title: 'Sadie Title',
-    icon: 'fas fa-dice-d20',
-    visible: true ,
-    toggle: false,
-    active: false,
-    button: true, 
-    onClick: () => {console.log("Test1")}
-}
-
-playerToolsObj2 =
-{
-    name: 'Jacob',
-    title: 'Wojo Title',
-    icon: 'fas fa-dice-d20',
-    visible: true ,
-    toggle: false,
-    active: true,
-    button: true, 
-    onClick: () => {console.log("Test2")}
-}
-
-playerToolsObj3 =
-{
-    name: 'Custom',
-    title: 'My Custom',
-    icon: 'fas fa-dice-d20',
-    visible: true ,
-    toggle: false,
-    active: false,
-    button: true, 
-    onClick: () => {console.log("Test3")}
-}
-
-DiceStatsLayerObj =
-{
-    name: 'dstats',
-    title: 'diceStatsButton',
-    layer: 'controls',
-    icon: 'fas fa-dice-d20',
-    visible: true,
-    tools: [playerToolsObj1,playerToolsObj2,playerToolsObj3],
-}
-
 Hooks.on("getSceneControlButtons", controls => {
     
     if(game && game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS)){
         
- 
         if(GLOBALSCENECONTROLSOBJ == null){
-            let toolsMade = 0;
+            //let toolsMade = 0;
             playersAsTools = [];
 
             playersAsTools.push(new CustomSceneControlToolGlobal());
 
-            for(user in game.users){
+            for(let user of game.users){
+                if(!user){
+                    return;
+                }
+
                 playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, 'fas fa-dice-d20'));
-                toolsMade++;
             }
             
             GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
         }
 
-        if(GLOBALSCENECONTROLSOBJ!=null && !controls.includes(DiceStatsLayerObj))
+        if(GLOBALSCENECONTROLSOBJ!=null && !controls.includes(GLOBALSCENECONTROLSOBJ))
         {
-            controls.push(DiceStatsLayerObj)
+            //controls.push(DiceStatsLayerObj)
+            controls.push(GLOBALSCENECONTROLSOBJ);
         }
     
         console.log(controls);
     }
-    
-    // if(GLOBAL_CONTROLS_OBJ == null)
-    // {
-    //     myTools = []
-    //     myTools.push();
-    //     for()
-    //     {
-    //         myTools.push(new CustomSceneControlToolPlayer())
-    //     }
-        
-    //     GLOBAL_CONTROLS_OBJ = new CustomSceneControl(myTools);
-    // }
 });
 
 //controls[0].tools.push(newControl);

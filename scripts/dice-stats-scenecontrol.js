@@ -11,11 +11,13 @@ class CustomSceneControlToolGlobal
 
     onClick(){
         if(GLOBALFORMOBJ){
-            GLOBALFORMOBJ.render();
+            GLOBALFORMOBJ.render(true);
         }else{
             GLOBALFORMOBJ = new GlobalStatusPage().render(true);
         }
     }
+
+    constructor(){}
 }
 
 class CustomSceneControlToolPlayer
@@ -37,7 +39,7 @@ class CustomSceneControlToolPlayer
             //do nothing, Dont allow ability to see gm data if setting is off
             ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
         }else{
-            PLAYERFORMOBJ = new PlayerStatusPage(user.id).render(true);
+            PLAYERFORMOBJ = new PlayerStatusPage(this.associatedPlayerId).render(true);
         }
     }
 
