@@ -20,6 +20,24 @@ class CustomSceneControlToolGlobal
     constructor(){}
 }
 
+class CustomSceneControlToolCompare
+{
+    name = 'Compare';
+    title = 'Compare Players';
+    icon = 'fa-solid fa-users-line';
+
+    visible= true;
+    toggle= false;
+    active= false;
+    button= true; 
+
+    onClick(){
+        ui.notifications.warn("Comparison Tool Work In Progress");
+    }
+
+    constructor(){}
+}
+
 class CustomSceneControlToolPlayer
 {
     name = '';

@@ -1092,13 +1092,22 @@ Hooks.on("getSceneControlButtons", controls => {
             playersAsTools = [];
 
             playersAsTools.push(new CustomSceneControlToolGlobal());
+            playersAsTools.push(new CustomSceneControlToolCompare());
 
+            icons = [];
+            icons = ['fa-solid fa-book-open-reader','fa-solid fa-user-shield','fa-solid fa-frog']
+            let i=0;
             for(let user of game.users){
-                if(!user){
-                    return;
+                if(!user){return;}
+
+                icon = 'fas fa-dice-d20';
+                if(icons.length > 0 && icons[i].length > 0)
+                {
+                    icon = icons[i];
                 }
 
-                playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, 'fas fa-dice-d20'));
+                playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, icon));
+                i++;
             }
             
             GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
