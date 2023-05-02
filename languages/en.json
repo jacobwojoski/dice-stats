@@ -55,7 +55,11 @@
             },
             "enable_other_access_buttons":{
                 "Name" : "Use Other Access Buttons",
-                "Hint" : "Changes access buttons from the player list to XXXXX"
+                "Hint" : "Changes access buttons from the player list to Scene Controls"
+            },
+            "player_access_icons":{
+                "Name": "Define Players Icons",
+                "Hint": "Used to change player Icons from D-20's to something custom. Need to use https://fontawesome.com/search?o=r&m=free Font Awesome Icons in a comma seperated list. Order matching players in player list \nEX: fa-solid fa-frog, fa-solid fa-circle, fa-solid fa-skull-crossbones"
             }
         },
         "both_forms":{

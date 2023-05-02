@@ -37,7 +37,6 @@ const SETTINGS = {
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
     ENABLE_STREAK_MSGS: 'enable_streak_msgs',   //Choose what dice to display streak msgs for    [Default : d20]            (Local)
     ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : false]         (Local)
-
 }
 
 /**
@@ -370,11 +369,11 @@ class DiceStatsTracker {
         // A Setting to change access icons when using the new access items
         game.settings.register(this.ID, SETTINGS.OTHER_ACCESS_BUTTON_ICONS, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Name`,
-            default: false,
+            default: 'fas fa-dice-d20',
             type: String,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Hint`,
+            hint: game.i18n.localize(`DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Hint`),
         })
 
         /*
@@ -1083,27 +1082,34 @@ Hooks.once('init', () => {
     }
 })
 
+// Hook to interact when scenecontrols get created Method used to have a better location to access player data
 Hooks.on("getSceneControlButtons", controls => {
     
     if(game && game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS)){
         
+        // Have Scenecontrol as global obj so its not made everytime scenecontrols gets rerendered (this happens alot)
+        // Create new button on scene control
         if(GLOBALSCENECONTROLSOBJ == null){
-            //let toolsMade = 0;
-            playersAsTools = [];
+            let playersAsTools = [];
 
             playersAsTools.push(new CustomSceneControlToolGlobal());
             playersAsTools.push(new CustomSceneControlToolCompare());
 
-            icons = [];
-            icons = ['fa-solid fa-book-open-reader','fa-solid fa-user-shield','fa-solid fa-frog']
+            let string = game.settings.get(MODULE_ID,SETTINGS.OTHER_ACCESS_BUTTON_ICONS);
+            let icons = string.split(',');
             let i=0;
+            let defaultIcon = 'fas fa-dice-d20'
+            
+            //Create sub button for each player
+            //Add players custom icons
             for(let user of game.users){
                 if(!user){return;}
 
-                icon = 'fas fa-dice-d20';
-                if(icons.length > 0 && icons[i].length > 0)
+                if(icons.length > 0 && icons[i])
                 {
                     icon = icons[i];
+                }else{
+                    icon = defaultIcon;
                 }
 
                 playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, icon));
@@ -1115,7 +1121,6 @@ Hooks.on("getSceneControlButtons", controls => {
 
         if(GLOBALSCENECONTROLSOBJ!=null && !controls.includes(GLOBALSCENECONTROLSOBJ))
         {
-            //controls.push(DiceStatsLayerObj)
             controls.push(GLOBALSCENECONTROLSOBJ);
         }
     
