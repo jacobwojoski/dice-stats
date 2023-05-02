@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.9.1 ]  4/28/2023
+### Fixed
+- Bugfix for gm visibility setting
+
 ## [ 1.9.0 ]  4/28/2023
 ### Added
 - Added optional setting to change where to access player roll data

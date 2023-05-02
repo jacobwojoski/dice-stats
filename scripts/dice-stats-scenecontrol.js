@@ -56,7 +56,7 @@ class CustomSceneControlToolPlayer
     onClick(){
         let canSeeGM = game.settings.get(MODULE_ID,SETTINGS.PLAYERS_SEE_GM);
         let amIGM = game.users.get(game.userId)?.isGM;
-        if(canSeeGM === false && user.isGM && !amIGM){
+        if(canSeeGM === false && game.user.isGM && !amIGM){
             //do nothing, Dont allow ability to see gm data if setting is off
             ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
         }else{
