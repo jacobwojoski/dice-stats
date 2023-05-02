@@ -2,6 +2,7 @@
 CLASSOBJ = null;
 GLOBALFORMOBJ = null;
 PLAYERFORMOBJ = null;
+GLOBALSCENECONTROLSOBJ = null;
 let socket;
 
 //----GLOBAL CONST VALUES----
@@ -31,9 +32,11 @@ const SETTINGS = {
     ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
     SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
     ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: false] (Global)
+    OTHER_ACCESS_BUTTON_ICONS: 'player_access_icons', //Change player icons to use custom       [Default: fas fa-dice-d20]  (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
-    ENABLE_STREAK_MSGS: 'enable_streak_msgs'   //Choose what dice to display streak msgs for    [Default : d20]             (Local)     
+    ENABLE_STREAK_MSGS: 'enable_streak_msgs',   //Choose what dice to display streak msgs for    [Default : d20]            (Local)
+    ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : false]         (Local)
 }
 
 /**
@@ -352,6 +355,27 @@ class DiceStatsTracker {
             config: true,
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB}.Hint`,
         })
+
+        // A setting to let the user change access buttons to use something else
+        game.settings.register(this.ID, SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS , {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Hint`,
+        })
+
+        // A Setting to change access icons when using the new access items
+        game.settings.register(this.ID, SETTINGS.OTHER_ACCESS_BUTTON_ICONS, {
+            name: `DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Name`,
+            default: 'fas fa-dice-d20',
+            type: String,
+            scope: 'world',
+            config: true,
+            hint: game.i18n.localize(`DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Hint`),
+        })
+
         /*
         // A setting to determine whether players can see their own data
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
@@ -478,15 +502,18 @@ class DiceStatsTracker {
             {
                 let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
 
-                DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
-                this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
+                if(localPlayerInfo)
+                {
+                    DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
+                    this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
 
-                if(GLOBALFORMOBJ){
-                    GLOBALFORMOBJ.render();
-                }
+                    if(GLOBALFORMOBJ != null){
+                        GLOBALFORMOBJ.render();
+                    }
 
-                if(PLAYERFORMOBJ){
-                    PLAYERFORMOBJ.render();
+                    if(PLAYERFORMOBJ != null){
+                        PLAYERFORMOBJ.render();
+                    }
                 }
             }
         }
@@ -939,6 +966,8 @@ class GlobalStatusPage extends FormApplication{
 
 Hooks.on('renderPlayerList', (playerList, html) => {
 
+    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
+
     const btn = html.find(`[data-user-id="${game.userId}"]`)
     btn.append(
         `<button type="button" title='Global Stats' class="open-player-stats-button flex0" id="globalStatsBtn"><i class="fa-solid fa-earth-americas"></i></button>`
@@ -950,6 +979,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
     CLASSOBJ.updateMap();
+
     // This add icon to ALL players on the player list
     const tooltip = game.i18n.localize('DICE_STATS_TEXT.player-stats-button-title')
     for (let user of game.users) {
@@ -976,59 +1006,59 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
 
 function midiQolSupport(){
-        /*Add Hook for Midi-QoL */
-        Hooks.on("midi-qol.RollComplete", (workflow) => {
-            //Deal with Attack Rolls
-            if(workflow.attackRollCount > 0){
-                let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
-                let isBlind = false;
+    /*Add Hook for Midi-QoL */
+    Hooks.on("midi-qol.RollComplete", (workflow) => {
+        //Deal with Attack Rolls
+        if(workflow.attackRollCount > 0){
+            let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
+            let isBlind = false;
 
-                if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
-                    isBlind = true;
-                }
-
-                let rolls = [];
-                for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.attackRoll.terms[0].results[i].result);
-                }
-
-                //Get Associated Player
-                let myId = game.userId;
-                let owners = Object.keys(workflow.actor.ownership);
-                let owner = owners[owners.length-1];
-                //If no owner found first pos should be GM ID
-                if(owner === undefined){
-                    owner = owners[1];
-                }
-                 
-                CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+            if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
+                isBlind = true;
             }
-              
-            //Deal with dmg rolls
-            if(workflow.damageRollCount > 0){
-                let dieType = MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
-                let isBlind = false;
 
-                if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
-                    isBlind = true;
-                }
-
-                let rolls = []
-                for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
-                    rolls.push(workflow.damageRoll.terms[0].results[i].result);
-                }
-
-                //Get Associated Player
-                let owners = Object.keys(workflow.actor.ownership);
-                let owner = owners[owners.length-1];
-                //If no owner found first pos should be GM ID
-                if(owner === undefined){
-                    owner = owners[1];
-                }
-                 
-                CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+            let rolls = [];
+            for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
+                rolls.push(workflow.attackRoll.terms[0].results[i].result);
             }
-        })
+
+            //Get Associated Player
+            let myId = game.userId;
+            let owners = Object.keys(workflow.actor.ownership);
+            let owner = owners[owners.length-1];
+            //If no owner found first pos should be GM ID
+            if(owner === undefined){
+                owner = owners[1];
+            }
+                
+            CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+        }
+            
+        //Deal with dmg rolls
+        if(workflow.damageRollCount > 0){
+            let dieType = MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
+            let isBlind = false;
+
+            if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
+                isBlind = true;
+            }
+
+            let rolls = []
+            for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
+                rolls.push(workflow.damageRoll.terms[0].results[i].result);
+            }
+
+            //Get Associated Player
+            let owners = Object.keys(workflow.actor.ownership);
+            let owner = owners[owners.length-1];
+            //If no owner found first pos should be GM ID
+            if(owner === undefined){
+                owner = owners[1];
+            }
+                
+            CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+        }
+    })
 }
 
 handleChatMsgHook = (chatMessage) => {
@@ -1052,8 +1082,58 @@ Hooks.once('init', () => {
     }
 })
 
+// Hook to interact when scenecontrols get created Method used to have a better location to access player data
+Hooks.on("getSceneControlButtons", controls => {
+    
+    if(game && game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS)){
+        
+        // Have Scenecontrol as global obj so its not made everytime scenecontrols gets rerendered (this happens alot)
+        // Create new button on scene control
+        if(GLOBALSCENECONTROLSOBJ == null){
+            let playersAsTools = [];
+
+            playersAsTools.push(new CustomSceneControlToolGlobal());
+            playersAsTools.push(new CustomSceneControlToolCompare());
+
+            let string = game.settings.get(MODULE_ID,SETTINGS.OTHER_ACCESS_BUTTON_ICONS);
+            let icons = string.split(',');
+            let i=0;
+            let defaultIcon = 'fas fa-dice-d20'
+            
+            //Create sub button for each player
+            //Add players custom icons
+            for(let user of game.users){
+                if(!user){return;}
+
+                if(icons.length > 0 && icons[i])
+                {
+                    icon = icons[i];
+                }else{
+                    icon = defaultIcon;
+                }
+
+                playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, icon));
+                i++;
+            }
+            
+            GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
+        }
+
+        if(GLOBALSCENECONTROLSOBJ!=null && !controls.includes(GLOBALSCENECONTROLSOBJ))
+        {
+            controls.push(GLOBALSCENECONTROLSOBJ);
+        }
+    
+        console.log(controls);
+    }
+});
+
+//controls[0].tools.push(newControl);
 //Autoload DB info on connection if setting is checked
-Hooks.on('ready', () => {
+Hooks.once('ready', () => {
+    //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
+    CLASSOBJ.updateMap();
+
     if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
     {
         CLASSOBJ.loadAllPlayerData();

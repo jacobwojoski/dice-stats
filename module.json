@@ -16,6 +16,7 @@
     "scripts/dice-stats-utils.js",
     "scripts/dice-stats-datapack.js",
     "scripts/dice-stats-db.js",
+    "scripts/dice-stats-scenecontrol.js",
     "scripts/googleChartImport.js"
   ],
   "styles": [
@@ -30,8 +31,8 @@
     }
   ],
   "socket": true,
-  "version": "1.8.0",
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.8.0.zip",
+  "version": "1.9.0",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.9.0.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
   "readme": "https://github.com/jacobwojoski/dice-stats",

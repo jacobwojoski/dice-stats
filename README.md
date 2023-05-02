@@ -1,7 +1,7 @@
 # Dice Stats
 A foundry vtt module to view dice stats (Number of each roll in a Chart! See Below)  
 Currently stats are stored by parsing chat. If the user joins the game late after rolls were made  
-they will only get data from that point on. Original Idea was from [Catan Online](https://colonist.io/)  
+they will only get data from that point on unless **Auto DB** Setting is enabled. Original Idea was from [Catan Online](https://colonist.io/)  
 end-of-game dice stats screen and wanted something similar to let players look at during or the end of a session.   
 
 Used Google Charts as a charting library. (MIT License)
@@ -14,7 +14,7 @@ Wanted the ability to track multiple dice types. This Basically lead to a full r
 - GM Data Does not get added to global stats by default so Players cant use it to cheat and see any of the GM's rolls
 
 ## DESIGN PHILOSOPHY
-The original design philosophy was a way to view SESSION stats. Rolls will always avg out over long periods of time so personaly I only wanted to look at per session data. Because of this the implementation resets stats when leaving in joining. Im currently Looking into adding a DB like feature where persistant stats can be saved if the user would like it as well as allowing resetting the DB for session only stats [View Issue #19](https://github.com/jacobwojoski/dice-stats/issues/19)
+The original design philosophy was a way to view SESSION stats. Rolls will always avg out over long periods of time so personaly I only wanted to look at per session data. Because of this the implementation resets stats when leaving in joining. There is now a DB setting if you would like stats to stay between sessions
 
 ## DEPENDENCIES
 [socketlib](https://github.com/manuelVo/foundryvtt-socketlib) | 
@@ -23,7 +23,6 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
-    - Shadow Of The Demon Lord (Rolls are printed but not as normal roll objects.
 - **Midi-Qol** if **Merge Rolls to 1 Card** is enabled but have a partial fix. 
     - Midi-qol.rollComplete hook Doesnt have a way to trace back to the Player that rolled. Only the actor
     - I Used actor.owner property to find out who to associate the roll with but that makes the following issues
@@ -41,6 +40,7 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 - Median (true-Middle for Odd or left-middle for Even number of rolls)
 - Mode  
 - Streaks (Incrementing die rolls in a row) 4,5,6,7 ect  
+- Save and Clear Player Data to DB
   
 ## Form Info and Features (Global)
 - Checkboxes to limit which dice types are displayed 
@@ -51,24 +51,11 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 - Global Mode
 - Global Longest Streaks (Player Name and Streak Value)
 - Most Min and Most Max values Rolled (Player Name and Number)
+- Clear All Players Data
 
 ## Dice Types Supported  
 Tracks multiple dice types. Currently supporting types are:  
 - D2, D3, D4, D6, D8, D10, D12, D20, D100
-
-## Hand Editing Dice Types (DONT RECCOMEND, MAKE ISSUE INSTEAD)
-The user can **hand edit** the dice types saved by editing the following
- * main/NUM_DIE_TYPES 
- * main/DIE_TYPE
- * main/DIE_MAX
- * main/MAX_TO_DIE
- * datapack/PLAYER_HANDL_INFO/DICE_ROLL_DATA
- * datapack/GLOBAL_HANDL_INFO/DICE_ROLL_DATA
- * dice-stats-player //Lots of changes would need to be made here as I dont know good way to implement loops in handlebars 
-    * (Could prolly make a fn that returns an HTML string or some shit tho)
- * dice-stats-global //Same as Player
-<b> Its Alot of work if adding a die between current die options as all UI's Would need to be updated by hand </b>
-<b> Planned Feature to add more dice types </b>
   
 ## Module Settings (Not All are Implemented Yet)
 [Def: XX] = Default value for setting  
@@ -84,7 +71,9 @@ Global Settings are restricted to GM only by default
 - SHOW_BLIND_ROLLS_IMMEDIATE -- let Blind Rolls be added to player stats immediately ---[Def: false] (Global)
 - ENABLE_CRIT_MSGS ------------  Choose what dice print crit msgs ---------------------[Def: d20]      (Local)
 - TYPES_OF_CRIT_MSGS ---------- Choose Type of crits to print ------------------------[Def: Both]     (Local)
-- ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def : d20]     (Local)  
+- ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def: d20]     (Local)  
+- ENABLE_OTHER_ACCESS_BUTTONS - Move buttons from Playerlist to scene controls ---[Def: false] (Local)
+- OTHER_ACCESS_BUTTON_ICONS - Setting to add custom icons on Scene Controls buttons - [Def: false] (Local)
 
 ## Install  
 If prerelease version is desired the user can add to module folder by hand by placing it in   
