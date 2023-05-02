@@ -1,3 +1,4 @@
+// Global Scene Control Icon 
 class CustomSceneControlToolGlobal 
 {
     name = 'Global';
@@ -20,6 +21,7 @@ class CustomSceneControlToolGlobal
     constructor(){}
 }
 
+// Compare Scene Control Icon
 class CustomSceneControlToolCompare
 {
     name = 'Compare';
@@ -38,6 +40,7 @@ class CustomSceneControlToolCompare
     constructor(){}
 }
 
+// Player Scene Control Icons 
 class CustomSceneControlToolPlayer
 {
     name = '';
@@ -70,6 +73,7 @@ class CustomSceneControlToolPlayer
     }
 }
 
+// Scene Controller outer button to view player buttons
 class CustomSceneControl
 {
     name = 'dstats';
