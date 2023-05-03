@@ -12,6 +12,7 @@ Wanted the ability to track multiple dice types. This Basically lead to a full r
 - GM's Rolls for player will count as GM Rolls (Unless Midi Qol is active)
 - Blind rolls get tracked but do not get added to results screen unless GM Presses "PUSH BLIND ROLLS" button on Global Stats Display
 - GM Data Does not get added to global stats by default so Players cant use it to cheat and see any of the GM's rolls
+- Database is not automatically used by default (auto DB adding and loading) as its unclear of the performance impact
 
 ## DESIGN PHILOSOPHY
 The original design philosophy was a way to view SESSION stats. Rolls will always avg out over long periods of time so personaly I only wanted to look at per session data. Because of this the implementation resets stats when leaving in joining. There is now a DB setting if you would like stats to stay between sessions
@@ -51,7 +52,7 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 - Global Mode
 - Global Longest Streaks (Player Name and Streak Value)
 - Most Min and Most Max values Rolled (Player Name and Number)
-- Clear All Players Data
+- Clear All Players Data (GM Only)
 
 ## Dice Types Supported  
 Tracks multiple dice types. Currently supporting types are:  
@@ -86,14 +87,24 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
   - Press Globe for Global Stats (Should only have 1 globe by clients username)  
 ![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
 
-- PLAYERS_SEE_GM = False  (Warning displayed if trying to view GM values)
+- If **Use Other Access Buttons** is enabled the buttons are removed from the player list and are instead added to the SCENE Controls.
+    - ![Icon Img](https://i.imgur.com/y0IwT0b.png) ![Icon Img 2](https://i.imgur.com/cXyQ1AV.png)
+    - Icons for Global and Compare buttons are hard coded and cant be changed
+    - The default value is the d20 icon but users can change the players Icons from the D-20 to anything on the font awesome icon website under the free section
+    - [Where to find Icons](https://fontawesome.com/search?o=a&m=free)
+    - Users can change the icons but updating the **Define Player Icons** field in the game settings
+    - Update the field to a comma seperated list of the ion text from the font awesome website. The order of the text list corresponds to the order of players in the player list from top down. 
+    - EX: Updating the field to `fa-solid fa-book-open-reader, fa-solid fa-dumbbell, fa-solid fa-explosion` as sceen in the following image changes the icons to what I have in my photos (Photo doesnt show full string of icons)
+    - ![My Settings Values](https://i.imgur.com/CocZunr.png)
+
+- Hideing GM Values from players so they cant cheat to see the GM rolls
+- PLAYERS_SEE_GM = False  (Warning is displayed if trying to view GM values with setting sating you cant)
 ![PLAYERS_SEE_GM = False](https://i.imgur.com/sGELoCJ.png)  
   
 - Database Interaction
-    - Database buttons are on **YOUR** Player dice stats screen at the bottom
-    - All users need to **MANUALLY SAVE** their data to the DB. 
-    - You Cant save other players data they must save it!
-![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
+    - **Automatically use DB** setting will allow users roll data save between session, load immediately on joining, autosave every roll but it could negatively impact performance
+    - If **Automatically use DB** is **Disabled** players can still save and load the info between sessions but they need to do it manually and if they forget leaving and rejoining will clear their data
+    - ![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
 
 ## FORM PHOTOS
 ### Player D20  
@@ -110,38 +121,4 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 
 ### Global Clear Local Data Button
 ![GLB CLR](https://i.imgur.com/GtGz0h4.png)
-
-## Ongoing Issues
-- Support Other Systems  
-
-## Planned Features
-- Streaks in Both Direction  
-- Add Most Max val and Most min values rolls Adjusted for % of total rolls  
-- Comparison Tool, Show a few players info size by side  
-- Deal w/ Multiple of same values (Streak or same length streak | Multiple with max number of rolls)  
-- Output to Chat how many Nat1 & 20's have been rolled by that player when one gets rolled  
-- Output to Chat when multiple max's get rolled in a row
-- Output to chat Lows and Highs for some other die types. Maybe just milestone numbers? EX Multiple of 5's on a d4 or d6 (10th 1, 15th 5)?  
-- Support more die types   
-- Export and Import Data (Prolly W/ JSON Formatting)
-
-## Planed Code Refactoring
-- Update Refresh Button to use "this" modifier instead of a global
-- Change Code to be properly formated in libs
-- Potentally Different charting lib
-- UI Changes
-    - Is There A Better Way to format data?
-    - Should Tabs be added?
-    - Make D100 Chart not look like shit?
-    - Change chart size
-    - Make Forms Resizeable
-    - Format Text in tables better
-    - Button organization being mediocre
-
-## TODO Settings (Running List)
-- PLAYERS_SEE_SELF          
-- PLAYERS_SEE_PLAYERS           
-- ENABLE_BLIND_STREAK_MSGS    
-- ENABLE_CRIT_MSGS         
-- TYPES_OF_CRIT_MSGS       
-- ENABLE_STREAK_MSGS     
+  
