@@ -31,7 +31,7 @@
             },
             "enable_auto_db": {
                 "Name" : "Automatically use DB",
-                "Hint" : "Enabled means rolls will get added and loaded from DB automatically."
+                "Hint" : "Enabled means rolls will get saved and loaded from DB automatically. Could Negatively Impact Player Performance!!"
             },
             "enable_crit_msgs": {
                 "Name" : "Stop All Crit Messages From Being Displayed To chat",
@@ -54,12 +54,12 @@
                 "Hint" : "If a streak has a blind roll in it its not printed to chat unless this is enabled"
             },
             "enable_other_access_buttons":{
-                "Name" : "Use Other Access Buttons",
-                "Hint" : "Changes access buttons from the player list to Scene Controls"
+                "Name" : "Use Updated Player Access Buttons",
+                "Hint" : "Changes access buttons from the player list to Scene Controls, Uncheck to revert to old buttons"
             },
             "player_access_icons":{
                 "Name": "Define Players Icons",
-                "Hint": "Used to change player Icons from D-20's to something custom. Need to use https://fontawesome.com/search?o=r&m=free Font Awesome Icons in a comma seperated list. Order matching players in player list \nEX: fa-solid fa-frog, fa-solid fa-circle, fa-solid fa-skull-crossbones"
+                "Hint": "Used to change player Icons from D-20's to something custom. Check GITHUB for better guide!\nNeed to use https://fontawesome.com/search?o=r&m=free Font Awesome Icons in a comma seperated list. Order matching players in player list \nEX: fa-solid fa-frog, fa-solid fa-circle, fa-solid fa-skull-crossbones"
             }
         },
         "both_forms":{

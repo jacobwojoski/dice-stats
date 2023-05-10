@@ -68,12 +68,12 @@ Global Settings are restricted to GM only by default
 - PLAYERS_SEE_GLOBAL --------  If Players Can  Global Dice Stats --------------------[Def: True]     (Global)
 - PLAYERS_SEE_GM_IN_GLOBAL - If GM roll stats get added into global stats ---------[Def: False]    (Global)
 - ENABLE_BLIND_STREAK_MSGS - Allow strk from a blind roll to be prnt to chat ------[Def: false]    (Global) 
-- ENABLE_AUTO_DB - Save And Load Info From DB Automatically On Join and On roll respectively -[Def: false]   (Global)
+- ENABLE_AUTO_DB - Save And Load Info From DB Automatically On Join and On roll respectively -[Def: true]   (Global)
 - SHOW_BLIND_ROLLS_IMMEDIATE -- let Blind Rolls be added to player stats immediately ---[Def: false] (Global)
 - ENABLE_CRIT_MSGS ------------  Choose what dice print crit msgs ---------------------[Def: d20]      (Local)
 - TYPES_OF_CRIT_MSGS ---------- Choose Type of crits to print ------------------------[Def: Both]     (Local)
 - ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def: d20]     (Local)  
-- ENABLE_OTHER_ACCESS_BUTTONS - Move buttons from Playerlist to scene controls ---[Def: false] (Local)
+- ENABLE_OTHER_ACCESS_BUTTONS - Move buttons from Playerlist to scene controls ---[Def: true] (Local)
 - OTHER_ACCESS_BUTTON_ICONS - Setting to add custom icons on Scene Controls buttons - [Def: false] (Local)
 
 ## Install  
