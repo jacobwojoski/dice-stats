@@ -15,7 +15,7 @@ class CustomSceneControlToolGlobal
             GLOBALFORMOBJ.render(true);
         }else{
             GLOBALFORMOBJ = new GlobalStatusPage().render(true);
-        }
+        } 
     }
 
     constructor(){}
@@ -40,7 +40,7 @@ class CustomSceneControlToolCompare
     constructor(){}
 }
 
-// Player Scene Control Icons 
+// Player Scene Control Icons (Icon can be customized in settings)
 class CustomSceneControlToolPlayer
 {
     name = '';

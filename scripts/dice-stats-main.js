@@ -31,12 +31,12 @@ const SETTINGS = {
     PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global)
     ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
     SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
-    ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: false] (Global)
+    ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: true] (Global)
     OTHER_ACCESS_BUTTON_ICONS: 'player_access_icons', //Change player icons to use custom       [Default: fas fa-dice-d20]  (Global)
     ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
     TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
     ENABLE_STREAK_MSGS: 'enable_streak_msgs',   //Choose what dice to display streak msgs for    [Default : d20]            (Local)
-    ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : false]         (Local)
+    ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : true]         (Local)
 }
 
 /**
@@ -92,7 +92,7 @@ class DIE_INFO {
     LONGEST_STREAK =        -1;
     LONGEST_STREAK_INIT =   -1;
 
-    MEAN =      0;
+    MEAN =      0.0; //(avg)
     MEDIAN =    0;
     MODE =      0;
 
@@ -145,7 +145,7 @@ class DIE_INFO {
         this.LONGEST_STREAK =        -1;
         this.LONGEST_STREAK_INIT =   -1;
 
-        this.MEAN =      0;
+        this.MEAN =      0.0;
         this.MEDIAN =    0;
         this.MODE =      0;
     }
@@ -197,9 +197,19 @@ class PLAYER {
     GM = false;
 
     constructor(userid){
-        this.USERID = userid;
-        this.USERNAME = game.users.get(userid)?.name;
-        this.GM = game.users.get(userid)?.isGM;
+        if(userid)
+        {
+            this.USERID = userid;
+            this.USERNAME = game.users.get(userid)?.name;
+            this.GM = game.users.get(userid)?.isGM;
+        }
+        else
+        {
+            this.USERID = -1;
+            this.USERNAME = 'NA';
+            this.GM = false;
+        }
+
         for (let i = 0; i < this.PLAYER_DICE.length; i++) {
             this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
         }
@@ -349,7 +359,7 @@ class DiceStatsTracker {
         // A setting to let db interaction be automated
         game.settings.register(this.ID, SETTINGS.ENABLE_AUTO_DB , {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB}.Name`,
-            default: false,
+            default: true,
             type: Boolean,
             scope: 'world',
             config: true,
@@ -359,7 +369,7 @@ class DiceStatsTracker {
         // A setting to let the user change access buttons to use something else
         game.settings.register(this.ID, SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS , {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Name`,
-            default: false,
+            default: true,
             type: Boolean,
             scope: 'world',
             config: true,
@@ -504,7 +514,7 @@ class DiceStatsTracker {
 
                 if(localPlayerInfo)
                 {
-                    DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
+                    DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo); //Puts db info into local player obj
                     this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
 
                     if(GLOBALFORMOBJ != null){
@@ -527,7 +537,7 @@ class DiceStatsTracker {
             let localPlayerInfo = this.ALLPLAYERDATA.get(game.user.id);
 
             DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
-            this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
+            this.ALLPLAYERDATA.set(game.user.id,localPlayerInfo);
 
             if(GLOBALFORMOBJ){
                 GLOBALFORMOBJ.render();
@@ -563,6 +573,11 @@ class DiceStatsTracker {
                 }
             }
         }
+    }
+
+    clear_database()
+    {
+        DB_INTERACTION.clearDB();
     }
 }
 
@@ -910,7 +925,7 @@ class GlobalStatusPage extends FormApplication{
     
                     if (dbClear) {
                         ui.notifications.warn("All DB Data Cleared");
-                        DB_INTERACTION.clearDB();
+                        CLASSOBJ.clear_database();
                     }
                 break;
             case 'd2checkbox':
@@ -1061,13 +1076,11 @@ function midiQolSupport(){
     })
 }
 
-handleChatMsgHook = (chatMessage) => {
+Hooks.on('createChatMessage', (chatMessage) => {
     if (chatMessage.isRoll) {
         CLASSOBJ.parseMessage(chatMessage)
     }
-}
-
-Hooks.on('createChatMessage', handleChatMsgHook);
+});
 
 // Initialize dialog and settings on foundry boot up
 Hooks.once('init', () => {
@@ -1123,8 +1136,6 @@ Hooks.on("getSceneControlButtons", controls => {
         {
             controls.push(GLOBALSCENECONTROLSOBJ);
         }
-    
-        console.log(controls);
     }
 });
 

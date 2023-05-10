@@ -5,9 +5,9 @@ class DB_INTERACTION
      */
     static createDB()
     {
-        for(let user in game.users)
+        for(let user of game.users)
         {
-            if(!hasProperty(user, 'data.flags.'+MODULE_ID+'.'+ROLLDATAFLAG))
+            if(!user.getFlag(MODULE_ID,'player_roll_data'))
             {
                 user.setFlag(MODULE_ID,ROLLDATAFLAG,{});
             }
@@ -32,7 +32,7 @@ class DB_INTERACTION
         let user = game.users.get(userId);
         if(user)
         {
-            if(hasProperty(user, 'data.flags.'+MODULE_ID+'.player_roll_data'))
+            if(user.getFlag(MODULE_ID,'player_roll_data'))
             {
                 return user.getFlag(MODULE_ID,'player_roll_data');
             }
@@ -103,11 +103,14 @@ class DB_INTERACTION
      */
     static clearDB()
     {
-        for(let user in game.users)
+        for(let aUser of game.users)
         {
-            if(hasProperty(user, 'data.flags.'+MODULE_ID+'.player_roll_data'))
+            if(aUser)
             {
-                user.unsetFlag(MODULE_ID,'player_roll_data');
+                if(aUser.getFlag(MODULE_ID,'player_roll_data'))
+                {
+                    aUser.unsetFlag(MODULE_ID,'player_roll_data');
+                }
             }
         }
     } 
@@ -117,9 +120,14 @@ class DB_INTERACTION
      */
     static clearPlayer(user)
     {
-        if(hasProperty(user, 'data.flags.'+MODULE_ID+'.player_roll_data'))
+        if(user)
         {
-            user.unsetFlag(MODULE_ID,'player_roll_data');
+            if(user.getFlag(MODULE_ID,'player_roll_data'))
+            {
+                user.unsetFlag(MODULE_ID,'player_roll_data');
+                //let tempPlayer = new PLAYER(user.id);
+                //user.setFlag(MODULE_ID,'player_roll_data', tempPlayer);
+            }
         }
     }
 }

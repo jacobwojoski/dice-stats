@@ -363,7 +363,7 @@ class DATA_PACKAGER
         handlebarsData.D100_ROLL_DATA.fill(0);
 
         handlebarsData.TOTAL_ROLLS.fill(0);
-        handlebarsData.MEAN.fill(0);
+        handlebarsData.MEAN.fill(0.0);
         handlebarsData.MEDIAN.fill(0);
         handlebarsData.MODE.fill(0);
 

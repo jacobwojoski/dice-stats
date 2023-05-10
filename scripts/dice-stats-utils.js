@@ -63,7 +63,12 @@ class DICE_STATS_UTILS {
             sum = sum+((i+1)*RollsAry[i]);
         }
 
-        return Math.round(sum/numberOfRolls);
+        if(numberOfRolls>0)
+        {
+            let float = sum/numberOfRolls;
+            return float.toFixed(2);
+        }
+        return 0;
     }
 
     //Middle number
