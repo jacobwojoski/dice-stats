@@ -526,6 +526,30 @@ class DiceStatsTracker {
                     }
                 }
             }
+            else
+            {
+                //DB returned null, save an empty user data
+                console.log("Warning: No DB data Found, Setting players DB values to 0");
+                let tempPlayer = this.ALLPLAYERDATA.get(tempUser.id);
+                tempPlayer.clearAllRollData();
+                DB_INTERACTION.saveUserData(tempPlayer);
+
+                // Update local player var with 0 values too
+                let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+                if(localPlayerInfo)
+                {
+                    //Update map with 0 values 
+                    this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
+                }
+
+                if(GLOBALFORMOBJ != null){
+                    GLOBALFORMOBJ.render();
+                }
+
+                if(PLAYERFORMOBJ != null){
+                    PLAYERFORMOBJ.render();
+                }
+            }
         }
     }
 
@@ -927,6 +951,22 @@ class GlobalStatusPage extends FormApplication{
                         ui.notifications.warn("All DB Data Cleared");
                         CLASSOBJ.clear_database();
                     }
+                break;
+            case 'loadAllFromDB':
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_all_db.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_all_db.context');
+                const loadConfirmation = await Dialog.confirm({
+                    title: title_txt,
+                    content: context_txt,
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (loadConfirmation) {
+                    ui.notifications.warn("All Data Loaded");
+                    CLASSOBJ.loadAllPlayerData();
+                }
                 break;
             case 'd2checkbox':
                 CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];

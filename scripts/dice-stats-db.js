@@ -5,13 +5,13 @@ class DB_INTERACTION
      */
     static createDB()
     {
-        for(let user of game.users)
-        {
-            if(!user.getFlag(MODULE_ID,'player_roll_data'))
-            {
-                user.setFlag(MODULE_ID,ROLLDATAFLAG,{});
-            }
-        }
+        // for(let user of game.users)
+        // {
+        //     if(!user.getFlag(MODULE_ID,'player_roll_data'))
+        //     {
+        //         user.setFlag(MODULE_ID,ROLLDATAFLAG,{});
+        //     }
+        // }
     }
 
     /**
@@ -125,8 +125,6 @@ class DB_INTERACTION
             if(user.getFlag(MODULE_ID,'player_roll_data'))
             {
                 user.unsetFlag(MODULE_ID,'player_roll_data');
-                //let tempPlayer = new PLAYER(user.id);
-                //user.setFlag(MODULE_ID,'player_roll_data', tempPlayer);
             }
         }
     }
