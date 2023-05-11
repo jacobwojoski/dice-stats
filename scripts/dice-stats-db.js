@@ -5,24 +5,24 @@ class DB_INTERACTION
      */
     static createDB()
     {
-        // for(let user of game.users)
-        // {
-        //     if(!user.getFlag(MODULE_ID,'player_roll_data'))
-        //     {
-        //         user.setFlag(MODULE_ID,ROLLDATAFLAG,{});
-        //     }
-        // }
+        //Not needed
     }
 
     /**
-     * Method called to save user info to the db
+     * Method called to save user info to the db, Can only save your own data!
      * @param {PLAYER} playerInfo 
      */
     static saveUserData(playerInfo)
     {
+        let userid = playerInfo.USERID;
         let objCpy = Object.assign({},playerInfo);
-        game.user.setFlag(MODULE_ID,'player_roll_data', objCpy);
+        if(userid)
+        {
+            game.users.get(userid)?.setFlag(MODULE_ID,'player_roll_data', objCpy);
+        }
     }
+
+
 
     /**
      * Method used to load all players info from the db
@@ -36,9 +36,8 @@ class DB_INTERACTION
             {
                 return user.getFlag(MODULE_ID,'player_roll_data');
             }
-            return null;
         }
-        
+        return null;
     }
 
     //Method used to convert DB info to A player OBJ

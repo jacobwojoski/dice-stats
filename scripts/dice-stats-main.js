@@ -529,9 +529,10 @@ class DiceStatsTracker {
             else
             {
                 //DB returned null, save an empty user data
-                console.log("Warning: No DB data Found, Setting players DB values to 0");
+                console.log("Warning: No DB data Found, Setting local value to 0");
                 let tempPlayer = this.ALLPLAYERDATA.get(tempUser.id);
                 tempPlayer.clearAllRollData();
+
                 DB_INTERACTION.saveUserData(tempPlayer);
 
                 // Update local player var with 0 values too
@@ -788,8 +789,8 @@ class PlayerStatusPage extends FormApplication {
                     }
                     break;
             case 'clearAllPlayerData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_both.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_both.context');
+                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.player_dialogs.title');
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.player_dialogs.context');
                 const dbcon2 = await Dialog.confirm({
                     title: title_txt,
                     content: context_txt,
