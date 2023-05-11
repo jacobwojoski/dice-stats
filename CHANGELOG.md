@@ -5,8 +5,8 @@
 - Updated the stats to display the decimal value of the average rather then the integer value
 - Fix clear All Data from DB buttons not working correctly
 ### Updated
-- Changed Default of Auto DB to be on
-- Changed Buttons to use new buttons rather then player list buttons by default
+- Changed Default of Auto DB to be **ON**
+- Changed new Buttons to be **ON** by default
 
 ## [ 1.9.1 ]  4/28/2023
 ### Fixed
