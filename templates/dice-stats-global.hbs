@@ -505,10 +505,13 @@
                     </td>
                 </tr>
             </table>
+            <button type="button" data-action="loadAllFromDB">{{localize "DICE_STATS_TEXT.player_data_form.load_data_btn"}}</button>
             {{else}}
             <br>
             <h1></h1>
             <button type="button" data-action="refresh">{{localize "DICE_STATS_TEXT.both_forms.refresh_btn"}}</button>
+            <br>
+            <button type="button" data-action="loadAllFromDB">{{localize "DICE_STATS_TEXT.player_data_form.load_data_btn"}}</button>
             {{/diceStats_ifIsGM}}
         </div>
     </div>
