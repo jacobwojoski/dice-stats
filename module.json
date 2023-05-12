@@ -16,14 +16,14 @@
     "scripts/dice-stats-utils.js",
     "scripts/dice-stats-datapack.js",
     "scripts/dice-stats-db.js",
-    "scripts/dice-stats-scenecontrol.js",
     "scripts/dice-stats-diceinfo.js",
-    "scripts/dice-stats-globalstatuspage.js",
+    "scripts/dice-stats-player.js",
     "scripts/dice-stats-handlebars.js",
     "scripts/dice-stats-hooks.js",
-    "scripts/dice-stats-player.js",
-    "scripts/dice-stats-playerstatuspage.js",
     "scripts/dice-stats-sockets.js",
+    "scripts/dice-stats-scenecontrol.js",
+    "scripts/forms/dice-stats-globalstatuspage.js",
+    "scripts/forms/dice-stats-playerstatuspage.js",
     "scripts/googleChartImport.js"
   ],
   "styles": [
