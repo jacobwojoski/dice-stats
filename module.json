@@ -12,12 +12,12 @@
     "verified": "10"
   },
   "scripts": [
-    "scripts/dice-stats-main.js",
-    "scripts/dice-stats-utils.js",
-    "scripts/dice-stats-datapack.js",
-    "scripts/dice-stats-db.js",
-    "scripts/dice-stats-diceinfo.js",
-    "scripts/dice-stats-player.js",
+    "scripts/classes/dice-stats-main.js",
+    "scripts/classes/dice-stats-utils.js",
+    "scripts/classes/dice-stats-datapack.js",
+    "scripts/classes/dice-stats-db.js",
+    "scripts/classes/dice-stats-diceinfo.js",
+    "scripts/classes/dice-stats-player.js",
     "scripts/dice-stats-handlebars.js",
     "scripts/dice-stats-hooks.js",
     "scripts/dice-stats-sockets.js",
