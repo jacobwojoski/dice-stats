@@ -81,6 +81,7 @@ class DATA_PACKAGER
     //======================================================
     
     //Turn PLAYER Object into Handlebars Readable data Object
+    //Convert PLAYER Object into DATA_PACKAGER::PLAYER_HNDL_INFO
     //Unsed in player.hbs
     static packagePlayerData(playerInfo)
     {   
@@ -129,8 +130,14 @@ class DATA_PACKAGER
     //================= Global Package =====================
     //======================================================
     
-    //Get stats from the global data (Mean median mode)
-    static globalMathStatsHelpter(dieType,rollAry,handlebarsData)
+    /**
+     * Get stats from the global data (Mean median mode)
+     * @param {DIE_TYPE} dieType 
+     * @param {int[]} rollAry 
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     * @returns {GLOBAL_HNDL_INFO} with updated values 
+     */
+    static globalMathStatsHelper(dieType,rollAry,handlebarsData)
     {
         handlebarsData.MEAN[dieType] = DICE_STATS_UTILS.getMean(rollAry);
         handlebarsData.MEDIAN[dieType] = DICE_STATS_UTILS.getMedian(rollAry);
@@ -138,37 +145,49 @@ class DATA_PACKAGER
         return handlebarsData;
     }
 
+    /**
+     * 
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     * @returns {GLOBAL_HNDL_INFO} with updated values
+     */
     static getGlobalMathStatsData(handlebarsData)
     {
         //For Every die type get stats
-        handlebarsData = this.globalMathStatsHelpter(0,handlebarsData.D2_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(1,handlebarsData.D3_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(2,handlebarsData.D4_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(3,handlebarsData.D6_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(4,handlebarsData.D8_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(5,handlebarsData.D10_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(6,handlebarsData.D12_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(7,handlebarsData.D20_ROLL_DATA,handlebarsData); 
-        handlebarsData = this.globalMathStatsHelpter(8,handlebarsData.D100_ROLL_DATA,handlebarsData);
+        handlebarsData = this.globalMathStatsHelper(0,handlebarsData.D2_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(1,handlebarsData.D3_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(2,handlebarsData.D4_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(3,handlebarsData.D6_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(4,handlebarsData.D8_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(5,handlebarsData.D10_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(6,handlebarsData.D12_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(7,handlebarsData.D20_ROLL_DATA,handlebarsData); 
+        handlebarsData = this.globalMathStatsHelper(8,handlebarsData.D100_ROLL_DATA,handlebarsData);
         return handlebarsData;
     }
     
-    static globalStreakDataHelper(dieType, player, handlebarsData, lengthData){
-        if(player.PLAYER_DICE[dieType].LONGEST_STREAK > lengthData[dieType])
+    /**
+     * method used to save the longest streak playername and streak values to handlebars data
+     * @param {DIE_TYPE} dieType 
+     * @param {PLAYER} player 
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     */
+    static globalStreakDataHelper(dieType, player, handlebarsData){
+        if(player.PLAYER_DICE[dieType].LONGEST_STREAK > 0)
         {
-            lengthData[dieType] = player.PLAYER_DICE[dieType].LONGEST_STREAK;
             handlebarsData.STREAK_PLAYER[dieType] = player.USERNAME;
             handlebarsData.STREAK[dieType] = player.getStreakString(dieType);
         }
     }
 
-    //Get global streak data from players
+    /**
+     * Get global streak data from players
+     * @param {PLAYER[]} players 
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     * @param {boolean} includeGMrolls 
+     * @returns {GLOBAL_HNDL_INFO}
+     */
     static getGlobalStreakData(players, handlebarsData,includeGMrolls)
     {
-        var streakLength = new Array(9);
-        streakLength.fill(0);
-        //Player.getStreakString(dieType)
-
         for(let itr = 0; itr < players.length; itr++){
             let plyr = players[itr];
             //See if we should skip adding data becasue its GM's
@@ -176,12 +195,21 @@ class DATA_PACKAGER
 
             //For every die type
             for (let i = 0; i < 9; i++) {
-                this.globalStreakDataHelper(i,plyr,handlebarsData,streakLength);
+                this.globalStreakDataHelper(i,plyr,handlebarsData);
             }
         }
         return handlebarsData;
     }
     
+    /**
+     * Method used to save info of player info to Handlebars data if they rolled the most MIN or most MAX for that die
+     * @param {int} minRoll 
+     * @param {int} maxRoll 
+     * @param {DIE_TYPE} dieType 
+     * @param {String} username 
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     * @returns {GLOBAL_HNDL_INFO}
+     */
     static globalMaxMinDataHelper(minRoll, maxRoll, dieType, username, handlebarsData){
         //If num Rolls is 0, Number wasnt rolled by user so skip processing data
         //Most Min Rolls
@@ -208,7 +236,13 @@ class DATA_PACKAGER
         return handlebarsData;
     }
 
-    //Get Max and min values from player data
+    /**
+     * //Get Max and min values from player data
+     * @param {PLAYER[]} players 
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     * @param {bool} includeGMrolls 
+     * @returns {GLOBAL_HNDL_INFO}
+     */
     static getGlobalMaxMinData(players, handlebarsData,includeGMrolls)
     {
         //NOTE Cant use loops to pack data because Global Data Obj cant use 2d Arrays (Handlbars is lame)
@@ -275,8 +309,15 @@ class DATA_PACKAGER
         return handlebarsData;
     }
     
-    //Create Combined Arrays of all players rolls
-    //Save Most Max and Most min Roll Data
+    
+    /**
+     * Create Combined Arrays of all players rolls
+     * Save Most Max and Most min Roll Data
+     * @param {PLAYER[]} players 
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     * @param {bool} includeGMrolls 
+     * @returns {GLOBAL_HNDL_INFO}
+     */
     static getGlobalRollData(players, handlebarsData,includeGMrolls)
     {
         for(let itr = 0; itr < players.length; itr++){
@@ -324,7 +365,11 @@ class DATA_PACKAGER
         return handlebarsData;
     }
 
-    //Initalize array size and set default values in arrays
+    /**
+     * Initalize array size and set default values in arrays
+     * @param {GLOBAL_HNDL_INFO} handlebarsData 
+     * @returns {GLOBAL_HNDL_INFO}
+     */
     static setGlobalDefaultData(handlebarsData){
         //Initalize Arrays
         handlebarsData.D2_ROLL_DATA = new Array(2);
@@ -381,8 +426,12 @@ class DATA_PACKAGER
         return handlebarsData;
     }
 
-    //Turn PLAYER[] into Handlebars Readable data object
-    //Used in global.hbs
+    /**
+     * Turn PLAYER[] into Handlebars Readable data object {GLOBAL_HNDL_INFO}
+     * @param {PLAYER[]} playersArry 
+     * @param {bool} includeGMrolls 
+     * @returns GLOBAL_HNDL_INFO
+     */
     static packageGlobalData(playersArry, includeGMrolls)
     {
         //TODO. packedData should be passed By ref so update fn's for that behavior
@@ -409,9 +458,21 @@ class DATA_PACKAGER
     //================= Export Package =====================
     //======================================================
     
-    //Save Global Data to a file to keep track of
-    static exportGlobalData(playersArry)
+    /**
+     * Save Global Data to a file to allow for importing
+     * @param {PLAYER[]} playersArry 
+     */
+    static exportGlobalDataAsJson(playersArry)
     {
         
+    }
+
+    /**
+     * Save Global Data to a file to keep track off in external program (Excel/google sheets/ect)
+     * @param {PLAYER[]} playersArry 
+     */
+    static exportGlobalDataAsCSV(playersArry)
+    {
+
     }
 }
