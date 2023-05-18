@@ -3,9 +3,13 @@
 class DICE_STATS_UTILS {
     //Makes an array of all the rolls from every play for a specific die type
 
-    //Build hook hook that waits for A DsN msg then return
-    //This funtion returns after Hook is made so this code returns and now were 
-    //waiting at the end of promise fn to get our resolve
+    /**
+     * Build hook hook that waits for A DsN msg then return
+     * This funtion returns after Hook is made so this code returns and now were 
+     * waiting at the end of promise fn to get our resolve
+     * @param {*} targetMessageId 
+     * @returns 
+     */
     static async waitFor3DDiceMessage(targetMessageId) {
         function buildHook(resolve) {
             Hooks.once('diceSoNiceRollComplete', (messageId) => {
@@ -33,9 +37,13 @@ class DICE_STATS_UTILS {
         });   
     }
 
-    //Most common
-    //Find index that has the largest value 
-    //result = index+1
+    /**
+     * Mode = Most common
+     * Find index that has the largest value 
+     * result = index+1
+     * @param {int[]} RollsAry 
+     * @returns 
+     */
     static getMode(RollsAry){
         var indexOfMax = 0;
         var maxValue = 0;
@@ -50,8 +58,12 @@ class DICE_STATS_UTILS {
         return indexOfMax+1;
     }
 
-    //Average
-    //Becasue array holds number of each roll instead of each roll value math is more anoying
+    /**
+     * Average
+     * Becasue array holds number of each roll instead of each roll value math is more anoying
+     * @param {int[]} RollsAry 
+     * @returns {float}
+     */
     static getMean(RollsAry){
         var numberOfRolls=0;
         var sum = 0;
@@ -71,9 +83,13 @@ class DICE_STATS_UTILS {
         return 0;
     }
 
-    //Middle number
-    //Find Total Number of rolls/2 ()
-    //Go through array subtracting each roll untill we find our middle number
+    /**
+     * Middle number
+     * Find Total Number of rolls/2 ()
+     * Go through array subtracting each roll untill we find our middle number
+     * @param {int[]} RollsAry 
+     * @returns {int}
+     */
     static getMedian(RollsAry){
         let totalRolls = 0;
         for(let i=0; i<RollsAry.length; i++){

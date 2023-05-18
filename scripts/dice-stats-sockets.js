@@ -23,6 +23,7 @@ function pushPlayerBlindRolls_sock(userid) {
     }
 }
 
+// socket that the gm can call on all players to clear all of their values
 function clearRollData_sock() {
     CLASSOBJ.clearAllRollData();
 

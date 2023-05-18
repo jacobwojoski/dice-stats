@@ -18,8 +18,10 @@ class DIE_INFO {
     MEDIAN =    0;
     MODE =      0;
 
-    //Class Constructor function
-    //Variable passed in should be max value
+    /**
+     * constructor set values to defaults
+     * @param {int} dieMax - max value the die can be
+     */
     constructor(dieMax = 100){
         this.TYPE = MAX_TO_DIE.get(dieMax);
         this.STREAK_SIZE = -1;
@@ -34,9 +36,11 @@ class DIE_INFO {
         this.BLIND_ROLLS.fill(0);
     }
 
-    //Streak count how many incramenting die Rolls are made 1234, 456789 ect. 
-    //Should prolly only be implemented for d20's but can be implented for others
-    //A bit less interesting for smaller die but could be cool to see if someone got a 1,2,3,4 or a 1,2,3,4,5,6
+    /**
+     * Update and save streak info (Streaks are series of incrementing dice rolls)
+     * @param {int} currentRoll - current die roll value
+     * @param {bool} isBlind was the roll a blind roll or not
+     */
     updateStreak(currentRoll, isBlind){
         //Streak Size will always be at least 1 unless its right after initalization
         if(this.STREAK_INIT + this.STREAK_SIZE != currentRoll){
@@ -56,6 +60,9 @@ class DIE_INFO {
         }
     }
 
+    /**
+     * Clear all die info
+     */
     clearData(){
         this.TOTAL_ROLLS =   0;
         this.ROLLS.fill(0);
@@ -72,6 +79,11 @@ class DIE_INFO {
         this.MODE =      0;
     }
 
+    /**
+     * A roll was made with this die so update the value that was rolled
+     * @param {int} roll - value of roll 
+     * @param {bool} isBlind 
+     */
     addRoll(roll, isBlind){
         this.TOTAL_ROLLS++;
         this.updateStreak(roll, isBlind)
@@ -84,14 +96,19 @@ class DIE_INFO {
         }
     }
 
+    /**
+     * Calculate mean median and mode for the die
+     */
     calculate(){
         this.MEAN = DICE_STATS_UTILS.getMean(this.ROLLS);
         this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ROLLS);
         this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
     }
 
-    //method to take blind roll data and push it into normal roll data
-    //Reset blind roll data once pushed
+    /**
+     * method to take blind roll data and push it into normal roll data
+     * Reset blind roll data once pushed
+     */
     pushBlindRolls(){
         for(let i=0; i<this.BLIND_ROLLS.length; i++){
             this.ROLLS[i] = this.ROLLS[i]+this.BLIND_ROLLS[i];
@@ -99,7 +116,10 @@ class DIE_INFO {
         }
     }
 
-    //method to get total number of blind rolls
+    /**
+     * method to get total number of blind rolls
+     * @returns {int} - total number of blind rolls for this die
+     */
     getBlindRollsCount(){
         let tempRollCount = 0;
         for(let i=0; i<this.BLIND_ROLLS.length; i++){

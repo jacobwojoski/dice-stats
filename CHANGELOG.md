@@ -1,5 +1,10 @@
 # CHANGELOG  
 
+## [ 1.11.0 ] 
+### Updated
+- Added better funtion comments to explain what every fn does and their inputs and outputs
+- Updated format of scripts to better organize classes into seperate files
+
 ## [ 1.10.0 ] 5/8/2023
 ### Added
 - Updated the stats to display the decimal value of the average rather then the integer value

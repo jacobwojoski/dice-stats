@@ -3,6 +3,7 @@
 //===================== HOOKS SHIT =========================
 //==========================================================
 
+//This hook adds buttons to the player list section of the screen if the setting is enabled to do so
 Hooks.on('renderPlayerList', (playerList, html) => {
 
     if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
@@ -43,7 +44,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     } 
 })
 
-
+//This hook is used to change how we deal with some midiqol settings 
 function midiQolSupport(){
     /*Add Hook for Midi-QoL */
     Hooks.on("midi-qol.RollComplete", (workflow) => {
@@ -100,6 +101,7 @@ function midiQolSupport(){
     })
 }
 
+//Parse chat message when one gets displayed
 Hooks.on('createChatMessage', (chatMessage) => {
     if (chatMessage.isRoll) {
         CLASSOBJ.parseMessage(chatMessage)
@@ -175,6 +177,7 @@ Hooks.once('ready', () => {
     }
 });
 
+// Do something when another user connects to the game 
 Hooks.on('userConnected', (userid, isConnecting) => {
     //Unused for now
 });

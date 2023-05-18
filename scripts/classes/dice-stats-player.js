@@ -26,6 +26,11 @@ class PLAYER {
         }
     }
 
+    /**
+     * Convert streak info into a string of all streak values
+     * @param {DIE_TYPE} dieType 
+     * @returns {string} - streak converted to a string
+     */
     getStreakString(dieType){
         let len = this.PLAYER_DICE[dieType].LONGEST_STREAK
         let initNum = this.PLAYER_DICE[dieType].LONGEST_STREAK_INIT
@@ -46,24 +51,47 @@ class PLAYER {
         }
     }
 
+    /**
+     * Get rolls from a specific die
+     * @param {DIE_TYPE} dieType 
+     * @returns {int[]} - array of die rolls
+     */
     getRolls(dieType){
         return this.PLAYER_DICE[dieType].ROLLS;
     }
 
+    /**
+     * Get die info object from a player
+     * @param {DIE_TYPE} dieType 
+     * @returns {DIE_INFO} - 
+     */
     getDieInfo(dieType){
         return this.PLAYER_DICE[dieType];
     }
 
+    /**
+     * Save roll to Players associated die
+     * @param {bool} isBlind 
+     * @param {int} rollVal 
+     * @param {DIE_TYPE} dieType 
+     */
     saveRoll(isBlind, rollVal, dieType){
         this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind)
     }
 
+    /**
+     * Move all bind roll info normal roll area so it can be displayed
+     */
     pushBlindRolls(){
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].pushBlindRolls();
         }
     }
 
+    /**
+     * get number of total blind rolls from every die
+     * @returns {int}
+     */
     getBlindRollsCount(){
         let tempRollCount = 0;
         for(let i=0; i<this.PLAYER_DICE.length; i++){
@@ -72,25 +100,29 @@ class PLAYER {
         return tempRollCount;
     }
 
+    /**
+     * Clear All DIE_INFO objects
+     */
     clearAllRollData(){
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].clearData();
         }
     }
 
+    /**
+     * Clear a players specific DIE_INFO object
+     * @param {DIE_TYPE} DiceType 
+     */
     clearDieData(DiceType){
         this.PLAYER_DICE[DiceType].clearData();
     }
 
-    //Clear all dice roll data
+    /**
+     * Clear all dice roll data
+     */
     clearDiceData(){
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].clearData();
         }
-    }
-
-    //clear a specific die's roll data
-    clearDieData(DiceType){
-        this.PLAYER_DICE[DiceType].clearData();
     }
 }

@@ -26,6 +26,7 @@ class DB_INTERACTION
 
     /**
      * Method used to load all players info from the db
+     * @param {String} userId //Long string of letters and numbers unique to each user
      */
     static loadPlayerData(userId)
     {
@@ -40,8 +41,12 @@ class DB_INTERACTION
         return null;
     }
 
-    //Method used to convert DB info to A player OBJ
-    //Objects are pass by ref so dont need to return
+    /**
+     * Method used to convert DB info to A player OBJ
+     * Objects are pass by ref so dont need to return
+     * @param {PLAYER} tempPlayerObj Object were putting data in
+     * @param {PLAYER (DB VERSION)} dbDataObj Object were taking data from
+     */
     static createPlayerObject(tempPlayerObj, dbDataObj)
     {
         /*
@@ -92,8 +97,6 @@ class DB_INTERACTION
             tempDieObj.MEDIAN =    dbDieDataObj.MEDIAN;
             tempDieObj.MODE =      dbDieDataObj.MODE;
         }
-
-        //return tempPlayerObj;
     }
 
     /**
@@ -116,6 +119,7 @@ class DB_INTERACTION
 
     /**
      * Method used to clear a specific users data
+     * @param {game.user} user
      */
     static clearPlayer(user)
     {

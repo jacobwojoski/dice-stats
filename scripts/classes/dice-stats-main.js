@@ -86,6 +86,10 @@ class DiceStatsTracker {
     PLAYER_DICE_CHECKBOXES = [];
     GLOBAL_DICE_CHECKBOXES = [];
 
+    /**
+     * Update global map to add a key value pair for every user.
+     * key:value = {int}userid:{PLAYER}PLAYER Object
+     */
     updateMap(){
         //Add everyplayer to storage. Were tracking all even if we dont need
         for (let user of game.users) {
@@ -222,7 +226,10 @@ class DiceStatsTracker {
         */
     }
 
-    //Method used that parses messages from the chat. This is how we know a roll has happened, what die was rolled, and the value
+    /**
+     * Method used that parses messages from the chat. This is how we know a roll has happened, what die was rolled, and the value
+     * @param {Message} msg - chat message object
+     */
     parseMessage(msg){
         let isBlind = msg.blind;
 
@@ -259,7 +266,13 @@ class DiceStatsTracker {
         }
     }
 
-    //Method used to add toll to a specifc player
+    /**
+     * Method used to add toll to a specifc player
+     * @param {DIE_TYPE} dieType 
+     * @param {int[]} rolls - array of rolled values in chat. might get array from things like advantage ect 
+     * @param {String} user - userid 
+     * @param {bool} isBlind 
+     */
     addRoll(dieType=7, rolls=[], user=game.user.id, isBlind=false){
         let playerInfo = this.ALLPLAYERDATA.get(user);
 
@@ -268,26 +281,36 @@ class DiceStatsTracker {
         });
     }
 
-    //Tell user to move any blind rolls they have saved from the blid roll ary to the data aray so the user can see the rolls on the charts
+    /**
+     * Tell user to move any blind rolls they have saved from the blind roll ary 
+     * to the data aray so the user can see the rolls on the charts
+     */
     pushBlindRolls(){
         for (let user of game.users) {
             this.ALLPLAYERDATA.get(user.id)?.pushBlindRolls();
         }
     }
 
-    //Erase all locally stored data
+    /**
+     * Erase all locally stored data
+     */
     clearAllRollData(){
         for (let user of game.users) {
             this.ALLPLAYERDATA.get(user.id)?.clearDiceData();
         }
     }
 
-    //Erase a specific users locally stored data
+    /**
+     * Erase a specific users locally stored data
+     * @param {String} userid 
+     */
     clearUsersRollData(userid){
         this.ALLPLAYERDATA.get(userid)?.clearDiceData();
     }
 
-    //Save my players data to the DB
+    /**
+     * Save my players data to the DB
+     */
     saveMyPlayerData(){
         let myData = this.ALLPLAYERDATA.get(game.user.id)
         if(myData)
@@ -296,7 +319,9 @@ class DiceStatsTracker {
         }
     }
      
-    //Load Every Players Data from the DB
+    /**
+     * Load Every Players Data from the DB
+     */
     loadAllPlayerData(){
         for(let tempUser of game.users)
         {
@@ -347,7 +372,9 @@ class DiceStatsTracker {
         }
     }
 
-    //Load your players data from the data
+    /**
+     * Load your players data from the data
+     */
     loadYourPlayerData(){
         var dbInfo = DB_INTERACTION.loadPlayerData(game.user.id);
         if(dbInfo)
@@ -367,7 +394,9 @@ class DiceStatsTracker {
         } 
     }
 
-    //Load other players data from the DB (Not yours)
+    /**
+     * Load other players data from the DB (Not yours)
+     */
     loadOthersPlayerData(){
         for(let tempUser of game.users)
         {
@@ -393,6 +422,9 @@ class DiceStatsTracker {
         }
     }
 
+    /**
+     * Clear DB values
+     */
     clear_database()
     {
         DB_INTERACTION.clearDB();
