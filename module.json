@@ -21,7 +21,7 @@
     "scripts/dice-stats-handlebars.js",
     "scripts/dice-stats-hooks.js",
     "scripts/dice-stats-sockets.js",
-    "scripts/dice-stats-scenecontrol.js",
+    "scripts/forms/dice-stats-scenecontrol.js",
     "scripts/forms/dice-stats-globalstatuspage.js",
     "scripts/forms/dice-stats-playerstatuspage.js",
     "scripts/googleChartImport.js"
