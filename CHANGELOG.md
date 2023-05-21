@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.11.1 ]
+### Fixed
+- Fixed Collision with global module id value & Token Mirror
+
 ## [ 1.11.0 ] 
 ### Updated
 - Added better funtion comments to explain what every fn does and their inputs and outputs

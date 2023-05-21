@@ -6,7 +6,7 @@
 //This hook adds buttons to the player list section of the screen if the setting is enabled to do so
 Hooks.on('renderPlayerList', (playerList, html) => {
 
-    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
+    if(game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
 
     const btn = html.find(`[data-user-id="${game.userId}"]`)
     btn.append(
@@ -32,7 +32,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
         //Create button with eacu user id 
         html.on('click', `#${user.id}`, (event) => {
-            let canSeeGM = game.settings.get(MODULE_ID,SETTINGS.PLAYERS_SEE_GM);
+            let canSeeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM);
             let amIGM = game.users.get(game.userId)?.isGM;
             if(canSeeGM === false && user.isGM && !amIGM){
                 //do nothing, Dont allow ability to see gm data if setting is off
@@ -124,7 +124,7 @@ Hooks.once('init', () => {
 // Hook to interact when scenecontrols get created Method used to have a better location to access player data
 Hooks.on("getSceneControlButtons", controls => {
     
-    if(game && game.settings.get(MODULE_ID,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS)){
+    if(game && game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS)){
         
         // Have Scenecontrol as global obj so its not made everytime scenecontrols gets rerendered (this happens alot)
         // Create new button on scene control
@@ -134,7 +134,7 @@ Hooks.on("getSceneControlButtons", controls => {
             playersAsTools.push(new CustomSceneControlToolGlobal());
             playersAsTools.push(new CustomSceneControlToolCompare());
 
-            let string = game.settings.get(MODULE_ID,SETTINGS.OTHER_ACCESS_BUTTON_ICONS);
+            let string = game.settings.get(MODULE_ID_DS,SETTINGS.OTHER_ACCESS_BUTTON_ICONS);
             let icons = string.split(',');
             let i=0;
             let defaultIcon = 'fas fa-dice-d20'
@@ -171,7 +171,7 @@ Hooks.once('ready', () => {
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
     CLASSOBJ.updateMap();
 
-    if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
+    if(game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB)) 
     {
         CLASSOBJ.loadAllPlayerData();
     }
