@@ -56,7 +56,7 @@ class DATA_PACKAGER
         S_IS_B:[], //Array of boolians to indicate if streak is blind 
 
         // String of playername per die. 
-        // Could have tie's so String is format of "NAME_ONE NAME_TWO NAME_THREE" (Space Delinated)
+        // Could have tie's so String is format of ["NAME_ONE NAME_TWO NAME_THREE","NAME_THREE","NAME_FIVE NAME_SIX"] (Space Delinated)
         ROLLED_MOST_MAX_PLAYER:[], 
         ROLLED_MOST_MAX_ROLLCOUNT:[],
         ROLLED_MOST_MIN_PLAYER:[],
@@ -74,6 +74,88 @@ class DATA_PACKAGER
         D100_ROLL_DATA: [],
 
         TOTAL_BLIND_ROLL_COUNT: 0,
+    }
+
+    //Handlebars doesnt handle 2D arrays well so this is jank af
+    COMPARE_HNDL_INFO = 
+    {
+        PLAYERS_SELECTED:[], //Selected Player ID's
+
+        D2_ROLL_DATA_1:   [],
+        D2_ROLL_DATA_2:   [],
+
+        D3_ROLL_DATA_1:   [],
+        D3_ROLL_DATA_2:   [],
+        D3_ROLL_DATA_3:   [],
+
+        D4_ROLL_DATA_1:   [],
+        D4_ROLL_DATA_2:   [],
+        D4_ROLL_DATA_3:   [],
+        D4_ROLL_DATA_4:   [],
+
+        D6_ROLL_DATA_1:   [],
+        D6_ROLL_DATA_2:   [],
+        D6_ROLL_DATA_3:   [],
+        D6_ROLL_DATA_4:   [],
+        D6_ROLL_DATA_5:   [],
+        D6_ROLL_DATA_6:   [],
+
+        D8_ROLL_DATA_1:   [],
+        D8_ROLL_DATA_2:   [],
+        D8_ROLL_DATA_3:   [],
+        D8_ROLL_DATA_4:   [],
+        D8_ROLL_DATA_5:   [],
+        D8_ROLL_DATA_6:   [],
+        D8_ROLL_DATA_7:   [],
+        D8_ROLL_DATA_8:   [],
+
+        D10_ROLL_DATA_1:  [],
+        D10_ROLL_DATA_2:  [],
+        D10_ROLL_DATA_3:  [],
+        D10_ROLL_DATA_4:  [],
+        D10_ROLL_DATA_5:  [],
+        D10_ROLL_DATA_6:  [],
+        D10_ROLL_DATA_7:  [],
+        D10_ROLL_DATA_8:  [],
+        D10_ROLL_DATA_9:  [],
+        D10_ROLL_DATA_10: [],
+
+        D12_ROLL_DATA_1:  [],
+        D12_ROLL_DATA_2:  [],
+        D12_ROLL_DATA_3:  [],
+        D12_ROLL_DATA_4:  [],
+        D12_ROLL_DATA_5:  [],
+        D12_ROLL_DATA_6:  [],
+        D12_ROLL_DATA_7:  [],
+        D12_ROLL_DATA_8:  [],
+        D12_ROLL_DATA_9:  [],
+        D12_ROLL_DATA_10: [],
+        D12_ROLL_DATA_11: [],
+        D12_ROLL_DATA_12: [],
+
+        D20_ROLL_DATA_1:  [],
+        D20_ROLL_DATA_2:  [],
+        D20_ROLL_DATA_3:  [],
+        D20_ROLL_DATA_4:  [],
+        D20_ROLL_DATA_5:  [],
+        D20_ROLL_DATA_6:  [],
+        D20_ROLL_DATA_7:  [],
+        D20_ROLL_DATA_8:  [],
+        D20_ROLL_DATA_9:  [],
+        D20_ROLL_DATA_10:  [],
+        D20_ROLL_DATA_11:  [],
+        D20_ROLL_DATA_12:  [],
+        D20_ROLL_DATA_13:  [],
+        D20_ROLL_DATA_14:  [],
+        D20_ROLL_DATA_15:  [],
+        D20_ROLL_DATA_16:  [],
+        D20_ROLL_DATA_17:  [],
+        D20_ROLL_DATA_18:  [],
+        D20_ROLL_DATA_19:  [],
+        D20_ROLL_DATA_20:  [],
+
+        //TODO
+        //D100_ROLL_DATA: [],
     }
 
     //======================================================
@@ -453,6 +535,10 @@ class DATA_PACKAGER
 
         return packedData;
     }
+
+    //======================================================
+    //============== Compare Plyr Package ==================
+    //======================================================
 
     //======================================================
     //================= Export Package =====================
