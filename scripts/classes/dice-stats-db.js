@@ -18,7 +18,7 @@ class DB_INTERACTION
         let objCpy = Object.assign({},playerInfo);
         if(userid)
         {
-            game.users.get(userid)?.setFlag(MODULE_ID,'player_roll_data', objCpy);
+            game.users.get(userid)?.setFlag(MODULE_ID_DS,'player_roll_data', objCpy);
         }
     }
 
@@ -33,9 +33,9 @@ class DB_INTERACTION
         let user = game.users.get(userId);
         if(user)
         {
-            if(user.getFlag(MODULE_ID,'player_roll_data'))
+            if(user.getFlag(MODULE_ID_DS,'player_roll_data'))
             {
-                return user.getFlag(MODULE_ID,'player_roll_data');
+                return user.getFlag(MODULE_ID_DS,'player_roll_data');
             }
         }
         return null;
@@ -109,9 +109,9 @@ class DB_INTERACTION
         {
             if(aUser)
             {
-                if(aUser.getFlag(MODULE_ID,'player_roll_data'))
+                if(aUser.getFlag(MODULE_ID_DS,'player_roll_data'))
                 {
-                    aUser.unsetFlag(MODULE_ID,'player_roll_data');
+                    aUser.unsetFlag(MODULE_ID_DS,'player_roll_data');
                 }
             }
         }
@@ -125,9 +125,9 @@ class DB_INTERACTION
     {
         if(user)
         {
-            if(user.getFlag(MODULE_ID,'player_roll_data'))
+            if(user.getFlag(MODULE_ID_DS,'player_roll_data'))
             {
-                user.unsetFlag(MODULE_ID,'player_roll_data');
+                user.unsetFlag(MODULE_ID_DS,'player_roll_data');
             }
         }
     }

@@ -88,7 +88,7 @@ class DATA_PACKAGER
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 
-        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB);
+        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB);
 
         packedData.IS_DIE_DISPLAYED = new Array(9);
         packedData.IS_DIE_DISPLAYED.fill(true);
@@ -438,7 +438,7 @@ class DATA_PACKAGER
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 
-        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB);
+        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB);
         
         packedData = this.setGlobalDefaultData(packedData);
         

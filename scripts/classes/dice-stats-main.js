@@ -6,7 +6,7 @@ GLOBALSCENECONTROLSOBJ = null;
 let socket;
 
 //----GLOBAL CONST VALUES----
-const MODULE_ID = 'dice-stats'
+const MODULE_ID_DS = 'dice-stats'
 
 //Get access to handlebars stuff
 const TEMPLATES = {
@@ -259,7 +259,7 @@ class DiceStatsTracker {
         }
 
         //If AutoSave is Enabled by GM
-        if(game.settings.get(MODULE_ID,SETTINGS.ENABLE_AUTO_DB)) 
+        if(game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB)) 
         {
             //If It was my Roll
             this.saveMyPlayerData();
