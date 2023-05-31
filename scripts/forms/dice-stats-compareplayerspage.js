@@ -4,17 +4,17 @@
 //==========================================================
 
 
-class GlobalStatusPage extends FormApplication{
+class ComparePlayerStatusPage extends FormApplication{
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
       
         const overrides = {
           height: 'auto',
-          id: 'global-data',
-          template: TEMPLATES.GLOBALDATAFORM,
+          id: 'compare-data',
+          template: TEMPLATES.COMPAREFORM,
           userId: game.userId,
-          title: 'Global Dice Stats',
+          title: 'Compare Player Stats',
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
