@@ -9,7 +9,7 @@
   ],
   "compatibility": {
     "minimum": "10",
-    "verified": "10"
+    "verified": "11"
   },
   "scripts": [
     "scripts/classes/dice-stats-main.js",

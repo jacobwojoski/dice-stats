@@ -76,6 +76,7 @@ class CustomSceneControlToolPlayer
 // Scene Controller outer button to view player buttons
 class CustomSceneControl
 {
+    activeTool = '';
     name = 'dstats';
     title = 'diceStatsButton';
     layer = 'controls';
