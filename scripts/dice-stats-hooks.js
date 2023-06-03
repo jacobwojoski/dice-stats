@@ -155,7 +155,12 @@ Hooks.on("getSceneControlButtons", controls => {
                 i++;
             }
             
-            GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
+            //GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
+            //This doesnt work anymore and dont know why. Need to set it as an object 
+            // first, hence the temp var and obj.assign
+            GLOBALSCENECONTROLSOBJ = new Object();
+            var temp = new CustomSceneControl(playersAsTools);
+            Object.assign(GLOBALSCENECONTROLSOBJ, temp);
         }
 
         if(GLOBALSCENECONTROLSOBJ!=null && !controls.includes(GLOBALSCENECONTROLSOBJ))

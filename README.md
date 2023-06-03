@@ -81,12 +81,8 @@ If prerelease version is desired the user can add to module folder by hand by pl
 ```bash
 $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ```  
-## Usage  
-- View Each Players info by selecting icon next to the player in the bottom left
-  - Press D20 For Player Stats
-  - Press Globe for Global Stats (Should only have 1 globe by clients username)  
-![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
-
+## Usage 
+### PLAYER ICONS
 - If **Use Other Access Buttons** is enabled the buttons are removed from the player list and are instead added to the SCENE Controls.
     - ![Icon Img](https://i.imgur.com/y0IwT0b.png) ![Icon Img 2](https://i.imgur.com/cXyQ1AV.png)
     - Icons for Global and Compare buttons are hard coded and cant be changed
@@ -97,6 +93,13 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - EX: Updating the field to `fa-solid fa-book-open-reader, fa-solid fa-dumbbell, fa-solid fa-explosion` as sceen in the following image changes the icons to what I have in my photos (Photo doesnt show full string of icons)
     - ![My Settings Values](https://i.imgur.com/CocZunr.png)
 
+### OLD ICONS
+- View Each Players info by selecting icon next to the player in the bottom left
+  - Press D20 For Player Stats
+  - Press Globe for Global Stats (Should only have 1 globe by clients username)  
+![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
+
+### OTHER FEATURES
 - Hideing GM Values from players so they cant cheat to see the GM rolls
 - PLAYERS_SEE_GM = False  (Warning is displayed if trying to view GM values with setting sating you cant)
 ![PLAYERS_SEE_GM = False](https://i.imgur.com/sGELoCJ.png)  
