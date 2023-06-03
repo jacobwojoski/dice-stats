@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.12.0 ]
+### Fixed
+- Works with Foundry V11 and V10
+
 ## [ 1.11.1 ]
 ### Fixed
 - Fixed Collision with global module id value & Token Mirror
