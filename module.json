@@ -39,8 +39,8 @@
     }
   ],
   "socket": true,
-  "version": "1.12.0",
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.12.0.zip",
+  "version": "1.13.0",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.13.0.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
   "readme": "https://github.com/jacobwojoski/dice-stats",

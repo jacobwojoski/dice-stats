@@ -4,10 +4,8 @@
 //==========================================================
 class ComparePlayerStatusPage extends FormApplication{
 
-    //[{name,id,isChecked}]
-    // ComparePlayerObjUtil []
-    COMPARE_PLAYERS_LIST = []; //List of players that are being compared
-    DIE_DISPLAYED = [];
+    COMPARE_PLAYERS_LIST = []; //List of players [{name, id, isChecked}, ...]
+    DIE_DISPLAYED = []; //bool []
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
@@ -25,6 +23,11 @@ class ComparePlayerStatusPage extends FormApplication{
         return mergedOptions;
     }
 
+    /**
+     * Update isChecked in COMPARE_PLAYERS_LIST[]
+     * @param {String} userid User ID Value
+     * @returns void
+     */
     swapPlayersChecked(userid)
     {
         for(let plyr of GLOBALCOMPAREPLAYERSFORMOBJ.COMPARE_PLAYERS_LIST)
@@ -51,7 +54,7 @@ class ComparePlayerStatusPage extends FormApplication{
         }
     }
 
-
+    //Every Form has this fn. Its returns data object that handlebars template uses
     getData(){
         var includeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
 
@@ -72,11 +75,9 @@ class ComparePlayerStatusPage extends FormApplication{
     async _handleButtonClick(event){
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
-        
-        let title_txt;
-        let context_txt;
-        let dbconfirmation;
 
+        if(GLOBALCOMPAREPLAYERSFORMOBJ == null){return;}
+        
         switch(action){
             case 'refresh':
                 GLOBALCOMPAREPLAYERSFORMOBJ.render();
