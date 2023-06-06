@@ -33,6 +33,11 @@
     text-align: center;
 }
 
+div.center-checkboxes{
+    margin: auto;
+    text-align: center;
+}
+
 input.form-checkboxes{
     width: 20px;
     height: 20px;
