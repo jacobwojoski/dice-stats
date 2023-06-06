@@ -95,3 +95,26 @@ Handlebars.registerHelper('diceStats_ifAutoDbActive', function (isAutoDBactive, 
     }
     return options.inverse(this);
 });
+
+Handlebars.registerHelper('diceStats_getCompareDiceArray', function (ary, options){
+    let retAry = [];
+    retAry.push(ary[0]);
+    for(let i=1; i<ary.length; i++)
+    {
+        retAry.push(ary[i]);
+    }
+
+    return retAry;
+});
+
+Handlebars.registerHelper('diceStats_getComparePlayerNames', function (ary, options){
+    let retString = "Dice Stats";
+    for(let i=0; i<ary.length; i++)
+    {
+        if(ary[i].isChecked)
+        {
+            retString += "|"+ary[i].name;
+        }
+    }
+    return retString
+});

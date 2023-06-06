@@ -35,6 +35,13 @@ class CustomSceneControlToolCompare
 
     onClick(){
         ui.notifications.warn("Comparison Tool Work In Progress");
+        
+        if(GLOBALCOMPAREPLAYERSFORMOBJ){
+            GLOBALCOMPAREPLAYERSFORMOBJ.render(true);
+        }else{
+            GLOBALCOMPAREPLAYERSFORMOBJ = new ComparePlayerStatusPage().render(true);
+        } 
+        
     }
 
     constructor(){}

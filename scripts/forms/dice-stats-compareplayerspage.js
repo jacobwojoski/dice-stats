@@ -2,19 +2,22 @@
 //==========================================================
 //===================== FORMS SHIT =========================
 //==========================================================
-
-
 class ComparePlayerStatusPage extends FormApplication{
+
+    //[{name,id,isChecked}]
+    // ComparePlayerObjUtil []
+    COMPARE_PLAYERS_LIST = []; //List of players that are being compared
+    DIE_DISPLAYED = [];
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
       
         const overrides = {
-          height: 'auto',
-          id: 'compare-data',
-          template: TEMPLATES.COMPAREFORM,
-          userId: game.userId,
-          title: 'Compare Player Stats',
+            height: 'auto',
+            id: 'compare-data',
+            template: TEMPLATES.COMPAREFORM,
+            userId: game.userId,
+            title: 'Compare Player Stats',
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -22,9 +25,35 @@ class ComparePlayerStatusPage extends FormApplication{
         return mergedOptions;
     }
 
+    swapPlayersChecked(userid)
+    {
+        for(let plyr of this.COMPARE_PLAYERS_LIST)
+        {
+            if(plyr.id == userid)
+            {
+                plyr.id = !plyr.id;
+                return;
+            }
+        }
+    }
+
+    constructor()
+    {
+        super();
+        this.COMPARE_PLAYERS_LIST.length = 0;
+        this.DIE_DISPLAYED = new Array(9);
+        this.DIE_DISPLAYED.fill(true);
+
+        for(let user of game.users)
+        {
+            let temp = new ComparePlayerObjUtil(user);
+            this.COMPARE_PLAYERS_LIST.push(temp);
+        }
+    }
+
 
     getData(){
-        var includeGM = game.settings.get(MODULE_ID,SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
+        var includeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
 
         //Convert Map of PLayers to Array
         let playersAry = [];
@@ -32,8 +61,10 @@ class ComparePlayerStatusPage extends FormApplication{
             playersAry.push(value);
         })
 
-        let dataObject = DATA_PACKAGER.packageGlobalData(playersAry, includeGM);
-        dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.GLOBAL_DICE_CHECKBOXES];
+        let dataObject = DATA_PACKAGER.packageComparePlayerData(this.COMPARE_PLAYERS_LIST, playersAry, includeGM);
+        dataObject.IS_DIE_DISPLAYED = [...this.DIE_DISPLAYED]
+
+        //dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.GLOBAL_DICE_CHECKBOXES];
         return dataObject;
     }
 
@@ -50,111 +81,48 @@ class ComparePlayerStatusPage extends FormApplication{
             case 'refresh':
                 GLOBALFORMOBJ.render();
                 break;
-            case 'pushBlindRolls':
-                socket.executeForEveryone("push_sock", game.userId);
-                GLOBALFORMOBJ.render();
-                break;
-            case 'clearAllRollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.context');
-                const allClear = await Dialog.confirm({
-                    title: title_txt,
-                    content: context_txt,
-                    yes: () => {return true},
-                    no: () => {return false},
-                    defaultYes: false
-                    });
-                if(allClear){
-                    ui.notifications.warn("All Player Data Cleared");
-                    socket.executeForEveryone("clear_sock", {});
-                    DB_INTERACTION.clearDB();
-                }
-                break;
-            case 'clearAllLocalRollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_local_data.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_local_data.context');
-                const localClear = await Dialog.confirm({
-                    title: title_txt,
-                    content: context_txt,
-                    yes: () => {return true},
-                    no: () => {return false},
-                    defaultYes: false
-                    });
-
-                if (localClear) {
-                    ui.notifications.warn("All Local Data Cleared");
-                    socket.executeForEveryone("clear_sock", {});
-                }
-                break;
-            case 'clearAllDBrollData':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.title');
-                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.context');
-                    const dbClear = await Dialog.confirm({
-                        title: title_txt,
-                        content: context_txt,
-                        yes: () => {return true},
-                        no: () => {return false},
-                        defaultYes: false
-                        });
-    
-                    if (dbClear) {
-                        ui.notifications.warn("All DB Data Cleared");
-                        CLASSOBJ.clear_database();
-                    }
-                break;
-            case 'loadAllFromDB':
-                title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_all_db.title');
-                context_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_all_db.context');
-                const loadConfirmation = await Dialog.confirm({
-                    title: title_txt,
-                    content: context_txt,
-                    yes: () => {return true},
-                    no: () => {return false},
-                    defaultYes: false
-                    });
-
-                if (loadConfirmation) {
-                    ui.notifications.warn("All Data Loaded");
-                    CLASSOBJ.loadAllPlayerData();
-                }
-                break;
             case 'd2checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
+                this.DIE_DISPLAYED[0] = !this.DIE_DISPLAYED[0];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd3checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[1] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[1];
+                this.DIE_DISPLAYED[1] = !this.DIE_DISPLAYED[1];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd4checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[2] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[2];
+                this.DIE_DISPLAYED[2] = !this.DIE_DISPLAYED[2];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd6checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[3] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[3];
+                this.DIE_DISPLAYED[3] = !this.DIE_DISPLAYED[3];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd8checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[4] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[4];
+                this.DIE_DISPLAYED[4] = !this.DIE_DISPLAYED[4];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd10checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[5] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[5];
+                this.DIE_DISPLAYED[5] = !this.DIE_DISPLAYED[5];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd12checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[6] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[6];
+                this.DIE_DISPLAYED[6] = !this.DIE_DISPLAYED[6];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd20checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[7] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[7];
+                this.DIE_DISPLAYED[7] = !this.DIE_DISPLAYED[7];
                 GLOBALFORMOBJ.render();
                 break;
             case 'd100checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[8] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[8];
+                this.DIE_DISPLAYED[8] = !this.DIE_DISPLAYED[8];
                 GLOBALFORMOBJ.render();
                 break;
             default:
+                //Check if button was from checking players to compare
+                if(ALLPLAYERDATA.has(action))
+                {
+                    swapPlayersChecked(action);
+                }
                 return;
         }
     }

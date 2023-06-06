@@ -79,7 +79,16 @@ class DATA_PACKAGER
     //Handlebars doesnt handle 2D arrays well so this is jank af
     COMPARE_HNDL_INFO = 
     {
-        PLAYERS_SELECTED:[], //Selected Player ID's
+        //Ary of {Player Name, Player ID:}
+        // [ {name:'', id:''}, {name:'', id:''}, {name:'', PlayerID:''} ... ]
+        PLAYERS_SELECTED: [], //Selected Player ID's
+        NUM_PLAYERS_SELECTED: 0,
+
+        IS_DIE_DISPLAYED: [],
+        TOTAL_ROLLS: [],
+        MEAN:   [],
+        MEDIAN: [],
+        MODE:   [],
 
         D2_ROLL_DATA_1:   [],
         D2_ROLL_DATA_2:   [],
@@ -152,10 +161,7 @@ class DATA_PACKAGER
         D20_ROLL_DATA_17:  [],
         D20_ROLL_DATA_18:  [],
         D20_ROLL_DATA_19:  [],
-        D20_ROLL_DATA_20:  [],
-
-        //TODO
-        //D100_ROLL_DATA: [],
+        D20_ROLL_DATA_20:  []
     }
 
     //======================================================
@@ -539,7 +545,383 @@ class DATA_PACKAGER
     //======================================================
     //============== Compare Plyr Package ==================
     //======================================================
+    //ComparePlayerObjUtil
+    static getNumPlayersSelected(compPlyrObjAry)
+    {
+        let numSel = 0;
+        for(let plyr of compPlyrObjAry)
+        {
+            if(plyr.isChecked == true)
+            {
+                numSel = numSel+1; 
+            }
+        }
+        return numSel;
+    }
 
+    static isPlayerCheckedComparePlayerObj(plyrAry,plyrID)
+    {
+        for(let plyr of plyrAry)
+        {
+            if(plyr.id == plyrID)
+            {
+                return plyr.isChecked;
+            }
+        }
+
+        return false;
+    }
+
+    static getPlayerDataComparePlayerObj(players, plyrID)
+    {
+        for(let plyr of players)
+        {
+            if(plyr.USERID == plyrID)
+            {
+                return plyr;
+            }
+        }
+        return null;
+    }
+
+    static setRollStatsComparePlayerObj(handlebarsData)
+    {
+        
+    }
+
+    static setPlayerRollDataComparePlayerObj(handlebarsData, playerObj)
+    {
+        handlebarsData.D2_ROLL_DATA_1.push(playerObj.PLAYER_DICE[0].ROLLS[0]); 
+        handlebarsData.D2_ROLL_DATA_2.push(playerObj.PLAYER_DICE[0].ROLLS[1]);
+
+        handlebarsData.D3_ROLL_DATA_1.push(playerObj.PLAYER_DICE[1].ROLLS[0]);
+        handlebarsData.D3_ROLL_DATA_2.push(playerObj.PLAYER_DICE[1].ROLLS[1]);
+        handlebarsData.D3_ROLL_DATA_3.push(playerObj.PLAYER_DICE[1].ROLLS[2]);
+
+        handlebarsData.D4_ROLL_DATA_1.push(playerObj.PLAYER_DICE[2].ROLLS[0]);
+        handlebarsData.D4_ROLL_DATA_2.push(playerObj.PLAYER_DICE[2].ROLLS[1]);
+        handlebarsData.D4_ROLL_DATA_3.push(playerObj.PLAYER_DICE[2].ROLLS[2]);
+        handlebarsData.D4_ROLL_DATA_4.push(playerObj.PLAYER_DICE[2].ROLLS[3]);
+
+        handlebarsData.D6_ROLL_DATA_1.push(playerObj.PLAYER_DICE[3].ROLLS[0]);
+        handlebarsData.D6_ROLL_DATA_2.push(playerObj.PLAYER_DICE[3].ROLLS[1]);
+        handlebarsData.D6_ROLL_DATA_3.push(playerObj.PLAYER_DICE[3].ROLLS[2]);
+        handlebarsData.D6_ROLL_DATA_4.push(playerObj.PLAYER_DICE[3].ROLLS[3]);
+        handlebarsData.D6_ROLL_DATA_5.push(playerObj.PLAYER_DICE[3].ROLLS[4]);
+        handlebarsData.D6_ROLL_DATA_6.push(playerObj.PLAYER_DICE[3].ROLLS[5]);
+
+        handlebarsData.D8_ROLL_DATA_1.push(playerObj.PLAYER_DICE[4].ROLLS[0]);
+        handlebarsData.D8_ROLL_DATA_2.push(playerObj.PLAYER_DICE[4].ROLLS[1]);
+        handlebarsData.D8_ROLL_DATA_3.push(playerObj.PLAYER_DICE[4].ROLLS[2]);
+        handlebarsData.D8_ROLL_DATA_4.push(playerObj.PLAYER_DICE[4].ROLLS[3]);
+        handlebarsData.D8_ROLL_DATA_5.push(playerObj.PLAYER_DICE[4].ROLLS[4]);
+        handlebarsData.D8_ROLL_DATA_6.push(playerObj.PLAYER_DICE[4].ROLLS[5]);
+        handlebarsData.D8_ROLL_DATA_7.push(playerObj.PLAYER_DICE[4].ROLLS[6]);
+        handlebarsData.D8_ROLL_DATA_8.push(playerObj.PLAYER_DICE[4].ROLLS[7]);
+
+        handlebarsData.D10_ROLL_DATA_1.push(playerObj.PLAYER_DICE[5].ROLLS[0]);
+        handlebarsData.D10_ROLL_DATA_2.push(playerObj.PLAYER_DICE[5].ROLLS[1]);
+        handlebarsData.D10_ROLL_DATA_3.push(playerObj.PLAYER_DICE[5].ROLLS[2]);
+        handlebarsData.D10_ROLL_DATA_4.push(playerObj.PLAYER_DICE[5].ROLLS[3]);
+        handlebarsData.D10_ROLL_DATA_5.push(playerObj.PLAYER_DICE[5].ROLLS[4]);
+        handlebarsData.D10_ROLL_DATA_6.push(playerObj.PLAYER_DICE[5].ROLLS[5]);
+        handlebarsData.D10_ROLL_DATA_7.push(playerObj.PLAYER_DICE[5].ROLLS[6]);
+        handlebarsData.D10_ROLL_DATA_8.push(playerObj.PLAYER_DICE[5].ROLLS[7]);
+        handlebarsData.D10_ROLL_DATA_9.push(playerObj.PLAYER_DICE[5].ROLLS[8]);
+        handlebarsData.D10_ROLL_DATA_10.push(playerObj.PLAYER_DICE[5].ROLLS[9]);
+
+        handlebarsData.D12_ROLL_DATA_1.push(playerObj.PLAYER_DICE[6].ROLLS[0]);
+        handlebarsData.D12_ROLL_DATA_2.push(playerObj.PLAYER_DICE[6].ROLLS[1]);
+        handlebarsData.D12_ROLL_DATA_3.push(playerObj.PLAYER_DICE[6].ROLLS[2]);
+        handlebarsData.D12_ROLL_DATA_4.push(playerObj.PLAYER_DICE[6].ROLLS[3]);
+        handlebarsData.D12_ROLL_DATA_5.push(playerObj.PLAYER_DICE[6].ROLLS[4]);
+        handlebarsData.D12_ROLL_DATA_6.push(playerObj.PLAYER_DICE[6].ROLLS[5]);
+        handlebarsData.D12_ROLL_DATA_7.push(playerObj.PLAYER_DICE[6].ROLLS[6]);
+        handlebarsData.D12_ROLL_DATA_8.push(playerObj.PLAYER_DICE[6].ROLLS[7]);
+        handlebarsData.D12_ROLL_DATA_9.push(playerObj.PLAYER_DICE[6].ROLLS[8]);
+        handlebarsData.D12_ROLL_DATA_10.push(playerObj.PLAYER_DICE[6].ROLLS[9]);
+        handlebarsData.D12_ROLL_DATA_11.push(playerObj.PLAYER_DICE[6].ROLLS[10]);
+        handlebarsData.D12_ROLL_DATA_12.push(playerObj.PLAYER_DICE[6].ROLLS[11]);
+
+        handlebarsData.D20_ROLL_DATA_1.push(playerObj.PLAYER_DICE[7].ROLLS[0]);
+        handlebarsData.D20_ROLL_DATA_2.push(playerObj.PLAYER_DICE[7].ROLLS[1]);
+        handlebarsData.D20_ROLL_DATA_3.push(playerObj.PLAYER_DICE[7].ROLLS[2]);
+        handlebarsData.D20_ROLL_DATA_4.push(playerObj.PLAYER_DICE[7].ROLLS[3]);
+        handlebarsData.D20_ROLL_DATA_5.push(playerObj.PLAYER_DICE[7].ROLLS[4]);
+        handlebarsData.D20_ROLL_DATA_6.push(playerObj.PLAYER_DICE[7].ROLLS[5]);
+        handlebarsData.D20_ROLL_DATA_7.push(playerObj.PLAYER_DICE[7].ROLLS[6]);
+        handlebarsData.D20_ROLL_DATA_8.push(playerObj.PLAYER_DICE[7].ROLLS[7]);
+        handlebarsData.D20_ROLL_DATA_9.push(playerObj.PLAYER_DICE[7].ROLLS[8]);
+        handlebarsData.D20_ROLL_DATA_10.push(playerObj.PLAYER_DICE[7].ROLLS[9]);
+        handlebarsData.D20_ROLL_DATA_11.push(playerObj.PLAYER_DICE[7].ROLLS[10]);
+        handlebarsData.D20_ROLL_DATA_12.push(playerObj.PLAYER_DICE[7].ROLLS[11]);
+        handlebarsData.D20_ROLL_DATA_13.push(playerObj.PLAYER_DICE[7].ROLLS[12]);
+        handlebarsData.D20_ROLL_DATA_14.push(playerObj.PLAYER_DICE[7].ROLLS[13]);
+        handlebarsData.D20_ROLL_DATA_15.push(playerObj.PLAYER_DICE[7].ROLLS[14]);
+        handlebarsData.D20_ROLL_DATA_16.push(playerObj.PLAYER_DICE[7].ROLLS[15]);
+        handlebarsData.D20_ROLL_DATA_17.push(playerObj.PLAYER_DICE[7].ROLLS[16]);
+        handlebarsData.D20_ROLL_DATA_18.push(playerObj.PLAYER_DICE[7].ROLLS[17]);
+        handlebarsData.D20_ROLL_DATA_19.push(playerObj.PLAYER_DICE[7].ROLLS[18]);
+        handlebarsData.D20_ROLL_DATA_20.push(playerObj.PLAYER_DICE[7].ROLLS[19]);
+    }
+
+    static setDefaultComparePlayerObj(handlebarsData){
+        handlebarsData.D2_ROLL_DATA_1 = [];
+        handlebarsData.D2_ROLL_DATA_2 = [];
+
+        handlebarsData.D3_ROLL_DATA_1 = [];
+        handlebarsData.D3_ROLL_DATA_2 = [];
+        handlebarsData.D3_ROLL_DATA_3 = [];
+
+        handlebarsData.D4_ROLL_DATA_1 = [];
+        handlebarsData.D4_ROLL_DATA_2 = [];
+        handlebarsData.D4_ROLL_DATA_3 = [];
+        handlebarsData.D4_ROLL_DATA_4 = [];
+
+        handlebarsData.D6_ROLL_DATA_1 = [];
+        handlebarsData.D6_ROLL_DATA_2 = [];
+        handlebarsData.D6_ROLL_DATA_3 = [];
+        handlebarsData.D6_ROLL_DATA_4 = [];
+        handlebarsData.D6_ROLL_DATA_5 = [];
+        handlebarsData.D6_ROLL_DATA_6 = [];
+
+        handlebarsData.D8_ROLL_DATA_1 = [];
+        handlebarsData.D8_ROLL_DATA_2 = [];
+        handlebarsData.D8_ROLL_DATA_3 = [];
+        handlebarsData.D8_ROLL_DATA_4 = [];
+        handlebarsData.D8_ROLL_DATA_5 = [];
+        handlebarsData.D8_ROLL_DATA_6 = [];
+        handlebarsData.D8_ROLL_DATA_7 = [];
+        handlebarsData.D8_ROLL_DATA_8 = [];
+
+        handlebarsData.D10_ROLL_DATA_1 = [];
+        handlebarsData.D10_ROLL_DATA_2 = [];
+        handlebarsData.D10_ROLL_DATA_3 = [];
+        handlebarsData.D10_ROLL_DATA_4 = [];
+        handlebarsData.D10_ROLL_DATA_5 = [];
+        handlebarsData.D10_ROLL_DATA_6 = [];
+        handlebarsData.D10_ROLL_DATA_7 = [];
+        handlebarsData.D10_ROLL_DATA_8 = [];
+        handlebarsData.D10_ROLL_DATA_9 = [];
+        handlebarsData.D10_ROLL_DATA_10 = [];
+
+        handlebarsData.D12_ROLL_DATA_1 = [];
+        handlebarsData.D12_ROLL_DATA_2 = [];
+        handlebarsData.D12_ROLL_DATA_3 = [];
+        handlebarsData.D12_ROLL_DATA_4 = [];
+        handlebarsData.D12_ROLL_DATA_5 = [];
+        handlebarsData.D12_ROLL_DATA_6 = [];
+        handlebarsData.D12_ROLL_DATA_7 = [];
+        handlebarsData.D12_ROLL_DATA_8 = [];
+        handlebarsData.D12_ROLL_DATA_9 = [];
+        handlebarsData.D12_ROLL_DATA_10 = [];
+        handlebarsData.D12_ROLL_DATA_11 = [];
+        handlebarsData.D12_ROLL_DATA_12 = [];
+
+        handlebarsData.D20_ROLL_DATA_1 = [];
+        handlebarsData.D20_ROLL_DATA_2 = [];
+        handlebarsData.D20_ROLL_DATA_3 = [];
+        handlebarsData.D20_ROLL_DATA_4 = [];
+        handlebarsData.D20_ROLL_DATA_5 = [];
+        handlebarsData.D20_ROLL_DATA_6 = [];
+        handlebarsData.D20_ROLL_DATA_7 = [];
+        handlebarsData.D20_ROLL_DATA_8 = [];
+        handlebarsData.D20_ROLL_DATA_9 = [];
+        handlebarsData.D20_ROLL_DATA_10 = [];
+        handlebarsData.D20_ROLL_DATA_11 = [];
+        handlebarsData.D20_ROLL_DATA_12 = [];
+        handlebarsData.D20_ROLL_DATA_13 = [];
+        handlebarsData.D20_ROLL_DATA_14 = [];
+        handlebarsData.D20_ROLL_DATA_15 = [];
+        handlebarsData.D20_ROLL_DATA_16 = [];
+        handlebarsData.D20_ROLL_DATA_17 = [];
+        handlebarsData.D20_ROLL_DATA_18 = [];
+        handlebarsData.D20_ROLL_DATA_19 = [];
+        handlebarsData.D20_ROLL_DATA_20 = [];
+
+        handlebarsData.IS_DIE_DISPLAYED = [];
+
+        // handlebarsData.D2_ROLL_DATA_1.length = 0;
+        // handlebarsData.D2_ROLL_DATA_2.length = 0;
+
+        // handlebarsData.D3_ROLL_DATA_1.length = 0;
+        // handlebarsData.D3_ROLL_DATA_2.length = 0;
+        // handlebarsData.D3_ROLL_DATA_3.length = 0;
+
+        // handlebarsData.D4_ROLL_DATA_1.length = 0;
+        // handlebarsData.D4_ROLL_DATA_2.length = 0;
+        // handlebarsData.D4_ROLL_DATA_3.length = 0;
+        // handlebarsData.D4_ROLL_DATA_4.length = 0;
+
+        // handlebarsData.D6_ROLL_DATA_1.length = 0;
+        // handlebarsData.D6_ROLL_DATA_2.length = 0;
+        // handlebarsData.D6_ROLL_DATA_3.length = 0;
+        // handlebarsData.D6_ROLL_DATA_4.length = 0;
+        // handlebarsData.D6_ROLL_DATA_5.length = 0;
+        // handlebarsData.D6_ROLL_DATA_6.length = 0;
+
+        // handlebarsData.D8_ROLL_DATA_1.length = 0;
+        // handlebarsData.D8_ROLL_DATA_2.length = 0;
+        // handlebarsData.D8_ROLL_DATA_3.length = 0;
+        // handlebarsData.D8_ROLL_DATA_4.length = 0;
+        // handlebarsData.D8_ROLL_DATA_5.length = 0;
+        // handlebarsData.D8_ROLL_DATA_6.length = 0;
+        // handlebarsData.D8_ROLL_DATA_7.length = 0;
+        // handlebarsData.D8_ROLL_DATA_8.length = 0;
+
+        // handlebarsData.D10_ROLL_DATA_1.length = 0;
+        // handlebarsData.D10_ROLL_DATA_2.length = 0;
+        // handlebarsData.D10_ROLL_DATA_3.length = 0;
+        // handlebarsData.D10_ROLL_DATA_4.length = 0;
+        // handlebarsData.D10_ROLL_DATA_5.length = 0;
+        // handlebarsData.D10_ROLL_DATA_6.length = 0;
+        // handlebarsData.D10_ROLL_DATA_7.length = 0;
+        // handlebarsData.D10_ROLL_DATA_8.length = 0;
+        // handlebarsData.D10_ROLL_DATA_9.length = 0;
+        // handlebarsData.D10_ROLL_DATA_10.length = 0;
+
+        // handlebarsData.D12_ROLL_DATA_1.length = 0;
+        // handlebarsData.D12_ROLL_DATA_2.length = 0;
+        // handlebarsData.D12_ROLL_DATA_3.length = 0;
+        // handlebarsData.D12_ROLL_DATA_4.length = 0;
+        // handlebarsData.D12_ROLL_DATA_5.length = 0;
+        // handlebarsData.D12_ROLL_DATA_6.length = 0;
+        // handlebarsData.D12_ROLL_DATA_7.length = 0;
+        // handlebarsData.D12_ROLL_DATA_8.length = 0;
+        // handlebarsData.D12_ROLL_DATA_9.length = 0;
+        // handlebarsData.D12_ROLL_DATA_10.length = 0;
+        // handlebarsData.D12_ROLL_DATA_11.length = 0;
+        // handlebarsData.D12_ROLL_DATA_12.length = 0;
+
+        // handlebarsData.D20_ROLL_DATA_1.length = 0;
+        // handlebarsData.D20_ROLL_DATA_2.length = 0;
+        // handlebarsData.D20_ROLL_DATA_3.length = 0;
+        // handlebarsData.D20_ROLL_DATA_4.length = 0;
+        // handlebarsData.D20_ROLL_DATA_5.length = 0;
+        // handlebarsData.D20_ROLL_DATA_6.length = 0;
+        // handlebarsData.D20_ROLL_DATA_7.length = 0;
+        // handlebarsData.D20_ROLL_DATA_8.length = 0;
+        // handlebarsData.D20_ROLL_DATA_9.length = 0;
+        // handlebarsData.D20_ROLL_DATA_10.length = 0;
+        // handlebarsData.D20_ROLL_DATA_11.length = 0;
+        // handlebarsData.D20_ROLL_DATA_12.length = 0;
+        // handlebarsData.D20_ROLL_DATA_13.length = 0;
+        // handlebarsData.D20_ROLL_DATA_14.length = 0;
+        // handlebarsData.D20_ROLL_DATA_15.length = 0;
+        // handlebarsData.D20_ROLL_DATA_16.length = 0;
+        // handlebarsData.D20_ROLL_DATA_17.length = 0;
+        // handlebarsData.D20_ROLL_DATA_18.length = 0;
+        // handlebarsData.D20_ROLL_DATA_19.length = 0;
+        // handlebarsData.D20_ROLL_DATA_20.length = 0;
+
+        //handlebarsData.IS_DIE_DISPLAYED.fill(0);
+
+        handlebarsData.D2_ROLL_DATA_1.push('1'); 
+        handlebarsData.D2_ROLL_DATA_2.push('2');
+
+        handlebarsData.D3_ROLL_DATA_1.push('1');
+        handlebarsData.D3_ROLL_DATA_2.push('2');
+        handlebarsData.D3_ROLL_DATA_3.push('3');
+
+        handlebarsData.D4_ROLL_DATA_1.push('1');
+        handlebarsData.D4_ROLL_DATA_2.push('2');
+        handlebarsData.D4_ROLL_DATA_3.push('3');
+        handlebarsData.D4_ROLL_DATA_4.push('4');
+
+        handlebarsData.D6_ROLL_DATA_1.push('1');
+        handlebarsData.D6_ROLL_DATA_2.push('2');
+        handlebarsData.D6_ROLL_DATA_3.push('3');
+        handlebarsData.D6_ROLL_DATA_4.push('4');
+        handlebarsData.D6_ROLL_DATA_5.push('5');
+        handlebarsData.D6_ROLL_DATA_6.push('6');
+
+        handlebarsData.D8_ROLL_DATA_1.push('1');
+        handlebarsData.D8_ROLL_DATA_2.push('2');
+        handlebarsData.D8_ROLL_DATA_3.push('3');
+        handlebarsData.D8_ROLL_DATA_4.push('4');
+        handlebarsData.D8_ROLL_DATA_5.push('5');
+        handlebarsData.D8_ROLL_DATA_6.push('6');
+        handlebarsData.D8_ROLL_DATA_7.push('7');
+        handlebarsData.D8_ROLL_DATA_8.push('8');
+
+        handlebarsData.D10_ROLL_DATA_1.push('1');
+        handlebarsData.D10_ROLL_DATA_2.push('2');
+        handlebarsData.D10_ROLL_DATA_3.push('3');
+        handlebarsData.D10_ROLL_DATA_4.push('4');
+        handlebarsData.D10_ROLL_DATA_5.push('5');
+        handlebarsData.D10_ROLL_DATA_6.push('6');
+        handlebarsData.D10_ROLL_DATA_7.push('7');
+        handlebarsData.D10_ROLL_DATA_8.push('8');
+        handlebarsData.D10_ROLL_DATA_9.push('9');
+        handlebarsData.D10_ROLL_DATA_10.push('10');
+
+        handlebarsData.D12_ROLL_DATA_1.push('1');
+        handlebarsData.D12_ROLL_DATA_2.push('2');
+        handlebarsData.D12_ROLL_DATA_3.push('3');
+        handlebarsData.D12_ROLL_DATA_4.push('4');
+        handlebarsData.D12_ROLL_DATA_5.push('5');
+        handlebarsData.D12_ROLL_DATA_6.push('6');
+        handlebarsData.D12_ROLL_DATA_7.push('7');
+        handlebarsData.D12_ROLL_DATA_8.push('8');
+        handlebarsData.D12_ROLL_DATA_9.push('9');
+        handlebarsData.D12_ROLL_DATA_10.push('10');
+        handlebarsData.D12_ROLL_DATA_11.push('11');
+        handlebarsData.D12_ROLL_DATA_12.push('12');
+
+        handlebarsData.D20_ROLL_DATA_1.push('1');
+        handlebarsData.D20_ROLL_DATA_2.push('2');
+        handlebarsData.D20_ROLL_DATA_3.push('3');
+        handlebarsData.D20_ROLL_DATA_4.push('4');
+        handlebarsData.D20_ROLL_DATA_5.push('5');
+        handlebarsData.D20_ROLL_DATA_6.push('6');
+        handlebarsData.D20_ROLL_DATA_7.push('7');
+        handlebarsData.D20_ROLL_DATA_8.push('8');
+        handlebarsData.D20_ROLL_DATA_9.push('9');
+        handlebarsData.D20_ROLL_DATA_10.push('10');
+        handlebarsData.D20_ROLL_DATA_11.push('11');
+        handlebarsData.D20_ROLL_DATA_12.push('12');
+        handlebarsData.D20_ROLL_DATA_13.push('13');
+        handlebarsData.D20_ROLL_DATA_14.push('14');
+        handlebarsData.D20_ROLL_DATA_15.push('15');
+        handlebarsData.D20_ROLL_DATA_16.push('16');
+        handlebarsData.D20_ROLL_DATA_17.push('17');
+        handlebarsData.D20_ROLL_DATA_18.push('18');
+        handlebarsData.D20_ROLL_DATA_19.push('19');
+        handlebarsData.D20_ROLL_DATA_20.push('20');
+    }
+
+    //ComparePlayersForm::COMPARE_PLAYERS_LIST 
+    static packageComparePlayerData(COMPARE_PLAYERS_LIST, playersArry, includeGMrolls)
+    {
+        //Create dataObject
+        let packedData = {};
+        Object.assign(packedData, this.COMPARE_HNDL_INFO);
+
+        packedData.PLAYERS_SELECTED = [...COMPARE_PLAYERS_LIST];
+        packedData.NUM_PLAYERS_SELECTED = this.getNumPlayersSelected(packedData.PLAYERS_SELECTED);
+
+        this.setDefaultComparePlayerObj(packedData);
+
+        for(let plyr of packedData.PLAYERS_SELECTED)
+        {
+            if(plyr.isChecked)
+            {
+                let playerObj = this.getPlayerDataComparePlayerObj(playersArry, plyr.id);
+                if(includeGMrolls == false && playerObj.GM == true)
+                {
+                    //skip because we dont want to allow adding gm data due to setting
+                }
+                else
+                {
+                    this.setPlayerRollDataComparePlayerObj(packedData, playerObj);
+                }
+            }
+        }
+
+        //this.setRollStatsComparePlayerObj(packedData);
+        return packedData;
+    }
+    
     //======================================================
     //================= Export Package =====================
     //======================================================
