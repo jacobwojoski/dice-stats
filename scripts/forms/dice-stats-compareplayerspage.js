@@ -47,7 +47,7 @@ class ComparePlayerStatusPage extends FormApplication{
     {
         super();
         this.COMPARE_PLAYERS_LIST.length = 0;
-        this.DIE_DISPLAYED = new Array(9);
+        this.DIE_DISPLAYED = new Array(8);
         this.DIE_DISPLAYED.fill(true);
 
         for(let user of game.users)
