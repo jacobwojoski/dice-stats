@@ -118,3 +118,15 @@ Handlebars.registerHelper('diceStats_getComparePlayerNames', function (ary, opti
     }
     return retString
 });
+
+Handlebars.registerHelper('diceStats_createPlayerCheckboxes', function (ary, options){
+    let retString = "Dice Stats";
+    for(let i=0; i<ary.length; i++)
+    {
+        if(ary[i].isChecked)
+        {
+            retString += "|"+ary[i].name;
+        }
+    }
+    return retString
+});

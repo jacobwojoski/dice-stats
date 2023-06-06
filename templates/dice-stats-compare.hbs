@@ -13,8 +13,11 @@
     <!-- [(name, id, isCheked), (name, isChecked), (name, isCheked)...] -->
     <div class="player-checkboxes">
         <br>
+        <input type="checkbox" class="player-checkboxes" data-action="Test" {{{diceStats_IsChecked this.isChecked}}}><span class="form-checkboxes">TEST PLAYER CECK</span></input>
         {{#each compare_players_list}} 
-            <input type="checkbox" class="player-checkboxes" data-action={{{this.id}}} {{{diceStats_IsChecked this.isChecked}}}><span class="form-checkboxes">{{this.playerName}}</span></input>
+            <input type="checkbox" class="player-checkboxes" data-action="Test2" ><span class="form-checkboxes">TEST PLAYER CECK2</span></input>
+            <input type="checkbox" class="player-checkboxes" data-action="Test3" {{{diceStats_IsChecked isChecked}}}><span class="form-checkboxes">{{playerName}}</span></input>
+            {{{this.id}}} 
         {{/each}} 
         <br>
         
@@ -138,7 +141,7 @@
                     color:'black',
                 },
             },
-            legend: 'none',
+            legend: 'top',
         }
 
 

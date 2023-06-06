@@ -79,43 +79,43 @@ class ComparePlayerStatusPage extends FormApplication{
 
         switch(action){
             case 'refresh':
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd2checkbox':
-                this.DIE_DISPLAYED[0] = !this.DIE_DISPLAYED[0];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[0] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[0];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd3checkbox':
-                this.DIE_DISPLAYED[1] = !this.DIE_DISPLAYED[1];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[1] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[1];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd4checkbox':
-                this.DIE_DISPLAYED[2] = !this.DIE_DISPLAYED[2];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[2] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[2];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd6checkbox':
-                this.DIE_DISPLAYED[3] = !this.DIE_DISPLAYED[3];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[3] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[3];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd8checkbox':
-                this.DIE_DISPLAYED[4] = !this.DIE_DISPLAYED[4];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[4] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[4];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd10checkbox':
-                this.DIE_DISPLAYED[5] = !this.DIE_DISPLAYED[5];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[5] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[5];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd12checkbox':
-                this.DIE_DISPLAYED[6] = !this.DIE_DISPLAYED[6];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[6] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[6];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd20checkbox':
-                this.DIE_DISPLAYED[7] = !this.DIE_DISPLAYED[7];
-                GLOBALFORMOBJ.render();
+                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[7] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[7];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             case 'd100checkbox':
-                this.DIE_DISPLAYED[8] = !this.DIE_DISPLAYED[8];
-                GLOBALFORMOBJ.render();
+                //this.DIE_DISPLAYED[8] = !this.DIE_DISPLAYED[8];
+                GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 break;
             default:
                 //Check if button was from checking players to compare
