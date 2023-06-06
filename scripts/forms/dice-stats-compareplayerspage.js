@@ -11,7 +11,10 @@ class ComparePlayerStatusPage extends FormApplication{
         const defaults = super.defaultOptions;
       
         const overrides = {
-            height: 'auto',
+            height: 700,
+            width: 1000,
+            popOut: true,
+            resizeable: true,
             id: 'compare-data',
             template: TEMPLATES.COMPAREFORM,
             userId: game.userId,
@@ -77,7 +80,7 @@ class ComparePlayerStatusPage extends FormApplication{
         const action = clickedElement.data().action;
 
         if(GLOBALCOMPAREPLAYERSFORMOBJ == null){return;}
-        
+
         switch(action){
             case 'refresh':
                 GLOBALCOMPAREPLAYERSFORMOBJ.render();

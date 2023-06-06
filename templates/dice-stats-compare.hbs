@@ -19,7 +19,7 @@
     </div>
     <h1></h1>
     <!-- Checkboxes to choose if you want a graph hidden -->
-    <div class="form-checkboxes">
+    <div class="center-checkboxes">
         <input type="checkbox" class="form-checkboxes" data-action="d2checkbox"     {{{diceStats_IsChecked IS_DIE_DISPLAYED.[0]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d2"}}</span></input>
         <input type="checkbox" class="form-checkboxes" data-action="d3checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[1]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d3"}}</span></input>
         <input type="checkbox" class="form-checkboxes" data-action="d4checkbox"     {{{diceStats_IsChecked IS_DIE_DISPLAYED.[2]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d4"}}</span></input>
@@ -466,13 +466,6 @@
         {
             google.charts.setOnLoadCallback(drawChartd20);
         }
-
-        /*
-        if({{TOTAL_ROLLS.[8]}} > 0 && {{IS_DIE_DISPLAYED.[8]}})
-        {
-            google.charts.setOnLoadCallback(drawChartd100);
-        }
-        */
 
     </script>
 
