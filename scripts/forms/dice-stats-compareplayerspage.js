@@ -119,9 +119,9 @@ class ComparePlayerStatusPage extends FormApplication{
                 break;
             default:
                 //Check if button was from checking players to compare
-                if(ALLPLAYERDATA.has(action))
+                if(CLASSOBJ.ALLPLAYERDATA.has(action))
                 {
-                    swapPlayersChecked(action);
+                    GLOBALCOMPAREPLAYERSFORMOBJ.swapPlayersChecked(action);
                 }
                 return;
         }

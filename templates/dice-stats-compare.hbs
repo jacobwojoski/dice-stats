@@ -12,12 +12,8 @@
     <!-- Example of using en.json values <li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{testhandle}}</li>-->
     <!-- [(name, id, isCheked), (name, isChecked), (name, isCheked)...] -->
     <div class="player-checkboxes">
-        <br>
-        <input type="checkbox" class="player-checkboxes" data-action="Test" {{{diceStats_IsChecked this.isChecked}}}><span class="form-checkboxes">TEST PLAYER CECK</span></input>
-        {{#each compare_players_list}} 
-            <input type="checkbox" class="player-checkboxes" data-action="Test2" ><span class="form-checkboxes">TEST PLAYER CECK2</span></input>
-            <input type="checkbox" class="player-checkboxes" data-action="Test3" {{{diceStats_IsChecked isChecked}}}><span class="form-checkboxes">{{playerName}}</span></input>
-            {{{this.id}}} 
+        {{#each PLAYERS_SELECTED}} 
+            <input type="checkbox" class="player-checkboxes" data-action="{{{this.id}}}" {{{diceStats_IsChecked this.isChecked}}}><span class="form-checkboxes">{{this.name}}</span></input>
         {{/each}} 
         <br>
         
@@ -141,7 +137,7 @@
                     color:'black',
                 },
             },
-            legend: 'top',
+            legend: 'right',
         }
 
 
