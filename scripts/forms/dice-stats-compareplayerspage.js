@@ -27,11 +27,11 @@ class ComparePlayerStatusPage extends FormApplication{
 
     swapPlayersChecked(userid)
     {
-        for(let plyr of this.COMPARE_PLAYERS_LIST)
+        for(let plyr of GLOBALCOMPAREPLAYERSFORMOBJ.COMPARE_PLAYERS_LIST)
         {
             if(plyr.id == userid)
             {
-                plyr.id = !plyr.id;
+                plyr.isChecked = !plyr.isChecked;
                 return;
             }
         }
@@ -122,6 +122,7 @@ class ComparePlayerStatusPage extends FormApplication{
                 if(CLASSOBJ.ALLPLAYERDATA.has(action))
                 {
                     GLOBALCOMPAREPLAYERSFORMOBJ.swapPlayersChecked(action);
+                    GLOBALCOMPAREPLAYERSFORMOBJ.render();
                 }
                 return;
         }
