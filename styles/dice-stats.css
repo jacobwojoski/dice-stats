@@ -20,7 +20,7 @@
 
 .chart-dice-stats{
     background: transparent;
-    width: 600px; 
+    width: auto; 
     height: 300px; 
     margin-top: 0;
     margin-left: 0;
@@ -29,6 +29,11 @@
 }
 
 .dice-type-title{
+    margin: auto;
+    text-align: center;
+}
+
+div.center-checkboxes{
     margin: auto;
     text-align: center;
 }

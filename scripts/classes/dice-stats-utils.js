@@ -129,3 +129,17 @@ class DICE_STATS_UTILS {
         return 0;
     }
 }
+
+class  ComparePlayerObjUtil
+{
+    name = '';
+    id = '';
+    isChecked = true;
+
+    constructor(user)
+    {
+        this.name = user.name;
+        this.id = user.id;
+        this.isChecked = true;
+    }
+}

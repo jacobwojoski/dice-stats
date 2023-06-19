@@ -14,6 +14,8 @@ class PlayerStatusPage extends FormApplication {
       
         const overrides = {
           height: 'auto',
+          popOut: true,
+          resizeable: true,
           id: 'player-data',
           template: TEMPLATES.PLAYERDATAFORM,
           userId: game.userId,

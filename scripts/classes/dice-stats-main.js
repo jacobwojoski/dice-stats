@@ -1,6 +1,7 @@
 //----GLOBAL VALUES----
 CLASSOBJ = null;
 GLOBALFORMOBJ = null;
+GLOBALCOMPAREPLAYERSFORMOBJ = null;
 PLAYERFORMOBJ = null;
 GLOBALSCENECONTROLSOBJ = null;
 let socket;
@@ -12,6 +13,7 @@ const MODULE_ID_DS = 'dice-stats'
 const TEMPLATES = {
     GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
     PLAYERDATAFORM:     'modules/dice-stats/templates/dice-stats-player.hbs',
+    COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
     
     //TODO
     STREAKCHATMSGFORM:  'modules/dice-stats/templates/dice-stats-global.hbs',
