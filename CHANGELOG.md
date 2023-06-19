@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.13.0 ]
+### Added
+- Comparison Screen Added! Now you can see your rolls next to your friends! 
+
 ## [ 1.12.0 ]
 ### Fixed
 - Works with Foundry V11 and V10
