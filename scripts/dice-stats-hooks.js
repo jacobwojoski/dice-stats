@@ -129,6 +129,10 @@ Hooks.on("getSceneControlButtons", controls => {
         // Have Scenecontrol as global obj so its not made everytime scenecontrols gets rerendered (this happens alot)
         // Create new button on scene control
         if(GLOBALSCENECONTROLSOBJ == null){
+
+            // Register a new layer for our button
+            CONFIG.Canvas.layers.diceStats = { layerClass: InteractionLayer, group: 'interface' }
+
             let playersAsTools = [];
 
             playersAsTools.push(new CustomSceneControlToolGlobal());
