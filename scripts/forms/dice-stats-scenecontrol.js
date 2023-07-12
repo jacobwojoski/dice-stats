@@ -84,7 +84,7 @@ class CustomSceneControl
     activeTool = '';
     name = 'dstats';
     title = 'diceStatsButton';
-    layer = 'controls';
+    layer = 'diceStats';
     icon = 'fas fa-dice-d20';
     visible = true;
     tools = [];
