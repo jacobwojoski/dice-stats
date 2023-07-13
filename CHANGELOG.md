@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.13.1 ]
+### Fixed
+- Added button to its own layer to avoid collision with other mods.
+
 ## [ 1.13.0 ]
 ### Added
 - Comparison Screen Added! Now you can see your rolls next to your friends! 
