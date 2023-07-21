@@ -18,6 +18,12 @@ class DIE_INFO {
     MEDIAN =    0;
     MODE =      0;
 
+    ATK_ROLLS = [];
+    DMG_ROLLS = [];
+    SAVES_ROLLS = [];
+    SKILLS_ROLLS = [];
+    UNKNOWN_ROLLS = [];
+
     /**
      * constructor set values to defaults
      * @param {int} dieMax - max value the die can be
@@ -34,6 +40,22 @@ class DIE_INFO {
 
         this.BLIND_ROLLS = new Array(dieMax);
         this.BLIND_ROLLS.fill(0);
+
+        //Constrct different types only for d20's for now
+        if(dieMax == 20)
+        {
+            this.ATK_ROLLS = new Array(dieMax);
+            this.DMG_ROLLS = new Array(dieMax);
+            this.SAVES_ROLLS = new Array(dieMax);
+            this.SKILLS_ROLLS = new Array(dieMax);
+            this.UNKNOWN_ROLLS = new Array(dieMax);
+
+            this.ATK_ROLLS.fill(0);
+            this.DMG_ROLLS.fill(0);
+            this.SAVES_ROLLS.fill(0);
+            this.SKILLS_ROLLS.fill(0);
+            this.UNKNOWN_ROLLS.fill(0);
+        }
     }
 
     /**
@@ -84,7 +106,7 @@ class DIE_INFO {
      * @param {int} roll - value of roll 
      * @param {bool} isBlind 
      */
-    addRoll(roll, isBlind){
+    addRoll(roll, isBlind, rollType){
         this.TOTAL_ROLLS++;
         this.updateStreak(roll, isBlind)
 
@@ -93,6 +115,25 @@ class DIE_INFO {
             this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
         }else{
             this.BLIND_ROLLS[roll-1] = this.BLIND_ROLLS[roll-1]+1; 
+        }
+
+        switch(rollType)
+        {
+            case DIE_ROLL_TYPE.ATK :
+                this.ATK_ROLLS[roll-1] = this.ATK_ROLLS[roll-1]+1;
+                break;
+            case DIE_ROLL_TYPE.DMG :
+                this.DMG_ROLLS[roll-1] = this.DMG_ROLLS[roll-1]+1;
+                break;
+            case DIE_ROLL_TYPE.SAVE :
+                this.SAVES_ROLLS[roll-1] = this.SAVES_ROLLS[roll-1]+1;
+                break;
+            case DIE_ROLL_TYPE.SKILL :
+                this.SKILLS_ROLLS[roll-1] = this.SKILLS_ROLLS[roll-1]+1;
+                break;
+            case DIE_ROLL_TYPE.UNKNOWN :
+                this.UNKNOWN_ROLLS[roll-1] = this.UNKNOWN_ROLLS[roll-1]+1;
+                break;
         }
     }
 

@@ -128,6 +128,51 @@ class DICE_STATS_UTILS {
         }
         return 0;
     }
+
+    /**
+     * get the type of roll the msg was. 
+     * Find Total Number of rolls/2 ()
+     * Go through array subtracting each roll untill we find our middle number
+     * @param {chatMessage} msg - chat message object (Chat message object is a foundry object not made by me. might have different variables bassed off of system so only woprking for PF2e for now)
+     * @returns {ROLL_TYPE} - Type of roll that was made (atack, dmg, save ect)
+     */
+    static getRollType()
+    {
+        if(game.system.id == "pf2e")
+        {
+            //Check if Atack roll
+            if()
+            {
+                return DIE_ROLL_TYPE.ATK;
+            }
+
+            //Check if damage Roll
+            if()
+            {
+                return DIE_ROLL_TYPE.DMG;
+            }
+
+            //check if save roll
+            if()
+            {
+                return DIE_ROLL_TYPE.SAVE;
+            }
+
+            //Check if skill check
+            if()
+            {
+                return DIE_ROLL_TYPE.SKILL;
+            }
+
+            //unknown so return unknown type
+            return DIE_ROLL_TYPE.UNKNOWN;
+
+        }//ADD else if for other systems here
+        else{
+            return DIE_ROLL_TYPE.UNKNOWN;
+        }
+        
+    }
 }
 
 class  ComparePlayerObjUtil

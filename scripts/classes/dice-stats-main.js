@@ -64,6 +64,15 @@ const DIE_TYPE = {
     D100:   8
 }
 
+//Global 'enum' for types of d20 rolls
+const DIE_ROLL_TYPE = {
+    ATK: 0,
+    DMG: 1,
+    SAVE: 2,
+    SKILL: 3,
+    UNKNOWN: 4   
+}
+
 //use array as way to convert DIE_TYPE enum to Max value of each die
 const DIE_MAX = [2,3,4,6,8,10,12,20,100];
 
