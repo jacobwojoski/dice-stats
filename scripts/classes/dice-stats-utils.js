@@ -130,48 +130,94 @@ class DICE_STATS_UTILS {
     }
 
     /**
-     * get the type of roll the msg was. 
-     * Find Total Number of rolls/2 ()
-     * Go through array subtracting each roll untill we find our middle number
-     * @param {chatMessage} msg - chat message object (Chat message object is a foundry object not made by me. might have different variables bassed off of system so only woprking for PF2e for now)
+     * Get the type of roll the msg was. Currently only for PF2e system
+     * @param {chatMessage} msg - chat message object (Chat message object is a foundry object not made by me. 
+     *                                 This object might have different variables bassed off of system so only set for PF2e for now)
      * @returns {ROLL_TYPE} - Type of roll that was made (atack, dmg, save ect)
      */
-    static getRollType()
+    static getRollType(msg)
     {
-        if(game.system.id == "pf2e")
+        if(msg.isRoll && game.system.id == "pf2e")
         {
-            //Check if Atack roll
-            if()
-            {
-                return DIE_ROLL_TYPE.ATK;
-            }
-
             //Check if damage Roll
-            if()
+            if(msg.isDamageRoll())
             {
                 return DIE_ROLL_TYPE.DMG;
             }
 
-            //check if save roll
-            if()
+            let domains = msg.rolls[0].options.domains;
+            //Check if Save | Atack roll | Skill check
+            if(domains)
             {
-                return DIE_ROLL_TYPE.SAVE;
+                for (var i=0; i<domains.length; i++) {
+                    if(domains[i].match("attack"))
+                    {
+                        return DIE_ROLL_TYPE.ATK;
+                    }
+                    else if (domains[i].match("saving-throw"))
+                    {
+                        return DIE_ROLL_TYPE.SAVE;
+                    }
+                    else if(domains[i].match("skill-check"))
+                    {
+                        return DIE_ROLL_TYPE.SKILL
+                    }
+                }
+                return DIE_ROLL_TYPE.UNKNOWN;
             }
-
-            //Check if skill check
-            if()
-            {
-                return DIE_ROLL_TYPE.SKILL;
-            }
-
             //unknown so return unknown type
             return DIE_ROLL_TYPE.UNKNOWN;
+        }
+        /**
+         * ADD else if HERE to implement other game systems, 
+         * For New TYPES need to udpate dice-info and enum values
+         * */
 
-        }//ADD else if for other systems here
-        else{
+        return DIE_ROLL_TYPE.UNKNOWN;
+    }
+
+    /**
+     * Get the type of roll the roll. Currently only for PF2e system, 
+     *      This is prolly not needed but getting from roll object seemed more correct then getting from the msg object. 
+     *      Some systems could have differnt types of rolls in same msg so this can be useful for them
+     * 
+     * @param {roll} roll - chat message object (Chat message object is a foundry object not made by me. 
+     *                                 This object might have different variables bassed off of system so only set for PF2e for now)
+     * @returns {ROLL_TYPE} - Type of roll that was made (atack, dmg, save ect)
+     */
+    static getRollType_fromRoll(roll)
+    {
+        if(msg.isRoll && game.system.id == "pf2e")
+        {
+            let domains = roll.options.domains;
+            //Check if Save | Atack roll | Skill check
+            if(domains)
+            {
+                for (var i=0; i<domains.length; i++) {
+                    if(domains[i].match("attack"))
+                    {
+                        return DIE_ROLL_TYPE.ATK;
+                    }
+                    else if (domains[i].match("saving-throw"))
+                    {
+                        return DIE_ROLL_TYPE.SAVE;
+                    }
+                    else if(domains[i].match("skill-check"))
+                    {
+                        return DIE_ROLL_TYPE.SKILL
+                    }
+                }
+                return DIE_ROLL_TYPE.UNKNOWN;
+            }
+            //unknown so return unknown type
             return DIE_ROLL_TYPE.UNKNOWN;
         }
-        
+        /**
+         * ADD else if HERE to implement other game systems, 
+         * For New TYPES need to udpate dice-info and enum values
+         * */
+
+        return DIE_ROLL_TYPE.UNKNOWN;
     }
 }
 
