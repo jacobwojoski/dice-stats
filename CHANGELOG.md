@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.14.0 ]
+### Added
+- Added feature to view different d20 rolls on seperate tab.
+
 ## [ 1.13.1 ]
 ### Fixed
 - Added button to its own layer to avoid collision with other mods.

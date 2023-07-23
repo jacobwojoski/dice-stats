@@ -24,6 +24,12 @@ class DIE_INFO {
     SKILLS_ROLLS = [];
     UNKNOWN_ROLLS = [];
 
+    ATK_ROLLS_BLIND = [];
+    DMG_ROLLS_BLIND = [];
+    SAVES_ROLLS_BLIND = [];
+    SKILLS_ROLLS_BLIND = [];
+    UNKNOWN_ROLLS_BLIND = [];
+
     /**
      * constructor set values to defaults
      * @param {int} dieMax - max value the die can be
@@ -50,11 +56,23 @@ class DIE_INFO {
             this.SKILLS_ROLLS = new Array(dieMax);
             this.UNKNOWN_ROLLS = new Array(dieMax);
 
+            this.ATK_ROLLS_BLIND = new Array(dieMax);
+            this.DMG_ROLLS_BLIND = new Array(dieMax);
+            this.SAVES_ROLLS_BLIND = new Array(dieMax);
+            this.SKILLS_ROLLS_BLIND = new Array(dieMax);
+            this.UNKNOWN_ROLLS_BLIND = new Array(dieMax);
+
             this.ATK_ROLLS.fill(0);
             this.DMG_ROLLS.fill(0);
             this.SAVES_ROLLS.fill(0);
             this.SKILLS_ROLLS.fill(0);
             this.UNKNOWN_ROLLS.fill(0);
+
+            this.ATK_ROLLS_BLIND.fill(0);
+            this.DMG_ROLLS_BLIND.fill(0);
+            this.SAVES_ROLLS_BLIND.fill(0);
+            this.SKILLS_ROLLS_BLIND.fill(0);
+            this.UNKNOWN_ROLLS_BLIND.fill(0);
         }
     }
 
@@ -117,23 +135,48 @@ class DIE_INFO {
             this.BLIND_ROLLS[roll-1] = this.BLIND_ROLLS[roll-1]+1; 
         }
 
-        switch(rollType)
+        //Add roll to proper array
+        if(isBlind)
         {
-            case DIE_ROLL_TYPE.ATK :
-                this.ATK_ROLLS[roll-1] = this.ATK_ROLLS[roll-1]+1;
-                break;
-            case DIE_ROLL_TYPE.DMG :
-                this.DMG_ROLLS[roll-1] = this.DMG_ROLLS[roll-1]+1;
-                break;
-            case DIE_ROLL_TYPE.SAVE :
-                this.SAVES_ROLLS[roll-1] = this.SAVES_ROLLS[roll-1]+1;
-                break;
-            case DIE_ROLL_TYPE.SKILL :
-                this.SKILLS_ROLLS[roll-1] = this.SKILLS_ROLLS[roll-1]+1;
-                break;
-            case DIE_ROLL_TYPE.UNKNOWN :
-                this.UNKNOWN_ROLLS[roll-1] = this.UNKNOWN_ROLLS[roll-1]+1;
-                break;
+            switch(rollType)
+            {
+                case DIE_ROLL_TYPE.ATK :
+                    this.ATK_ROLLS_BLIND[roll-1] = this.ATK_ROLLS_BLIND[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.DMG :
+                    this.DMG_ROLLS_BLIND[roll-1] = this.DMG_ROLLS_BLIND[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.SAVE :
+                    this.SAVES_ROLLS_BLIND[roll-1] = this.SAVES_ROLLS_BLIND[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.SKILL :
+                    this.SKILLS_ROLLS_BLIND[roll-1] = this.SKILLS_ROLLS_BLIND[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.UNKNOWN :
+                    this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;
+                    break;
+            }
+        }
+        else
+        {
+            switch(rollType)
+            {
+                case DIE_ROLL_TYPE.ATK :
+                    this.ATK_ROLLS[roll-1] = this.ATK_ROLLS[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.DMG :
+                    this.DMG_ROLLS[roll-1] = this.DMG_ROLLS[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.SAVE :
+                    this.SAVES_ROLLS[roll-1] = this.SAVES_ROLLS[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.SKILL :
+                    this.SKILLS_ROLLS[roll-1] = this.SKILLS_ROLLS[roll-1]+1;
+                    break;
+                case DIE_ROLL_TYPE.UNKNOWN :
+                    this.UNKNOWN_ROLLS[roll-1] = this.UNKNOWN_ROLLS[roll-1]+1;
+                    break;
+            }
         }
     }
 
@@ -151,9 +194,40 @@ class DIE_INFO {
      * Reset blind roll data once pushed
      */
     pushBlindRolls(){
+        //Push All rolls ary
         for(let i=0; i<this.BLIND_ROLLS.length; i++){
             this.ROLLS[i] = this.ROLLS[i]+this.BLIND_ROLLS[i];
             this.BLIND_ROLLS[i]=0;
+        }
+
+        //Atk Rolls ary
+        for(let i=0; i<this.ATK_ROLLS_BLIND.length; i++){
+            this.ATK_ROLLS[i] = this.ATK_ROLLS[i]+this.ATK_ROLLS_BLIND[i];
+            this.ATK_ROLLS_BLIND[i]=0;
+        }
+
+        //DMG Rolls ary
+        for(let i=0; i<this.DMG_ROLLS_BLIND.length; i++){
+            this.DMG_ROLLS[i] = this.DMG_ROLLS[i]+this.DMG_ROLLS_BLIND[i];
+            this.DMG_ROLLS_BLIND[i]=0;
+        }
+
+        //SAVE Rolls ary
+        for(let i=0; i<this.SAVES_ROLLS_BLIND.length; i++){
+            this.SAVES_ROLLS[i] = this.SAVES_ROLLS[i]+this.SAVES_ROLLS_BLIND[i];
+            this.SAVES_ROLLS_BLIND[i]=0;
+        }
+
+        //SKILL Rolls ary
+        for(let i=0; i<this.SKILLS_ROLLS_BLIND.length; i++){
+            this.SAVES_ROLLS[i] = this.SKILLS_ROLLS[i]+this.SKILLS_ROLLS_BLIND[i];
+            this.SKILLS_ROLLS_BLIND[i]=0;
+        }
+
+        //UNKNOWN / FLATCHECK Rolls ary
+        for(let i=0; i<this.UNKNOWN_ROLLS_BLIND.length; i++){
+            this.UNKNOWN_ROLLS[i] = this.UNKNOWN_ROLLS[i]+this.UNKNOWN_ROLLS_BLIND[i];
+            this.UNKNOWN_ROLLS_BLIND[i]=0;
         }
     }
 
