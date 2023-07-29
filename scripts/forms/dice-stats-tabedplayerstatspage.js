@@ -1,44 +1,23 @@
-
-//==========================================================
-//===================== FORMS SHIT =========================
-//==========================================================
-
-
-class PlayerStatusPage extends FormApplication {
-    // static TESTSTATS;
-    // static TESTROLLS;
+class CustomTabFormClass extends FormApplication
+{
     SEL_PLAYER = 0;
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
-      
-        const overrides = {
-          height: 'auto',
-          popOut: true,
-          resizeable: true,
-          id: 'player-data',
-          template: TEMPLATES.PLAYERDATAFORM,
-          userId: game.userId,
-          title: 'Player Dice Stats',
-        };
-      
-        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
-        
-        return mergedOptions;
+        return defaults;
     }
 
-    //dataObject<PLAYER> = pointerToPlayerData type class PLAYER
+    //dataObject<PLAYER> = pointerToPlayerData type class PLAYER, Data objec
     constructor(userId, options={}, dataObject = null) {  
         // the first argument is the object, the second are the options
-        super(userId, options)
+        super(userId, options) 
         this.SEL_PLAYER = userId;
-        //this.PLAYERDATA = dataObject;
     }
 
     getData(){
         if(CLASSOBJ.ALLPLAYERDATA.has(this.SEL_PLAYER)){
             let playerObj = CLASSOBJ.ALLPLAYERDATA.get(this.SEL_PLAYER);
-            var dataObject = DATA_PACKAGER.packagePlayerData(playerObj);
+            var dataObject = DATA_PACKAGER.packageTabedPlayerData(playerObj);
             dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
             return dataObject;
         }
@@ -249,4 +228,49 @@ class PlayerStatusPage extends FormApplication {
         super.activateListeners(html);
         html.on('click', "[data-action]", this._handleButtonClick);
     }
+
+    async _updateObject(event, formData) {
+        return;
+    }
+    
 }
+
+const template_file = "templates/tab_player_base.html";
+loadTemplates(["templates/partial/tab_player_stats.html"]);
+loadTemplates(["templates/partial/tab_player_stats_d20.html"]);
+
+const template_data = { 
+                        header: "template header",
+                        tabs: [
+                            { 
+                                label: "player-stats",
+                                title: "All Dice Stats",
+                                content: "{{{templates/parital/tab_player_stats.hbs}}}"
+                            },
+                            { 
+                                label: "player-stats-d20",
+                                title: "D-20 Stats",
+                                content: "{{{templates/partial/tab_player_stats_d20.hbs}}}"
+                            }
+                        ],
+                        footer: "template footer"
+                    };
+
+var options_data = { 
+        template: template_file,
+        height: 'auto',
+        popOut: true,
+        resizeable: true,
+        id: 'player-tabbed-dice-stats',
+        userId: game.userId,
+        title: 'Player Dice Stats',
+        tabs: [
+            {   navSelector: ".tabs", 
+                contentSelector: ".content", 
+                initial: "player-stats"
+            }
+        ]
+    }
+
+const my_form = new CustomTabFormClass(template_data, options_data); // data, options
+const res = await my_form.render(true); 

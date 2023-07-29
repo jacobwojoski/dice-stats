@@ -72,7 +72,7 @@ class DIE_INFO {
             this.DMG_ROLLS_BLIND.fill(0);
             this.SAVES_ROLLS_BLIND.fill(0);
             this.SKILLS_ROLLS_BLIND.fill(0);
-            this.UNKNOWN_ROLLS_BLIND.fill(0);
+            this.UNKNOWN_ROLLS_BLIND.fill(0);d
         }
     }
 
@@ -107,6 +107,18 @@ class DIE_INFO {
         this.TOTAL_ROLLS =   0;
         this.ROLLS.fill(0);
         this.BLIND_ROLLS.fill(0);
+
+        this.ATK_ROLLS.fill(0);
+        this.DMG_ROLLS.fill(0);
+        this.SAVES_ROLLS.fill(0);
+        this.SKILLS_ROLLS.fill(0);
+        this.UNKNOWN_ROLLS.fill(0);
+
+        this.ATK_ROLLS_BLIND.fill(0);
+        this.DMG_ROLLS_BLIND.fill(0);
+        this.SAVES_ROLLS_BLIND.fill(0);
+        this.SKILLS_ROLLS_BLIND.fill(0);
+        this.UNKNOWN_ROLLS_BLIND.fill(0);
 
         this.STREAK_SIZE =   -1;
         this.STREAK_INIT =   -1;
