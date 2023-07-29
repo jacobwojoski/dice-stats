@@ -38,7 +38,13 @@ Hooks.on('renderPlayerList', (playerList, html) => {
                 //do nothing, Dont allow ability to see gm data if setting is off
                 ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
             }else{
-                PLAYERFORMOBJ = new PlayerStatusPage(user.id).render(true);
+
+                if( game.system.id == 'pf2e' )
+                {
+                    PLAYERFORMOBJ = new CustomTabFormClass(user.id).render(true);
+                }else{
+                    PLAYERFORMOBJ = new PlayerStatusPage(user.id).render(true);
+                }
             }
         })
     } 
