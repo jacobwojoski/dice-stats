@@ -1,6 +1,6 @@
-loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
-loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
-loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
+// loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
+// loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
+// loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
 
 class CustomTabFormClass extends FormApplication
 {
@@ -48,6 +48,7 @@ class CustomTabFormClass extends FormApplication
         loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
         loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
         loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
+        loadTemplates(["modules/dice-stats/templates/partial/test_issue.hbs"]);
         //Object needed to specify tabs
         var baseDataObject = { 
             header: "<h1>HEADER</h1>",
@@ -74,8 +75,8 @@ class CustomTabFormClass extends FormApplication
             playerDataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
 
             var mergedDataObj = foundry.utils.mergeObject(baseDataObject, playerDataObject)
-            return mergedDataObj;
-            //return baseDataObject;
+            //return mergedDataObj;
+            return baseDataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
     }

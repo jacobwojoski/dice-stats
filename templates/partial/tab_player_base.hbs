@@ -40,10 +40,13 @@
             <div class="tab" data-tab="{{label}}" data-group="primary-tabs">
                 {{{content}}}
 
-                {{#if d20}} <!-- Need to add section to tabbedplayerstats form to add more dice -->
-                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs' this}}
+                <!-- Need to add section to tabbedplayerstats form to add more dice -->
+                {{#if d20}} 
+                    
+       
+                    {{> "modules/dice-stats/templates/partial/test_issue.hbs" this}}
                 {{else}}
-                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs' this}}
+                    
                 {{/if}}
             </div>
         {{/each}}
