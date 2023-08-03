@@ -739,6 +739,9 @@
         chart.draw(data, chartOptions);
     }
 
+    //Make sure value is in data object
+    {{#if TOTAL_ROLLS}}
+
     //Checks to See if charts callback should be made
     if({{TOTAL_ROLLS.[0]}} > 0 && {{IS_DIE_DISPLAYED.[0]}})
     {
@@ -784,4 +787,6 @@
     {
         google.charts.setOnLoadCallback(drawChartd100);
     }
+    {{/if}}
+  
 </script>

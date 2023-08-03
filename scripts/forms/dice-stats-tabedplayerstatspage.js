@@ -74,9 +74,11 @@ class CustomTabFormClass extends FormApplication
             var playerDataObject = DATA_PACKAGER.packagePlayerData(playerObj);
             playerDataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
 
-            var mergedDataObj = foundry.utils.mergeObject(baseDataObject, playerDataObject)
-            //return mergedDataObj;
-            return baseDataObject;
+            //var mergedDataObj = foundry.utils.mergeObject(baseDataObject, playerDataObject)
+            var mergedDataObj = {...baseDataObject};
+            mergedDataObj[ 'playerData' ] = playerDataObject;
+            return mergedDataObj;
+            //return baseDataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
     }

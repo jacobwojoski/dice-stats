@@ -213,29 +213,33 @@
         chart.draw(data, chartOptions);
     }
 
-    //Checks to See if charts callback should be made
-    if({{TOTAL_ROLLS.[0]}} > 0 )
-    {
-        google.charts.setOnLoadCallback(drawChartd20Atk);
-    }
+    //Make sure we have total rolls object in hbs
+    {{#if TOTAL_ROLLS includeZero=true}}
 
-    if({{TOTAL_ROLLS.[1]}} > 0 )
-    {
-        google.charts.setOnLoadCallback(drawChartd20Dmg);
-    }
+        //Checks to See if charts callback should be made
+        if( {{TOTAL_ROLLS.[0]}} > 0 )
+        {
+            google.charts.setOnLoadCallback(drawChartd20Atk);
+        }
 
-    if({{TOTAL_ROLLS.[2]}} > 0 )
-    {
-        google.charts.setOnLoadCallback(drawChartd20Save);
-    }
+        if( {{TOTAL_ROLLS.[1]}} > 0 )
+        {
+            google.charts.setOnLoadCallback(drawChartd20Dmg);
+        }
 
-    if({{TOTAL_ROLLS.[3]}} > 0 )
-    {
-        google.charts.setOnLoadCallback(drawChartd20Skill);
-    }
+        if( {{TOTAL_ROLLS.[2]}} > 0 )
+        {
+            google.charts.setOnLoadCallback(drawChartd20Save);
+        }
 
-    if({{TOTAL_ROLLS.[4]}} > 0 )
-    {
-        google.charts.setOnLoadCallback(drawChartd20Unknown);
-    }
+        if( {{TOTAL_ROLLS.[3]}} > 0 )
+        {
+            google.charts.setOnLoadCallback(drawChartd20Skill);
+        }
+
+        if( {{TOTAL_ROLLS.[4]}} > 0 )
+        {
+            google.charts.setOnLoadCallback(drawChartd20Unknown);
+        }
+    {{/if}}
 </script>

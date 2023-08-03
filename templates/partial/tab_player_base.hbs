@@ -8,15 +8,15 @@
    <div class="heading">
         <!-- Example of using en.json values <li>{{localize "DICE_STATS_TEXT.player-stats-button-title"}} : {{testhandle}}</li>-->
         <div class="form-checkboxes">
-            <input type="checkbox" class="form-checkboxes" data-action="d2checkbox"     {{{diceStats_IsChecked IS_DIE_DISPLAYED.[0]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d2"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d3checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[1]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d3"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d4checkbox"     {{{diceStats_IsChecked IS_DIE_DISPLAYED.[2]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d4"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d6checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[3]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d6"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d8checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[4]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d8"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d10checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[5]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d10"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d12checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[6]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d12"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d20checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[7]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d20"}}</span></input>
-            <input type="checkbox" class="form-checkboxes" data-action="d100checkbox"    {{{diceStats_IsChecked IS_DIE_DISPLAYED.[8]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d100"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d2checkbox"     {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[0]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d2"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d3checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[1]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d3"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d4checkbox"     {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[2]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d4"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d6checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[3]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d6"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d8checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[4]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d8"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d10checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[5]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d10"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d12checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[6]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d12"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d20checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[7]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d20"}}</span></input>
+            <input type="checkbox" class="form-checkboxes" data-action="d100checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[8]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d100"}}</span></input>
         </div>
         <br>
         {{#diceStats_ifHaveBlindRolls BLIND_ROLL_COUNT}}
@@ -38,15 +38,11 @@
     <section class="content">
         {{#each tabs}}
             <div class="tab" data-tab="{{label}}" data-group="primary-tabs">
-                {{{content}}}
-
                 <!-- Need to add section to tabbedplayerstats form to add more dice -->
                 {{#if d20}} 
-                    
-       
-                    {{> "modules/dice-stats/templates/partial/test_issue.hbs" this}}
+                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs' ../playerData }}
                 {{else}}
-                    
+                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs' ../playerData }}
                 {{/if}}
             </div>
         {{/each}}
