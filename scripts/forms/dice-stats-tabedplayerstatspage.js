@@ -1,3 +1,7 @@
+loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
+loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
+loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
+
 class CustomTabFormClass extends FormApplication
 {
     SEL_PLAYER = 0;
@@ -5,26 +9,7 @@ class CustomTabFormClass extends FormApplication
     static get defaultOptions() {
         const defaults = super.defaultOptions;
       
-        const player_stats_template_file = "templates/partial/tab_player_base.hbs";
-        loadTemplates(["templates/partial/tab_player_stats_all_dice.hbs"]);
-        loadTemplates(["templates/partial/tab_player_stats_d20.hbs"]);
-
-        const player_stats_template_data = { 
-            header: "template header",
-            tabs: [
-                { 
-                    label: "player-stats",
-                    title: "All Dice Stats",
-                    content: "{{> 'templates/partial/tab_player_stats_all_dice.hbs' this}}"
-                },
-                { 
-                    label: "player-stats-d20",
-                    title: "D-20 Stats",
-                    content: "{{> 'templates/partial/tab_player_stats_d20.hbs' this}}"
-                }
-            ],
-            footer: "template footer"
-        };
+        const player_stats_template_file = "modules/dice-stats/templates/partial/tab_player_base.hbs";
 
         var player_stats_options_data = { 
             template: player_stats_template_file,
@@ -43,26 +28,54 @@ class CustomTabFormClass extends FormApplication
         }
 
         const mergedOptions = foundry.utils.mergeObject(defaults, player_stats_options_data);
-        
+
         return mergedOptions;
     }
+
+    formDataObject;
 
     //dataObject<PLAYER> = pointerToPlayerData type class PLAYER
     constructor(userId, options={}, dataObject = null) {  
         // the first argument is the object, the second are the options
         super(userId, options)
         this.SEL_PLAYER = userId;
+        this.formDataObject = dataObject;
         //this.PLAYERDATA = dataObject;
     }
 
     getData(){
+
+        loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
+        loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
+        loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
+        //Object needed to specify tabs
+        var baseDataObject = { 
+            header: "<h1>HEADER</h1>",
+            tabs: [
+                { 
+                    label: "player-stats",
+                    title: "All Dice Stats",
+                    content: "<em>Fancy tab1 content.</em>"
+                },
+                { 
+                    label: "player-stats-d20",
+                    title: "D-20 Stats",
+                    content: "<em>Fancy tab2 content.</em>",
+                    d20: true
+                }
+            ],
+            footer: "<h1>FOOTER</h1>"
+        };
+
         if(CLASSOBJ.ALLPLAYERDATA.has(this.SEL_PLAYER)){
             let playerObj = CLASSOBJ.ALLPLAYERDATA.get(this.SEL_PLAYER);
-            var playerDataObject = DATA_PACKAGER.packageTabedPlayerData(playerObj);
+            //var playerDataObject = DATA_PACKAGER.packageTabedPlayerData(playerObj);
+            var playerDataObject = DATA_PACKAGER.packagePlayerData(playerObj);
             playerDataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
 
-            var mergedDataObj = foundry.utils.mergeObject(dataObject, playerDataObject)
+            var mergedDataObj = foundry.utils.mergeObject(baseDataObject, playerDataObject)
             return mergedDataObj;
+            //return baseDataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
     }

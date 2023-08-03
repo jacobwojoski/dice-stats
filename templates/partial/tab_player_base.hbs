@@ -39,43 +39,13 @@
         {{#each tabs}}
             <div class="tab" data-tab="{{label}}" data-group="primary-tabs">
                 {{{content}}}
+
+                {{#if d20}} <!-- Need to add section to tabbedplayerstats form to add more dice -->
+                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs' this}}
+                {{else}}
+                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs' this}}
+                {{/if}}
             </div>
         {{/each}}
     </section>
 </form>
-
-<!--
-tabs
-    label
-    title
-    content
--->
-<!-- Paste
-
-<form>
-<nav class="tabs" data-group="primary-tabs">
-    {{#each tabs}}
-        <a class="item" data-tab="{{label}}"><i class="fas fa-dice-d20"></i> {{title}}</a>
-    {{/each}}
-</nav>
-
-<b>Fixed header</b><br>
-    {{header}}
-<hr>
-
-<section class="content">
-    {{#each tabs}}
-        <div class="tab" data-tab="{{label}}" data-group="primary-tabs">
-            Fixed content for tab {{title}}<br>
-            {{> 'macro_data/tab_partial.html' this}}
-        </div>
-    {{/each}}
-</section>
-
-// partial.html is as follows
-<hr>
-Fixed <em>footer</em><br>
-{{footer}}
-</form>
-
-End Paste -->

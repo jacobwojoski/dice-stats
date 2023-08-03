@@ -39,7 +39,6 @@ class CustomSceneControlToolCompare
         }else{
             GLOBALCOMPAREPLAYERSFORMOBJ = new ComparePlayerStatusPage().render(true);
         } 
-        
     }
 
     constructor(){}
@@ -65,7 +64,12 @@ class CustomSceneControlToolPlayer
             //do nothing, Dont allow ability to see gm data if setting is off
             ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
         }else{
-            PLAYERFORMOBJ = new PlayerStatusPage(this.associatedPlayerId).render(true);
+            if( game.system.id == 'pf2e' )
+            {
+                PLAYERFORMOBJ = new CustomTabFormClass(this.associatedPlayerId).render(true);
+            }else{
+                PLAYERFORMOBJ = new PlayerStatusPage(this.associatedPlayerId).render(true);
+            }
         }
     }
 

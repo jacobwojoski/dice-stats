@@ -72,7 +72,7 @@ class DIE_INFO {
             this.DMG_ROLLS_BLIND.fill(0);
             this.SAVES_ROLLS_BLIND.fill(0);
             this.SKILLS_ROLLS_BLIND.fill(0);
-            this.UNKNOWN_ROLLS_BLIND.fill(0);d
+            this.UNKNOWN_ROLLS_BLIND.fill(0);
         }
     }
 
