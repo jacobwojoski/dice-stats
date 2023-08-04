@@ -277,6 +277,7 @@ class CustomTabFormClass extends FormApplication
                 PLAYERFORMOBJ.render();
                 break;
             default:
+                PLAYERFORMOBJ.render();
                 return;
         }
     }
