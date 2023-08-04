@@ -72,6 +72,24 @@ class DB_INTERACTION
             MEAN =      0;
             MEDIAN =    0;
             MODE =      0;
+            MEANS = [];
+
+            //Used for Specific Die Info (Currently only D20 on pf2e)
+            MEDIANS = [];
+            MODES = [];
+            ROLL_COUNTERS = [];
+
+            ATK_ROLLS = [];
+            DMG_ROLLS = [];
+            SAVES_ROLLS = [];
+            SKILLS_ROLLS = [];
+            UNKNOWN_ROLLS = [];
+
+            ATK_ROLLS_BLIND = [];
+            DMG_ROLLS_BLIND = [];
+            SAVES_ROLLS_BLIND = [];
+            SKILLS_ROLLS_BLIND = [];
+            UNKNOWN_ROLLS_BLIND = [];
         }
     */
         tempPlayerObj.USERNAME =    dbDataObj.USERNAME;
@@ -96,6 +114,24 @@ class DB_INTERACTION
             tempDieObj.MEAN =      dbDieDataObj.MEAN;
             tempDieObj.MEDIAN =    dbDieDataObj.MEDIAN;
             tempDieObj.MODE =      dbDieDataObj.MODE;
+
+
+            tempDieObj.MEANS =          [...dbDieDataObj.MEANS]
+            tempDieObj.MEDIANS =        [...dbDieDataObj.MEDIANS]
+            tempDieObj.MODES =          [...dbDieDataObj.MODES]
+            tempDieObj.ROLL_COUNTERS =  [...dbDieDataObj.ROLL_COUNTERS]
+
+            tempDieObj.ATK_ROLLS =      [...dbDieDataObj.ATK_ROLLS]
+            tempDieObj.DMG_ROLLS =      [...dbDieDataObj.DMG_ROLLS]
+            tempDieObj.SAVES_ROLLS =    [...dbDieDataObj.SAVES_ROLLS]
+            tempDieObj.SKILLS_ROLLS =   [...dbDieDataObj.SKILLS_ROLLS]
+            tempDieObj.UNKNOWN_ROLLS =  [...dbDieDataObj.UNKNOWN_ROLLS]
+
+            tempDieObj.ATK_ROLLS_BLIND =        [...dbDieDataObj.ATK_ROLLS_BLIND]
+            tempDieObj.DMG_ROLLS_BLIND =        [...dbDieDataObj.DMG_ROLLS_BLIND]
+            tempDieObj.SAVES_ROLLS_BLIND =      [...dbDieDataObj.SAVES_ROLLS_BLIND]
+            tempDieObj.SKILLS_ROLLS_BLIND =     [...dbDieDataObj.SKILLS_ROLLS_BLIND]
+            tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND]
         }
     }
 
