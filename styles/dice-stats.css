@@ -48,7 +48,8 @@ input.form-checkboxes{
 
 span.form-checkboxes{
     vertical-align: middle;
-    font-size: 18px
+    font-size: 18px;
+    white-space: nowrap;
 }
 
 .blind-roll-rollcount{
@@ -74,4 +75,9 @@ button.blind-roll-rollcount{
 .db-interaction-heading{
     margin: auto;
     text-align: center;
+}
+
+.heading{
+    margin-right: 10px;
+    white-space: nowrap;
 }

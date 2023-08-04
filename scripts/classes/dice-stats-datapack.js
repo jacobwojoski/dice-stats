@@ -35,6 +35,18 @@ class DATA_PACKAGER
         D20_ROLL_DATA:  [],
         D100_ROLL_DATA: [],
 
+        //D20 Info
+        D20_ATK:[],
+        D20_DMG:[],
+        D20_SAVE:[],
+        D20_SKILL:[],
+        D20_UNKNOWN:[],
+
+        D20_MEAN:       [],
+        D20_MEDIAN:     [],
+        D20_MODE:       [],
+        D20_ROLLCOUNT:  [], //Size 5, total [atk, Dmg, save, skill, unknown] rolls
+
         BLIND_ROLL_COUNT: 0,
     }
 
@@ -210,6 +222,17 @@ class DATA_PACKAGER
             packedData.S_IS_B[die] = playerInfo.PLAYER_DICE[die].STREAK_ISBLIND;
         }
         
+        packedData.D20_ATK = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].ATK_ROLLS];
+        packedData.D20_DMG = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].DMG_ROLLS];
+        packedData.D20_SAVE = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].SAVES_ROLLS];
+        packedData.D20_SKILL = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].SKILLS_ROLLS];
+        packedData.D20_UNKNOWN = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].UNKNOWN_ROLLS];
+
+        packedData.D20_MEAN = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].MEANS];
+        packedData.D20_MEDIAN = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].MEDIANS];
+        packedData.D20_MODE = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].MODES];
+        packedData.D20_ROLLCOUNT = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].ROLL_COUNTERS];
+
         packedData.BLIND_ROLL_COUNT = playerInfo.getBlindRollsCount();
         return packedData;
     }

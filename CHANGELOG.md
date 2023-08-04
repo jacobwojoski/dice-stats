@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.14.0 ]
+### Added
+- PF2E added ability to view different roll types! 
+
 ## [ 1.13.1 ]
 ### Fixed
 - Added button to its own layer to avoid collision with other mods.

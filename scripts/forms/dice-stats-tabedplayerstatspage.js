@@ -1,46 +1,82 @@
+// loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
+// loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
+// loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
 
-//==========================================================
-//===================== FORMS SHIT =========================
-//==========================================================
-
-
-class PlayerStatusPage extends FormApplication {
-    // static TESTSTATS;
-    // static TESTROLLS;
+class CustomTabFormClass extends FormApplication
+{
     SEL_PLAYER = 0;
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;
       
-        const overrides = {
-          height: 'auto',
-          popOut: true,
-          resizeable: true,
-          id: 'player-data',
-          template: TEMPLATES.PLAYERDATAFORM,
-          userId: game.userId,
-          title: 'Player Dice Stats',
-        };
-      
-        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
-        
+        const player_stats_template_file = "modules/dice-stats/templates/partial/tab_player_base.hbs";
+
+        var player_stats_options_data = { 
+            template: player_stats_template_file,
+            height: 'auto',
+            popOut: true,
+            resizeable: true,
+            id: 'player-tabbed-dice-stats',
+            userId: game.userId,
+            title: 'Player Dice Stats',
+            tabs: [
+                {   navSelector: ".tabs", 
+                    contentSelector: ".content", 
+                    initial: "player-stats"
+                }
+            ]
+        }
+
+        const mergedOptions = foundry.utils.mergeObject(defaults, player_stats_options_data);
+
         return mergedOptions;
     }
+
+    formDataObject;
 
     //dataObject<PLAYER> = pointerToPlayerData type class PLAYER
     constructor(userId, options={}, dataObject = null) {  
         // the first argument is the object, the second are the options
         super(userId, options)
         this.SEL_PLAYER = userId;
+        this.formDataObject = dataObject;
         //this.PLAYERDATA = dataObject;
     }
 
     getData(){
+
+        loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
+        loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
+        loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
+        loadTemplates(["modules/dice-stats/templates/partial/test_issue.hbs"]);
+        //Object needed to specify tabs
+        var baseDataObject = { 
+            header: "<h1>HEADER</h1>",
+            tabs: [
+                { 
+                    label: "player-stats",
+                    title: "All Dice Stats",
+                    content: "<em>Fancy tab1 content.</em>"
+                },
+                { 
+                    label: "player-stats-d20",
+                    title: "D-20 Stats",
+                    content: "<em>Fancy tab2 content.</em>",
+                    d20: true
+                }
+            ],
+            footer: "<h1>FOOTER</h1>"
+        };
+
         if(CLASSOBJ.ALLPLAYERDATA.has(this.SEL_PLAYER)){
             let playerObj = CLASSOBJ.ALLPLAYERDATA.get(this.SEL_PLAYER);
-            var dataObject = DATA_PACKAGER.packagePlayerData(playerObj);
-            dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
-            return dataObject;
+
+            var playerDataObject = DATA_PACKAGER.packagePlayerData(playerObj);
+            playerDataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
+
+            var mergedDataObj = {...baseDataObject};
+            mergedDataObj[ 'playerData' ] = playerDataObject;
+            return mergedDataObj;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
     }
@@ -241,6 +277,7 @@ class PlayerStatusPage extends FormApplication {
                 PLAYERFORMOBJ.render();
                 break;
             default:
+                PLAYERFORMOBJ.render();
                 return;
         }
     }
@@ -249,4 +286,9 @@ class PlayerStatusPage extends FormApplication {
         super.activateListeners(html);
         html.on('click', "[data-action]", this._handleButtonClick);
     }
+
+    async _updateObject(event, formData) {
+        return;
+    }
+    
 }
