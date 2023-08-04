@@ -219,25 +219,25 @@ class DIE_INFO {
         this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ROLLS);
         this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
 
-        this.MEAN = DICE_STATS_UTILS.getMean(this.ATK_ROLLS);
-        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ATK_ROLLS);
-        this.MODE = DICE_STATS_UTILS.getMode(this.ATK_ROLLS);
+        this.MEANS[0] = DICE_STATS_UTILS.getMean(this.ATK_ROLLS);
+        this.MEDIANS[0] = DICE_STATS_UTILS.getMedian(this.ATK_ROLLS);
+        this.MODES[0] = DICE_STATS_UTILS.getMode(this.ATK_ROLLS);
 
-        this.MEAN = DICE_STATS_UTILS.getMean(this.DMG_ROLLS);
-        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.DMG_ROLLS);
-        this.MODE = DICE_STATS_UTILS.getMode(this.DMG_ROLLS);
+        this.MEANS[1] = DICE_STATS_UTILS.getMean(this.DMG_ROLLS);
+        this.MEDIANS[1] = DICE_STATS_UTILS.getMedian(this.DMG_ROLLS);
+        this.MODES[1] = DICE_STATS_UTILS.getMode(this.DMG_ROLLS);
 
-        this.MEAN = DICE_STATS_UTILS.getMean(this.SAVES_ROLLS);
-        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.SAVES_ROLLS);
-        this.MODE = DICE_STATS_UTILS.getMode(this.SAVES_ROLLS);
+        this.MEANS[2] = DICE_STATS_UTILS.getMean(this.SAVES_ROLLS);
+        this.MEDIANS[2] = DICE_STATS_UTILS.getMedian(this.SAVES_ROLLS);
+        this.MODES[2] = DICE_STATS_UTILS.getMode(this.SAVES_ROLLS);
 
-        this.MEAN = DICE_STATS_UTILS.getMean(this.SKILLS_ROLLS);
-        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.SKILLS_ROLLS);
-        this.MODE = DICE_STATS_UTILS.getMode(this.SKILLS_ROLLS);
+        this.MEANS[3] = DICE_STATS_UTILS.getMean(this.SKILLS_ROLLS);
+        this.MEDIANS[3] = DICE_STATS_UTILS.getMedian(this.SKILLS_ROLLS);
+        this.MODES[3] = DICE_STATS_UTILS.getMode(this.SKILLS_ROLLS);
 
-        this.MEAN = DICE_STATS_UTILS.getMean(this.UNKNOWN_ROLLS);
-        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.UNKNOWN_ROLLS);
-        this.MODE = DICE_STATS_UTILS.getMode(this.UNKNOWN_ROLLS);
+        this.MEANS[4] = DICE_STATS_UTILS.getMean(this.UNKNOWN_ROLLS);
+        this.MEDIANS[4] = DICE_STATS_UTILS.getMedian(this.UNKNOWN_ROLLS);
+        this.MODES[4] = DICE_STATS_UTILS.getMode(this.UNKNOWN_ROLLS);
     }
 
     /**
