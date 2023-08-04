@@ -64,6 +64,7 @@ const DIE_TYPE = {
     D100:   8
 }
 
+const NUM_ROLL_TYES = 5;
 //Global 'enum' for types of d20 rolls
 const DIE_ROLL_TYPE = {
     ATK: 0,
@@ -257,13 +258,15 @@ class DiceStatsTracker {
                 let sides = msg.rolls[tempRoll]?.dice[tempDie].faces
                 let dieType = MAX_TO_DIE.get(sides);
                 let newNumbers = [];
+                //Get type of roll (Atack, Save, ect)
+                let rollType = getRollType(msg);
 
                 //In case there's more than one die rolled in a single instance as in 
                 //  fortune/misfortune rolls or multiple hit dice save each roll
                 newNumbers = msg.rolls[tempRoll].dice[tempDie].results.map(result => result.result)
 
                 newNumbers.forEach(element => {
-                    playerInfo.saveRoll(isBlind, element, dieType)
+                    playerInfo.saveRoll(isBlind, element, dieType, rollType)
                 });
             }
             

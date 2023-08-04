@@ -45,6 +45,9 @@ class DICE_STATS_UTILS {
      * @returns 
      */
     static getMode(RollsAry){
+        if(!RollsAry || RollsAry.length == 0 )
+        {return 0}
+        
         var indexOfMax = 0;
         var maxValue = 0;
 
@@ -65,6 +68,9 @@ class DICE_STATS_UTILS {
      * @returns {float}
      */
     static getMean(RollsAry){
+        if(!RollsAry || RollsAry.length == 0 )
+        {return 0}
+
         var numberOfRolls=0;
         var sum = 0;
 
@@ -91,6 +97,9 @@ class DICE_STATS_UTILS {
      * @returns {int}
      */
     static getMedian(RollsAry){
+        if(!RollsAry || RollsAry.length == 0 )
+        {return 0}
+
         let totalRolls = 0;
         for(let i=0; i<RollsAry.length; i++){
             totalRolls += RollsAry[i];

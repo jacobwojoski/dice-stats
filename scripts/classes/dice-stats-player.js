@@ -74,9 +74,10 @@ class PLAYER {
      * @param {bool} isBlind 
      * @param {int} rollVal 
      * @param {DIE_TYPE} dieType 
+     * @param {DIE_ROLL_TYPE} rollType
      */
-    saveRoll(isBlind, rollVal, dieType){
-        this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind)
+    saveRoll(isBlind, rollVal, dieType, rollType){
+        this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind,rollType)
     }
 
     /**

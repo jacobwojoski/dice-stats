@@ -2,378 +2,385 @@
     google.charts.load('current', {packages: ['corechart']});     
 </script>
 
-<div class="col">
-    <h1 class="dice-type-title"> {{PLAYER_NAME}} {{localize "DICE_STATS_TEXT.player_data_form.player_name"}}</h1>
+{{#diceStats_ifHaveBlindRolls BLIND_ROLL_COUNT}}
+    <div class="blind-roll-rollcount">
+        <h2>{{localize "DICE_STATS_TEXT.player_data_form.blind_rolls" ui_rolls=BLIND_ROLL_COUNT }}</h2>
+    </div>
     <br>
-    
-    <!--
-        const DIE_ROLL_TYPE = {
-            ATK: 0,
-            DMG: 1,
-            SAVE: 2,
-            SKILL: 3,
-            UNKNOWN: 4   
-        }
-    -->
-
-    {{#diceStats_ifDieUsed TOTAL_ROLLS.[7] }} <!-- if Have D20 ATK Rolls -->
-        <h1 class="dice-type-title">D20 Atack Rolls</h1>
-        <div id = "d20AtkChart" class="chart-dice-stats"></div>
-        <table> <!-- Table Of Rolled Stats -->
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
-                <td>{{TOTAL_ROLLS.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
-                <td>{{MEAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
-                <td>{{MEDIAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
-                <td>{{MODE.[7]}}</th>
-            </tr>
-        </table>
+{{#else}}
+    <div class="col">
+        <h1 class="dice-type-title"> {{PLAYER_NAME}} {{localize "DICE_STATS_TEXT.player_data_form.player_name"}}</h1>
         <br>
-    {{/diceStats_ifDieUsed}}
+        
+        <!--
+            const DIE_ROLL_TYPE = {
+                ATK: 0,
+                DMG: 1,
+                SAVE: 2,
+                SKILL: 3,
+                UNKNOWN: 4   
+            }
+        -->
 
-    {{#diceStats_ifDieUsed TOTAL_ROLLS.[7] }} <!-- if Have D20 ATK Rolls -->
-        <h1 class="dice-type-title">D20 Damage Rolls</h1>
-        <div id = "d20DmgChart" class="chart-dice-stats"></div>
-        <table> <!-- Table Of Rolled Stats -->
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
-                <td>{{TOTAL_ROLLS.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
-                <td>{{MEAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
-                <td>{{MEDIAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
-                <td>{{MODE.[7]}}</th>
-            </tr>
-        </table>
-        <br>
-    {{/diceStats_ifDieUsed}}
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[0] }} <!-- if Have D20 ATK Rolls -->
+            <h1 class="dice-type-title">D20 Atack Rolls</h1>
+            <div id = "d20AtkChart" class="chart-dice-stats"></div>
+            <table> <!-- Table Of Rolled Stats -->
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
+                    <td>{{D20_ROLLCOUNT.[0]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
+                    <td>{{D20_MEAN.[0]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
+                    <td>{{D20_MEDIAN.[0]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
+                    <td>{{D20_MODE.[0]}}</th>
+                </tr>
+            </table>
+            <br>
+        {{/diceStats_ifDieUsed}}
 
-    {{#diceStats_ifDieUsed TOTAL_ROLLS.[7] }} <!-- if Have D20 ATK Rolls -->
-        <h1 class="dice-type-title">D20 Save Rolls</h1>
-        <div id = "d20SaveChart" class="chart-dice-stats"></div>
-        <table> <!-- Table Of Rolled Stats -->
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
-                <td>{{TOTAL_ROLLS.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
-                <td>{{MEAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
-                <td>{{MEDIAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
-                <td>{{MODE.[7]}}</th>
-            </tr>
-        </table>
-        <br>
-    {{/diceStats_ifDieUsed}}
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[1] }} <!-- if Have D20 ATK Rolls -->
+            <h1 class="dice-type-title">D20 Damage Rolls</h1>
+            <div id = "d20DmgChart" class="chart-dice-stats"></div>
+            <table> <!-- Table Of Rolled Stats -->
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
+                    <td>{{D20_ROLLCOUNT.[1]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
+                    <td>{{D20_MEAN.[1]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
+                    <td>{{D20_MEDIAN.[1]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
+                    <td>{{D20_MODE.[1]}}</th>
+                </tr>
+            </table>
+            <br>
+        {{/diceStats_ifDieUsed}}
 
-    {{#diceStats_ifDieUsed TOTAL_ROLLS.[7] }} <!-- if Have D20 ATK Rolls -->
-        <h1 class="dice-type-title">D20 Skill Rolls</h1>
-        <div id = "d20SkillChart" class="chart-dice-stats"></div>
-        <table> <!-- Table Of Rolled Stats -->
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
-                <td>{{TOTAL_ROLLS.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
-                <td>{{MEAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
-                <td>{{MEDIAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
-                <td>{{MODE.[7]}}</th>
-            </tr>
-        </table>
-        <br>
-    {{/diceStats_ifDieUsed}}
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[2] }} <!-- if Have D20 ATK Rolls -->
+            <h1 class="dice-type-title">D20 Save Rolls</h1>
+            <div id = "d20SaveChart" class="chart-dice-stats"></div>
+            <table> <!-- Table Of Rolled Stats -->
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
+                    <td>{{D20_ROLLCOUNT.[2]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
+                    <td>{{D20_MEAN.[2]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
+                    <td>{{D20_MEDIAN.[2]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
+                    <td>{{D20_MODE.[2]}}</th>
+                </tr>
+            </table>
+            <br>
+        {{/diceStats_ifDieUsed}}
 
-    {{#diceStats_ifDieUsed TOTAL_ROLLS.[7] }} <!-- if Have D20 ATK Rolls -->
-        <h1 class="dice-type-title">D20 Unknown Rolls</h1>
-        <div id = "d20UnknownChart" class="chart-dice-stats"></div>
-        <table> <!-- Table Of Rolled Stats -->
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
-                <td>{{TOTAL_ROLLS.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
-                <td>{{MEAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
-                <td>{{MEDIAN.[7]}}</th>
-            </tr>
-            <tr>
-                <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
-                <td>{{MODE.[7]}}</th>
-            </tr>
-        </table>
-        <br>
-    {{/diceStats_ifDieUsed}}
-</div>
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[3] }} <!-- if Have D20 ATK Rolls -->
+            <h1 class="dice-type-title">D20 Skill Rolls</h1>
+            <div id = "d20SkillChart" class="chart-dice-stats"></div>
+            <table> <!-- Table Of Rolled Stats -->
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
+                    <td>{{D20_ROLLCOUNT.[3]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
+                    <td>{{D20_MEAN.[3]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
+                    <td>{{D20_MEDIAN.[3]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
+                    <td>{{D20_MODE.[3]}}</th>
+                </tr>
+            </table>
+            <br>
+        {{/diceStats_ifDieUsed}}
 
-<script language = "JavaScript">
-    var chartOptions = {
-        //NOTE:Couldn't adjust "hAxis.baseline" to make it thicker
-        backgroundColor:{
-            fill: '#faf0e1',
-            fillOpacity: 0.1,
-        },
-        chartArea:{
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[4] }} <!-- if Have D20 ATK Rolls -->
+            <h1 class="dice-type-title">D20 Unknown Rolls</h1>
+            <div id = "d20UnknownChart" class="chart-dice-stats"></div>
+            <table> <!-- Table Of Rolled Stats -->
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
+                    <td>{{D20_ROLLCOUNT.[4]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
+                    <td>{{D20_MEAN.[4]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
+                    <td>{{D20_MEDIAN.[4]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
+                    <td>{{D20_MODE.[4]}}</th>
+                </tr>
+            </table>
+            <br>
+        {{/diceStats_ifDieUsed}}
+    </div>
+
+    <script language = "JavaScript">
+        var chartOptions = {
+            //NOTE:Couldn't adjust "hAxis.baseline" to make it thicker
             backgroundColor:{
-            //stroke: 'black',
-            //strokeWidth: 5,
-            fill: '#faf0e1',
-            fillOpacity: 0.1,
+                fill: '#faf0e1',
+                fillOpacity: 0.1,
             },
-        },
-        hAxis: {
-            title: 'Die Number',
-            titleTextStyle:{
-                fontSize:20,
+            chartArea:{
+                backgroundColor:{
+                //stroke: 'black',
+                //strokeWidth: 5,
+                fill: '#faf0e1',
+                fillOpacity: 0.1,
+                },
             },
-            textStyle:{
-                fontSize: 12,
+            hAxis: {
+                title: 'Die Number',
+                titleTextStyle:{
+                    fontSize:20,
+                },
+                textStyle:{
+                    fontSize: 12,
+                },
+                gridlines:{
+                    color:'black',
+                },
             },
-            gridlines:{
-                color:'black',
+            vAxis: {
+                title: 'Number Of Rolls',
+                titleTextStyle:{
+                    fontSize:20,
+                },
+                textStyle:{
+                    fontSize: 15,
+                },
+                gridlines:{
+                    color:'black',
+                },
+                minorGridlines:{
+                    color:'black',
+                },
             },
-        },
-        vAxis: {
-            title: 'Number Of Rolls',
-            titleTextStyle:{
-                fontSize:20,
-            },
-            textStyle:{
-                fontSize: 15,
-            },
-            gridlines:{
-                color:'black',
-            },
-            minorGridlines:{
-                color:'black',
-            },
-        },
-        legend: 'none',
-    }
-
-    function drawChartd20Atk() {
-        // Define the chart to be drawn.
-        var data = google.visualization.arrayToDataTable(
-            [
-                ['Die Number', 'Number Of rolls'],
-                ['1',   {{D20_ROLL_DATA.[0]}}],
-                ['2',   {{D20_ROLL_DATA.[1]}}],
-                ['3',   {{D20_ROLL_DATA.[2]}}],
-                ['4',   {{D20_ROLL_DATA.[3]}}],
-                ['5',   {{D20_ROLL_DATA.[4]}}],
-                ['6',   {{D20_ROLL_DATA.[5]}}],
-                ['7',   {{D20_ROLL_DATA.[6]}}],
-                ['8',   {{D20_ROLL_DATA.[7]}}],
-                ['9',   {{D20_ROLL_DATA.[8]}}],
-                ['10',  {{D20_ROLL_DATA.[9]}}],
-                ['11',  {{D20_ROLL_DATA.[10]}}],
-                ['12',  {{D20_ROLL_DATA.[11]}}],
-                ['13',  {{D20_ROLL_DATA.[12]}}],
-                ['14',  {{D20_ROLL_DATA.[13]}}],
-                ['15',  {{D20_ROLL_DATA.[14]}}],
-                ['16',  {{D20_ROLL_DATA.[15]}}],
-                ['17',  {{D20_ROLL_DATA.[16]}}],
-                ['18',  {{D20_ROLL_DATA.[17]}}],
-                ['19',  {{D20_ROLL_DATA.[18]}}],
-                ['20',  {{D20_ROLL_DATA.[19]}}]
-            ]
-        );
-
-        // Instantiate and draw the chart.
-        var chart = new google.visualization.ColumnChart(document.getElementById('d20AtkChart'));
-        chart.draw(data, chartOptions);
-    }
-
-    function drawChartd20Dmg() {
-        // Define the chart to be drawn.
-        var data = google.visualization.arrayToDataTable(
-            [
-                ['Die Number', 'Number Of rolls'],
-                ['1',   {{D20_ROLL_DATA.[0]}}],
-                ['2',   {{D20_ROLL_DATA.[1]}}],
-                ['3',   {{D20_ROLL_DATA.[2]}}],
-                ['4',   {{D20_ROLL_DATA.[3]}}],
-                ['5',   {{D20_ROLL_DATA.[4]}}],
-                ['6',   {{D20_ROLL_DATA.[5]}}],
-                ['7',   {{D20_ROLL_DATA.[6]}}],
-                ['8',   {{D20_ROLL_DATA.[7]}}],
-                ['9',   {{D20_ROLL_DATA.[8]}}],
-                ['10',  {{D20_ROLL_DATA.[9]}}],
-                ['11',  {{D20_ROLL_DATA.[10]}}],
-                ['12',  {{D20_ROLL_DATA.[11]}}],
-                ['13',  {{D20_ROLL_DATA.[12]}}],
-                ['14',  {{D20_ROLL_DATA.[13]}}],
-                ['15',  {{D20_ROLL_DATA.[14]}}],
-                ['16',  {{D20_ROLL_DATA.[15]}}],
-                ['17',  {{D20_ROLL_DATA.[16]}}],
-                ['18',  {{D20_ROLL_DATA.[17]}}],
-                ['19',  {{D20_ROLL_DATA.[18]}}],
-                ['20',  {{D20_ROLL_DATA.[19]}}]
-            ]
-        );
-
-        // Instantiate and draw the chart.
-        var chart = new google.visualization.ColumnChart(document.getElementById('d20DmgChart'));
-        chart.draw(data, chartOptions);
-    }
-
-    function drawChartd20Save() {
-        // Define the chart to be drawn.
-        var data = google.visualization.arrayToDataTable(
-            [
-                ['Die Number', 'Number Of rolls'],
-                ['1',   {{D20_ROLL_DATA.[0]}}],
-                ['2',   {{D20_ROLL_DATA.[1]}}],
-                ['3',   {{D20_ROLL_DATA.[2]}}],
-                ['4',   {{D20_ROLL_DATA.[3]}}],
-                ['5',   {{D20_ROLL_DATA.[4]}}],
-                ['6',   {{D20_ROLL_DATA.[5]}}],
-                ['7',   {{D20_ROLL_DATA.[6]}}],
-                ['8',   {{D20_ROLL_DATA.[7]}}],
-                ['9',   {{D20_ROLL_DATA.[8]}}],
-                ['10',  {{D20_ROLL_DATA.[9]}}],
-                ['11',  {{D20_ROLL_DATA.[10]}}],
-                ['12',  {{D20_ROLL_DATA.[11]}}],
-                ['13',  {{D20_ROLL_DATA.[12]}}],
-                ['14',  {{D20_ROLL_DATA.[13]}}],
-                ['15',  {{D20_ROLL_DATA.[14]}}],
-                ['16',  {{D20_ROLL_DATA.[15]}}],
-                ['17',  {{D20_ROLL_DATA.[16]}}],
-                ['18',  {{D20_ROLL_DATA.[17]}}],
-                ['19',  {{D20_ROLL_DATA.[18]}}],
-                ['20',  {{D20_ROLL_DATA.[19]}}]
-            ]
-        );
-
-        // Instantiate and draw the chart.
-        var chart = new google.visualization.ColumnChart(document.getElementById('d20SaveChart'));
-        chart.draw(data, chartOptions);
-    }
-
-    function drawChartd20Skill() {
-        // Define the chart to be drawn.
-        var data = google.visualization.arrayToDataTable(
-            [
-                ['Die Number', 'Number Of rolls'],
-                ['1',   {{D20_ROLL_DATA.[0]}}],
-                ['2',   {{D20_ROLL_DATA.[1]}}],
-                ['3',   {{D20_ROLL_DATA.[2]}}],
-                ['4',   {{D20_ROLL_DATA.[3]}}],
-                ['5',   {{D20_ROLL_DATA.[4]}}],
-                ['6',   {{D20_ROLL_DATA.[5]}}],
-                ['7',   {{D20_ROLL_DATA.[6]}}],
-                ['8',   {{D20_ROLL_DATA.[7]}}],
-                ['9',   {{D20_ROLL_DATA.[8]}}],
-                ['10',  {{D20_ROLL_DATA.[9]}}],
-                ['11',  {{D20_ROLL_DATA.[10]}}],
-                ['12',  {{D20_ROLL_DATA.[11]}}],
-                ['13',  {{D20_ROLL_DATA.[12]}}],
-                ['14',  {{D20_ROLL_DATA.[13]}}],
-                ['15',  {{D20_ROLL_DATA.[14]}}],
-                ['16',  {{D20_ROLL_DATA.[15]}}],
-                ['17',  {{D20_ROLL_DATA.[16]}}],
-                ['18',  {{D20_ROLL_DATA.[17]}}],
-                ['19',  {{D20_ROLL_DATA.[18]}}],
-                ['20',  {{D20_ROLL_DATA.[19]}}]
-            ]
-        );
-
-        // Instantiate and draw the chart.
-        var chart = new google.visualization.ColumnChart(document.getElementById('d20SkillChart'));
-        chart.draw(data, chartOptions);
-    }
-
-    function drawChartd20Unknown() {
-        // Define the chart to be drawn.
-        var data = google.visualization.arrayToDataTable(
-            [
-                ['Die Number', 'Number Of rolls'],
-                ['1',   {{D20_ROLL_DATA.[0]}}],
-                ['2',   {{D20_ROLL_DATA.[1]}}],
-                ['3',   {{D20_ROLL_DATA.[2]}}],
-                ['4',   {{D20_ROLL_DATA.[3]}}],
-                ['5',   {{D20_ROLL_DATA.[4]}}],
-                ['6',   {{D20_ROLL_DATA.[5]}}],
-                ['7',   {{D20_ROLL_DATA.[6]}}],
-                ['8',   {{D20_ROLL_DATA.[7]}}],
-                ['9',   {{D20_ROLL_DATA.[8]}}],
-                ['10',  {{D20_ROLL_DATA.[9]}}],
-                ['11',  {{D20_ROLL_DATA.[10]}}],
-                ['12',  {{D20_ROLL_DATA.[11]}}],
-                ['13',  {{D20_ROLL_DATA.[12]}}],
-                ['14',  {{D20_ROLL_DATA.[13]}}],
-                ['15',  {{D20_ROLL_DATA.[14]}}],
-                ['16',  {{D20_ROLL_DATA.[15]}}],
-                ['17',  {{D20_ROLL_DATA.[16]}}],
-                ['18',  {{D20_ROLL_DATA.[17]}}],
-                ['19',  {{D20_ROLL_DATA.[18]}}],
-                ['20',  {{D20_ROLL_DATA.[19]}}]
-            ]
-        );
-
-        // Instantiate and draw the chart.
-        var chart = new google.visualization.ColumnChart(document.getElementById('d20UnknownChart'));
-        chart.draw(data, chartOptions);
-    }
-
-    //Make sure value is in data object
-    {{#if TOTAL_ROLLS includeZero=true}}
-
-        //Checks to See if charts callback should be made (If charts should be displayed)
-        if({{TOTAL_ROLLS.[0]}} > 0 )
-        {
-            google.charts.setOnLoadCallback(drawChartd20Atk);
+            legend: 'none',
         }
 
-        if({{TOTAL_ROLLS.[1]}} > 0 )
-        {
-            google.charts.setOnLoadCallback(drawChartd20Dmg);
+        function drawChartd20Atk() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable(
+                [
+                    ['Die Number', 'Number Of rolls'],
+                    ['1',   {{D20_ATK.[0]}}],
+                    ['2',   {{D20_ATK.[1]}}],
+                    ['3',   {{D20_ATK.[2]}}],
+                    ['4',   {{D20_ATK.[3]}}],
+                    ['5',   {{D20_ATK.[4]}}],
+                    ['6',   {{D20_ATK.[5]}}],
+                    ['7',   {{D20_ATK.[6]}}],
+                    ['8',   {{D20_ATK.[7]}}],
+                    ['9',   {{D20_ATK.[8]}}],
+                    ['10',  {{D20_ATK.[9]}}],
+                    ['11',  {{D20_ATK.[10]}}],
+                    ['12',  {{D20_ATK.[11]}}],
+                    ['13',  {{D20_ATK.[12]}}],
+                    ['14',  {{D20_ATK.[13]}}],
+                    ['15',  {{D20_ATK.[14]}}],
+                    ['16',  {{D20_ATK.[15]}}],
+                    ['17',  {{D20_ATK.[16]}}],
+                    ['18',  {{D20_ATK.[17]}}],
+                    ['19',  {{D20_ATK.[18]}}],
+                    ['20',  {{D20_ATK.[19]}}]
+                ]
+            );
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d20AtkChart'));
+            chart.draw(data, chartOptions);
         }
 
-        if({{TOTAL_ROLLS.[2]}} > 0 )
-        {
-            google.charts.setOnLoadCallback(drawChartd20Save);
+        function drawChartd20Dmg() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable(
+                [
+                    ['Die Number', 'Number Of rolls'],
+                    ['1',   {{D20_DMG.[0]}}],
+                    ['2',   {{D20_DMG.[1]}}],
+                    ['3',   {{D20_DMG.[2]}}],
+                    ['4',   {{D20_DMG.[3]}}],
+                    ['5',   {{D20_DMG.[4]}}],
+                    ['6',   {{D20_DMG.[5]}}],
+                    ['7',   {{D20_DMG.[6]}}],
+                    ['8',   {{D20_DMG.[7]}}],
+                    ['9',   {{D20_DMG.[8]}}],
+                    ['10',  {{D20_DMG.[9]}}],
+                    ['11',  {{D20_DMG.[10]}}],
+                    ['12',  {{D20_DMG.[11]}}],
+                    ['13',  {{D20_DMG.[12]}}],
+                    ['14',  {{D20_DMG.[13]}}],
+                    ['15',  {{D20_DMG.[14]}}],
+                    ['16',  {{D20_DMG.[15]}}],
+                    ['17',  {{D20_DMG.[16]}}],
+                    ['18',  {{D20_DMG.[17]}}],
+                    ['19',  {{D20_DMG.[18]}}],
+                    ['20',  {{D20_DMG.[19]}}]
+                ]
+            );
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d20DmgChart'));
+            chart.draw(data, chartOptions);
         }
 
-        if({{TOTAL_ROLLS.[3]}} > 0 )
-        {
-            google.charts.setOnLoadCallback(drawChartd20Skill);
+        function drawChartd20Save() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable(
+                [
+                    ['Die Number', 'Number Of rolls'],
+                    ['1',   {{D20_SAVE.[0]}}],
+                    ['2',   {{D20_SAVE.[1]}}],
+                    ['3',   {{D20_SAVE.[2]}}],
+                    ['4',   {{D20_SAVE.[3]}}],
+                    ['5',   {{D20_SAVE.[4]}}],
+                    ['6',   {{D20_SAVE.[5]}}],
+                    ['7',   {{D20_SAVE.[6]}}],
+                    ['8',   {{D20_SAVE.[7]}}],
+                    ['9',   {{D20_SAVE.[8]}}],
+                    ['10',  {{D20_SAVE.[9]}}],
+                    ['11',  {{D20_SAVE.[10]}}],
+                    ['12',  {{D20_SAVE.[11]}}],
+                    ['13',  {{D20_SAVE.[12]}}],
+                    ['14',  {{D20_SAVE.[13]}}],
+                    ['15',  {{D20_SAVE.[14]}}],
+                    ['16',  {{D20_SAVE.[15]}}],
+                    ['17',  {{D20_SAVE.[16]}}],
+                    ['18',  {{D20_SAVE.[17]}}],
+                    ['19',  {{D20_SAVE.[18]}}],
+                    ['20',  {{D20_SAVE.[19]}}]
+                ]
+            );
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d20SaveChart'));
+            chart.draw(data, chartOptions);
         }
 
-        if({{TOTAL_ROLLS.[4]}} > 0 )
-        {
-            google.charts.setOnLoadCallback(drawChartd20Unknown);
+        function drawChartd20Skill() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable(
+                [
+                    ['Die Number', 'Number Of rolls'],
+                    ['1',   {{D20_SKILL.[0]}}],
+                    ['2',   {{D20_SKILL.[1]}}],
+                    ['3',   {{D20_SKILL.[2]}}],
+                    ['4',   {{D20_SKILL.[3]}}],
+                    ['5',   {{D20_SKILL.[4]}}],
+                    ['6',   {{D20_SKILL.[5]}}],
+                    ['7',   {{D20_SKILL.[6]}}],
+                    ['8',   {{D20_SKILL.[7]}}],
+                    ['9',   {{D20_SKILL.[8]}}],
+                    ['10',  {{D20_SKILL.[9]}}],
+                    ['11',  {{D20_SKILL.[10]}}],
+                    ['12',  {{D20_SKILL.[11]}}],
+                    ['13',  {{D20_SKILL.[12]}}],
+                    ['14',  {{D20_SKILL.[13]}}],
+                    ['15',  {{D20_SKILL.[14]}}],
+                    ['16',  {{D20_SKILL.[15]}}],
+                    ['17',  {{D20_SKILL.[16]}}],
+                    ['18',  {{D20_SKILL.[17]}}],
+                    ['19',  {{D20_SKILL.[18]}}],
+                    ['20',  {{D20_SKILL.[19]}}]
+                ]
+            );
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d20SkillChart'));
+            chart.draw(data, chartOptions);
         }
-    {{/if}}
-</script>
+
+        function drawChartd20Unknown() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable(
+                [
+                    ['Die Number', 'Number Of rolls'],
+                    ['1',   {{D20_UNKNOWN.[0]}}],
+                    ['2',   {{D20_UNKNOWN.[1]}}],
+                    ['3',   {{D20_UNKNOWN.[2]}}],
+                    ['4',   {{D20_UNKNOWN.[3]}}],
+                    ['5',   {{D20_UNKNOWN.[4]}}],
+                    ['6',   {{D20_UNKNOWN.[5]}}],
+                    ['7',   {{D20_UNKNOWN.[6]}}],
+                    ['8',   {{D20_UNKNOWN.[7]}}],
+                    ['9',   {{D20_UNKNOWN.[8]}}],
+                    ['10',  {{D20_UNKNOWN.[9]}}],
+                    ['11',  {{D20_UNKNOWN.[10]}}],
+                    ['12',  {{D20_UNKNOWN.[11]}}],
+                    ['13',  {{D20_UNKNOWN.[12]}}],
+                    ['14',  {{D20_UNKNOWN.[13]}}],
+                    ['15',  {{D20_UNKNOWN.[14]}}],
+                    ['16',  {{D20_UNKNOWN.[15]}}],
+                    ['17',  {{D20_UNKNOWN.[16]}}],
+                    ['18',  {{D20_UNKNOWN.[17]}}],
+                    ['19',  {{D20_UNKNOWN.[18]}}],
+                    ['20',  {{D20_UNKNOWN.[19]}}]
+                ]
+            );
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d20UnknownChart'));
+            chart.draw(data, chartOptions);
+        }
+
+        //Make sure value is in data object
+        {{#if D20_ROLLCOUNT includeZero=true}}
+
+            //Checks to See if charts callback should be made (If charts should be displayed)
+            if({{D20_ROLLCOUNT.[0]}} > 0 )
+            {
+                google.charts.setOnLoadCallback(drawChartd20Atk);
+            }
+
+            if({{D20_ROLLCOUNT.[1]}} > 0 )
+            {
+                google.charts.setOnLoadCallback(drawChartd20Dmg);
+            }
+
+            if({{D20_ROLLCOUNT.[2]}} > 0 )
+            {
+                google.charts.setOnLoadCallback(drawChartd20Save);
+            }
+
+            if({{D20_ROLLCOUNT.[3]}} > 0 )
+            {
+                google.charts.setOnLoadCallback(drawChartd20Skill);
+            }
+
+            if({{D20_ROLLCOUNT.[4]}} > 0 )
+            {
+                google.charts.setOnLoadCallback(drawChartd20Unknown);
+            }
+        {{/if}}
+    </script>
+{{/diceStats_ifHaveBlindRolls}}

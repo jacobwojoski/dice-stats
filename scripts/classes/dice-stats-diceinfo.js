@@ -18,6 +18,12 @@ class DIE_INFO {
     MEDIAN =    0;
     MODE =      0;
 
+    //Basic Stats About Specific Type of Rolls
+    MEANS = [];
+    MEDIANS = [];
+    MODES = [];
+    ROLL_COUNTERS = [];
+
     ATK_ROLLS = [];
     DMG_ROLLS = [];
     SAVES_ROLLS = [];
@@ -50,6 +56,11 @@ class DIE_INFO {
         //Constrct different types only for d20's for now
         if(dieMax == 20)
         {
+            this.ROLL_COUNTERS = new Array(NUM_ROLL_TYES);
+            this.MEANS = new Array(NUM_ROLL_TYES);
+            this.MEDIANS = new Array(NUM_ROLL_TYES);
+            this.MODES = new Array(NUM_ROLL_TYES);
+
             this.ATK_ROLLS = new Array(dieMax);
             this.DMG_ROLLS = new Array(dieMax);
             this.SAVES_ROLLS = new Array(dieMax);
@@ -61,6 +72,11 @@ class DIE_INFO {
             this.SAVES_ROLLS_BLIND = new Array(dieMax);
             this.SKILLS_ROLLS_BLIND = new Array(dieMax);
             this.UNKNOWN_ROLLS_BLIND = new Array(dieMax);
+
+            this.ROLL_COUNTERS.fill(0);
+            this.MEANS.fill(0);
+            this.MEDIANS.fill(0);
+            this.MODES.fill(0);
 
             this.ATK_ROLLS.fill(0);
             this.DMG_ROLLS.fill(0);
@@ -108,6 +124,11 @@ class DIE_INFO {
         this.ROLLS.fill(0);
         this.BLIND_ROLLS.fill(0);
 
+        this.ROLL_COUNTERS.fill(0);
+        this.MEANS.fill(0);
+        this.MEDIANS.fill(0);
+        this.MODES.fill(0);
+
         this.ATK_ROLLS.fill(0);
         this.DMG_ROLLS.fill(0);
         this.SAVES_ROLLS.fill(0);
@@ -135,9 +156,11 @@ class DIE_INFO {
      * A roll was made with this die so update the value that was rolled
      * @param {int} roll - value of roll 
      * @param {bool} isBlind 
+     * @param {DIE_ROLL_TYPE} rollType
      */
     addRoll(roll, isBlind, rollType){
         this.TOTAL_ROLLS++;
+        this.ROLL_COUNTERS[rollType] ++;
         this.updateStreak(roll, isBlind)
 
         var dontHideBlindRolls = game.settings.get(MODULE_ID_DS,SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE);
@@ -148,47 +171,43 @@ class DIE_INFO {
         }
 
         //Add roll to proper array
-        if(isBlind)
+        switch(rollType)
         {
-            switch(rollType)
-            {
-                case DIE_ROLL_TYPE.ATK :
+            case DIE_ROLL_TYPE.ATK :
+                if(isBlind){
                     this.ATK_ROLLS_BLIND[roll-1] = this.ATK_ROLLS_BLIND[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.DMG :
-                    this.DMG_ROLLS_BLIND[roll-1] = this.DMG_ROLLS_BLIND[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.SAVE :
-                    this.SAVES_ROLLS_BLIND[roll-1] = this.SAVES_ROLLS_BLIND[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.SKILL :
-                    this.SKILLS_ROLLS_BLIND[roll-1] = this.SKILLS_ROLLS_BLIND[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.UNKNOWN :
-                    this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;
-                    break;
-            }
-        }
-        else
-        {
-            switch(rollType)
-            {
-                case DIE_ROLL_TYPE.ATK :
+                }else{
                     this.ATK_ROLLS[roll-1] = this.ATK_ROLLS[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.DMG :
+                }
+                break;
+            case DIE_ROLL_TYPE.DMG :
+                if(isBlind){
+                    this.DMG_ROLLS_BLIND[roll-1] = this.DMG_ROLLS_BLIND[roll-1]+1;
+                }else{
                     this.DMG_ROLLS[roll-1] = this.DMG_ROLLS[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.SAVE :
+                }
+                break;
+            case DIE_ROLL_TYPE.SAVE :
+                if(isBlind){
+                    this.SAVES_ROLLS_BLIND[roll-1] = this.SAVES_ROLLS_BLIND[roll-1]+1;
+                }else{
                     this.SAVES_ROLLS[roll-1] = this.SAVES_ROLLS[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.SKILL :
+                }
+                break;
+            case DIE_ROLL_TYPE.SKILL :
+                if(isBlind){
+                    this.SKILLS_ROLLS_BLIND[roll-1] = this.SKILLS_ROLLS_BLIND[roll-1]+1;
+                }else{
                     this.SKILLS_ROLLS[roll-1] = this.SKILLS_ROLLS[roll-1]+1;
-                    break;
-                case DIE_ROLL_TYPE.UNKNOWN :
+                }
+                break;
+            case DIE_ROLL_TYPE.UNKNOWN :
+                if(isBlind){
+                    this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;
+                }else{
                     this.UNKNOWN_ROLLS[roll-1] = this.UNKNOWN_ROLLS[roll-1]+1;
-                    break;
-            }
+                }
+                break;
         }
     }
 
@@ -199,6 +218,26 @@ class DIE_INFO {
         this.MEAN = DICE_STATS_UTILS.getMean(this.ROLLS);
         this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ROLLS);
         this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
+
+        this.MEAN = DICE_STATS_UTILS.getMean(this.ATK_ROLLS);
+        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ATK_ROLLS);
+        this.MODE = DICE_STATS_UTILS.getMode(this.ATK_ROLLS);
+
+        this.MEAN = DICE_STATS_UTILS.getMean(this.DMG_ROLLS);
+        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.DMG_ROLLS);
+        this.MODE = DICE_STATS_UTILS.getMode(this.DMG_ROLLS);
+
+        this.MEAN = DICE_STATS_UTILS.getMean(this.SAVES_ROLLS);
+        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.SAVES_ROLLS);
+        this.MODE = DICE_STATS_UTILS.getMode(this.SAVES_ROLLS);
+
+        this.MEAN = DICE_STATS_UTILS.getMean(this.SKILLS_ROLLS);
+        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.SKILLS_ROLLS);
+        this.MODE = DICE_STATS_UTILS.getMode(this.SKILLS_ROLLS);
+
+        this.MEAN = DICE_STATS_UTILS.getMean(this.UNKNOWN_ROLLS);
+        this.MEDIAN = DICE_STATS_UTILS.getMedian(this.UNKNOWN_ROLLS);
+        this.MODE = DICE_STATS_UTILS.getMode(this.UNKNOWN_ROLLS);
     }
 
     /**
