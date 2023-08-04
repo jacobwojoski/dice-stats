@@ -2,7 +2,7 @@
 
 ## [ 1.14.0 ]
 ### Added
-- Added feature to view different d20 rolls on seperate tab.
+- PF2E added ability to view different roll types! 
 
 ## [ 1.13.1 ]
 ### Fixed
