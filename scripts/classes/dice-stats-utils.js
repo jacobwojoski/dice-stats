@@ -149,7 +149,7 @@ class DICE_STATS_UTILS {
         if(msg.isRoll && game.system.id == "pf2e")
         {
             //Check if damage Roll
-            if(msg.isDamageRoll())
+            if(msg.isDamageRoll && msg.isDamageRoll())
             {
                 return DIE_ROLL_TYPE.DMG;
             }

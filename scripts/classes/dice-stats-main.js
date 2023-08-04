@@ -259,7 +259,7 @@ class DiceStatsTracker {
                 let dieType = MAX_TO_DIE.get(sides);
                 let newNumbers = [];
                 //Get type of roll (Atack, Save, ect)
-                let rollType = getRollType(msg);
+                let rollType = DICE_STATS_UTILS.getRollType(msg);
 
                 //In case there's more than one die rolled in a single instance as in 
                 //  fortune/misfortune rolls or multiple hit dice save each roll

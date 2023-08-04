@@ -19,7 +19,7 @@
             <input type="checkbox" class="form-checkboxes" data-action="d100checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[8]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d100"}}</span></input>
         </div>
         <br>
-        {{#diceStats_ifHaveBlindRolls BLIND_ROLL_COUNT}}
+        {{#diceStats_ifHaveBlindRolls playerData/BLIND_ROLL_COUNT}}
         <div class="blind-roll-rollcount">
             <h2>{{localize "DICE_STATS_TEXT.player_data_form.blind_rolls" ui_rolls=BLIND_ROLL_COUNT }}</h2>
         </div>
