@@ -48,7 +48,6 @@ class CustomTabFormClass extends FormApplication
         loadTemplates(["modules/dice-stats/templates/partial/tab_player_base.hbs"]);
         loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs"]);
         loadTemplates(["modules/dice-stats/templates/partial/tab_player_stats_d20.hbs"]);
-        loadTemplates(["modules/dice-stats/templates/partial/test_issue.hbs"]);
         //Object needed to specify tabs
         var baseDataObject = { 
             header: "<h1>HEADER</h1>",
