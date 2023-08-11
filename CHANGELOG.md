@@ -1,5 +1,12 @@
 # CHANGELOG  
 
+## [ 1.14.1 ]
+### Added
+- Fixed bug where blind roll setting didn't work correctly
+- Fixed bug where mod was trying to load a form that was only used for testing so didn't exist
+- Updated a few comments
+- Fixed bug when trying to load DB values for different roll types on dice that didnt have different rolls
+
 ## [ 1.14.0 ]
 ### Added
 - PF2E added ability to view different roll types! 
