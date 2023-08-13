@@ -13,7 +13,10 @@ DS_GLOBALS = {
     MODULE_TEMPLATES: {
         GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
         PLAYERDATAFORM:     'modules/dice-stats/templates/dice-stats-player.hbs',
-        COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs'
+        COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
+        TABPLAYERBASE:      'modules/dice-stats/templates/partial/tab_player_base.hbs',
+        TABBEDPLAYER_ALL:   'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
+        TABBEDPLAYER_D20:   'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs'
     },
     MODULE_SETTINGS: {
         PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either     [Def: True]      (Global)
@@ -90,7 +93,7 @@ DS_GLOBALS.GL_MAX_TO_DIE.set(100, DIE_TYPE.D100);
 //Were using this class as a singleton although its not quite set up correctly as one. 
 class DiceStatsTracker {
     AM_I_GM = false;
-
+    ID = DS_GLOBALS.MODULE_ID;
     /*User Player ID to Get player info*/
     PLAYER_DATA_MAP =    new Map();
 
@@ -106,16 +109,19 @@ class DiceStatsTracker {
     updateMap(){
         //Add everyplayer to storage. Were tracking all even if we dont need
         for (let user of game.users) {
-            if(!this.ALLPLAYERDATA.has(user.id)){
-                this.ALLPLAYERDATA.set(user.id, new PLAYER(user.id))    
+            if(!this.PLAYER_DATA_MAP.has(user.id)){
+                this.PLAYER_DATA_MAP.set(user.id, new PLAYER(user.id))    
             }
         }
     }
 
     updateComparisonFormCheckboxes(){
-        let numPlayers = game.users.length;
-        this.COMPARISON_FORM_CHECKBOXES = new Array(numPlayers);
-        this.COMPARISON_FORM_CHECKBOXES.fill(true);
+        this.COMPARISON_FORM_PLAYER_CHECKBOXES = new Array();
+        for(let user of game.users)
+        {
+            let temp = new ComparePlayerObjUtil(user);
+            this.COMPARISON_FORM_PLAYER_CHECKBOXES.push(temp);
+        }
     }
 
     /**
@@ -124,85 +130,85 @@ class DiceStatsTracker {
     loadModuleSettings(){
 
         // A setting to determine whether players can see gm data
-        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.SETTINGS.PLAYERS_SEE_GM, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM}.Name`,
             default: false,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Hint`
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM}.Hint`
             //restricted: true    // Restric item to gamemaster only 
             //Only used for non world lvl items. All World items are already gm only
         })
 
         // A setting to determine whether players can see global data
-        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GLOBAL, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GLOBAL, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GLOBAL}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GLOBAL}.Hint`,
         })
 
         // A setting to determine whether players can see global data
-        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Name`,
             default: false,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL}.Hint`,
         })
 
         // A setting to determine whether players can see global data
-        game.settings.register(this.ID, SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Name`,
             default: false,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE}.Hint`,
         })
 
         // A setting to let db interaction be automated
-        game.settings.register(this.ID, SETTINGS.ENABLE_AUTO_DB , {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB , {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_AUTO_DB}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB}.Hint`,
         })
 
         // A setting to let the user change access buttons to use something else
-        game.settings.register(this.ID, SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS , {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS , {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Name`,
             default: true,
             type: Boolean,
             scope: 'world',
             config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS}.Hint`,
         })
 
         // A Setting to change access icons when using the new access items
-        game.settings.register(this.ID, SETTINGS.OTHER_ACCESS_BUTTON_ICONS, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.OTHER_ACCESS_BUTTON_ICONS, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Name`,
             default: 'fas fa-dice-d20',
             type: String,
             scope: 'world',
             config: true,
-            hint: game.i18n.localize(`DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Hint`),
+            hint: game.i18n.localize(`DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Hint`),
         })
 
         // A setting to limit players to only see global stats
-        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_PLAYERS, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Name`,
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS}.Name`,
             default: true,
             type: Boolean,
             scope: 'world', //world = db, client = local
             config: true,   // show in module config
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Hint`,
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS}.Hint`,
         })
     }
 
@@ -234,7 +240,7 @@ class DiceStatsTracker {
         let isBlind = msg.blind;
 
         //Get Associated player object
-        let playerInfo = this.ALLPLAYERDATA.get(msg.user.id);
+        let playerInfo = this.PLAYER_DATA_MAP.get(msg.user.id);
 
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
@@ -261,7 +267,7 @@ class DiceStatsTracker {
         }
 
         //If AutoSave is Enabled by GM
-        if(game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB)) 
+        if(game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
         {
             //If It was my Roll
             this.saveMyPlayerData();
@@ -276,7 +282,7 @@ class DiceStatsTracker {
      * @param {bool} isBlind 
      */
     addRoll(dieType=7, rolls=[], user=game.user.id, isBlind=false){
-        let playerInfo = this.ALLPLAYERDATA.get(user);
+        let playerInfo = this.PLAYER_DATA_MAP.get(user);
 
         rolls.forEach(element => {
             playerInfo.saveRoll(isBlind, element, dieType)
@@ -289,7 +295,7 @@ class DiceStatsTracker {
      */
     pushBlindRolls(){
         for (let user of game.users) {
-            this.ALLPLAYERDATA.get(user.id)?.pushBlindRolls();
+            this.PLAYER_DATA_MAP.get(user.id)?.pushBlindRolls();
         }
     }
 
@@ -298,7 +304,7 @@ class DiceStatsTracker {
      */
     clearAllRollData(){
         for (let user of game.users) {
-            this.ALLPLAYERDATA.get(user.id)?.clearDiceData();
+            this.PLAYER_DATA_MAP.get(user.id)?.clearDiceData();
         }
     }
 
@@ -307,14 +313,14 @@ class DiceStatsTracker {
      * @param {String} userid 
      */
     clearUsersRollData(userid){
-        this.ALLPLAYERDATA.get(userid)?.clearDiceData();
+        this.PLAYER_DATA_MAP.get(userid)?.clearDiceData();
     }
 
     /**
      * Save my players data to the DB
      */
     saveMyPlayerData(){
-        let myData = this.ALLPLAYERDATA.get(game.user.id)
+        let myData = this.PLAYER_DATA_MAP.get(game.user.id)
         if(myData)
         {
             DB_INTERACTION.saveUserData(myData); 
@@ -330,46 +336,20 @@ class DiceStatsTracker {
             var dbInfo = DB_INTERACTION.loadPlayerData(tempUser.id);
             if(dbInfo)
             {
-                let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+                let localPlayerInfo = this.PLAYER_DATA_MAP.get(tempUser.id);
 
                 if(localPlayerInfo)
                 {
                     DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo); //Puts db info into local player obj
-                    this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
-
-                    if(GLOBALFORMOBJ != null){
-                        GLOBALFORMOBJ.render();
-                    }
-
-                    if(PLAYERFORMOBJ != null){
-                        PLAYERFORMOBJ.render();
-                    }
+                    this.PLAYER_DATA_MAP.set(tempUser.id,localPlayerInfo);
                 }
             }
             else
             {
-                //DB returned null, save an empty user data
+                //DB returned null clear local data
                 console.log("Warning: No DB data Found, Setting local value to 0");
-                let tempPlayer = this.ALLPLAYERDATA.get(tempUser.id);
+                let tempPlayer = this.PLAYER_DATA_MAP.get(tempUser.id);
                 tempPlayer.clearAllRollData();
-
-                DB_INTERACTION.saveUserData(tempPlayer);
-
-                // Update local player var with 0 values too
-                let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
-                if(localPlayerInfo)
-                {
-                    //Update map with 0 values 
-                    this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
-                }
-
-                if(GLOBALFORMOBJ != null){
-                    GLOBALFORMOBJ.render();
-                }
-
-                if(PLAYERFORMOBJ != null){
-                    PLAYERFORMOBJ.render();
-                }
             }
         }
     }
@@ -381,18 +361,10 @@ class DiceStatsTracker {
         var dbInfo = DB_INTERACTION.loadPlayerData(game.user.id);
         if(dbInfo)
         {
-            let localPlayerInfo = this.ALLPLAYERDATA.get(game.user.id);
+            let localPlayerInfo = this.PLAYER_DATA_MAP.get(game.user.id);
 
             DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
-            this.ALLPLAYERDATA.set(game.user.id,localPlayerInfo);
-
-            if(GLOBALFORMOBJ){
-                GLOBALFORMOBJ.render();
-            }
-
-            if(PLAYERFORMOBJ){
-                PLAYERFORMOBJ.render();
-            }
+            this.PLAYER_DATA_MAP.set(game.user.id,localPlayerInfo);
         } 
     }
 
@@ -407,18 +379,10 @@ class DiceStatsTracker {
                 var dbInfo = DB_INTERACTION.loadPlayerData(tempUser.id);
                 if(dbInfo)
                 {
-                    let localPlayerInfo = this.ALLPLAYERDATA.get(tempUser.id);
+                    let localPlayerInfo = this.PLAYER_DATA_MAP.get(tempUser.id);
 
                     DB_INTERACTION.createPlayerObject(localPlayerInfo,dbInfo);
-                    this.ALLPLAYERDATA.set(tempUser.id,localPlayerInfo);
-
-                    if(GLOBALFORMOBJ){
-                        GLOBALFORMOBJ.render();
-                    }
-
-                    if(PLAYERFORMOBJ){
-                        PLAYERFORMOBJ.render();
-                    }
+                    this.PLAYER_DATA_MAP.set(tempUser.id,localPlayerInfo);
                 }
             }
         }

@@ -1,8 +1,6 @@
 
 
 class DICE_STATS_UTILS {
-    //Makes an array of all the rolls from every play for a specific die type
-
     /**
      * Build hook hook that waits for A DsN msg then return
      * This funtion returns after Hook is made so this code returns and now were 
@@ -146,12 +144,26 @@ class DICE_STATS_UTILS {
      */
     static getRollType(msg)
     {
-        if(msg.isRoll && game.system.id == "pf2e")
+        //This should never happen as its already been checked but double check
+        if(!msg.isRoll)
+        {
+            return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+        }
+
+        //Return type of roll we received. Only set up for pf2e now.
+        /*
+        WOuld need to Update 
+            else if here, 
+            Update Forms (Player Data Obj), 
+            Data Pack (Player Data Pack)
+            Roll Types (Maybe)
+        */
+        if(game.system.id == "pf2e")
         {
             //Check if damage Roll
             if(msg.isDamageRoll)
             {
-                return DIE_ROLL_TYPE.DMG;
+                return DS_GLOBALS.ROLL_TYPE.DMG;
             }
 
             let domains = msg.rolls[0].options.domains;
@@ -161,72 +173,45 @@ class DICE_STATS_UTILS {
                 for (var i=0; i<domains.length; i++) {
                     if(domains[i].match("attack"))
                     {
-                        return DIE_ROLL_TYPE.ATK;
+                        return DS_GLOBALS.ROLL_TYPE.ATK;
                     }
                     else if (domains[i].match("saving-throw"))
                     {
-                        return DIE_ROLL_TYPE.SAVE;
+                        return DS_GLOBALS.ROLL_TYPE.SAVE;
                     }
                     else if(domains[i].match("skill-check"))
                     {
-                        return DIE_ROLL_TYPE.SKILL
+                        return DS_GLOBALS.ROLL_TYPE.SKILL
                     }
                 }
-                return DIE_ROLL_TYPE.UNKNOWN;
+                return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
             }
             //unknown so return unknown type
-            return DIE_ROLL_TYPE.UNKNOWN;
+            return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
         }
         /**
          * ADD else if HERE to implement other game systems, 
          * For New TYPES need to udpate dice-info and enum values
          * */
 
-        return DIE_ROLL_TYPE.UNKNOWN;
+        return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
     }
 
     /**
-     * Get the type of roll the roll. Currently only for PF2e system, 
-     *      This is prolly not needed but getting from roll object seemed more correct then getting from the msg object. 
-     *      Some systems could have differnt types of rolls in same msg so this can be useful for them
-     * 
-     * @param {roll} roll - chat message object (Chat message object is a foundry object not made by me. 
-     *                                 This object might have different variables bassed off of system so only set for PF2e for now)
-     * @returns {ROLL_TYPE} - Type of roll that was made (atack, dmg, save ect)
+     * Refresh all form objects
      */
-    static getRollType_fromRoll(roll)
-    {
-        if(msg.isRoll && game.system.id == "pf2e")
-        {
-            let domains = roll.options.domains;
-            //Check if Save | Atack roll | Skill check
-            if(domains)
-            {
-                for (var i=0; i<domains.length; i++) {
-                    if(domains[i].match("attack"))
-                    {
-                        return DIE_ROLL_TYPE.ATK;
-                    }
-                    else if (domains[i].match("saving-throw"))
-                    {
-                        return DIE_ROLL_TYPE.SAVE;
-                    }
-                    else if(domains[i].match("skill-check"))
-                    {
-                        return DIE_ROLL_TYPE.SKILL
-                    }
-                }
-                return DIE_ROLL_TYPE.UNKNOWN;
-            }
-            //unknown so return unknown type
-            return DIE_ROLL_TYPE.UNKNOWN;
+    static refreshForms(){
+        if(DS_GLOBALS.FORM_GL_STATS){
+            DS_GLOBALS.FORM_GL_STATS.render();
         }
-        /**
-         * ADD else if HERE to implement other game systems, 
-         * For New TYPES need to udpate dice-info and enum values
-         * */
-
-        return DIE_ROLL_TYPE.UNKNOWN;
+    
+        if(DS_GLOBALS.FORM_GL_COMPARE){
+            DS_GLOBALS.FORM_GL_COMPARE.render()
+        }
+    
+        if(DS_GLOBALS.FORM_PLAYER_STATS){
+            DS_GLOBALS.FORM_PLAYER_STATS.render();
+        }
     }
 }
 

@@ -11,10 +11,10 @@ class CustomSceneControlToolGlobal
     button= true; 
 
     onClick(){
-        if(GLOBALFORMOBJ){
-            GLOBALFORMOBJ.render(true);
+        if(DS_GLOBALS.FORM_GL_STATS){
+            DS_GLOBALS.FORM_GL_STATS.render(true);
         }else{
-            GLOBALFORMOBJ = new GlobalStatusPage().render(true);
+            DS_GLOBALS.FORM_GL_STATS = new GlobalStatusPage().render(true);
         } 
     }
 
@@ -34,13 +34,14 @@ class CustomSceneControlToolCompare
     button= true; 
 
     onClick(){
+        let canSeePlayerData = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_PLAYERS);
         if(canSeePlayerData){
             //Do nothing, Dont allow players to view player data if setting is set
             ui.notifications.warn("No Accesss to Player Data, Ask GM For Permission");
-        }else if(GLOBALCOMPAREPLAYERSFORMOBJ){
-            GLOBALCOMPAREPLAYERSFORMOBJ.render(true);
+        }else if(DS_GLOBALS.FORM_GL_COMPARE){
+            DS_GLOBALS.FORM_GL_COMPARE.render(true);
         }else{
-            GLOBALCOMPAREPLAYERSFORMOBJ = new ComparePlayerStatusPage().render(true);
+            DS_GLOBALS.FORM_GL_COMPARE = new ComparePlayerStatusPage().render(true);
         } 
     }
 
@@ -61,8 +62,8 @@ class CustomSceneControlToolPlayer
     associatedPlayerId = null;
 
     onClick(){
-        let canSeeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM);
-        let canSeePlayerData = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_PLAYERS);
+        let canSeeGM = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.SETTINGS.PLAYERS_SEE_GM);
+        let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.SETTINGS.PLAYERS_SEE_PLAYERS);
         let amIGM = game.users.get(game.userId)?.isGM;
         let isThisGMrolls = game.users.get(this.associatedPlayerId)?.isGM;
         if(canSeeGM === false && isThisGMrolls && !amIGM){
@@ -82,9 +83,9 @@ class CustomSceneControlToolPlayer
     
             if( game.system.id == 'pf2e' )
             {
-                PLAYERFORMOBJ = new CustomTabFormClass(this.associatedPlayerId).render(true);
+                DS_GLOBALS.FORM_PLAYER_STATS = new CustomTabFormClass(this.associatedPlayerId).render(true);
             }else{
-                PLAYERFORMOBJ = new PlayerStatusPage(this.associatedPlayerId).render(true);
+                DS_GLOBALS.FORM_PLAYER_STATS = new PlayerStatusPage(this.associatedPlayerId).render(true);
             }
         }
     }

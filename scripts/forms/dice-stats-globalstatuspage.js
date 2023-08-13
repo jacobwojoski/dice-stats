@@ -14,7 +14,7 @@ class GlobalStatusPage extends FormApplication{
           popOut: true,
           resizeable: true,
           id: 'global-data',
-          template: TEMPLATES.GLOBALDATAFORM,
+          template: DS_GLOBALS.TEMPLATES.GLOBALDATAFORM,
           userId: game.userId,
           title: 'Global Dice Stats',
         };

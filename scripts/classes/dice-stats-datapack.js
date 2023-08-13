@@ -546,6 +546,7 @@ class DATA_PACKAGER
     static packageGlobalData(playersArry, includeGMrolls)
     {
         //TODO. packedData should be passed By ref so update fn's for that behavior
+        //Well yk what they say. Nothings more perm than a temp solution that works...
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 

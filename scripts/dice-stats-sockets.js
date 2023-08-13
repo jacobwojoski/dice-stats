@@ -13,26 +13,14 @@ Hooks.once("socketlib.ready", () => {
 //Socket fn call. This funtion is triggered by the gm to tell all users that they can 
 //  inclide the blind roll data to the charts
 function pushPlayerBlindRolls_sock(userid) {
-	CLASSOBJ.pushBlindRolls();
-    if(GLOBALFORMOBJ){
-        GLOBALFORMOBJ.render();
-    }
-        
-    if(PLAYERFORMOBJ){
-        PLAYERFORMOBJ.render();
-    }
+	DS_GLOBALS.DS_OBJ_GLOBAL.pushBlindRolls();
+    
+    DICE_STATS_UTILS.refreshForms();
 }
 
 // socket that the gm can call on all players to clear all of their values
 function clearRollData_sock() {
-    CLASSOBJ.clearAllRollData();
-
-    if(GLOBALFORMOBJ){
-        GLOBALFORMOBJ.render();
-    }
-        
-    if(PLAYERFORMOBJ){
-        PLAYERFORMOBJ.render();
-    }
-        
+    DS_GLOBALS.DS_OBJ_GLOBAL.clearAllRollData();
+    
+    DICE_STATS_UTILS.refreshForms();   
 }

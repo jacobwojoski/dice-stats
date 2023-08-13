@@ -108,7 +108,7 @@ Handlebars.registerHelper('diceStats_getCompareDiceArray', function (ary, option
 });
 
 Handlebars.registerHelper('diceStats_getComparePlayerNames', function (ary, options){
-    var includeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
+    var includeGM = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
 
     let retString = "Dice Stats";
     for(let i=0; i<ary.length; i++)

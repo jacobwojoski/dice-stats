@@ -21,8 +21,9 @@ class PLAYER {
             this.GM = false;
         }
 
-        for (let i = 0; i < this.PLAYER_DICE.length; i++) {
-            this.PLAYER_DICE[i] = new DIE_INFO(DIE_MAX[i]);
+        for(let i in DS_GLOBALS.DIE_TYPE.values)
+        {
+            this.PLAYER_DICE[i] = new DIE_INFO(i);
         }
     }
 

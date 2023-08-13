@@ -17,7 +17,7 @@ class PlayerStatusPage extends FormApplication {
           popOut: true,
           resizeable: true,
           id: 'player-data',
-          template: TEMPLATES.PLAYERDATAFORM,
+          template: DS_GLOBALS.TEMPLATES.PLAYERDATAFORM,
           userId: game.userId,
           title: 'Player Dice Stats',
         };
@@ -36,10 +36,10 @@ class PlayerStatusPage extends FormApplication {
     }
 
     getData(){
-        if(CLASSOBJ.ALLPLAYERDATA.has(this.SEL_PLAYER)){
-            let playerObj = CLASSOBJ.ALLPLAYERDATA.get(this.SEL_PLAYER);
+        if(DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.has(this.SEL_PLAYER)){
+            let playerObj = DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(this.SEL_PLAYER);
             var dataObject = DATA_PACKAGER.packagePlayerData(playerObj);
-            dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.PLAYER_DICE_CHECKBOXES];
+            dataObject.IS_DIE_DISPLAYED = [...DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES];
             return dataObject;
         }
         return DATA_PACKAGER.PLAYER_HNDL_INFO;
@@ -56,7 +56,7 @@ class PlayerStatusPage extends FormApplication {
         //Handle button events made on the form
         switch(action){
             case 'refresh':
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'save':
                 title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.save_to_db.title');
@@ -71,7 +71,7 @@ class PlayerStatusPage extends FormApplication {
 
                 if (saveConfirmation) {
                     ui.notifications.warn("Your Data Saved");
-                    CLASSOBJ.saveMyPlayerData();
+                    DS_GLOBALS.DS_OBJ_GLOBAL.saveMyPlayerData();
                 }
                 break;
             case 'loadAllFromDB':
@@ -87,7 +87,7 @@ class PlayerStatusPage extends FormApplication {
 
                 if (loadConfirmation) {
                     ui.notifications.warn("All Data Loaded");
-                    CLASSOBJ.loadAllPlayerData();
+                    DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
                 }
                 break;
             case 'loadYoursFromDB':
@@ -103,7 +103,7 @@ class PlayerStatusPage extends FormApplication {
 
                 if (loadYoursConfirmation) {
                     ui.notifications.warn("Your Data Loaded");
-                    CLASSOBJ.loadYourPlayerData();
+                    DS_GLOBALS.DS_OBJ_GLOBAL.loadYourPlayerData();
                 }
                 break;
             case 'loadOthersFromDB':
@@ -118,7 +118,7 @@ class PlayerStatusPage extends FormApplication {
                     });
 
                 if (loadOthersConfirmation) {
-                    CLASSOBJ.loadOthersPlayerData();
+                    DS_GLOBALS.DS_OBJ_GLOBAL.loadOthersPlayerData();
                 }
                 break;
             case 'clearAllLocalRollData':
@@ -134,13 +134,10 @@ class PlayerStatusPage extends FormApplication {
 
                 if (clearAllLocalConfirmation) {
                     ui.notifications.warn("All Local Data Cleared");
-                    CLASSOBJ.clearAllRollData();
-                    if(PLAYERFORMOBJ){
-                        PLAYERFORMOBJ.render();
+                    DS_GLOBALS.DS_OBJ_GLOBAL.clearAllRollData();
+                    if(DS_GLOBALS.FORM_PLAYER_STATS){
+                        DS_GLOBALS.FORM_PLAYER_STATS.render();
                     }
-                    if(GLOBALFORMOBJ){
-                        GLOBALFORMOBJ.render();
-                    } 
                 }
                 break;
             case 'clearYourLocalRollData':
@@ -157,12 +154,9 @@ class PlayerStatusPage extends FormApplication {
                 if (clearYourLocalConfirmation) {
                     ui.notifications.warn("Your Local Data Cleared");
                     CLASSOBJ.clearUsersRollData(game.user.id);
-                    if(PLAYERFORMOBJ){
-                        PLAYERFORMOBJ.render();
+                    if(DS_GLOBALS.FORM_PLAYER_STATS){
+                        DS_GLOBALS.FORM_PLAYER_STATS.render();
                     }
-                    if(GLOBALFORMOBJ){
-                        GLOBALFORMOBJ.render();
-                    } 
                 }
                 break;
             case 'clearYourDBrollData':
@@ -179,8 +173,8 @@ class PlayerStatusPage extends FormApplication {
                     if (dbcon) {
                         ui.notifications.warn("All Your DB Data Cleared");
                         DB_INTERACTION.clearPlayer(game.user);
-                        if(PLAYERFORMOBJ){
-                            PLAYERFORMOBJ.render();
+                        if(DS_GLOBALS.FORM_PLAYER_STATS){
+                            DS_GLOBALS.FORM_PLAYER_STATS.render();
                         }
                     }
                     break;
@@ -199,48 +193,58 @@ class PlayerStatusPage extends FormApplication {
                     ui.notifications.warn("All Your Data Cleared");
                     CLASSOBJ.clearUsersRollData(game.user.id);
                     DB_INTERACTION.clearPlayer(game.user);
-                    if(PLAYERFORMOBJ){
-                        PLAYERFORMOBJ.render();
+                    if(DS_GLOBALS.FORM_PLAYER_STATS){
+                        DS_GLOBALS.FORM_PLAYER_STATS.render();
                     }
                 }
                 break;
             case 'd2checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[0] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[0];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D2] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D2];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd3checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[1] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[1];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D3] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D3];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd4checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[2] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[2];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D4] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D4];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd6checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[3] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[3];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D6] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D6];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd8checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[4] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[4];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D8] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D8];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd10checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[5] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[5];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D10] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D10];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd12checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[6] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[6];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D12] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D12];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd20checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[7] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[7];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D20] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D20];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             case 'd100checkbox':
-                CLASSOBJ.PLAYER_DICE_CHECKBOXES[8] = !CLASSOBJ.PLAYER_DICE_CHECKBOXES[8];
-                PLAYERFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D100] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D100];
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 break;
             default:
+                DS_GLOBALS.FORM_PLAYER_STATS.render();
                 return;
         }
     }

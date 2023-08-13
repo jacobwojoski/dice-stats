@@ -6,7 +6,7 @@
 //This hook adds buttons to the player list section of the screen if the setting is enabled to do so
 Hooks.on('renderPlayerList', (playerList, html) => {
 
-    if(game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
+    if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
 
     const btn = html.find(`[data-user-id="${game.userId}"]`)
     btn.append(
@@ -14,11 +14,11 @@ Hooks.on('renderPlayerList', (playerList, html) => {
     )
 
     html.on('click', `#globalStatsBtn`, (event) => {
-        GLOBALFORMOBJ = new GlobalStatusPage().render(true);
+        DS_GLOBALS.FORM_GL_STATS = new GlobalStatusPage().render(true);
     })
 
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
-    CLASSOBJ.updateMap();
+    DS_GLOBALS.DS_OBJ_GLOBAL.updateMap();
 
     // This add icon to ALL players on the player list
     const tooltip = game.i18n.localize('DICE_STATS_TEXT.player-stats-button-title')
@@ -32,7 +32,7 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
         //Create button with eacu user id 
         html.on('click', `#${user.id}`, (event) => {
-            let canSeeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM);
+            let canSeeGM = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM);
             let amIGM = game.users.get(game.userId)?.isGM;
             if(canSeeGM === false && user.isGM && !amIGM){
                 //do nothing, Dont allow ability to see gm data if setting is off
@@ -41,9 +41,9 @@ Hooks.on('renderPlayerList', (playerList, html) => {
 
                 if( game.system.id == 'pf2e' )
                 {
-                    PLAYERFORMOBJ = new CustomTabFormClass(user.id).render(true);
+                    DS_GLOBALS.FORM_PLAYER_STATS = new CustomTabFormClass(user.id).render(true);
                 }else{
-                    PLAYERFORMOBJ = new PlayerStatusPage(user.id).render(true);
+                    DS_GLOBALS.FORM_PLAYER_STATS = new PlayerStatusPage(user.id).render(true);
                 }
             }
         })
@@ -56,7 +56,7 @@ function midiQolSupport(){
     Hooks.on("midi-qol.RollComplete", (workflow) => {
         //Deal with Attack Rolls
         if(workflow.attackRollCount > 0){
-            let dieType = MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
+            let dieType = DS_GLOBALS.MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
             let isBlind = false;
 
             if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
@@ -77,12 +77,12 @@ function midiQolSupport(){
                 owner = owners[1];
             }
                 
-            CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+            DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(dieType, rolls, owner, isBlind)
         }
             
         //Deal with dmg rolls
         if(workflow.damageRollCount > 0){
-            let dieType = MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
+            let dieType = DS_GLOBALS.MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
             let isBlind = false;
 
             if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
@@ -102,7 +102,7 @@ function midiQolSupport(){
                 owner = owners[1];
             }
                 
-            CLASSOBJ.addRoll(dieType, rolls, owner, isBlind)
+            DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(dieType, rolls, owner, isBlind)
         }
     })
 }
@@ -110,7 +110,7 @@ function midiQolSupport(){
 //Parse chat message when one gets displayed
 Hooks.on('createChatMessage', (chatMessage) => {
     if (chatMessage.isRoll) {
-        CLASSOBJ.parseMessage(chatMessage)
+        DS_GLOBALS.DS_OBJ_GLOBAL.parseMessage(chatMessage)
     }
 });
 
@@ -129,55 +129,53 @@ Hooks.once('init', () => {
 
 // Hook to interact when scenecontrols get created Method used to have a better location to access player data
 Hooks.on("getSceneControlButtons", controls => {
-    
-    if(game && game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS)){
+  
+    // Have Scenecontrol as global obj so its not made everytime scenecontrols gets rerendered (this happens alot)
+    // Create new button on scene control
+    if(DS_GLOBALS.SCENE_CONTROL_BTNS == null){
+
+        // Register a new layer for our button
+        CONFIG.Canvas.layers.diceStats = { layerClass: InteractionLayer, group: 'interface' }
+
+        let playersAsTools = [];
+
+        playersAsTools.push(new CustomSceneControlToolGlobal());
+        playersAsTools.push(new CustomSceneControlToolCompare());
+
+        let string = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.OTHER_ACCESS_BUTTON_ICONS);
+        let icons = string.split(',');
+        let i=0;
+        let defaultIcon = 'fas fa-dice-d20'
         
-        // Have Scenecontrol as global obj so its not made everytime scenecontrols gets rerendered (this happens alot)
-        // Create new button on scene control
-        if(GLOBALSCENECONTROLSOBJ == null){
+        //Create sub button for each player
+        //Add players custom icons
+        for(let user of game.users){
+            if(!user){return;}
 
-            // Register a new layer for our button
-            CONFIG.Canvas.layers.diceStats = { layerClass: InteractionLayer, group: 'interface' }
-
-            let playersAsTools = [];
-
-            playersAsTools.push(new CustomSceneControlToolGlobal());
-            playersAsTools.push(new CustomSceneControlToolCompare());
-
-            let string = game.settings.get(MODULE_ID_DS,SETTINGS.OTHER_ACCESS_BUTTON_ICONS);
-            let icons = string.split(',');
-            let i=0;
-            let defaultIcon = 'fas fa-dice-d20'
-            
-            //Create sub button for each player
-            //Add players custom icons
-            for(let user of game.users){
-                if(!user){return;}
-
-                if(icons.length > 0 && icons[i])
-                {
-                    icon = icons[i];
-                }else{
-                    icon = defaultIcon;
-                }
-
-                playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, icon));
-                i++;
+            if(icons.length > 0 && icons[i])
+            {
+                icon = icons[i];
+            }else{
+                icon = defaultIcon;
             }
-            
-            //GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
-            //This doesnt work anymore and dont know why. Need to set it as an object 
-            // first, hence the temp var and obj.assign
-            GLOBALSCENECONTROLSOBJ = new Object();
-            var temp = new CustomSceneControl(playersAsTools);
-            Object.assign(GLOBALSCENECONTROLSOBJ, temp);
-        }
 
-        if(GLOBALSCENECONTROLSOBJ!=null && !controls.includes(GLOBALSCENECONTROLSOBJ))
-        {
-            controls.push(GLOBALSCENECONTROLSOBJ);
+            playersAsTools.push(new CustomSceneControlToolPlayer(user.name, user.id, icon));
+            i++;
         }
+        
+        //GLOBALSCENECONTROLSOBJ = new CustomSceneControl(playersAsTools);
+        //This doesnt work anymore and dont know why. Need to set it as an object 
+        // first, hence the temp var and obj.assign
+        DS_GLOBALS.SCENE_CONTROL_BTNS = new Object();
+        var temp = new CustomSceneControl(playersAsTools);
+        Object.assign(DS_GLOBALS.SCENE_CONTROL_BTNS, temp);
     }
+
+    if(DS_GLOBALS.SCENE_CONTROL_BTNS!=null && !controls.includes(DS_GLOBALS.SCENE_CONTROL_BTNS))
+    {
+        controls.push(DS_GLOBALS.SCENE_CONTROL_BTNS);
+    }
+    
 });
 
 //Autoload DB info on connection if setting is checked
