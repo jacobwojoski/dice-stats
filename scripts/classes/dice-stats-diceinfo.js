@@ -213,7 +213,7 @@ class DIE_INFO {
     }
 
     /**
-     * Calculate mean median and mode for the die
+     * Calculate mean median and mode for the die and for each type of roll of that die
      */
     calculate(){
         this.MEAN = DICE_STATS_UTILS.getMean(this.ROLLS);
