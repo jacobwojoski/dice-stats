@@ -1,102 +1,103 @@
-//----GLOBAL VALUES----
-CLASSOBJ = null;
-GLOBALFORMOBJ = null;
-GLOBALCOMPAREPLAYERSFORMOBJ = null;
-PLAYERFORMOBJ = null;
-GLOBALSCENECONTROLSOBJ = null;
-let socket;
+// -----------------------------------------
+// ------------ GLOBAL VALUES --------------
+// -----------------------------------------
 
-//----GLOBAL CONST VALUES----
-const MODULE_ID_DS = 'dice-stats'
+DS_GLOBALS = {
+    /* ------ SYSTEM GLOBALS ------*/
+    GAME_SYSTEM_ID: '',
+    MODULE_SOCKET: null,
+    MODULE_ID: 'dice-stats',
+    MODULE_FLAGS: {
+        ROLLDATAFLAG:'player_roll_data'
+    },
+    MODULE_TEMPLATES: {
+        GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
+        PLAYERDATAFORM:     'modules/dice-stats/templates/dice-stats-player.hbs',
+        COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs'
+    },
+    MODULE_SETTINGS: {
+        PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either     [Def: True]      (Global)
+        PLAYERS_SEE_GM:     'players_see_gm',       //If Players can see GM dice roll stats                    [Def: False]     (Global)
+        PLAYERS_SEE_GLOBAL: 'players_see_global',   //If Players Can  Global Dice Stats                        [Def: True]      (Global)
+        PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global) 
+        SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
+        ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: true] (Global)
+    },
+    /* ------ GLOBAL DS OBJECTS ------- */
+    DS_OBJ_GLOBAL: null,
+    FORM_GL_STATS: null,
+    FORM_GL_COMPARE: null,
+    FORM_PLAYER_STATS: null,
+    SCENE_CONTROL_BTNS: null,
 
-//Get access to handlebars stuff
-const TEMPLATES = {
-    GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
-    PLAYERDATAFORM:     'modules/dice-stats/templates/dice-stats-player.hbs',
-    COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
-    
-    //TODO
-    STREAKCHATMSGFORM:  'modules/dice-stats/templates/dice-stats-global.hbs',
-    ROLLCHATMSGFORM:    'modules/dice-stats/templates/dice-stats-global.hbs'
+    /* ------ UTIL GLOBALS ------- */
+    /**
+     * If more dice types want to be added or number of dice types changed you need to edit the following:
+     * main/NUM_DIE_TYPES
+     * main/DIE_TYPE
+     * main/DIE_MAX
+     * main/MAX_TO_DIE
+     * datapack/PLAYER_HANDL_INFO/DICE_ROLL_DATA
+     * datapack/GLOBAL_HANDL_INFO/DICE_ROLL_DATA
+     */
+    NUM_DIE_TYPES: 9,   //Size of {DIE_TYPE}
+    DIE_TYPE: {         //TYPES of DICE I TRACK
+        D2:     0,
+        D3:     1,
+        D4:     2,
+        D6:     3,
+        D8:     4,
+        D10:    5,
+        D12:    6,
+        D20:    7,
+        D100:   8
+    },
+    NUM_ROLL_TYPES: 5,  //Size of {ROLL_TYPE}
+    ROLL_TYPE: {        //Types of rolls the user can roll
+        ATK: 0,
+        DMG: 1,
+        SAVE: 2,
+        SKILL: 3,
+        /* UNKNOWN includes flat checks. No way to distingush them as there is no "flat check roll. 
+        Its just has no details. Same output as typing /r 1d20 in chat and using result for something. 
+        Its not assigned as Damage or atack ect */
+        UNKNOWN: 4    
+    },
+
+    //Convert {DIE_TYPE} to the max value you can roll on that die
+    MAX_DIE_VALUE: [2,3,4,6,8,10,12,20,100],
+
+    //Convert Max value of Die to Associated {GL_DIE_TYPE}
+    //Used when parcing message. Message sends Number of faces. We need to convert to DIE_TYPE enum
+    MAX_TO_DIE:         new Map(),
 }
 
-const FLAGS = {
-    ROLLDATAFLAG:'player_roll_data'
-}
+//Load {MAP} MAX_TO_DIE To be used in DICE_STATS message parsing
+DS_GLOBALS.GL_MAX_TO_DIE.set(2,   DIE_TYPE.D2);
+DS_GLOBALS.GL_MAX_TO_DIE.set(3,   DIE_TYPE.D3);
+DS_GLOBALS.GL_MAX_TO_DIE.set(4,   DIE_TYPE.D4);
+DS_GLOBALS.GL_MAX_TO_DIE.set(6,   DIE_TYPE.D6);
+DS_GLOBALS.GL_MAX_TO_DIE.set(8,   DIE_TYPE.D8);
+DS_GLOBALS.GL_MAX_TO_DIE.set(10,  DIE_TYPE.D10);
+DS_GLOBALS.GL_MAX_TO_DIE.set(12,  DIE_TYPE.D12);
+DS_GLOBALS.GL_MAX_TO_DIE.set(20,  DIE_TYPE.D20);
+DS_GLOBALS.GL_MAX_TO_DIE.set(100, DIE_TYPE.D100);
 
-//Currently Every user will store everyone elses data
-const SETTINGS = {
-    PLAYERS_SEE_SELF: 'players_see_self',       //If players are allowed to view their stats               [Def: True]      (Global)
-    PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either     [Def: True]      (Global)
-    PLAYERS_SEE_GM:     'players_see_gm',       //If Players can see GM dice roll stats                    [Def: False]     (Global)
-    PLAYERS_SEE_GLOBAL: 'players_see_global',   //If Players Can  Global Dice Stats                        [Def: True]      (Global)
-    PLAYERS_SEE_GM_IN_GLOBAL: 'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global)
-    ENABLE_BLIND_STREAK_MSGS: 'enable_blind_streak_msgs',   //Allow strk from a blind roll to be prnt to chat [Def: false]  (Global) 
-    SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
-    ENABLE_AUTO_DB: 'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: true] (Global)
-    OTHER_ACCESS_BUTTON_ICONS: 'player_access_icons', //Change player icons to use custom       [Default: fas fa-dice-d20]  (Global)
-    ENABLE_CRIT_MSGS: 'enable_crit_msgs',       //Choose what dice print crit msgs              [Default: d20]              (Local)
-    TYPES_OF_CRIT_MSGS: 'types_of_crit_msgs',   //Choose Type of crits to print                 [Default Both]              (Local)
-    ENABLE_STREAK_MSGS: 'enable_streak_msgs',   //Choose what dice to display streak msgs for    [Default : d20]            (Local)
-    ENABLE_OTHER_ACCESS_BUTTONS: 'enable_other_access_buttons' //Enable different access buttons [Defaunt : true]         (Local)
-}
+// -------------------------------------------
+// ---------- END GLOBAL VALUES --------------
+// -------------------------------------------
 
-/**
- * If more dice types want to be added or number of dice types changed you need to edit the following:
- * main/NUM_DIE_TYPES
- * main/DIE_TYPE
- * main/DIE_MAX
- * main/MAX_TO_DIE
- * datapack/PLAYER_HANDL_INFO/DICE_ROLL_DATA
- * datapack/GLOBAL_HANDL_INFO/DICE_ROLL_DATA
- */
-const NUM_DIE_TYPES = 9;
-//Enum of die types,
-const DIE_TYPE = {
-    D2:     0,
-    D3:     1,
-    D4:     2,
-    D6:     3,
-    D8:     4,
-    D10:    5,
-    D12:    6,
-    D20:    7,
-    D100:   8
-}
-
-const NUM_ROLL_TYES = 5;
-//Global 'enum' for types of d20 rolls
-const DIE_ROLL_TYPE = {
-    ATK: 0,
-    DMG: 1,
-    SAVE: 2,
-    SKILL: 3,
-    UNKNOWN: 4   
-}
-
-//use array as way to convert DIE_TYPE enum to Max value of each die
-const DIE_MAX = [2,3,4,6,8,10,12,20,100];
-
-MAX_TO_DIE = new Map();
-MAX_TO_DIE.set(2,   DIE_TYPE.D2);
-MAX_TO_DIE.set(3,   DIE_TYPE.D3);
-MAX_TO_DIE.set(4,   DIE_TYPE.D4);
-MAX_TO_DIE.set(6,   DIE_TYPE.D6);
-MAX_TO_DIE.set(8,   DIE_TYPE.D8);
-MAX_TO_DIE.set(10,  DIE_TYPE.D10);
-MAX_TO_DIE.set(12,  DIE_TYPE.D12);
-MAX_TO_DIE.set(20,  DIE_TYPE.D20);
-MAX_TO_DIE.set(100, DIE_TYPE.D100);
-//---- END GLOBAL CONST ----
-
+//Were using this class as a singleton although its not quite set up correctly as one. 
 class DiceStatsTracker {
-    ALLPLAYERDATA;  //Map of all Players <PlayerID, PLAYER> 
+    AM_I_GM = false;
 
-    ID = 'dice-stats'
-    IMGM = false;
-    SYSTEM;
-    PLAYER_DICE_CHECKBOXES = [];
-    GLOBAL_DICE_CHECKBOXES = [];
+    /*User Player ID to Get player info*/
+    PLAYER_DATA_MAP =    new Map();
+
+    PLAYER_STATS_FORM_DIE_CHECKBOXES =   [];
+    GLOBAL_STATS_FORM_DIE_CHECKBOXES =   [];
+    COMPARISON_FORM_DIE_CHECKBOXES =     [];
+    COMPARISON_FORM_PLAYER_CHECKBOXES =  [];
 
     /**
      * Update global map to add a key value pair for every user.
@@ -111,20 +112,19 @@ class DiceStatsTracker {
         }
     }
 
-    constructor(){
-        //Get Settings and Systtem Info
-        // Store the current system, for settings purposes. It has to be set here, and not in the parent
-        // class, because the system needs to initialize on foundry boot up before we can get its id
-        this.SYSTEM = `${game.system.id}`
-        this.ALLPLAYERDATA = new Map();
-        
-        this.PLAYER_DICE_CHECKBOXES = new Array(NUM_DIE_TYPES);
-        this.GLOBAL_DICE_CHECKBOXES = new Array(NUM_DIE_TYPES);
-        this.PLAYER_DICE_CHECKBOXES.fill(true);
-        this.GLOBAL_DICE_CHECKBOXES.fill(true);
+    updateComparisonFormCheckboxes(){
+        let numPlayers = game.users.length;
+        this.COMPARISON_FORM_CHECKBOXES = new Array(numPlayers);
+        this.COMPARISON_FORM_CHECKBOXES.fill(true);
+    }
+
+    /**
+     * [Create / Add] Mod settings
+     */
+    loadModuleSettings(){
 
         // A setting to determine whether players can see gm data
-        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_GM, {
+        game.settings.register(DS_GLOBALS.MODULE_ID, DS_GLOBALS.SETTINGS.PLAYERS_SEE_GM, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_GM}.Name`,
             default: false,
             type: Boolean,
@@ -195,47 +195,35 @@ class DiceStatsTracker {
             hint: game.i18n.localize(`DICE_STATS_TEXT.settings.${SETTINGS.OTHER_ACCESS_BUTTON_ICONS}.Hint`),
         })
 
-        /*
-        // A setting to determine whether players can see their own data
-        game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_SELF, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_SELF}.Name`,
-            default: true,
-            type: Boolean,
-            scope: 'world', //world = db, client = local
-            config: true,   // show in module config
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_SELF}.Hint`,
-        })
-
-        // A setting to determine whether players can see other players data
+        // A setting to limit players to only see global stats
         game.settings.register(this.ID, SETTINGS.PLAYERS_SEE_PLAYERS, {
             name: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Name`,
             default: true,
             type: Boolean,
-            scope: 'world',
-            config: true,
+            scope: 'world', //world = db, client = local
+            config: true,   // show in module config
             hint: `DICE_STATS_TEXT.settings.${SETTINGS.PLAYERS_SEE_PLAYERS}.Hint`,
         })
+    }
 
-        // A setting to determine whether players can see streaks at all
-        game.settings.register(this.ID, SETTINGS.DISABLE_STREAKS, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.DISABLE_STREAKS}.Name`,
-            default: true,
-            type: Boolean,
-            scope: 'world',
-            config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.DISABLE_STREAKS}.Hint`
-        })
+    constructor(){
+        //Get Settings and Systtem Info
+        // Store the current system, for settings purposes. It has to be set here, and not in the parent
+        // class, because the system needs to initialize on foundry boot up before we can get its id
+        DS_GLOBALS.GAME_SYSTEM_ID = `${game.system.id}`;
+        this.PLAYER_DATA_MAP = new Map();
+        
+        this.PLAYER_STATS_FORM_DIE_CHECKBOXES =   new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        this.GLOBAL_STATS_FORM_DIE_CHECKBOXES =   new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        this.COMPARISON_FORM_DIE_CHECKBOXES =     new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        // This can only be update when game system is ready to know player count
+        //COMPARISON_FORM_PLAYER_CHECKBOXES =  []; 
 
-        // A setting to determine whether players can see a streak due to blind roll (default of No)
-        game.settings.register(this.ID, SETTINGS.SEE_BLIND_STREAK, {
-            name: `DICE_STATS_TEXT.settings.${SETTINGS.SEE_BLIND_STREAK}.Name`,
-            default: false,
-            type: Boolean,
-            scope: 'world',
-            config: true,
-            hint: `DICE_STATS_TEXT.settings.${SETTINGS.SEE_BLIND_STREAK}.Hint`
-        })
-        */
+        this.PLAYER_STATS_FORM_DIE_CHECKBOXES.fill(0);
+        this.GLOBAL_STATS_FORM_DIE_CHECKBOXES.fill(0);
+        this.COMPARISON_FORM_DIE_CHECKBOXES.fill(0);
+
+        loadModuleSettings();
     }
 
     /**

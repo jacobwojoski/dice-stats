@@ -59,10 +59,15 @@ class CustomSceneControlToolPlayer
 
     onClick(){
         let canSeeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM);
+        let canSeePlayerData = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_PLAYERS);
         let amIGM = game.users.get(game.userId)?.isGM;
+
         if(canSeeGM === false && game.user.isGM && !amIGM){
             //do nothing, Dont allow ability to see gm data if setting is off
             ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
+        }else if(canSeePlayerData){
+            //Do nothing, Dont allow players to view player data if setting is set
+            ui.notifications.warn("No Accesss to Player Data, Ask GM For Permission");
         }else{
             if( game.system.id == 'pf2e' )
             {

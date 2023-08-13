@@ -5,6 +5,7 @@
 //Ex, D20 roll was 16 -> Rolls[(16-1)]++;
 class DIE_INFO {
     TYPE =          0;  //Type of die <DIE_TYPE> varable
+    MAX =           0;  //MAX Value On Die , ex 6, 10, 12, 20
     TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
     BLIND_ROLLS = [];

@@ -180,11 +180,13 @@ Hooks.on("getSceneControlButtons", controls => {
     }
 });
 
-//controls[0].tools.push(newControl);
 //Autoload DB info on connection if setting is checked
 Hooks.once('ready', () => {
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
     CLASSOBJ.updateMap();
+
+    //Comparison form needs player list which needs to wait for game to be in ready state.
+    CLASSOBJ.updateComparisonFormCheckboxes() 
 
     if(game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB)) 
     {
