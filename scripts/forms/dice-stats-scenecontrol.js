@@ -34,7 +34,7 @@ class CustomSceneControlToolCompare
     button= true; 
 
     onClick(){
-        let canSeePlayerData = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_PLAYERS);
+        let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS);
         if(canSeePlayerData){
             //Do nothing, Dont allow players to view player data if setting is set
             ui.notifications.warn("No Accesss to Player Data, Ask GM For Permission");
@@ -75,10 +75,10 @@ class CustomSceneControlToolPlayer
         }else{
             
             //Delete OLD OBJ before making new one (Other objects are singletons so delete is not needed)
-            if(DS_GLOBAL.FORM_PLAYER_STATS)
+            if(DS_GLOBALS.FORM_PLAYER_STATS)
             {
-                DS_GLOBAL.FORM_PLAYER_STATS.render(false);
-                delete DS_GLOBAL.FORM_PLAYER_STATS
+                DS_GLOBALS.FORM_PLAYER_STATS.render(false);
+                delete DS_GLOBALS.FORM_PLAYER_STATS
             }
     
             if( game.system.id == 'pf2e' )

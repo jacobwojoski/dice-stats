@@ -116,7 +116,7 @@ Hooks.on('createChatMessage', (chatMessage) => {
 
 // Initialize dialog and settings on foundry boot up
 Hooks.once('init', () => {
-    CLASSOBJ = new DiceStatsTracker();
+    DS_GLOBALS.DS_OBJ_GLOBAL = new DiceStatsTracker();
     DB_INTERACTION.createDB();
 
     //Updates for Other system support. 
@@ -180,15 +180,17 @@ Hooks.on("getSceneControlButtons", controls => {
 
 //Autoload DB info on connection if setting is checked
 Hooks.once('ready', () => {
+    DS_GLOBALS.GAME_SYSTEM_ID = `${game.system.id}`;
+
     //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
-    CLASSOBJ.updateMap();
+    DS_GLOBALS.DS_OBJ_GLOBAL.updateMap();
 
     //Comparison form needs player list which needs to wait for game to be in ready state.
-    CLASSOBJ.updateComparisonFormCheckboxes() 
+    DS_GLOBALS.DS_OBJ_GLOBAL.updateComparisonFormCheckboxes() 
 
-    if(game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB)) 
+    if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
     {
-        CLASSOBJ.loadAllPlayerData();
+        DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
     }
 });
 

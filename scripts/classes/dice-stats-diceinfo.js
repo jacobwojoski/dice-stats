@@ -162,7 +162,7 @@ class DIE_INFO {
         this.ROLL_COUNTERS[rollType] ++;
         this.updateStreak(roll, isBlind)
 
-        var dontHideBlindRolls = game.settings.get(MODULE_ID_DS,SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE);
+        var dontHideBlindRolls = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE);
         if(!isBlind || dontHideBlindRolls){
             this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
         }else{

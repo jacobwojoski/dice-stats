@@ -188,7 +188,7 @@ class DATA_PACKAGER
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 
-        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB);
+        packedData.AUTO_DB_ACTIVE = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB);
 
         packedData.IS_DIE_DISPLAYED = new Array(9);
         packedData.IS_DIE_DISPLAYED.fill(true);
@@ -550,7 +550,7 @@ class DATA_PACKAGER
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 
-        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB);
+        packedData.AUTO_DB_ACTIVE = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB);
         
         packedData = this.setGlobalDefaultData(packedData);
         
@@ -764,81 +764,6 @@ class DATA_PACKAGER
         handlebarsData.D20_ROLL_DATA_20 = [];
 
         handlebarsData.IS_DIE_DISPLAYED = [];
-
-        // handlebarsData.D2_ROLL_DATA_1.length = 0;
-        // handlebarsData.D2_ROLL_DATA_2.length = 0;
-
-        // handlebarsData.D3_ROLL_DATA_1.length = 0;
-        // handlebarsData.D3_ROLL_DATA_2.length = 0;
-        // handlebarsData.D3_ROLL_DATA_3.length = 0;
-
-        // handlebarsData.D4_ROLL_DATA_1.length = 0;
-        // handlebarsData.D4_ROLL_DATA_2.length = 0;
-        // handlebarsData.D4_ROLL_DATA_3.length = 0;
-        // handlebarsData.D4_ROLL_DATA_4.length = 0;
-
-        // handlebarsData.D6_ROLL_DATA_1.length = 0;
-        // handlebarsData.D6_ROLL_DATA_2.length = 0;
-        // handlebarsData.D6_ROLL_DATA_3.length = 0;
-        // handlebarsData.D6_ROLL_DATA_4.length = 0;
-        // handlebarsData.D6_ROLL_DATA_5.length = 0;
-        // handlebarsData.D6_ROLL_DATA_6.length = 0;
-
-        // handlebarsData.D8_ROLL_DATA_1.length = 0;
-        // handlebarsData.D8_ROLL_DATA_2.length = 0;
-        // handlebarsData.D8_ROLL_DATA_3.length = 0;
-        // handlebarsData.D8_ROLL_DATA_4.length = 0;
-        // handlebarsData.D8_ROLL_DATA_5.length = 0;
-        // handlebarsData.D8_ROLL_DATA_6.length = 0;
-        // handlebarsData.D8_ROLL_DATA_7.length = 0;
-        // handlebarsData.D8_ROLL_DATA_8.length = 0;
-
-        // handlebarsData.D10_ROLL_DATA_1.length = 0;
-        // handlebarsData.D10_ROLL_DATA_2.length = 0;
-        // handlebarsData.D10_ROLL_DATA_3.length = 0;
-        // handlebarsData.D10_ROLL_DATA_4.length = 0;
-        // handlebarsData.D10_ROLL_DATA_5.length = 0;
-        // handlebarsData.D10_ROLL_DATA_6.length = 0;
-        // handlebarsData.D10_ROLL_DATA_7.length = 0;
-        // handlebarsData.D10_ROLL_DATA_8.length = 0;
-        // handlebarsData.D10_ROLL_DATA_9.length = 0;
-        // handlebarsData.D10_ROLL_DATA_10.length = 0;
-
-        // handlebarsData.D12_ROLL_DATA_1.length = 0;
-        // handlebarsData.D12_ROLL_DATA_2.length = 0;
-        // handlebarsData.D12_ROLL_DATA_3.length = 0;
-        // handlebarsData.D12_ROLL_DATA_4.length = 0;
-        // handlebarsData.D12_ROLL_DATA_5.length = 0;
-        // handlebarsData.D12_ROLL_DATA_6.length = 0;
-        // handlebarsData.D12_ROLL_DATA_7.length = 0;
-        // handlebarsData.D12_ROLL_DATA_8.length = 0;
-        // handlebarsData.D12_ROLL_DATA_9.length = 0;
-        // handlebarsData.D12_ROLL_DATA_10.length = 0;
-        // handlebarsData.D12_ROLL_DATA_11.length = 0;
-        // handlebarsData.D12_ROLL_DATA_12.length = 0;
-
-        // handlebarsData.D20_ROLL_DATA_1.length = 0;
-        // handlebarsData.D20_ROLL_DATA_2.length = 0;
-        // handlebarsData.D20_ROLL_DATA_3.length = 0;
-        // handlebarsData.D20_ROLL_DATA_4.length = 0;
-        // handlebarsData.D20_ROLL_DATA_5.length = 0;
-        // handlebarsData.D20_ROLL_DATA_6.length = 0;
-        // handlebarsData.D20_ROLL_DATA_7.length = 0;
-        // handlebarsData.D20_ROLL_DATA_8.length = 0;
-        // handlebarsData.D20_ROLL_DATA_9.length = 0;
-        // handlebarsData.D20_ROLL_DATA_10.length = 0;
-        // handlebarsData.D20_ROLL_DATA_11.length = 0;
-        // handlebarsData.D20_ROLL_DATA_12.length = 0;
-        // handlebarsData.D20_ROLL_DATA_13.length = 0;
-        // handlebarsData.D20_ROLL_DATA_14.length = 0;
-        // handlebarsData.D20_ROLL_DATA_15.length = 0;
-        // handlebarsData.D20_ROLL_DATA_16.length = 0;
-        // handlebarsData.D20_ROLL_DATA_17.length = 0;
-        // handlebarsData.D20_ROLL_DATA_18.length = 0;
-        // handlebarsData.D20_ROLL_DATA_19.length = 0;
-        // handlebarsData.D20_ROLL_DATA_20.length = 0;
-
-        //handlebarsData.IS_DIE_DISPLAYED.fill(0);
 
         handlebarsData.D2_ROLL_DATA_1.push('1'); 
         handlebarsData.D2_ROLL_DATA_2.push('2');
