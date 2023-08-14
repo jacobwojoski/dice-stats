@@ -18,11 +18,9 @@ class DB_INTERACTION
         let objCpy = Object.assign({},playerInfo);
         if(userid)
         {
-            game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID,DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
+            game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
         }
     }
-
-
 
     /**
      * Method used to load all players info from the db

@@ -3,53 +3,6 @@
 //===================== HOOKS SHIT =========================
 //==========================================================
 
-//This hook adds buttons to the player list section of the screen if the setting is enabled to do so
-Hooks.on('renderPlayerList', (playerList, html) => {
-
-    if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_OTHER_ACCESS_BUTTONS) == true){return;}
-
-    const btn = html.find(`[data-user-id="${game.userId}"]`)
-    btn.append(
-        `<button type="button" title='Global Stats' class="open-player-stats-button flex0" id="globalStatsBtn"><i class="fa-solid fa-earth-americas"></i></button>`
-    )
-
-    html.on('click', `#globalStatsBtn`, (event) => {
-        DS_GLOBALS.FORM_GL_STATS = new GlobalStatusPage().render(true);
-    })
-
-    //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
-    DS_GLOBALS.DS_OBJ_GLOBAL.updateMap();
-
-    // This add icon to ALL players on the player list
-    const tooltip = game.i18n.localize('DICE_STATS_TEXT.player-stats-button-title')
-    for (let user of game.users) {
-
-        //add user ID to associated button
-        const buttonPlacement = html.find(`[data-user-id="${user.id}"]`)
-        buttonPlacement.append(
-            `<button type="button" title='${tooltip}' class="open-player-stats-button flex0" id="${user.id}"><i class="fas fa-dice-d20"></i></button>`
-        )
-
-        //Create button with eacu user id 
-        html.on('click', `#${user.id}`, (event) => {
-            let canSeeGM = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM);
-            let amIGM = game.users.get(game.userId)?.isGM;
-            if(canSeeGM === false && user.isGM && !amIGM){
-                //do nothing, Dont allow ability to see gm data if setting is off
-                ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
-            }else{
-
-                if( game.system.id == 'pf2e' )
-                {
-                    DS_GLOBALS.FORM_PLAYER_STATS = new CustomTabFormClass(user.id).render(true);
-                }else{
-                    DS_GLOBALS.FORM_PLAYER_STATS = new PlayerStatusPage(user.id).render(true);
-                }
-            }
-        })
-    } 
-})
-
 //This hook is used to change how we deal with some midiqol settings 
 function midiQolSupport(){
     /*Add Hook for Midi-QoL */

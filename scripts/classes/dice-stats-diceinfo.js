@@ -55,10 +55,10 @@ class DIE_INFO {
         this.BLIND_ROLLS = new Array(this.MAX);
         this.BLIND_ROLLS.fill(0);
         
-        this.ROLL_COUNTERS = new Array(DS_GLOBALS.NUM_ROLL_TYES);
-        this.MEANS = new Array(DS_GLOBALS.NUM_ROLL_TYES);
-        this.MEDIANS = new Array(DS_GLOBALS.NUM_ROLL_TYES);
-        this.MODES = new Array(DS_GLOBALS.NUM_ROLL_TYES);
+        this.ROLL_COUNTERS = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
+        this.MEANS = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
+        this.MEDIANS = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
+        this.MODES = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
 
         this.ATK_ROLLS = new Array(this.MAX);
         this.DMG_ROLLS = new Array(this.MAX);
@@ -155,7 +155,7 @@ class DIE_INFO {
      * A roll was made with this die so update the value that was rolled
      * @param {int} roll - value of roll 
      * @param {bool} isBlind 
-     * @param {DIE_ROLL_TYPE} rollType
+     * @param {ROLL_TYPE} rollType
      */
     addRoll(roll, isBlind, rollType){
         this.TOTAL_ROLLS++;
@@ -172,35 +172,35 @@ class DIE_INFO {
         //Add roll to sub type array
         switch(rollType)
         {
-            case DS_GLOBALS.DIE_ROLL_TYPE.ATK :
+            case DS_GLOBALS.ROLL_TYPE.ATK :
                 if(isBlind){
                     this.ATK_ROLLS_BLIND[roll-1] = this.ATK_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.ATK_ROLLS[roll-1] = this.ATK_ROLLS[roll-1]+1;
                 }
                 break;
-            case DS_GLOBALS.DIE_ROLL_TYPE.DMG :
+            case DS_GLOBALS.ROLL_TYPE.DMG :
                 if(isBlind){
                     this.DMG_ROLLS_BLIND[roll-1] = this.DMG_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.DMG_ROLLS[roll-1] = this.DMG_ROLLS[roll-1]+1;
                 }
                 break;
-            case DS_GLOBALS.DIE_ROLL_TYPE.SAVE :
+            case DS_GLOBALS.ROLL_TYPE.SAVE :
                 if(isBlind){
                     this.SAVES_ROLLS_BLIND[roll-1] = this.SAVES_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.SAVES_ROLLS[roll-1] = this.SAVES_ROLLS[roll-1]+1;
                 }
                 break;
-            case DS_GLOBALS.DIE_ROLL_TYPE.SKILL :
+            case DS_GLOBALS.ROLL_TYPE.SKILL :
                 if(isBlind){
                     this.SKILLS_ROLLS_BLIND[roll-1] = this.SKILLS_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.SKILLS_ROLLS[roll-1] = this.SKILLS_ROLLS[roll-1]+1;
                 }
                 break;
-            case DS_GLOBALS.DIE_ROLL_TYPE.UNKNOWN :
+            case DS_GLOBALS.ROLL_TYPE.UNKNOWN :
                 if(isBlind){
                     this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;
                 }else{

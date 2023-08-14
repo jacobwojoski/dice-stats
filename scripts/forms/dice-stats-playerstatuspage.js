@@ -17,7 +17,7 @@ class PlayerStatusPage extends FormApplication {
           popOut: true,
           resizeable: true,
           id: 'player-data',
-          template: DS_GLOBALS.TEMPLATES.PLAYERDATAFORM,
+          template: DS_GLOBALS.MODULE_TEMPLATES.PLAYERDATAFORM,
           userId: game.userId,
           title: 'Player Dice Stats',
         };
@@ -153,7 +153,7 @@ class PlayerStatusPage extends FormApplication {
 
                 if (clearYourLocalConfirmation) {
                     ui.notifications.warn("Your Local Data Cleared");
-                    CLASSOBJ.clearUsersRollData(game.user.id);
+                    DS_GLOBALS.DS_OBJ_GLOBAL.clearUsersRollData(game.user.id);
                     if(DS_GLOBALS.FORM_PLAYER_STATS){
                         DS_GLOBALS.FORM_PLAYER_STATS.render();
                     }
@@ -191,7 +191,7 @@ class PlayerStatusPage extends FormApplication {
 
                 if (dbcon2) {
                     ui.notifications.warn("All Your Data Cleared");
-                    CLASSOBJ.clearUsersRollData(game.user.id);
+                    DS_GLOBALS.DS_OBJ_GLOBAL.clearUsersRollData(game.user.id);
                     DB_INTERACTION.clearPlayer(game.user);
                     if(DS_GLOBALS.FORM_PLAYER_STATS){
                         DS_GLOBALS.FORM_PLAYER_STATS.render();

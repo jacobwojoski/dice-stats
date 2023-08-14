@@ -13,7 +13,7 @@ class ComparePlayerStatusPage extends FormApplication{
             popOut: true,
             resizeable: true,
             id: 'compare-data',
-            template: DS_GLOBALS.TEMPLATES.FORM_GL_COMPARE,
+            template: DS_GLOBALS.MODULE_TEMPLATES.COMPAREFORM,
             userId: game.userId,
             title: 'Compare Player Stats',
         };
@@ -21,6 +21,11 @@ class ComparePlayerStatusPage extends FormApplication{
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
         
         return mergedOptions;
+    }
+
+    constructor(userId, options={}, dataObject = null) {  
+        // the first argument is the object, the second are the options
+        super(userId, options)
     }
 
     /**
@@ -40,14 +45,9 @@ class ComparePlayerStatusPage extends FormApplication{
         }
     }
 
-    constructor()
-    {
-        //EMPTY
-    }
-
     //Every Form has this fn. Its returns data object that handlebars template uses
     getData(){
-        var includeGM = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
+        var includeGM = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
 
         //Convert Map of PLayers to Array
         let playersAry = [];

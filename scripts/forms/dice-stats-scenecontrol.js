@@ -35,7 +35,7 @@ class CustomSceneControlToolCompare
 
     onClick(){
         let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS);
-        if(canSeePlayerData){
+        if(canSeePlayerData === false){
             //Do nothing, Dont allow players to view player data if setting is set
             ui.notifications.warn("No Accesss to Player Data, Ask GM For Permission");
         }else if(DS_GLOBALS.FORM_GL_COMPARE){
@@ -62,14 +62,14 @@ class CustomSceneControlToolPlayer
     associatedPlayerId = null;
 
     onClick(){
-        let canSeeGM = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.SETTINGS.PLAYERS_SEE_GM);
-        let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.SETTINGS.PLAYERS_SEE_PLAYERS);
+        let canSeeGM = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM);
+        let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS);
         let amIGM = game.users.get(game.userId)?.isGM;
         let isThisGMrolls = game.users.get(this.associatedPlayerId)?.isGM;
         if(canSeeGM === false && isThisGMrolls && !amIGM){
             //do nothing, Dont allow ability to see gm data if setting is off
             ui.notifications.warn("No Accesss to GM Data, Ask GM For Permission");
-        }else if(canSeePlayerData){
+        }else if(canSeePlayerData === false){
             //Do nothing, Dont allow players to view player data if setting is set
             ui.notifications.warn("No Accesss to Player Data, Ask GM For Permission");
         }else{

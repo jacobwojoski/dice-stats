@@ -6,7 +6,7 @@ class CustomTabFormClass extends FormApplication
         const defaults = super.defaultOptions;
       
         var player_stats_options_data = { 
-            template: DS_GLOBALS.MODULE_TEMPLATES.TABPLAYERBASE,
+            template: DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYERBASE,
             height: 'auto',
             popOut: true,
             resizeable: true,
@@ -182,7 +182,7 @@ class CustomTabFormClass extends FormApplication
 
                 if (clearYourLocalConfirmation) {
                     ui.notifications.warn("Your Local Data Cleared");
-                    CLASSOBJ.clearUsersRollData(game.user.id);
+                    DS_GLOBALS.DS_OBJ_GLOBAL.clearUsersRollData(game.user.id);
                     if(DS_GLOBALS.FORM_PLAYER_STATS){
                         DS_GLOBALS.FORM_PLAYER_STATS.render();
                     }
@@ -220,7 +220,7 @@ class CustomTabFormClass extends FormApplication
 
                 if (dbcon2) {
                     ui.notifications.warn("All Your Data Cleared");
-                    CLASSOBJ.clearUsersRollData(game.user.id);
+                    DS_GLOBALS.DS_OBJ_GLOBAL.clearUsersRollData(game.user.id);
                     DB_INTERACTION.clearPlayer(game.user);
                     if(DS_GLOBALS.FORM_PLAYER_STATS){
                         DS_GLOBALS.FORM_PLAYER_STATS.render();

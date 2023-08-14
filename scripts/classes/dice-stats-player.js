@@ -2,7 +2,7 @@
 //Class that defines a player. Players are all connected people to server including gm
 //Player has Die Info for each die type they roll & some other misc data
 class PLAYER {
-    PLAYER_DICE = new Array(NUM_DIE_TYPES); //Aray of type<DIE_INFO>
+    PLAYER_DICE = new Array(DS_GLOBALS.NUM_DIE_TYPES); //Aray of type<DIE_INFO>
     USERNAME = '';
     USERID = 0;
     GM = false;
@@ -21,7 +21,7 @@ class PLAYER {
             this.GM = false;
         }
 
-        for(let i in DS_GLOBALS.DIE_TYPE.values)
+        for(let i in Object.values(DS_GLOBALS.DIE_TYPE))
         {
             this.PLAYER_DICE[i] = new DIE_INFO(i);
         }
