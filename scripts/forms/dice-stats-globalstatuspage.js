@@ -50,15 +50,14 @@ class GlobalStatusPage extends FormApplication{
         
         let title_txt;
         let context_txt;
-        let dbconfirmation;
 
         switch(action){
             case 'refresh':
-                GLOBALFORMOBJ.render();
+                DS_GLOBALS.FORM_GL_STATS.render();
                 break;
             case 'pushBlindRolls':
-                socket.executeForEveryone("push_sock", game.userId);
-                GLOBALFORMOBJ.render();
+                DS_GLOBALS.MODULE_SOCKET.executeForEveryone("push_sock", game.userId);
+                DS_GLOBALS.FORM_GL_STATS.render();
                 break;
             case 'clearAllRollData':
                 title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
@@ -72,7 +71,7 @@ class GlobalStatusPage extends FormApplication{
                     });
                 if(allClear){
                     ui.notifications.warn("All Player Data Cleared");
-                    socket.executeForEveryone("clear_sock", {});
+                    DS_GLOBALS.MODULE_SOCKET.executeForEveryone("clear_sock", {});
                     DB_INTERACTION.clearDB();
                 }
                 break;
@@ -89,7 +88,7 @@ class GlobalStatusPage extends FormApplication{
 
                 if (localClear) {
                     ui.notifications.warn("All Local Data Cleared");
-                    socket.executeForEveryone("clear_sock", {});
+                    DS_GLOBALS.MODULE_SOCKET.executeForEveryone("clear_sock", {});
                 }
                 break;
             case 'clearAllDBrollData':
