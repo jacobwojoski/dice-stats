@@ -15,7 +15,10 @@ class DB_INTERACTION
     static saveUserData(playerInfo)
     {
         let userid = playerInfo.USERID;
-        let objCpy = Object.assign({},playerInfo);
+        // Deep Copy rather than shallow copy the player object
+        let objCpy = JSON.parse(JSON.stringify(playerInfo));
+        //let objCpy = Object.assign({},playerInfo);
+        
         if(userid)
         {
             game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);

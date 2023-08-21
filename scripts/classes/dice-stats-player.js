@@ -6,7 +6,7 @@ class PLAYER {
     USERNAME = '';
     USERID = 0;
     GM = false;
-
+    
     constructor(userid){
         if(userid)
         {
