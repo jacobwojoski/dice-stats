@@ -9,7 +9,7 @@ class CustomTabFormClass extends FormApplication
             template: DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYERBASE,
             height: 'auto',
             popOut: true,
-            resizeable: true,
+            resizable: true,
             id: 'player-tabbed-dice-stats',
             userId: game.userId,
             title: 'Player Dice Stats',

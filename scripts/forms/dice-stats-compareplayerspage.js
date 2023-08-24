@@ -11,7 +11,7 @@ class ComparePlayerStatusPage extends FormApplication{
             height: 700,
             width: 1000,
             popOut: true,
-            resizeable: true,
+            resizable: true,
             id: 'compare-data',
             template: DS_GLOBALS.MODULE_TEMPLATES.COMPAREFORM,
             userId: game.userId,

@@ -12,7 +12,7 @@ class GlobalStatusPage extends FormApplication{
         const overrides = {
           height: 'auto',
           popOut: true,
-          resizeable: true,
+          resizable: true,
           id: 'global-data',
           template: DS_GLOBALS.MODULE_TEMPLATES.GLOBALDATAFORM,
           userId: game.userId,
