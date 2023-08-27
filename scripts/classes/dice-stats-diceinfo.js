@@ -5,6 +5,7 @@
 //Ex, D20 roll was 16 -> Rolls[(16-1)]++;
 class DIE_INFO {
     TYPE =          0;  //Type of die <DIE_TYPE> varable
+    MAX =           0;  //MAX Value On Die , ex 6, 10, 12, 20
     TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
     BLIND_ROLLS = [];
@@ -40,56 +41,54 @@ class DIE_INFO {
      * constructor set values to defaults
      * @param {int} dieMax - max value the die can be
      */
-    constructor(dieMax = 100){
-        this.TYPE = MAX_TO_DIE.get(dieMax);
+    constructor(dieType = 9){
+        this.MAX = DS_GLOBALS.MAX_DIE_VALUE[dieType];
+        this.TYPE = dieType;
         this.STREAK_SIZE = -1;
         this.STREAK_INIT = -1;
         this.LONGEST_STREAK = 0;
         this.LONGEST_STREAK_INIT = 0;
 
-        this.ROLLS = new Array(dieMax);
+        this.ROLLS = new Array(this.MAX);
         this.ROLLS.fill(0);
 
-        this.BLIND_ROLLS = new Array(dieMax);
+        this.BLIND_ROLLS = new Array(this.MAX);
         this.BLIND_ROLLS.fill(0);
+        
+        this.ROLL_COUNTERS = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
+        this.MEANS = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
+        this.MEDIANS = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
+        this.MODES = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
 
-        //Constrct different types only for d20's for now
-        if(dieMax == 20)
-        {
-            this.ROLL_COUNTERS = new Array(NUM_ROLL_TYES);
-            this.MEANS = new Array(NUM_ROLL_TYES);
-            this.MEDIANS = new Array(NUM_ROLL_TYES);
-            this.MODES = new Array(NUM_ROLL_TYES);
+        this.ATK_ROLLS = new Array(this.MAX);
+        this.DMG_ROLLS = new Array(this.MAX);
+        this.SAVES_ROLLS = new Array(this.MAX);
+        this.SKILLS_ROLLS = new Array(this.MAX);
+        this.UNKNOWN_ROLLS = new Array(this.MAX);
 
-            this.ATK_ROLLS = new Array(dieMax);
-            this.DMG_ROLLS = new Array(dieMax);
-            this.SAVES_ROLLS = new Array(dieMax);
-            this.SKILLS_ROLLS = new Array(dieMax);
-            this.UNKNOWN_ROLLS = new Array(dieMax);
+        this.ATK_ROLLS_BLIND = new Array(this.MAX);
+        this.DMG_ROLLS_BLIND = new Array(this.MAX);
+        this.SAVES_ROLLS_BLIND = new Array(this.MAX);
+        this.SKILLS_ROLLS_BLIND = new Array(this.MAX);
+        this.UNKNOWN_ROLLS_BLIND = new Array(this.MAX);
 
-            this.ATK_ROLLS_BLIND = new Array(dieMax);
-            this.DMG_ROLLS_BLIND = new Array(dieMax);
-            this.SAVES_ROLLS_BLIND = new Array(dieMax);
-            this.SKILLS_ROLLS_BLIND = new Array(dieMax);
-            this.UNKNOWN_ROLLS_BLIND = new Array(dieMax);
+        this.ROLL_COUNTERS.fill(0);
+        this.MEANS.fill(0);
+        this.MEDIANS.fill(0);
+        this.MODES.fill(0);
 
-            this.ROLL_COUNTERS.fill(0);
-            this.MEANS.fill(0);
-            this.MEDIANS.fill(0);
-            this.MODES.fill(0);
+        this.ATK_ROLLS.fill(0);
+        this.DMG_ROLLS.fill(0);
+        this.SAVES_ROLLS.fill(0);
+        this.SKILLS_ROLLS.fill(0);
+        this.UNKNOWN_ROLLS.fill(0);
 
-            this.ATK_ROLLS.fill(0);
-            this.DMG_ROLLS.fill(0);
-            this.SAVES_ROLLS.fill(0);
-            this.SKILLS_ROLLS.fill(0);
-            this.UNKNOWN_ROLLS.fill(0);
-
-            this.ATK_ROLLS_BLIND.fill(0);
-            this.DMG_ROLLS_BLIND.fill(0);
-            this.SAVES_ROLLS_BLIND.fill(0);
-            this.SKILLS_ROLLS_BLIND.fill(0);
-            this.UNKNOWN_ROLLS_BLIND.fill(0);
-        }
+        this.ATK_ROLLS_BLIND.fill(0);
+        this.DMG_ROLLS_BLIND.fill(0);
+        this.SAVES_ROLLS_BLIND.fill(0);
+        this.SKILLS_ROLLS_BLIND.fill(0);
+        this.UNKNOWN_ROLLS_BLIND.fill(0);
+        
     }
 
     /**
@@ -156,52 +155,52 @@ class DIE_INFO {
      * A roll was made with this die so update the value that was rolled
      * @param {int} roll - value of roll 
      * @param {bool} isBlind 
-     * @param {DIE_ROLL_TYPE} rollType
+     * @param {ROLL_TYPE} rollType
      */
     addRoll(roll, isBlind, rollType){
         this.TOTAL_ROLLS++;
         this.ROLL_COUNTERS[rollType] ++;
         this.updateStreak(roll, isBlind)
 
-        var dontHideBlindRolls = game.settings.get(MODULE_ID_DS,SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE);
+        var dontHideBlindRolls = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.SHOW_BLIND_ROLLS_IMMEDIATE);
         if(!isBlind || dontHideBlindRolls){
             this.ROLLS[roll-1] = this.ROLLS[roll-1]+1;
         }else{
             this.BLIND_ROLLS[roll-1] = this.BLIND_ROLLS[roll-1]+1; 
         }
 
-        //Add roll to proper array
+        //Add roll to sub type array
         switch(rollType)
         {
-            case DIE_ROLL_TYPE.ATK :
+            case DS_GLOBALS.ROLL_TYPE.ATK :
                 if(isBlind){
                     this.ATK_ROLLS_BLIND[roll-1] = this.ATK_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.ATK_ROLLS[roll-1] = this.ATK_ROLLS[roll-1]+1;
                 }
                 break;
-            case DIE_ROLL_TYPE.DMG :
+            case DS_GLOBALS.ROLL_TYPE.DMG :
                 if(isBlind){
                     this.DMG_ROLLS_BLIND[roll-1] = this.DMG_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.DMG_ROLLS[roll-1] = this.DMG_ROLLS[roll-1]+1;
                 }
                 break;
-            case DIE_ROLL_TYPE.SAVE :
+            case DS_GLOBALS.ROLL_TYPE.SAVE :
                 if(isBlind){
                     this.SAVES_ROLLS_BLIND[roll-1] = this.SAVES_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.SAVES_ROLLS[roll-1] = this.SAVES_ROLLS[roll-1]+1;
                 }
                 break;
-            case DIE_ROLL_TYPE.SKILL :
+            case DS_GLOBALS.ROLL_TYPE.SKILL :
                 if(isBlind){
                     this.SKILLS_ROLLS_BLIND[roll-1] = this.SKILLS_ROLLS_BLIND[roll-1]+1;
                 }else{
                     this.SKILLS_ROLLS[roll-1] = this.SKILLS_ROLLS[roll-1]+1;
                 }
                 break;
-            case DIE_ROLL_TYPE.UNKNOWN :
+            case DS_GLOBALS.ROLL_TYPE.UNKNOWN :
                 if(isBlind){
                     this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;
                 }else{

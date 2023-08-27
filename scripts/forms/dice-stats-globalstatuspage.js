@@ -12,9 +12,9 @@ class GlobalStatusPage extends FormApplication{
         const overrides = {
           height: 'auto',
           popOut: true,
-          resizeable: true,
+          resizable: true,
           id: 'global-data',
-          template: TEMPLATES.GLOBALDATAFORM,
+          template: DS_GLOBALS.MODULE_TEMPLATES.GLOBALDATAFORM,
           userId: game.userId,
           title: 'Global Dice Stats',
         };
@@ -24,18 +24,22 @@ class GlobalStatusPage extends FormApplication{
         return mergedOptions;
     }
 
+    constructor(userId, options={}, dataObject = null) {  
+        // the first argument is the object, the second are the options
+        super(userId, options)
+    }
 
     getData(){
-        var includeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
+        var includeGM = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
 
         //Convert Map of PLayers to Array
         let playersAry = [];
-        CLASSOBJ.ALLPLAYERDATA.forEach(value => {
+        DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.forEach(value => {
             playersAry.push(value);
         })
 
         let dataObject = DATA_PACKAGER.packageGlobalData(playersAry, includeGM);
-        dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.GLOBAL_DICE_CHECKBOXES];
+        dataObject.IS_DIE_DISPLAYED = [...DS_GLOBALS.DS_OBJ_GLOBAL.GLOBAL_STATS_FORM_DIE_CHECKBOXES];
         return dataObject;
     }
 
@@ -46,15 +50,14 @@ class GlobalStatusPage extends FormApplication{
         
         let title_txt;
         let context_txt;
-        let dbconfirmation;
 
         switch(action){
             case 'refresh':
-                GLOBALFORMOBJ.render();
+                DS_GLOBALS.FORM_GL_STATS.render();
                 break;
             case 'pushBlindRolls':
-                socket.executeForEveryone("push_sock", game.userId);
-                GLOBALFORMOBJ.render();
+                DS_GLOBALS.MODULE_SOCKET.executeForEveryone("push_sock", game.userId);
+                DS_GLOBALS.FORM_GL_STATS.render();
                 break;
             case 'clearAllRollData':
                 title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
@@ -68,7 +71,7 @@ class GlobalStatusPage extends FormApplication{
                     });
                 if(allClear){
                     ui.notifications.warn("All Player Data Cleared");
-                    socket.executeForEveryone("clear_sock", {});
+                    DS_GLOBALS.MODULE_SOCKET.executeForEveryone("clear_sock", {});
                     DB_INTERACTION.clearDB();
                 }
                 break;
@@ -85,7 +88,7 @@ class GlobalStatusPage extends FormApplication{
 
                 if (localClear) {
                     ui.notifications.warn("All Local Data Cleared");
-                    socket.executeForEveryone("clear_sock", {});
+                    DS_GLOBALS.MODULE_SOCKET.executeForEveryone("clear_sock", {});
                 }
                 break;
             case 'clearAllDBrollData':
@@ -101,7 +104,7 @@ class GlobalStatusPage extends FormApplication{
     
                     if (dbClear) {
                         ui.notifications.warn("All DB Data Cleared");
-                        CLASSOBJ.clear_database();
+                        DS_GLOBALS.DS_OBJ_GLOBAL.clear_database();
                     }
                 break;
             case 'loadAllFromDB':
@@ -117,48 +120,58 @@ class GlobalStatusPage extends FormApplication{
 
                 if (loadConfirmation) {
                     ui.notifications.warn("All Data Loaded");
-                    CLASSOBJ.loadAllPlayerData();
+                    DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
                 }
                 break;
-            case 'd2checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[0];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd3checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[1] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[1];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd4checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[2] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[2];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd6checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[3] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[3];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd8checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[4] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[4];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd10checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[5] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[5];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd12checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[6] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[6];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd20checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[7] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[7];
-                GLOBALFORMOBJ.render();
-                break;
-            case 'd100checkbox':
-                CLASSOBJ.GLOBAL_DICE_CHECKBOXES[8] = !CLASSOBJ.GLOBAL_DICE_CHECKBOXES[8];
-                GLOBALFORMOBJ.render();
-                break;
-            default:
-                return;
-        }
+                case 'd2checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D2] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D2];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd3checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D3] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D3];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd4checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D4] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D4];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd6checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D6] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D6];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd8checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D8] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D8];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd10checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D10] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D10];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd12checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D12] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D12];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd20checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D20] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D20];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                case 'd100checkbox':
+                    DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D100] 
+                        = !DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_STATS_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D100];
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    break;
+                default:
+                    DS_GLOBALS.FORM_PLAYER_STATS.render();
+                    return;
+            }
     }
 
     activateListeners(html) {

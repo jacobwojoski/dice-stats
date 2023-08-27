@@ -1,65 +1,33 @@
 {
     "DICE_STATS_TEXT" : {
         "settings":{
-            "players_see_self": {
-                "Name" : "See YOUR stats?",
-                "Hint" : "If enabled, the player can see their own stats. Recomended On"
-            },
             "players_see_players": {
-                "Name" : "See OTHER players stats?",
-                "Hint" : "If enabled, the player can see other players stats. Reccomended On"
+                "Name" : "See players stats?",
+                "Hint" : "If enabled, the player can see other players stats. Impacts Comparison Screen. Doesn't Impact Global Stats Page.\n Reccomended: On"
             },
             "players_see_gm": {
                 "Name" : "See GM roll data?",
-                "Hint" : "If enabled, the player can see the GM's stats. If you are the GM this is useless. Reccomended Off"
+                "Hint" : "If enabled, the player can see the GM's stats. If you are the GM this is useless. \n Reccomended: Off"
             },
             "players_see_global": {
                 "Name" : "See GLOBAL roll data?",
-                "Hint" : "If enabled, the player can see the global stats. Reccomended On"
+                "Hint" : "If enabled, the player can see the global stats. \n Reccomended: On"
             },
             "players_see_gm_in_global": {
                 "Name" : "See GM Stats In Global Roll Data?",
-                "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacts GM global stats button too)"
-            },
-            "enable_persistant_data": {
-                "Name" : "Enable Database Saving?",
-                "Hint" : "If enabled stats will be saved between sessions"
+                "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacts GM global stats button too) \n Reccomended: off"
             },
             "enable_blind_rolls_immediate": {
                 "Name" : "Allow blind rolls to be immediately added to player stats",
-                "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats"
+                "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats. \n Reccomended: Off"
             },
             "enable_auto_db": {
                 "Name" : "Automatically use DB",
-                "Hint" : "Enabled means rolls will get saved and loaded from DB automatically. Could Negatively Impact Player Performance!!"
-            },
-            "enable_crit_msgs": {
-                "Name" : "Stop All Crit Messages From Being Displayed To chat",
-                "Hint" : "Empty = Disabled | 20, 4 = Crits for d20 and d4's are printed"
-            },
-            "types_of_crit_msgs": {
-                "Name" : "Select Type of Crits to Display",
-                "Hint" : "Choose what crit vales you want to display",
-                "Option 0" : "NA",
-                "Option1" : "Both",
-                "Option2" : "Only Crit Fails",
-                "Option3" : "Only Crit Success"
-            },
-            "enable_streak_msgs": {
-                "Name" : "List Die types to have streaks printed to chat",
-                "Hint" : "Empty = Disabled | 20, 4 = Streaks for d20 and d4's are printed"
-            },
-            "enable_blind_streak_msgs": {
-                "Name" : "See blind streaks",
-                "Hint" : "If a streak has a blind roll in it its not printed to chat unless this is enabled"
-            },
-            "enable_other_access_buttons":{
-                "Name" : "Use Updated Player Access Buttons",
-                "Hint" : "Changes access buttons from the player list to Scene Controls, Uncheck to revert to old buttons"
+                "Hint" : "Enabled means rolls will get saved and loaded from DB automatically. Could Negatively Impact Player Performance. Seems Minimal From Testing. \n Reccomended: On"
             },
             "player_access_icons":{
                 "Name": "Define Players Icons",
-                "Hint": "Used to change player Icons from D-20's to something custom. Check GITHUB for better guide!\nNeed to use https://fontawesome.com/search?o=r&m=free Font Awesome Icons in a comma seperated list. Order matching players in player list \nEX: fa-solid fa-frog, fa-solid fa-circle, fa-solid fa-skull-crossbones"
+                "Hint": "Used to change player Icons from D-20's to something custom. Check GITHUB for better guide!\nNeed to use https://fontawesome.com/search?o=r&m=free Font Awesome Icons in a comma seperated list. Order matching players in player list \n EX: fa-solid fa-frog, fa-solid fa-circle, fa-solid fa-skull-crossbones"
             }
         },
         "both_forms":{

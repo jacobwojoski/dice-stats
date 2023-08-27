@@ -4,9 +4,6 @@
 //==========================================================
 class ComparePlayerStatusPage extends FormApplication{
 
-    COMPARE_PLAYERS_LIST = []; //List of players [{name, id, isChecked}, ...]
-    DIE_DISPLAYED = []; //bool []
-
     static get defaultOptions() {
         const defaults = super.defaultOptions;
       
@@ -14,9 +11,9 @@ class ComparePlayerStatusPage extends FormApplication{
             height: 700,
             width: 1000,
             popOut: true,
-            resizeable: true,
+            resizable: true,
             id: 'compare-data',
-            template: TEMPLATES.COMPAREFORM,
+            template: DS_GLOBALS.MODULE_TEMPLATES.COMPAREFORM,
             userId: game.userId,
             title: 'Compare Player Stats',
         };
@@ -26,6 +23,11 @@ class ComparePlayerStatusPage extends FormApplication{
         return mergedOptions;
     }
 
+    constructor(userId, options={}, dataObject = null) {  
+        // the first argument is the object, the second are the options
+        super(userId, options)
+    }
+
     /**
      * Update isChecked in COMPARE_PLAYERS_LIST[]
      * @param {String} userid User ID Value
@@ -33,7 +35,7 @@ class ComparePlayerStatusPage extends FormApplication{
      */
     swapPlayersChecked(userid)
     {
-        for(let plyr of GLOBALCOMPAREPLAYERSFORMOBJ.COMPARE_PLAYERS_LIST)
+        for(let plyr of DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_PLAYER_CHECKBOXES)
         {
             if(plyr.id == userid)
             {
@@ -43,32 +45,18 @@ class ComparePlayerStatusPage extends FormApplication{
         }
     }
 
-    constructor()
-    {
-        super();
-        this.COMPARE_PLAYERS_LIST.length = 0;
-        this.DIE_DISPLAYED = new Array(8);
-        this.DIE_DISPLAYED.fill(true);
-
-        for(let user of game.users)
-        {
-            let temp = new ComparePlayerObjUtil(user);
-            this.COMPARE_PLAYERS_LIST.push(temp);
-        }
-    }
-
     //Every Form has this fn. Its returns data object that handlebars template uses
     getData(){
-        var includeGM = game.settings.get(MODULE_ID_DS,SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
+        var includeGM = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM_IN_GLOBAL);
 
         //Convert Map of PLayers to Array
         let playersAry = [];
-        CLASSOBJ.ALLPLAYERDATA.forEach(value => {
+        DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.forEach(value => {
             playersAry.push(value);
         })
 
-        let dataObject = DATA_PACKAGER.packageComparePlayerData(this.COMPARE_PLAYERS_LIST, playersAry, includeGM);
-        dataObject.IS_DIE_DISPLAYED = [...this.DIE_DISPLAYED]
+        let dataObject = DATA_PACKAGER.packageComparePlayerData(DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_PLAYER_CHECKBOXES, playersAry, includeGM);
+        dataObject.IS_DIE_DISPLAYED = [...DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES]
 
         //dataObject.IS_DIE_DISPLAYED = [...CLASSOBJ.GLOBAL_DICE_CHECKBOXES];
         return dataObject;
@@ -79,54 +67,64 @@ class ComparePlayerStatusPage extends FormApplication{
         const clickedElement = $(event.currentTarget);
         const action = clickedElement.data().action;
 
-        if(GLOBALCOMPAREPLAYERSFORMOBJ == null){return;}
+        if(DS_GLOBALS.FORM_GL_COMPARE == null){return;}
 
         switch(action){
             case 'refresh':
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd2checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[0] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[0];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D2] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D2];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd3checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[1] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[1];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D3] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D3];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd4checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[2] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[2];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D4] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D4];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd6checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[3] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[3];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D6] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D6];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd8checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[4] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[4];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D8] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D8];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd10checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[5] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[5];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D10] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D10];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd12checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[6] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[6];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D12] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D12];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd20checkbox':
-                GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[7] = !GLOBALCOMPAREPLAYERSFORMOBJ.DIE_DISPLAYED[7];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D20] 
+                    = !DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D20];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             case 'd100checkbox':
-                //this.DIE_DISPLAYED[8] = !this.DIE_DISPLAYED[8];
-                GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                //D100 Not currently on Comparison Screen due to lines not being wide enough
+                //DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D100] = 
+                //!DS_GLOBALS.DS_OBJ_GLOBAL.COMPARISON_FORM_DIE_CHECKBOXES[DS_GLOBALS.DIE_TYPE.D100];
+                DS_GLOBALS.FORM_GL_COMPARE.render();
                 break;
             default:
                 //Check if button was from checking players to compare
-                if(CLASSOBJ.ALLPLAYERDATA.has(action))
+                if(DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.has(action))
                 {
-                    GLOBALCOMPAREPLAYERSFORMOBJ.swapPlayersChecked(action);
-                    GLOBALCOMPAREPLAYERSFORMOBJ.render();
+                    DS_GLOBALS.FORM_GL_COMPARE.swapPlayersChecked(action);
+                    DS_GLOBALS.FORM_GL_COMPARE.render();
                 }
                 return;
         }

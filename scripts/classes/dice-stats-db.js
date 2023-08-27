@@ -15,14 +15,15 @@ class DB_INTERACTION
     static saveUserData(playerInfo)
     {
         let userid = playerInfo.USERID;
-        let objCpy = Object.assign({},playerInfo);
+        // Deep Copy rather than shallow copy the player object
+        let objCpy = JSON.parse(JSON.stringify(playerInfo));
+        //let objCpy = Object.assign({},playerInfo);
+        
         if(userid)
         {
-            game.users.get(userid)?.setFlag(MODULE_ID_DS,'player_roll_data', objCpy);
+            game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
         }
     }
-
-
 
     /**
      * Method used to load all players info from the db
@@ -33,9 +34,9 @@ class DB_INTERACTION
         let user = game.users.get(userId);
         if(user)
         {
-            if(user.getFlag(MODULE_ID_DS,'player_roll_data'))
+            if(user.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG))
             {
-                return user.getFlag(MODULE_ID_DS,'player_roll_data');
+                return user.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG);
             }
         }
         return null;
@@ -115,7 +116,7 @@ class DB_INTERACTION
             tempDieObj.MEDIAN =    dbDieDataObj.MEDIAN;
             tempDieObj.MODE =      dbDieDataObj.MODE;
 
-            if(i == DIE_TYPE.D20)
+            if(i == DS_GLOBALS.DIE_TYPE.D20)
             {
                 tempDieObj.MEANS =          [...dbDieDataObj.MEANS]
                 tempDieObj.MEDIANS =        [...dbDieDataObj.MEDIANS]
@@ -147,9 +148,9 @@ class DB_INTERACTION
         {
             if(aUser)
             {
-                if(aUser.getFlag(MODULE_ID_DS,'player_roll_data'))
+                if(aUser.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG))
                 {
-                    aUser.unsetFlag(MODULE_ID_DS,'player_roll_data');
+                    aUser.unsetFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG);
                 }
             }
         }
@@ -163,9 +164,9 @@ class DB_INTERACTION
     {
         if(user)
         {
-            if(user.getFlag(MODULE_ID_DS,'player_roll_data'))
+            if(user.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG))
             {
-                user.unsetFlag(MODULE_ID_DS,'player_roll_data');
+                user.unsetFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG);
             }
         }
     }

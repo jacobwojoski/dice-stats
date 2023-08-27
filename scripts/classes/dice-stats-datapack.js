@@ -188,7 +188,7 @@ class DATA_PACKAGER
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 
-        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB);
+        packedData.AUTO_DB_ACTIVE = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB);
 
         packedData.IS_DIE_DISPLAYED = new Array(9);
         packedData.IS_DIE_DISPLAYED.fill(true);
@@ -222,16 +222,16 @@ class DATA_PACKAGER
             packedData.S_IS_B[die] = playerInfo.PLAYER_DICE[die].STREAK_ISBLIND;
         }
         
-        packedData.D20_ATK = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].ATK_ROLLS];
-        packedData.D20_DMG = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].DMG_ROLLS];
-        packedData.D20_SAVE = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].SAVES_ROLLS];
-        packedData.D20_SKILL = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].SKILLS_ROLLS];
-        packedData.D20_UNKNOWN = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].UNKNOWN_ROLLS];
+        packedData.D20_ATK = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].ATK_ROLLS];
+        packedData.D20_DMG = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].DMG_ROLLS];
+        packedData.D20_SAVE = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].SAVES_ROLLS];
+        packedData.D20_SKILL = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].SKILLS_ROLLS];
+        packedData.D20_UNKNOWN = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].UNKNOWN_ROLLS];
 
-        packedData.D20_MEAN = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].MEANS];
-        packedData.D20_MEDIAN = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].MEDIANS];
-        packedData.D20_MODE = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].MODES];
-        packedData.D20_ROLLCOUNT = [...playerInfo.PLAYER_DICE[DIE_TYPE.D20].ROLL_COUNTERS];
+        packedData.D20_MEAN = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].MEANS];
+        packedData.D20_MEDIAN = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].MEDIANS];
+        packedData.D20_MODE = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].MODES];
+        packedData.D20_ROLLCOUNT = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].ROLL_COUNTERS];
 
         packedData.BLIND_ROLL_COUNT = playerInfo.getBlindRollsCount();
         return packedData;
@@ -546,10 +546,11 @@ class DATA_PACKAGER
     static packageGlobalData(playersArry, includeGMrolls)
     {
         //TODO. packedData should be passed By ref so update fn's for that behavior
+        //Well yk what they say. Nothings more perm than a temp solution that works...
         let packedData = {};
         Object.assign(packedData, this.PLAYER_HNDL_INFO);
 
-        packedData.AUTO_DB_ACTIVE = game.settings.get(MODULE_ID_DS,SETTINGS.ENABLE_AUTO_DB);
+        packedData.AUTO_DB_ACTIVE = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB);
         
         packedData = this.setGlobalDefaultData(packedData);
         
@@ -763,81 +764,6 @@ class DATA_PACKAGER
         handlebarsData.D20_ROLL_DATA_20 = [];
 
         handlebarsData.IS_DIE_DISPLAYED = [];
-
-        // handlebarsData.D2_ROLL_DATA_1.length = 0;
-        // handlebarsData.D2_ROLL_DATA_2.length = 0;
-
-        // handlebarsData.D3_ROLL_DATA_1.length = 0;
-        // handlebarsData.D3_ROLL_DATA_2.length = 0;
-        // handlebarsData.D3_ROLL_DATA_3.length = 0;
-
-        // handlebarsData.D4_ROLL_DATA_1.length = 0;
-        // handlebarsData.D4_ROLL_DATA_2.length = 0;
-        // handlebarsData.D4_ROLL_DATA_3.length = 0;
-        // handlebarsData.D4_ROLL_DATA_4.length = 0;
-
-        // handlebarsData.D6_ROLL_DATA_1.length = 0;
-        // handlebarsData.D6_ROLL_DATA_2.length = 0;
-        // handlebarsData.D6_ROLL_DATA_3.length = 0;
-        // handlebarsData.D6_ROLL_DATA_4.length = 0;
-        // handlebarsData.D6_ROLL_DATA_5.length = 0;
-        // handlebarsData.D6_ROLL_DATA_6.length = 0;
-
-        // handlebarsData.D8_ROLL_DATA_1.length = 0;
-        // handlebarsData.D8_ROLL_DATA_2.length = 0;
-        // handlebarsData.D8_ROLL_DATA_3.length = 0;
-        // handlebarsData.D8_ROLL_DATA_4.length = 0;
-        // handlebarsData.D8_ROLL_DATA_5.length = 0;
-        // handlebarsData.D8_ROLL_DATA_6.length = 0;
-        // handlebarsData.D8_ROLL_DATA_7.length = 0;
-        // handlebarsData.D8_ROLL_DATA_8.length = 0;
-
-        // handlebarsData.D10_ROLL_DATA_1.length = 0;
-        // handlebarsData.D10_ROLL_DATA_2.length = 0;
-        // handlebarsData.D10_ROLL_DATA_3.length = 0;
-        // handlebarsData.D10_ROLL_DATA_4.length = 0;
-        // handlebarsData.D10_ROLL_DATA_5.length = 0;
-        // handlebarsData.D10_ROLL_DATA_6.length = 0;
-        // handlebarsData.D10_ROLL_DATA_7.length = 0;
-        // handlebarsData.D10_ROLL_DATA_8.length = 0;
-        // handlebarsData.D10_ROLL_DATA_9.length = 0;
-        // handlebarsData.D10_ROLL_DATA_10.length = 0;
-
-        // handlebarsData.D12_ROLL_DATA_1.length = 0;
-        // handlebarsData.D12_ROLL_DATA_2.length = 0;
-        // handlebarsData.D12_ROLL_DATA_3.length = 0;
-        // handlebarsData.D12_ROLL_DATA_4.length = 0;
-        // handlebarsData.D12_ROLL_DATA_5.length = 0;
-        // handlebarsData.D12_ROLL_DATA_6.length = 0;
-        // handlebarsData.D12_ROLL_DATA_7.length = 0;
-        // handlebarsData.D12_ROLL_DATA_8.length = 0;
-        // handlebarsData.D12_ROLL_DATA_9.length = 0;
-        // handlebarsData.D12_ROLL_DATA_10.length = 0;
-        // handlebarsData.D12_ROLL_DATA_11.length = 0;
-        // handlebarsData.D12_ROLL_DATA_12.length = 0;
-
-        // handlebarsData.D20_ROLL_DATA_1.length = 0;
-        // handlebarsData.D20_ROLL_DATA_2.length = 0;
-        // handlebarsData.D20_ROLL_DATA_3.length = 0;
-        // handlebarsData.D20_ROLL_DATA_4.length = 0;
-        // handlebarsData.D20_ROLL_DATA_5.length = 0;
-        // handlebarsData.D20_ROLL_DATA_6.length = 0;
-        // handlebarsData.D20_ROLL_DATA_7.length = 0;
-        // handlebarsData.D20_ROLL_DATA_8.length = 0;
-        // handlebarsData.D20_ROLL_DATA_9.length = 0;
-        // handlebarsData.D20_ROLL_DATA_10.length = 0;
-        // handlebarsData.D20_ROLL_DATA_11.length = 0;
-        // handlebarsData.D20_ROLL_DATA_12.length = 0;
-        // handlebarsData.D20_ROLL_DATA_13.length = 0;
-        // handlebarsData.D20_ROLL_DATA_14.length = 0;
-        // handlebarsData.D20_ROLL_DATA_15.length = 0;
-        // handlebarsData.D20_ROLL_DATA_16.length = 0;
-        // handlebarsData.D20_ROLL_DATA_17.length = 0;
-        // handlebarsData.D20_ROLL_DATA_18.length = 0;
-        // handlebarsData.D20_ROLL_DATA_19.length = 0;
-        // handlebarsData.D20_ROLL_DATA_20.length = 0;
-
-        //handlebarsData.IS_DIE_DISPLAYED.fill(0);
 
         handlebarsData.D2_ROLL_DATA_1.push('1'); 
         handlebarsData.D2_ROLL_DATA_2.push('2');
