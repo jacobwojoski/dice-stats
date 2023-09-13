@@ -13,6 +13,7 @@
   },
   "scripts": [
     "scripts/classes/dice-stats-main.js",
+    "scripts/classes/dice-stats-globals.js",
     "scripts/classes/dice-stats-utils.js",
     "scripts/classes/dice-stats-datapack.js",
     "scripts/classes/dice-stats-db.js",
@@ -40,8 +41,8 @@
     }
   ],
   "socket": true,
-  "version": "1.14.2",
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.14.2.zip",
+  "version": "1.14.3",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.14.3.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
   "readme": "https://github.com/jacobwojoski/dice-stats",

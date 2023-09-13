@@ -1,5 +1,16 @@
 # CHANGELOG  
 
+## [ 1.14.3 ]
+### Updates
+- move constants to own file
+- Updates to readme
+  - Added images for new d20 rolls display
+  - Remove old versions
+
+## [ 1.14.2 ]
+### Fixed
+- Reformat of globals 
+
 ## [ 1.14.1 ]
 ### Added
 - Fixed bug where blind roll setting didn't work correctly

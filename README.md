@@ -1,11 +1,10 @@
 # Dice Stats
 A foundry vtt module to view dice stats (Number of each roll in a Chart! See Below)  
 Currently stats are stored by parsing chat. If the user joins the game late after rolls were made  
-they will only get data from that point on unless **Auto DB** Setting is enabled. Original Idea was from [Catan Online](https://colonist.io/)  
-end-of-game dice stats screen and wanted something similar to let players look at during or the end of a session.   
+they will only get data from that point on unless **Auto DB** Setting is enabled. Original Idea was from [Catan Online](https://colonist.io/) end-of-game dice stats screen and wanted something similar to let players look at during or the end of a session.   
 
 Used Google Charts as a charting library. (MIT License)
-Used [Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker) as a starting point but (MIT License)  
+Used [Roll Tracker Module](https://foundryvtt.com/packages/roll-tracker)(MIT License) as a starting point but  
 Wanted the ability to track multiple dice types. This Basically lead to a full rewrite as I wanted a more OOP appreach for data storage.
 
 ## MISC Design Settings
@@ -20,7 +19,7 @@ The original design philosophy was a way to view SESSION stats. Rolls will alway
 ## DEPENDENCIES
 [socketlib](https://github.com/manuelVo/foundryvtt-socketlib) | 
 [socketlib Foundry Page](https://foundryvtt.com/packages/socketlib)
-Socketlib needs to be active allow GM to tell other users to push blind rolls.
+Socketlib needs to be active to allow GM to tell other users to push blind rolls.
 
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
@@ -47,7 +46,7 @@ Socketlib needs to be active allow GM to tell other users to push blind rolls.
 - Checkboxes to limit which dice types are displayed 
 - Refresh Button To update stats if a new roll is made while screen if open 
 - Total Number of each roll
-- Globa Mean
+- Global Mean
 - Global Median (true-Middle for Odd or left-middle for Even number of rolls)
 - Global Mode
 - Global Longest Streaks (Player Name and Streak Value)
@@ -62,19 +61,13 @@ Tracks multiple dice types. Currently supporting types are:
 [Def: XX] = Default value for setting  
 (Global) & (Local) = setting scope  
 Global Settings are restricted to GM only by default
-- PLAYERS_SEE_SELF -------------- If players are allowed to view their stats -----------[Def: True]     (Global)
 - PLAYERS_SEE_PLAYERS --------- If players cant see self they cant see others either -[Def: True]     (Global)
 - PLAYERS_SEE_GM -------------- If Players can see GM dice roll stats ----------------[Def: False]    (Global)
 - PLAYERS_SEE_GLOBAL --------  If Players Can  Global Dice Stats --------------------[Def: True]     (Global)
 - PLAYERS_SEE_GM_IN_GLOBAL - If GM roll stats get added into global stats ---------[Def: False]    (Global)
-- ENABLE_BLIND_STREAK_MSGS - Allow strk from a blind roll to be prnt to chat ------[Def: false]    (Global) 
-- ENABLE_AUTO_DB - Save And Load Info From DB Automatically On Join and On roll respectively -[Def: true]   (Global)
 - SHOW_BLIND_ROLLS_IMMEDIATE -- let Blind Rolls be added to player stats immediately ---[Def: false] (Global)
-- ENABLE_CRIT_MSGS ------------  Choose what dice print crit msgs ---------------------[Def: d20]      (Local)
-- TYPES_OF_CRIT_MSGS ---------- Choose Type of crits to print ------------------------[Def: Both]     (Local)
-- ENABLE_STREAK_MSGS -------- Choose what dice to display streak msgs for ----------[Def: d20]     (Local)  
-- ENABLE_OTHER_ACCESS_BUTTONS - Move buttons from Playerlist to scene controls ---[Def: true] (Local)
-- OTHER_ACCESS_BUTTON_ICONS - Setting to add custom icons on Scene Controls buttons - [Def: false] (Local)
+- ENABLE_AUTO_DB - Save And Load Info From DB Automatically On Join and On roll respectively -[Def: true]   (Global)
+- OTHER_ACCESS_BUTTON_ICONS - Setting to add custom icons on Scene Controls buttons - [Def: fas fa-dice-d20] (Local)
 
 ## Install  
 If prerelease version is desired the user can add to module folder by hand by placing it in   
@@ -83,7 +76,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 ```  
 ## Usage 
 ### PLAYER ICONS
-- If **Use Other Access Buttons** is enabled the buttons are removed from the player list and are instead added to the SCENE Controls.
+- Must be on a scene to see the die button. Pressing the die button allows the user to open global stats or specific player stats
     - ![Icon Img](https://i.imgur.com/y0IwT0b.png) ![Icon Img 2](https://i.imgur.com/cXyQ1AV.png)
     - Icons for Global and Compare buttons are hard coded and cant be changed
     - The default value is the d20 icon but users can change the players Icons from the D-20 to anything on the font awesome icon website under the free section
@@ -93,11 +86,15 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - EX: Updating the field to `fa-solid fa-book-open-reader, fa-solid fa-dumbbell, fa-solid fa-explosion` as sceen in the following image changes the icons to what I have in my photos (Photo doesnt show full string of icons)
     - ![My Settings Values](https://i.imgur.com/CocZunr.png)
 
-### OLD ICONS
-- View Each Players info by selecting icon next to the player in the bottom left
-  - Press D20 For Player Stats
-  - Press Globe for Global Stats (Should only have 1 globe by clients username)  
-![Player List Buttons](https://i.imgur.com/QhwLQOX.png)
+### PF2E Specific Settings
+- D20 rolls on pf2e get seperated into their different types to specially viewable. The anyone can select **ALL STATS** or **D20 STATS** to switch between the different set of graphs
+- Different D20 Catagory types include
+    - Attack
+    - Damage
+    - Save
+    - Skill
+    - Unknow (All rolls that dont have a label, This includes Flat-Checks)
+    - ![Tabs](https://i.imgur.com/mG96PAd.png)
 
 ### OTHER FEATURES
 - Hideing GM Values from players so they cant cheat to see the GM rolls
@@ -106,7 +103,7 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
   
 - Database Interaction
     - **Automatically use DB** setting will allow users roll data save between session, load immediately on joining, autosave every roll but it could negatively impact performance
-    - If **Automatically use DB** is **Disabled** players can still save and load the info between sessions but they need to do it manually and if they forget leaving and rejoining will clear their data
+    - If **Automatically use DB** is **Disabled** players can still save and load the info between sessions but they need to do it manually. If they forget, leaving and rejoining the session will clear their data
     - ![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
 
 ## FORM PHOTOS
