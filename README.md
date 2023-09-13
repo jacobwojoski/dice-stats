@@ -11,7 +11,7 @@ Wanted the ability to track multiple dice types. This Basically lead to a full r
 - GM's Rolls for player will count as GM Rolls (Unless Midi Qol is active)
 - Blind rolls get tracked but do not get added to results screen unless GM Presses "PUSH BLIND ROLLS" button on Global Stats Display
 - GM Data Does not get added to global stats by default so Players cant use it to cheat and see any of the GM's rolls
-- Database is not automatically used by default (auto DB adding and loading) as its unclear of the performance impact
+- Database is automatically used by default (auto DB adding and loading). its unclear of the performance impact so for games with lower speced player you might want this disabled
 
 ## DESIGN PHILOSOPHY
 The original design philosophy was a way to view SESSION stats. Rolls will always avg out over long periods of time so personaly I only wanted to look at per session data. Because of this the implementation resets stats when leaving in joining. There is now a DB setting if you would like stats to stay between sessions
