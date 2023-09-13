@@ -5,6 +5,7 @@
 - move constants to own file
 - Updates to readme
   - Added images for new d20 rolls display
+  - Added images for comparison screen
   - Remove old versions
 
 ## [ 1.14.2 ]

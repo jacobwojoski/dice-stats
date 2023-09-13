@@ -107,6 +107,9 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
     - ![PLAYER DB](https://i.imgur.com/yrwyJJH.png)
 
 ## FORM PHOTOS
+### Player Comparison Screen
+![Comparison Screen](https://i.imgur.com/VJzKOy8.png)
+
 ### Player D20  
 ![PL D20](https://i.imgur.com/Sszy3bk.png)   
 
