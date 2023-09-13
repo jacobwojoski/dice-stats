@@ -168,8 +168,11 @@ class DiceStatsTracker {
         //If AutoSave is Enabled by GM
         if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
         {
-            //If It was my Roll
-            this.saveMyPlayerData();
+            //If it was my roll save my data to the db
+            if(msg.user.id == game.user.id)
+            {
+                this.saveMyPlayerData();
+            }
         }
     }
 
