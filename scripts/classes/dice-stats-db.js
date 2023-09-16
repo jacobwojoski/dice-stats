@@ -23,6 +23,10 @@ class DB_INTERACTION
         //Save copy into DB
         if(userid)
         {
+            /*
+            * Adding clear to save fn would fix load Error but seems like an unnessicary call
+            * await DB_INTERACTION.clearPlayer(game.user);
+            */
             await game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
         }
     }
@@ -162,13 +166,13 @@ class DB_INTERACTION
      * Method used to clear a specific users data
      * @param {game.user} user
      */
-    static clearPlayer(user)
+    static async clearPlayer(user)
     {
         if(user)
         {
             if(user.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG))
             {
-                user.unsetFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG);
+                await user.unsetFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG);
             }
         }
     }
