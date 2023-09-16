@@ -12,7 +12,7 @@ class DB_INTERACTION
      * Method called to save user info to the db, Can only save your own data!
      * @param {PLAYER} playerInfo 
      */
-    static saveUserData(playerInfo)
+    static async saveUserData(playerInfo)
     {
         // Get Deep Copy rather than shallow copy the player object
         let objCpy = JSON.parse(JSON.stringify(playerInfo));
@@ -23,7 +23,7 @@ class DB_INTERACTION
         //Save copy into DB
         if(userid)
         {
-            game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
+            await game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
         }
     }
 
