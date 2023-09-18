@@ -7,6 +7,8 @@
   - Added images for new d20 rolls display
   - Added images for comparison screen
   - Remove old versions
+  - Updated DB call so now only player rolling should update DB values rather than everyone on every roll
+  - Put comment in on where to fix DB error but dont feel fix is needed. Issue is with setFlag->Update call
 
 ## [ 1.14.2 ]
 ### Fixed

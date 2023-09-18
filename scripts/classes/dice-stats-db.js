@@ -24,7 +24,8 @@ class DB_INTERACTION
         if(userid)
         {
             /*
-            * Adding clear to save fn would fix load Error but seems like an unnessicary call
+            * the underlies update fn that set Flag calls seems to mess up and not update the DB causing the ERROR. 
+            * Uncommenting this should fix it but leaving it out to not interact with DB more than needed
             * await DB_INTERACTION.clearPlayer(game.user);
             */
             await game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
