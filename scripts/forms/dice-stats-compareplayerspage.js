@@ -15,7 +15,7 @@ class ComparePlayerStatusPage extends FormApplication{
             id: 'compare-data',
             template: DS_GLOBALS.MODULE_TEMPLATES.COMPAREFORM,
             userId: game.userId,
-            title: 'Compare Player Stats',
+            title: game.i18n.localize('DICE_STATS_TEXT.compare_data_form.title'),
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);

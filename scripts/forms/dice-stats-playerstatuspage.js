@@ -19,7 +19,7 @@ class PlayerStatusPage extends FormApplication {
           id: 'player-data',
           template: DS_GLOBALS.MODULE_TEMPLATES.PLAYERDATAFORM,
           userId: game.userId,
-          title: 'Player Dice Stats',
+          title: game.i18n.localize('DICE_STATS_TEXT.player_data_form.title'),
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);

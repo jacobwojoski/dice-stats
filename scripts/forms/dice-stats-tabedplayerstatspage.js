@@ -12,7 +12,7 @@ class CustomTabFormClass extends FormApplication
             resizable: true,
             id: 'player-tabbed-dice-stats',
             userId: game.userId,
-            title: 'Player Dice Stats',
+            title: game.i18n.localize('DICE_STATS_TEXT.player_data_form.title'),
             tabs: [
                 {   navSelector: ".tabs", 
                     contentSelector: ".content", 
@@ -48,12 +48,12 @@ class CustomTabFormClass extends FormApplication
             tabs: [
                 { 
                     label: "player-stats",
-                    title: "All Dice Stats",
+                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.section_headings.all'),
                     content: "<em>Fancy tab1 content.</em>"
                 },
                 { 
                     label: "player-stats-d20",
-                    title: "D-20 Stats",
+                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.section_headings.d20'),
                     content: "<em>Fancy tab2 content.</em>",
                     d20: true
                 }
