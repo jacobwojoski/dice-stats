@@ -16,7 +16,7 @@ class GlobalStatusPage extends FormApplication{
           id: 'global-data',
           template: DS_GLOBALS.MODULE_TEMPLATES.GLOBALDATAFORM,
           userId: game.userId,
-          title: 'Global Dice Stats',
+          title: game.i18n.localize('DICE_STATS_TEXT.global_data_form.title'),
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);

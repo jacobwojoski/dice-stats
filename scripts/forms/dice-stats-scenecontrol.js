@@ -2,7 +2,7 @@
 class CustomSceneControlToolGlobal 
 {
     name = 'Global';
-    title = 'Global Dice Stats';
+    title = game.i18n.localize('DICE_STATS_TEXT.global_data_form.button');
     icon = 'fa-solid fa-earth-americas';
 
     visible= true;
@@ -25,7 +25,7 @@ class CustomSceneControlToolGlobal
 class CustomSceneControlToolCompare
 {
     name = 'Compare';
-    title = 'Compare Players';
+    title = game.i18n.localize('DICE_STATS_TEXT.compare_data_form.button');
     icon = 'fa-solid fa-users-line';
 
     visible= true;
@@ -104,7 +104,7 @@ class CustomSceneControl
 {
     activeTool = '';
     name = 'dstats';
-    title = 'Dice Stats';
+    title = game.i18n.localize('DICE_STATS_TEXT.title');
     layer = 'diceStats';
     icon = 'fas fa-dice-d20';
     visible = true;

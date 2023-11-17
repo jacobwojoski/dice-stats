@@ -1,5 +1,6 @@
 {
     "DICE_STATS_TEXT" : {
+        "title": "Dice Stats",
         "settings":{
             "players_see_players": {
                 "Name" : "See players stats?",
@@ -43,6 +44,7 @@
                 "d100": "D-100" 
             },
             "section_headings":{
+                "all": "All Dice Stats",
                 "d2": "D-2 (COIN) Stats",
                 "d3": "D-3 (Fate) Stats", 
                 "d4": "D-4 Stats", 
@@ -62,7 +64,8 @@
             "refresh_btn":  "Refresh Stats"
         },
         "global_data_form":{
-            "title":        "GLOBAL Roll Data",
+            "title":        "Global Dice Stats",
+            "button": "Global Dice Stats",
             "blind_rolls":  "There Are {ui_rollcount} Blind rolls between all players",
             "blind_roll_btn": "Push Players Blind Rolls to Graph",
             "clear_all_btn": "Clear All Roll Data",
@@ -97,8 +100,9 @@
             "no_streak_label":"No Streak was made"
         },
         "player_data_form":{
+            "title": "Player Dice Stats",
             "blind_rolls": "You have {ui_rolls} Blind Rolls Which are Not Tracked. Ask GM to Push Rolls",
-            "player_name":  "Roll Data",
+            "player_name":  "{ui_player} Roll Data",
             "streak":       "Streak Data (Sequential incrementing rolls):",
             "no_streak":    "No Streak was made",
             "streak_blind": "Streak Includes a Blind Roll, Data Hidden",
@@ -110,6 +114,14 @@
             "clear_my_local_data_btn":"Clear YOUR locally stored data",
             "clear_my_db_info":"Clear YOUR DB values",
             "clear_your_both":"Clear YOUR Local And DB Values"
+        },
+        "compare_data_form":{
+            "title": "Compare Player Stats",
+            "button": "Compare Players"
+        },
+        "google_chart":{
+            "die": "Die Number",
+            "rolls": "Number Of Rolls"
         },
         "roll_chat_form":{
 

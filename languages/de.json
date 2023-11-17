@@ -1,0 +1,186 @@
+{
+    "DICE_STATS_TEXT" : {
+        "title": "Würfelstatistiken",
+        "settings":{
+            "players_see_players": {
+                "Name" : "Statistiken der Spieler anzeigen?",
+                "Hint" : "Wenn aktiviert, können Spieler die Statistik anderer Spieler einsehen. Beeinflusst Vergleichsübersicht. Beeinflusst nicht die globalen Statistiken.\n Empfehlung: An"
+            },
+            "players_see_gm": {
+                "Name" : "Statistik des SL anzeigen?",
+                "Hint" : "Wenn aktiviert, können die Spieler die Statistik des SL einsehen. Für den SL ist diese Einstellung bedeutungslos. \n Empfehlung: Aus"
+            },
+            "players_see_global": {
+                "Name" : "Globale Statistiken anzeigen?",
+                "Hint" : "Wenn aktiviert, können die Spieler die globalen Stastistiken einsehen. \n Empfehlung: An"
+            },
+            "players_see_gm_in_global": {
+                "Name" : "SL Ergebnisse in den globalen Statistiken anzeigen?",
+                "Hint" : "Wenn aktiviert, werden die SL Ergebnisse den globalen Statistiken hinzugefügt. \n Empfehlung: Aus"
+            },
+            "enable_blind_rolls_immediate": {
+                "Name" : "Versteckte Würfe automatisch den Statistiken der Spieler hinzufügen",
+                "Hint" : "Wenn aktiviert, könnten Spieler ihr verstecktes Würfelergebnis über die Statistik ableiten. \n Empfehlung: Aus"
+            },
+            "enable_auto_db": {
+                "Name" : "Datenbank verwenden",
+                "Hint" : "Wenn aktiviert, werden die Ergebnisse automatisch in der Datenbank gespeichert. Dies könnte die Leistung beeinflussen. (Tests zeigten eine minimale Auswirkung) \n Empfehlung: An"
+            },
+            "player_access_icons":{
+                "Name": "Spielersymbole festlegen",
+                "Hint": "Ändert die Spielersymbole von einem W20 zu etwas eigenem. Nähere Details in GitHub!\nBenötigt https://fontawesome.com/search?o=r&m=free Font Awesome Symbole in einer Komma separierten Liste. Reihenfolge entspricht der Spielerliste \n Beispiel: fa-solid fa-frog, fa-solid fa-circle, fa-solid fa-skull-crossbones"
+            }
+        },
+        "both_forms":{
+            "checkboxes":{
+                "d2": "W2",
+                "d3": "W3",
+                "d4": "W4",
+                "d6": "W6",
+                "d8": "W8",
+                "d10": "W10",
+                "d12": "W12",
+                "d20": "W20",
+                "d100": "W100"
+            },
+            "section_headings":{
+                "all": "Alle Würfelstatistiken",
+                "d2": "W2 (Münze) Statistik",
+                "d3": "W3 (Schicksal) Statistik",
+                "d4": "W4 Statistik",
+                "d6": "W6 Statistik",
+                "d8": "W8 Statistik",
+                "d10": "W10 Statistik",
+                "d12": "W12 Statistik",
+                "d20": "W20 Statistik",
+                "d100": "W100 Statistik"
+            },
+            "table_values":{
+                "total_rolls":  "Gesamtzahl an Würfen:      ",
+                "mean":         "Durchschnitt:              ",
+                "median":       "Median (Mittelwert):       ",
+                "mode":         "Modus (Am häufigsten):     "
+            },
+            "refresh_btn":  "Statistik aktualisieren"
+        },
+        "global_data_form":{
+            "title": "Globale Würfelstatistik",
+            "button": "Globale Würfelstatistik",
+            "blind_rolls": "Es gibt {ui_rollcount} versteckte Würfe über alle Spieler",
+            "blind_roll_btn": "Veröffentliche versteckte Würfe",
+            "clear_all_btn": "Lösche alle Statistiken",
+            "clear_all_local_btn": "Lösche alle lokal gespeicherten Statistiken",
+            "clear_all_db_btn": "Lösche alle in der Datenbank gespeicherten Statistiken",
+
+            "player_roll_count": "<b>{ui_player}</b> mit <b>{ui_lowRollCnt}</b> Würfen",
+
+            "most_low_roll":    "Meist gewürfelte 1er",
+            "no_low_roll":      "Keine 1er gewürfelt",
+            "most_high_roll_2": "Meist gewürfelte 2er",
+            "no_high_roll_2":   "Keine 2er gewürfelt",
+            "most_high_roll_3": "Meist gewürfelte 3er",
+            "no_high_roll_3":   "Keine 3er gewürfelt",
+            "most_high_roll_4": "Meist gewürfelte 4er",
+            "no_high_roll_4":   "Keine 4er gewürfelt",
+            "most_high_roll_6": "Meist gewürfelte 6er",
+            "no_high_roll_6":   "Keine 6er gewürfelt",
+            "most_high_roll_8": "Meist gewürfelte 8er",
+            "no_high_roll_8":   "Keine 8er gewürfelt",
+            "most_high_roll_10":"Meist gewürfelte 10er",
+            "no_high_roll_10":  "Keine 10er gewürfelt",
+            "most_high_roll_12": "Meist gewürfelte 12er",
+            "no_high_roll_12":  "Keine 12er gewürfelt",
+            "most_high_roll_20":    "Meist gewürfelte 20er",
+            "no_high_roll_20":  "Keine 20er gewürfelt",
+            "most_high_roll_100": "Meist gewürfelte 100er",
+            "no_high_roll_100": "Keine 100er gewürfelt",
+
+            "streak_label": "Längste Serie von <b>{ui_player}</b> (Sequenziell steigende Ergebnisse):",
+            "no_streak_label": "Keine Serie gewürfelt"
+        },
+        "player_data_form":{
+            "title":        "Spieler Würfelstatistik",
+            "blind_rolls":  "Du hast {ui_rolls} versteckte Würfe. Frag den SL die Würfe zu veröffentlichen.",
+            "player_name":  "Würfelstatistik von {ui_player}",
+            "streak":       "Größte Serie (Sequenziell steigende Ergebnisse):",
+            "no_streak":    "Keine Serie gewürfelt",
+            "streak_blind": "Serie beinhaltet einen versteckten Wurf, Ergebnis versteckt.",
+            "load_data_btn": "Lade ALLE Spielerdaten von der Datenbank",
+            "load_data_btn_yours": "Lade DEINE Statistik von der Datenbank",
+            "load_data_btn_others": "Lade ALLE ANDEREN Statistiken von der Datenbank",
+            "save_data_btn": "Speichere DEINE Statistik in die Datenbank",
+            "clear_all_local_data_btn":"Lösche ALLE lokal gespeicherten Statistiken",
+            "clear_my_local_data_btn":"Lösche DEINE lokal gespeicherten Statistik",
+            "clear_my_db_info":"Lösche DEINE in der Datenbank gespeicherte Statistik",
+            "clear_your_both":"Lösche DEINE lokal und in der Datenbank gespeicherte Statistik"
+        },
+        "compare_data_form":{
+            "title": "Spielerstatistik vergleichen",
+            "button": "Spieler vergleichen"
+        },
+        "google_chart":{
+            "die": "Ergebnis",
+            "rolls": "Wurfanzahl"
+        },
+        "roll_chat_form":{
+
+        },
+        "streak_chat_form":{
+
+        },
+        "player-stats-button-title": "Spieler Würfe",
+        "global-stats-button-title": "Globale Würfe",
+        "player_dialogs":{
+            "save_to_db":{
+                "title":"Speichern bestätigen",
+                "context":"Bist du sicher, dass du DEINE Werte in die Datenbank speichern möchtest? Dies überschreibt alle zuvor gespeicherten Werte."
+            },
+            "load_all_db":{
+                "title":"Laden bestätigen",
+                "context":"Bist du sicher, dass du die Werte aus der Datenbank laden möchtest? Dies überschreibt die Statistiken aller Spieler inkl. deinen eigenen."
+            },
+            "load_your_db":{
+                "title":"Laden bestätigen",
+                "context":"Bist du sicher, dass du die Werte aus der Datenbank laden möchtest? Dies überschreibt die Statistiken aller Spieler inkl. deinen eigenen."
+            },
+            "load_others_db":{
+                "title":"Laden bestätigen",
+                "context":"Bist du sicher, dass du die Werte aus der Datenbank laden möchtest? Dies überschreibt die Statistiken aller Spieler inkl. deinen eigenen."
+            },
+            "clear_all_db":{
+                "title":"Löschen bestätigen",
+                "context":"Bist du sicher, dass du ALLE lokalen Statistiken löschen möchtest? Dies betrifft nicht die in der Datenbank gespeicherten Daten sowie die Statistiken anderer Spieler."
+            },
+            "clear_your_db":{
+                "title":"Löschen bestätigen",
+                "context":"Bist du sicher, dass du DEINE lokalen Statistiken löschen möchtest? Dies betrifft nicht die in der Datenbank gespeicherten Daten sowie die Statistiken anderer Spieler."
+            },
+            "clear_all_local":{
+                "title": "Löschen bestätigen",
+                "context": "Bist du sicher, dass du ALLE lokal gespeicherten Daten löschen möchtest?"
+            },
+            "clear_your_local":{
+                "title": "Löschen bestätigen",
+                "context": "Bist du sicher, dass du DEINE lokal gespeicherten Daten löschen möchtest?"
+            },
+            "clear_both":{
+                "title": "Löschen bestätigen",
+                "context": "Bist du sicher, dass du DEINE lokal und in der Datenbank gespeicherten Daten löschen möchtest?"
+            }
+        },
+        "global_dialogs":{
+            "clear_all_local_data":{
+                "title":"Löschen bestätigen",
+                "context":"Bist du sicher, dass du ALLE lokalen Daten löschen möchtest? Dies löscht alle lokalen Daten bei JEDEM Spieler. Die in der Datenbank gespeicherte Statistik ist nicht betroffen"
+            },
+            "clear_all_db_data":{
+                "title":"Löschen bestätigen",
+                "context":"Bist du sicher, dass du ALLE Datenbank Daten löschen möchtest? Dies löscht alle Werte in der Datenbank. Lokal gespeicherte Statistiken sind nicht betroffen."
+            },
+            "clear_all_data":{
+                "title":"Löschen bestätigen",
+                "context":"Bist du sicher, dass du ALLE Daten löschen möchtest? Dies löscht alle Werte in der Datenbank sowie lokal."
+            }
+        }
+    }
+}
