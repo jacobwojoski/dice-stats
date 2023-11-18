@@ -1,5 +1,10 @@
 # CHANGELOG  
 
+## [ 1.14.4 ]
+### Updates - By *marcel-wiechmann*
+- Add German language file 
+- Move some hardcoded values to lang files
+
 ## [ 1.14.3 ]
 ### Updates
 - move constants to own file
