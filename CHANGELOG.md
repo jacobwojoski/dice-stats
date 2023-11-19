@@ -1,5 +1,10 @@
 # CHANGELOG  
 
+## [ 1.15.0 ]
+### Updates
+- fix issue with version number being mismatched
+- Updated from 14->15 as lang change is more or minor version than bug fix
+
 ## [ 1.14.4 ]
 ### Updates - By *marcel-wiechmann*
 - Add German language file 
