@@ -61,7 +61,12 @@
                 "median":       "Median (Middle Number):   ",
                 "mode":         "Mode (Most Common):        "
             },
-            "refresh_btn":  "Refresh Stats"
+            "refresh_btn":  "Refresh Stats",
+            "tab_titles":{
+                "all": "All Dice Stats",
+                "d20": "D-20 Stats",
+                "twoDx":    "2 D-(X) Stats"
+            }
         },
         "global_data_form":{
             "title":        "Global Dice Stats",

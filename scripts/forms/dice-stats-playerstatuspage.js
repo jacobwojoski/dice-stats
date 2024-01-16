@@ -5,8 +5,6 @@
 
 
 class PlayerStatusPage extends FormApplication {
-    // static TESTSTATS;
-    // static TESTROLLS;
     SEL_PLAYER = 0;
 
     static get defaultOptions() {

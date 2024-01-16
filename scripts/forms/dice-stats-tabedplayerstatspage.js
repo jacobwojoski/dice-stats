@@ -37,25 +37,34 @@ class CustomTabFormClass extends FormApplication
         //this.PLAYERDATA = dataObject;
     }
 
+    // Create data object thats used for the form
     getData(){
 
         loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYERBASE]);
         loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_ALL]);
         loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_D20]);
+        
         //Object needed to specify tabs
         var baseDataObject = { 
             header: "<h1>HEADER</h1>",
             tabs: [
                 { 
                     label: "player-stats",
-                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.section_headings.all'),
-                    content: "<em>Fancy tab1 content.</em>"
+                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.all'),
+                    content: "<em>Fancy tab1 content.</em>",
+                    base: true
                 },
                 { 
                     label: "player-stats-d20",
-                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.section_headings.d20'),
+                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.d20'),
                     content: "<em>Fancy tab2 content.</em>",
                     d20: true
+                },
+                {
+                    label: "2dx-stats",
+                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.twoDx'),
+                    content: "<em>Fancy tab2 content.</em>",
+                    twoDx: true
                 }
             ],
             footer: "<h1>FOOTER</h1>"

@@ -39,9 +39,16 @@
         {{#each tabs}}
             <div class="tab" data-tab="{{label}}" data-group="primary-tabs">
                 <!-- Need to add section to tabbedplayerstats form to add more dice -->
+
+                {{#if twoDx}}
+                    {{> 'modules/dice-stats/templates/partial/2dx.hbs' ../playerData }}
+                {{/if}}
+
                 {{#if d20}} 
                     {{> 'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs' ../playerData }}
-                {{else}}
+                {{/if}}
+
+                {{#if base}}
                     {{> 'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs' ../playerData }}
                 {{/if}}
             </div>
