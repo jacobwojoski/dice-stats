@@ -1,0 +1,8 @@
+#Gitignore file
+#=================================
+# Ignore files used for creating typescript stuff
+# People can download that shit themselves
+# ================================
+package-lock.json
+package.json
+node_modules*
