@@ -1,4 +1,8 @@
 //This file is for packaging data to be used in handlebars functions
+// It converts the dice stats data into a format that is used by the displays
+// Due to how handlebars loads data (Its really bad at using multi dim arrays)
+//  we have to make a special object that is all 1D arrays and convert the info  
+//  the display needs into the new object
 
 class DATA_PACKAGER
 {
@@ -35,6 +39,12 @@ class DATA_PACKAGER
         D12_ROLL_DATA:  [],
         D20_ROLL_DATA:  [],
         D100_ROLL_DATA: [],
+
+        // -------- SUBCATAGORIZE DICE INFO --------
+        // -- Only support D20's for PF2e 
+
+        //Bool to say if we should even display D20 Sub Catagories
+        HAVE_D20_CATAGORIES: false,
 
         //D20 Info
         D20_ATK:[],
