@@ -7,6 +7,7 @@ class DATA_PACKAGER
     //======================================================
     
     //Data displayed on the Player Handlebars Template Page
+    //  We load dice-stats-player data into PLAYER_HANDLE_INFO when the popup is opened
     PLAYER_HNDL_INFO = 
     {
         PLAYER_NAME: '',
@@ -50,6 +51,8 @@ class DATA_PACKAGER
         BLIND_ROLL_COUNT: 0,
     }
 
+    // Data displayed on the Global Dice Stats page (Combines all player data together)
+    //  We load all data from main into GLOBAL_HANDLE_INFO when the popup is opened
     GLOBAL_HNDL_INFO = 
     {   
         //array<bools>[num_of_dice] Used by checkboxes on UI
@@ -89,6 +92,7 @@ class DATA_PACKAGER
     }
 
     //Handlebars doesnt handle 2D arrays well so this is jank af
+    //  Every Array is the size of NUMBER_OF_PLAYERS(Including GM). We can't find that value till runtime.
     COMPARE_HNDL_INFO = 
     {
         //Ary of {Player Name, Player ID:}
@@ -180,9 +184,13 @@ class DATA_PACKAGER
     //================= Player Package =====================
     //======================================================
     
-    //Turn PLAYER Object into Handlebars Readable data Object
-    //Convert PLAYER Object into DATA_PACKAGER::PLAYER_HNDL_INFO
-    //Unsed in player.hbs
+    /**
+     * Turn PLAYER Object into Handlebars Readable data Object
+     *  Convert PLAYER Object into DATA_PACKAGER::PLAYER_HNDL_INFO
+     *  Used in player.hbs
+     * @param {PLAYER} playerInfo - PLAYER data object
+     * @returns {PLAYER_HNDL_INFO} - Player info converted into handlebars struct
+     */
     static packagePlayerData(playerInfo)
     {   
         let packedData = {};
@@ -569,7 +577,13 @@ class DATA_PACKAGER
     //======================================================
     //============== Compare Plyr Package ==================
     //======================================================
-    //ComparePlayerObjUtil
+    
+    /**
+     * Get the number of players selected
+     *  Part of Pack Compare Object
+     * @param {*} compPlyrObjAry 
+     * @returns 
+     */
     static getNumPlayersSelected(compPlyrObjAry)
     {
         let numSel = 0;
@@ -583,6 +597,12 @@ class DATA_PACKAGER
         return numSel;
     }
 
+    /**
+     * 
+     * @param {*} plyrAry 
+     * @param {*} plyrID 
+     * @returns 
+     */
     static isPlayerCheckedComparePlayerObj(plyrAry,plyrID)
     {
         for(let plyr of plyrAry)
@@ -596,6 +616,12 @@ class DATA_PACKAGER
         return false;
     }
 
+    /**
+     * 
+     * @param {*} players 
+     * @param {*} plyrID 
+     * @returns 
+     */
     static getPlayerDataComparePlayerObj(players, plyrID)
     {
         for(let plyr of players)
@@ -608,11 +634,11 @@ class DATA_PACKAGER
         return null;
     }
 
-    static setRollStatsComparePlayerObj(handlebarsData)
-    {
-        
-    }
-
+    /**
+     * 
+     * @param {*} handlebarsData 
+     * @param {*} playerObj 
+     */
     static setPlayerRollDataComparePlayerObj(handlebarsData, playerObj)
     {
         handlebarsData.D2_ROLL_DATA_1.push(playerObj.PLAYER_DICE[0].ROLLS[0]); 
@@ -689,6 +715,10 @@ class DATA_PACKAGER
         handlebarsData.D20_ROLL_DATA_20.push(playerObj.PLAYER_DICE[7].ROLLS[19]);
     }
 
+    /**
+     * 
+     * @param {*} handlebarsData 
+     */
     static setDefaultComparePlayerObj(handlebarsData){
         handlebarsData.D2_ROLL_DATA_1 = [];
         handlebarsData.D2_ROLL_DATA_2 = [];
@@ -839,7 +869,13 @@ class DATA_PACKAGER
         handlebarsData.D20_ROLL_DATA_20.push('20');
     }
 
-    //ComparePlayersForm::COMPARE_PLAYERS_LIST 
+    /**
+     * ComparePlayersForm::COMPARE_PLAYERS_LIST
+     * @param {*} COMPARE_PLAYERS_LIST 
+     * @param {*} playersArry 
+     * @param {*} includeGMrolls 
+     * @returns 
+     */
     static packageComparePlayerData(COMPARE_PLAYERS_LIST, playersArry, includeGMrolls)
     {
         //Create dataObject
