@@ -43,6 +43,8 @@ class CustomTabFormClass extends FormApplication
         loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYERBASE]);
         loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_ALL]);
         loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_D20]);
+        loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TEBEDPLAYER_2DX]);
+        loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_ERROR]);
         
         //Object needed to specify tabs
         var baseDataObject = { 
@@ -289,7 +291,7 @@ class CustomTabFormClass extends FormApplication
 
     activateListeners(html) {
         super.activateListeners(html);
-        html.on('click', "[data-action]", this._handleButtonClick).bind(this);
+        html.on('click', "[data-action]", this._handleButtonClick.bind(this));
     }
 
     async _updateObject(event, formData) {

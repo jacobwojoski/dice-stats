@@ -44,7 +44,7 @@ class DATA_PACKAGER
         // -- Only support D20's for PF2e 
 
         // Bool Array of Size NUM_DICE_TYPES
-        HAVE_DICE_CATAGORIES: [],
+        HAVE_DICE_SUB_CATAGORIES: [],
 
         //D20 Info
         D20_ATK:[],
@@ -241,16 +241,18 @@ class DATA_PACKAGER
         }
         
         // Set default of false to if we sub catagorize dice rolls
-        packedData.HAVE_DICE_CATAGORIES = new Array(DS_GLOBALS.NUM_DIE_TYPES);
-        packedData.HAVE_DICE_CATAGORIES.fill(false);
-        
+        packedData.HAVE_DICE_SUB_CATAGORIES = new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        packedData.HAVE_DICE_SUB_CATAGORIES.fill(false);
+
         // Handle if we hold sub catagory info for rolls
         //  - Currntly only supports PF2E, Working on adding D&D5e
+        // * Note: If adding a new system that gets subcatagories,
+        // *  You need to add stuff here and in the dice-stats-datapack::playerdata
         switch (game.system.id)
         {
             case 'pf2e':
-                packedData.HAVE_DICE_CATAGORIES [DS_GLOBALS.DIE_TYPE.D20] = true;
-            case 'd&d5e':
+            case 'dnd5e':
+                packedData.HAVE_DICE_SUB_CATAGORIES[DS_GLOBALS.DIE_TYPE.D20] = true;
                 break;
                 
             default:

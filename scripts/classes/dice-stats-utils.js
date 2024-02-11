@@ -138,6 +138,10 @@ class DICE_STATS_UTILS {
 
     /**
      * Get the type of roll the msg was. Currently only for PF2e system
+     * 
+     * Note: If adding a new system that gets subcatagories,
+     *  You need to add stuff here and in the dice-stats-datapack::playerdata
+     * 
      * @param {chatMessage} msg - chat message object (Chat message object is a foundry object not made by me. 
      *                                 This object might have different variables bassed off of system so only set for PF2e for now)
      * @returns {ROLL_TYPE} - Type of roll that was made (atack, dmg, save ect)
@@ -188,6 +192,10 @@ class DICE_STATS_UTILS {
             }
             //unknown so return unknown type
             return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+        }
+        else if (game.system.id == "dnd5e")
+        {
+
         }
         /**
          * ADD else if HERE to implement other game systems, 

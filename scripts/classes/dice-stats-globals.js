@@ -15,7 +15,9 @@ class DS_GLOBALS {
         COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
         TABEDPLAYERBASE:    'modules/dice-stats/templates/partial/tab_player_base.hbs',
         TABEDPLAYER_ALL:   'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
-        TABEDPLAYER_D20:   'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs'
+        TABEDPLAYER_D20:   'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
+        TEBEDPLAYER_2DX:   'modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs',
+        TABEDPLAYER_ERROR: 'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'
     };
     static MODULE_SETTINGS= {
         PLAYERS_SEE_PLAYERS: 'players_see_players', //if players cant see self they cant see others either     [Def: True]      (Global)

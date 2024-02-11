@@ -176,6 +176,6 @@ class GlobalStatusPage extends FormApplication{
 
     activateListeners(html) {
         super.activateListeners(html);
-        html.on('click', "[data-action]", this._handleButtonClick).bind(this);
+        html.on('click', "[data-action]", this._handleButtonClick.bind(this));
     }
 }
