@@ -1,4 +1,5 @@
 //Were using this class as a singleton although its not quite set up correctly as one. 
+// This is the main dice stats class. It holds all the data.
 class DiceStatsTracker {
     AM_I_GM = false;
 

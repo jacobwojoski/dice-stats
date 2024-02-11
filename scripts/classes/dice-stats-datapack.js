@@ -43,8 +43,8 @@ class DATA_PACKAGER
         // -------- SUBCATAGORIZE DICE INFO --------
         // -- Only support D20's for PF2e 
 
-        //Bool to say if we should even display D20 Sub Catagories
-        HAVE_D20_CATAGORIES: false,
+        // Bool Array of Size NUM_DICE_TYPES
+        HAVE_DICE_CATAGORIES: [],
 
         //D20 Info
         D20_ATK:[],
@@ -240,6 +240,23 @@ class DATA_PACKAGER
             packedData.S_IS_B[die] = playerInfo.PLAYER_DICE[die].STREAK_ISBLIND;
         }
         
+        // Set default of false to if we sub catagorize dice rolls
+        packedData.HAVE_DICE_CATAGORIES = new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        packedData.HAVE_DICE_CATAGORIES.fill(false);
+        
+        // Handle if we hold sub catagory info for rolls
+        //  - Currntly only supports PF2E, Working on adding D&D5e
+        switch (game.system.id)
+        {
+            case 'pf2e':
+                packedData.HAVE_DICE_CATAGORIES [DS_GLOBALS.DIE_TYPE.D20] = true;
+            case 'd&d5e':
+                break;
+                
+            default:
+                // By default we dont hold any sub roll info
+        }
+
         packedData.D20_ATK = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].ATK_ROLLS];
         packedData.D20_DMG = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].DMG_ROLLS];
         packedData.D20_SAVE = [...playerInfo.PLAYER_DICE[DS_GLOBALS.DIE_TYPE.D20].SAVES_ROLLS];

@@ -44,8 +44,13 @@
                     {{> 'modules/dice-stats/templates/partial/2dx.hbs' ../playerData }}
                 {{/if}}
 
-                {{#if d20}} 
-                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs' ../playerData }}
+                <!-- Display D20 info or display the warning display if the data is unsupported -->
+                {{#if ../playerData/HAVE_DICE_CATAGORIES.[DS_GLOBALS.DIE_TYPE.D20]}}
+                    {{#if d20}} 
+                        {{> 'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs' ../playerData }}
+                    {{/if}}
+                {{else}}
+                    {{> 'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'}}
                 {{/if}}
 
                 {{#if base}}

@@ -81,12 +81,9 @@ class CustomSceneControlToolPlayer
                 delete DS_GLOBALS.FORM_PLAYER_STATS
             }
     
-            if( game.system.id == 'pf2e' )
-            {
-                DS_GLOBALS.FORM_PLAYER_STATS = new CustomTabFormClass(this.associatedPlayerId).render(true);
-            }else{
-                DS_GLOBALS.FORM_PLAYER_STATS = new PlayerStatusPage(this.associatedPlayerId).render(true);
-            }
+            // Always render the Tabbed Version, Were removing the normal Player status page
+            DS_GLOBALS.FORM_PLAYER_STATS = new CustomTabFormClass(this.associatedPlayerId).render(true);
+
         }
     }
 
