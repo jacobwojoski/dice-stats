@@ -289,7 +289,7 @@ class CustomTabFormClass extends FormApplication
 
     activateListeners(html) {
         super.activateListeners(html);
-        html.on('click', "[data-action]", this._handleButtonClick);
+        html.on('click', "[data-action]", this._handleButtonClick).bind(this);
     }
 
     async _updateObject(event, formData) {
