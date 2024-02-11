@@ -12,7 +12,6 @@ class DS_GLOBALS {
     };
     static MODULE_TEMPLATES= {
         GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
-        PLAYERDATAFORM:     'modules/dice-stats/templates/dice-stats-player.hbs',
         COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
         TABEDPLAYERBASE:    'modules/dice-stats/templates/partial/tab_player_base.hbs',
         TABEDPLAYER_ALL:   'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
