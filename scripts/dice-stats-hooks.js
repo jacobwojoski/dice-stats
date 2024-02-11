@@ -2,6 +2,9 @@
 //==========================================================
 //===================== HOOKS SHIT =========================
 //==========================================================
+// Hooks 'hook' into different external triggers
+//  - EX: Loading of A page, When a roll gets made etc
+// Some hooks get made from modules while most we use are prebuild into foundry
 
 //This hook is used to change how we deal with some midiqol settings 
 function midiQolSupport(){
@@ -135,7 +138,7 @@ Hooks.on("getSceneControlButtons", controls => {
 Hooks.once('ready', () => {
     DS_GLOBALS.GAME_SYSTEM_ID = `${game.system.id}`;
 
-    //New Players might get added throught the game so update map on playerlist render. Didnt work in the Constructor.
+    //New Players might get added throught the game so update map on playerlist render. 
     DS_GLOBALS.DS_OBJ_GLOBAL.updateMap();
 
     //Comparison form needs player list which needs to wait for game to be in ready state.
