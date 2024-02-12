@@ -51,6 +51,7 @@ class DATA_PACKAGER
         D20_DMG:[],
         D20_SAVE:[],
         D20_SKILL:[],
+        D20_ABILITY:[],
         D20_UNKNOWN:[],
 
         D20_MEAN:       [],
@@ -222,14 +223,14 @@ class DATA_PACKAGER
         packedData.D20_ROLL_DATA =     [...playerInfo.PLAYER_DICE[7].ROLLS];
         packedData.D100_ROLL_DATA =    [...playerInfo.PLAYER_DICE[8].ROLLS];
 
-        packedData.TOTAL_ROLLS = new Array(9);
-        packedData.MEAN =   new Array(9);
-        packedData.MEDIAN = new Array(9);
-        packedData.MODE =   new Array(9);
-        packedData.STREAK = new Array(9);
-        packedData.S_IS_B = new Array(9);
+        packedData.TOTAL_ROLLS = new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        packedData.MEAN =   new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        packedData.MEDIAN = new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        packedData.MODE =   new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        packedData.STREAK = new Array(DS_GLOBALS.NUM_DIE_TYPES);
+        packedData.S_IS_B = new Array(DS_GLOBALS.NUM_DIE_TYPES);
 
-        for(let die=0; die<9; die++){
+        for(let die=0; die<DS_GLOBALS.NUM_DIE_TYPES; die++){
             playerInfo.PLAYER_DICE[die].calculate();
             
             packedData.TOTAL_ROLLS[die] = playerInfo.PLAYER_DICE[die].TOTAL_ROLLS;

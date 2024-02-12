@@ -46,7 +46,7 @@
             <br>
         {{/diceStats_ifDieUsed}}
 
-        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[1] }} <!-- if Have D20 ATK Rolls -->
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[1] }} <!-- if Have D20 Damage Rolls -->
             <h1 class="dice-type-title">D20 Damage Rolls</h1>
             <div id = "d20DmgChart" class="chart-dice-stats"></div>
             <table> <!-- Table Of Rolled Stats -->
@@ -70,7 +70,7 @@
             <br>
         {{/diceStats_ifDieUsed}}
 
-        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[2] }} <!-- if Have D20 ATK Rolls -->
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[2] }} <!-- if Have D20 Save Rolls -->
             <h1 class="dice-type-title">D20 Save Rolls</h1>
             <div id = "d20SaveChart" class="chart-dice-stats"></div>
             <table> <!-- Table Of Rolled Stats -->
@@ -94,7 +94,7 @@
             <br>
         {{/diceStats_ifDieUsed}}
 
-        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[3] }} <!-- if Have D20 ATK Rolls -->
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[3] }} <!-- if Have D20 Skill Rolls -->
             <h1 class="dice-type-title">D20 Skill Rolls</h1>
             <div id = "d20SkillChart" class="chart-dice-stats"></div>
             <table> <!-- Table Of Rolled Stats -->
@@ -118,9 +118,9 @@
             <br>
         {{/diceStats_ifDieUsed}}
 
-        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[4] }} <!-- if Have D20 ATK Rolls -->
-            <h1 class="dice-type-title">D20 Unknown Rolls</h1>
-            <div id = "d20UnknownChart" class="chart-dice-stats"></div>
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[4] }} <!-- if Have D20 Ability Rolls -->
+            <h1 class="dice-type-title">D20 Ability Rolls</h1>
+            <div id = "d20AbilityChart" class="chart-dice-stats"></div>
             <table> <!-- Table Of Rolled Stats -->
                 <tr>
                     <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
@@ -137,6 +137,30 @@
                 <tr>
                     <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
                     <td>{{D20_MODE.[4]}}</th>
+                </tr>
+            </table>
+            <br>
+        {{/diceStats_ifDieUsed}}
+
+        {{#diceStats_ifDieUsed D20_ROLLCOUNT.[5] }} <!-- if Have D20 Unknown Rolls -->
+            <h1 class="dice-type-title">D20 Unknown Rolls</h1>
+            <div id = "d20UnknownChart" class="chart-dice-stats"></div>
+            <table> <!-- Table Of Rolled Stats -->
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.total_rolls"}}</th>
+                    <td>{{D20_ROLLCOUNT.[5]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mean"}}</th>
+                    <td>{{D20_MEAN.[5]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.median"}}</th>
+                    <td>{{D20_MEDIAN.[5]}}</th>
+                </tr>
+                <tr>
+                    <td>{{localize "DICE_STATS_TEXT.both_forms.table_values.mode"}}</th>
+                    <td>{{D20_MODE.[5]}}</th>
                 </tr>
             </table>
             <br>
@@ -320,6 +344,39 @@
             chart.draw(data, chartOptions);
         }
 
+        function drawChartd20Ability() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable(
+                [
+                    ['{{localize 'DICE_STATS_TEXT.google_chart.die'}}', '{{localize 'DICE_STATS_TEXT.google_chart.rolls'}}'],
+                    ['1',   {{D20_ABILITY.[0]}}],
+                    ['2',   {{D20_ABILITY.[1]}}],
+                    ['3',   {{D20_ABILITY.[2]}}],
+                    ['4',   {{D20_ABILITY.[3]}}],
+                    ['5',   {{D20_ABILITY.[4]}}],
+                    ['6',   {{D20_ABILITY.[5]}}],
+                    ['7',   {{D20_ABILITY.[6]}}],
+                    ['8',   {{D20_ABILITY.[7]}}],
+                    ['9',   {{D20_ABILITY.[8]}}],
+                    ['10',  {{D20_ABILITY.[9]}}],
+                    ['11',  {{D20_ABILITY.[10]}}],
+                    ['12',  {{D20_ABILITY.[11]}}],
+                    ['13',  {{D20_ABILITY.[12]}}],
+                    ['14',  {{D20_ABILITY.[13]}}],
+                    ['15',  {{D20_ABILITY.[14]}}],
+                    ['16',  {{D20_ABILITY.[15]}}],
+                    ['17',  {{D20_ABILITY.[16]}}],
+                    ['18',  {{D20_ABILITY.[17]}}],
+                    ['19',  {{D20_ABILITY.[18]}}],
+                    ['20',  {{D20_ABILITY.[19]}}]
+                ]
+            );
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('d20AbilityChart'));
+            chart.draw(data, chartOptions);
+        }
+
         function drawChartd20Unknown() {
             // Define the chart to be drawn.
             var data = google.visualization.arrayToDataTable(
@@ -378,6 +435,11 @@
             }
 
             if({{D20_ROLLCOUNT.[4]}} > 0 )
+            {
+                google.charts.setOnLoadCallback(drawChartd20Ability);
+            }
+
+            if({{D20_ROLLCOUNT.[5]}} > 0 )
             {
                 google.charts.setOnLoadCallback(drawChartd20Unknown);
             }

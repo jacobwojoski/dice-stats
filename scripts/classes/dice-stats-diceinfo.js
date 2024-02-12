@@ -29,12 +29,14 @@ class DIE_INFO {
     DMG_ROLLS = [];
     SAVES_ROLLS = [];
     SKILLS_ROLLS = [];
+    ABILITY_ROLLS = [];
     UNKNOWN_ROLLS = [];
 
     ATK_ROLLS_BLIND = [];
     DMG_ROLLS_BLIND = [];
     SAVES_ROLLS_BLIND = [];
     SKILLS_ROLLS_BLIND = [];
+    ABILITY_ROLLS_BLIND = [];
     UNKNOWN_ROLLS_BLIND = [];
 
     /**
@@ -64,12 +66,14 @@ class DIE_INFO {
         this.DMG_ROLLS = new Array(this.MAX);
         this.SAVES_ROLLS = new Array(this.MAX);
         this.SKILLS_ROLLS = new Array(this.MAX);
+        this.ABILITY_ROLLS = new Array(this.MAX);
         this.UNKNOWN_ROLLS = new Array(this.MAX);
 
         this.ATK_ROLLS_BLIND = new Array(this.MAX);
         this.DMG_ROLLS_BLIND = new Array(this.MAX);
         this.SAVES_ROLLS_BLIND = new Array(this.MAX);
         this.SKILLS_ROLLS_BLIND = new Array(this.MAX);
+        this.ABILITY_ROLLS_BLIND = new Array(this.MAX);
         this.UNKNOWN_ROLLS_BLIND = new Array(this.MAX);
 
         this.ROLL_COUNTERS.fill(0);
@@ -81,12 +85,14 @@ class DIE_INFO {
         this.DMG_ROLLS.fill(0);
         this.SAVES_ROLLS.fill(0);
         this.SKILLS_ROLLS.fill(0);
+        this.ABILITY_ROLLS.fill(0);
         this.UNKNOWN_ROLLS.fill(0);
 
         this.ATK_ROLLS_BLIND.fill(0);
         this.DMG_ROLLS_BLIND.fill(0);
         this.SAVES_ROLLS_BLIND.fill(0);
         this.SKILLS_ROLLS_BLIND.fill(0);
+        this.ABILITY_ROLLS_BLIND.fill(0);
         this.UNKNOWN_ROLLS_BLIND.fill(0);
         
     }
@@ -132,12 +138,14 @@ class DIE_INFO {
         this.DMG_ROLLS.fill(0);
         this.SAVES_ROLLS.fill(0);
         this.SKILLS_ROLLS.fill(0);
+        this.ABILITY_ROLLS.fill(0);
         this.UNKNOWN_ROLLS.fill(0);
 
         this.ATK_ROLLS_BLIND.fill(0);
         this.DMG_ROLLS_BLIND.fill(0);
         this.SAVES_ROLLS_BLIND.fill(0);
         this.SKILLS_ROLLS_BLIND.fill(0);
+        this.ABILITY_ROLLS_BLIND.fill(0);
         this.UNKNOWN_ROLLS_BLIND.fill(0);
 
         this.STREAK_SIZE =   -1;
@@ -200,6 +208,12 @@ class DIE_INFO {
                     this.SKILLS_ROLLS[roll-1] = this.SKILLS_ROLLS[roll-1]+1;
                 }
                 break;
+            case DS_GLOBALS.ROLL_TYPE.ABILITY :
+                if(isBlind){
+                    this.ABILITY_ROLLS_BLIND[roll-1] = this.ABILITY_ROLLS_BLIND[roll-1]+1;
+                }else{
+                    this.ABILITY_ROLLS[roll-1] = this.ABILITY_ROLLS[roll-1]+1;
+                }
             case DS_GLOBALS.ROLL_TYPE.UNKNOWN :
                 if(isBlind){
                     this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;
@@ -218,25 +232,29 @@ class DIE_INFO {
         this.MEDIAN = DICE_STATS_UTILS.getMedian(this.ROLLS);
         this.MODE = DICE_STATS_UTILS.getMode(this.ROLLS);
 
-        this.MEANS[0] = DICE_STATS_UTILS.getMean(this.ATK_ROLLS);
-        this.MEDIANS[0] = DICE_STATS_UTILS.getMedian(this.ATK_ROLLS);
-        this.MODES[0] = DICE_STATS_UTILS.getMode(this.ATK_ROLLS);
+        this.MEANS[DS_GLOBALS.ROLL_TYPE.ATK] = DICE_STATS_UTILS.getMean(this.ATK_ROLLS);
+        this.MEDIANS[DS_GLOBALS.ROLL_TYPE.ATK] = DICE_STATS_UTILS.getMedian(this.ATK_ROLLS);
+        this.MODES[DS_GLOBALS.ROLL_TYPE.ATK] = DICE_STATS_UTILS.getMode(this.ATK_ROLLS);
 
-        this.MEANS[1] = DICE_STATS_UTILS.getMean(this.DMG_ROLLS);
-        this.MEDIANS[1] = DICE_STATS_UTILS.getMedian(this.DMG_ROLLS);
-        this.MODES[1] = DICE_STATS_UTILS.getMode(this.DMG_ROLLS);
+        this.MEANS[DS_GLOBALS.ROLL_TYPE.DMG] = DICE_STATS_UTILS.getMean(this.DMG_ROLLS);
+        this.MEDIANS[DS_GLOBALS.ROLL_TYPE.DMG] = DICE_STATS_UTILS.getMedian(this.DMG_ROLLS);
+        this.MODES[DS_GLOBALS.ROLL_TYPE.DMG] = DICE_STATS_UTILS.getMode(this.DMG_ROLLS);
 
-        this.MEANS[2] = DICE_STATS_UTILS.getMean(this.SAVES_ROLLS);
-        this.MEDIANS[2] = DICE_STATS_UTILS.getMedian(this.SAVES_ROLLS);
-        this.MODES[2] = DICE_STATS_UTILS.getMode(this.SAVES_ROLLS);
+        this.MEANS[DS_GLOBALS.ROLL_TYPE.SAVE] = DICE_STATS_UTILS.getMean(this.SAVES_ROLLS);
+        this.MEDIANS[DS_GLOBALS.ROLL_TYPE.SAVE] = DICE_STATS_UTILS.getMedian(this.SAVES_ROLLS);
+        this.MODES[DS_GLOBALS.ROLL_TYPE.SAVE] = DICE_STATS_UTILS.getMode(this.SAVES_ROLLS);
 
-        this.MEANS[3] = DICE_STATS_UTILS.getMean(this.SKILLS_ROLLS);
-        this.MEDIANS[3] = DICE_STATS_UTILS.getMedian(this.SKILLS_ROLLS);
-        this.MODES[3] = DICE_STATS_UTILS.getMode(this.SKILLS_ROLLS);
+        this.MEANS[DS_GLOBALS.ROLL_TYPE.SKILL] = DICE_STATS_UTILS.getMean(this.SKILLS_ROLLS);
+        this.MEDIANS[DS_GLOBALS.ROLL_TYPE.SKILL] = DICE_STATS_UTILS.getMedian(this.SKILLS_ROLLS);
+        this.MODES[DS_GLOBALS.ROLL_TYPE.SKILL] = DICE_STATS_UTILS.getMode(this.SKILLS_ROLLS);
 
-        this.MEANS[4] = DICE_STATS_UTILS.getMean(this.UNKNOWN_ROLLS);
-        this.MEDIANS[4] = DICE_STATS_UTILS.getMedian(this.UNKNOWN_ROLLS);
-        this.MODES[4] = DICE_STATS_UTILS.getMode(this.UNKNOWN_ROLLS);
+        this.MEANS[DS_GLOBALS.ROLL_TYPE.ABILITY] = DICE_STATS_UTILS.getMean(this.ABILITY_ROLLS);
+        this.MEDIANS[DS_GLOBALS.ROLL_TYPE.ABILITY] = DICE_STATS_UTILS.getMedian(this.ABILITY_ROLLS);
+        this.MODES[DS_GLOBALS.ROLL_TYPE.ABILITY] = DICE_STATS_UTILS.getMode(this.ABILITY_ROLLS);
+
+        this.MEANS[DS_GLOBALS.ROLL_TYPE.UNKNOWN] = DICE_STATS_UTILS.getMean(this.UNKNOWN_ROLLS);
+        this.MEDIANS[DS_GLOBALS.ROLL_TYPE.UNKNOWN] = DICE_STATS_UTILS.getMedian(this.UNKNOWN_ROLLS);
+        this.MODES[DS_GLOBALS.ROLL_TYPE.UNKNOWN] = DICE_STATS_UTILS.getMode(this.UNKNOWN_ROLLS);
     }
 
     /**
@@ -270,8 +288,14 @@ class DIE_INFO {
 
         //SKILL Rolls ary
         for(let i=0; i<this.SKILLS_ROLLS_BLIND.length; i++){
-            this.SAVES_ROLLS[i] = this.SKILLS_ROLLS[i]+this.SKILLS_ROLLS_BLIND[i];
+            this.SKILLS_ROLLS[i] = this.SKILLS_ROLLS[i]+this.SKILLS_ROLLS_BLIND[i];
             this.SKILLS_ROLLS_BLIND[i]=0;
+        }
+
+        //Ability Rolls array
+        for(let i=0; i<this.ABILITY_ROLLS_BLIND.length; i++){
+            this.ABILITY_ROLLS[i] = this.ABILITY_ROLLS[i]+this.ABILITY_ROLLS_BLIND[i];
+            this.ABILITY_ROLLS_BLIND[i]=0;
         }
 
         //UNKNOWN / FLATCHECK Rolls ary

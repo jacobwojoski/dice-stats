@@ -3,6 +3,15 @@
 //================== HANDLEBARS SHIT =======================
 //==========================================================
 
+//handelabars fn used to get true or false of a bool
+Handlebars.registerHelper('diceStats_isTrue', function (passedInBool, options) {
+    if(passedInBool == true){
+        return options.fn(this);
+    }else{
+        return options.inverse(this);
+    }
+});
+
 //handlebars fn used to tell if a die was rolled. 
 //If not display something different then charts and dice stats
 Handlebars.registerHelper('diceStats_ifDieUsed', function (var1, options) {

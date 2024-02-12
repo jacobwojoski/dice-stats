@@ -57,16 +57,18 @@ class DS_GLOBALS {
         D20:    7,
         D100:   8
     };
-    static NUM_ROLL_TYPES= 5;  //Size of {ROLL_TYPE}
+    
+    static NUM_ROLL_TYPES= 6;  //Size of {ROLL_TYPE}
     static ROLL_TYPE= {        //Types of rolls the user can roll
-        ATK: 0,
-        DMG: 1,
-        SAVE: 2,
-        SKILL: 3,
+        ATK: 0,     /* Rolling to Attack */
+        DMG: 1,     /* Rolling Damage */
+        SAVE: 2,    /* Rolling Will, Fortitude, Reflex*/
+        SKILL: 3,   /* Rolling Stealth, Perception, Nature ETC*/
+        ABILITY: 4, /* Rolling STR, CON, DEX ETC */
         /* UNKNOWN includes flat checks. No way to distingush them as there is no "flat check roll. 
         Its just has no details. Same output as typing /r 1d20 in chat and using result for something. 
         Its not assigned as Damage or atack ect */
-        UNKNOWN: 4    
+        UNKNOWN: 5    
     };
 
     //Convert {DIE_TYPE} to the max value you can roll on that die

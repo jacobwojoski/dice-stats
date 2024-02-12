@@ -170,6 +170,8 @@ class DICE_STATS_UTILS {
                 return DS_GLOBALS.ROLL_TYPE.DMG;
             }
 
+            //TODO: Add Ability Section for if someone Rolls straight STR, CON, WILL ETC
+            
             let domains = msg.rolls[0].options.domains;
             //Check if Save | Atack roll | Skill check
             if(domains)
