@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.15.1 ]
+### Updates
+- added 0 min so graphs don't adjust min
+
 ## [ 1.15.0 ]
 ### Updates
 - fix issue with version number being mismatched
