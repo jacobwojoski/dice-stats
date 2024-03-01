@@ -61,13 +61,15 @@ class CustomTabFormClass extends FormApplication
                     title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.d20'),
                     content: "<em>Fancy tab2 content.</em>",
                     d20: true
-                },
+                }
+                /*,
                 {
                     label: "2dx-stats",
                     title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.twoDx'),
                     content: "<em>Fancy tab2 content.</em>",
                     twoDx: true
                 }
+                */
             ],
             footer: "<h1>FOOTER</h1>"
         };
