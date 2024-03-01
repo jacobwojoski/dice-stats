@@ -91,12 +91,14 @@ class DB_INTERACTION
             DMG_ROLLS = [];
             SAVES_ROLLS = [];
             SKILLS_ROLLS = [];
+            ABILITY_ROLLS = [];
             UNKNOWN_ROLLS = [];
 
             ATK_ROLLS_BLIND = [];
             DMG_ROLLS_BLIND = [];
             SAVES_ROLLS_BLIND = [];
             SKILLS_ROLLS_BLIND = [];
+            ABILITY_ROLLS_BLIND = [];
             UNKNOWN_ROLLS_BLIND = [];
         }
     */
@@ -134,12 +136,14 @@ class DB_INTERACTION
                 tempDieObj.DMG_ROLLS =      [...dbDieDataObj.DMG_ROLLS]
                 tempDieObj.SAVES_ROLLS =    [...dbDieDataObj.SAVES_ROLLS]
                 tempDieObj.SKILLS_ROLLS =   [...dbDieDataObj.SKILLS_ROLLS]
+                tempDieObj.ABILITY_ROLLS =  [...dbDieDataObj.ABILITY_ROLLS]
                 tempDieObj.UNKNOWN_ROLLS =  [...dbDieDataObj.UNKNOWN_ROLLS]
 
                 tempDieObj.ATK_ROLLS_BLIND =        [...dbDieDataObj.ATK_ROLLS_BLIND]
                 tempDieObj.DMG_ROLLS_BLIND =        [...dbDieDataObj.DMG_ROLLS_BLIND]
                 tempDieObj.SAVES_ROLLS_BLIND =      [...dbDieDataObj.SAVES_ROLLS_BLIND]
                 tempDieObj.SKILLS_ROLLS_BLIND =     [...dbDieDataObj.SKILLS_ROLLS_BLIND]
+                tempDieObj.ABILITY_ROLLS_BLIND =    [...dbDieDataObj.ABILITY_ROLLS_BLIND]
                 tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND]
             }
         }

@@ -19,7 +19,8 @@ class DIE_INFO {
     MEDIAN =    0;
     MODE =      0;
 
-    //Basic Stats About Specific Type of Rolls
+    //Basic Stats About Specific Type of Rolls. Should prolly be called 
+    //  D20_MEANS, D20_MEDIANS....etc
     MEANS = [];
     MEDIANS = [];
     MODES = [];
