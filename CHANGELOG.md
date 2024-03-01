@@ -4,6 +4,7 @@
 - Added bind to HTML Calls, allows future refactoring to remove globals and help with scope issues (Callbacks and scope are a real bitch sometimes)
 - Added various comments to improve code readability
 - Made all systems used the tabbed_player_screen
+- Made D&D5E support d20 roll types!
 - Made sub template to deal when dice info isnt present for current system (Warning Display)
 
 ## [ 1.15.1 ]
