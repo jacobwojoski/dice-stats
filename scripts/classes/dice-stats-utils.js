@@ -156,7 +156,7 @@ class DICE_STATS_UTILS {
 
         //Return type of roll we received. Only set up for pf2e now.
         /*
-        WOuld need to Update 
+            Would need to Update 
             else if here, 
             Update Forms (Player Data Obj), 
             Data Pack (Player Data Pack)
@@ -196,8 +196,26 @@ class DICE_STATS_UTILS {
             return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
         }
         else if (game.system.id == "dnd5e")
-        {
+        {// D&D System is annoying and doesn't have a good way to see the type of roll. Need to parse a String to find out
+            let flavorString = msg.flavor;
+            if(flavorString.includes("Skill Check")){
+                return DS_GLOBALS.ROLL_TYPE.SKILL;
 
+            }else if(flavorString.includes("Ability Check")){
+                return DS_GLOBALS.ROLL_TYPE.ABILITY;
+
+            }else if(flavorString.includes("Attack Roll")){
+                return DS_GLOBALS.ROLL_TYPE.ATK;
+
+            }else if(flavorString.includes("Damage Roll")){
+                return DS_GLOBALS.ROLL_TYPE.DMG;
+
+            }else if(flavorString.includes("Saving Throw")){
+                return DS_GLOBALS.ROLL_TYPE.SAVE;
+
+            }else{
+                return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+            }
         }
         /**
          * ADD else if HERE to implement other game systems, 
