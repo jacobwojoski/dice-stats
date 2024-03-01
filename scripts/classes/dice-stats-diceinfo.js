@@ -215,6 +215,7 @@ class DIE_INFO {
                 }else{
                     this.ABILITY_ROLLS[roll-1] = this.ABILITY_ROLLS[roll-1]+1;
                 }
+                break;
             case DS_GLOBALS.ROLL_TYPE.UNKNOWN :
                 if(isBlind){
                     this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;

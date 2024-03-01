@@ -58,6 +58,14 @@ class DS_GLOBALS {
         D100:   8
     };
     
+    /** Adding a roll type involves updating the following
+     *      DB interaction
+     *      datapack (player section)
+     *      diceinfo
+     *      utils (Parser)
+     *      
+     *      hbs
+     */ 
     static NUM_ROLL_TYPES= 6;  //Size of {ROLL_TYPE}
     static ROLL_TYPE= {        //Types of rolls the user can roll
         ATK: 0,     /* Rolling to Attack */
