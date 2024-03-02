@@ -96,6 +96,8 @@ button.blind-roll-rollcount{
 }
 
 .templates-tab-unsupported-heading{
+    vertical-align: middle;
+    align-self: center;
     text-align: center;
 }
 
