@@ -1,4 +1,9 @@
 # CHANGELOG  
+## [ 1.16.1 ]
+- Fix weird bug on pf2e due to not allowing Ability rolls. 
+- Removing the ability rolls secrion from handlebars, Loading, Adding it back and reloading worked for some reason.
+- Can no longer recreate issue
+
 ## [ 1.16.0 ]
 ### Updates
 - Added bind to HTML Calls, allows future refactoring to remove globals and help with scope issues (Callbacks and scope are a real bitch sometimes)
