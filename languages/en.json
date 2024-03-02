@@ -118,7 +118,20 @@
             "clear_all_local_data_btn":"Clear ALL locally stored data",
             "clear_my_local_data_btn":"Clear YOUR locally stored data",
             "clear_my_db_info":"Clear YOUR DB values",
-            "clear_your_both":"Clear YOUR Local And DB Values"
+            "clear_your_both":"Clear YOUR Local And DB Values",
+            "tab_unsupported":{
+                "tab_unsuported_heading":   "Feature not supported for your current system",
+                "tab_unsuported_body":      "Please submit a feature request on the github if you would like the information added",
+                "tab_unsuported_link":      "Link to Feature Request Page"
+            },
+            "tab_d20_rolls":{
+                "attack": "D20 Atack Rolls",
+                "damage": "D20 Damage Rolls",
+                "save": "D20 Save Rolls",
+                "skill": "D20 Skill Rolls",
+                "ability": "D20 Ability Rolls",
+                "unknown": "D20 Unknown Rolls"
+            }
         },
         "compare_data_form":{
             "title": "Compare Player Stats",
@@ -127,12 +140,6 @@
         "google_chart":{
             "die": "Die Number",
             "rolls": "Number Of Rolls"
-        },
-        "roll_chat_form":{
-
-        },
-        "streak_chat_form":{
-
         },
         "player-stats-button-title": "Player Rolls",
         "global-stats-button-title": "Global Rolls",

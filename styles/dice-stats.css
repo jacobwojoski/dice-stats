@@ -94,3 +94,11 @@ button.blind-roll-rollcount{
     margin-right: 10px;
     white-space: nowrap;
 }
+
+.templates-tab-unsupported-heading{
+    text-align: center;
+}
+
+.templates-tab-unsupported-body{
+    margin: auto;
+}
