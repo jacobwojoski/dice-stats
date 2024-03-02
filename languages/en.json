@@ -121,7 +121,7 @@
             "clear_your_both":"Clear YOUR Local And DB Values",
             "tab_unsupported":{
                 "tab_unsuported_heading":   "Feature not supported for your current system",
-                "tab_unsuported_body":      "Please submit a feature request on the github if you would like the information added",
+                "tab_unsuported_body":      "This page subcatagorizes D20 rolls into Attack, Damage, Skill, etc. Please submit a feature request on the github if you would like the information added for whatever system your using",
                 "tab_unsuported_link":      "Link to Feature Request Page"
             },
             "tab_d20_rolls":{
