@@ -21,6 +21,11 @@ The original design philosophy was a way to view SESSION stats. Rolls will alway
 [socketlib Foundry Page](https://foundryvtt.com/packages/socketlib)
 Socketlib needs to be active to allow GM to tell other users to push blind rolls.
 
+## CONTRIBUTIONS
+- Jacobwojo: Lead Developer
+- Juan Ferrer: Fix for canvas buttons
+- RadicalEd: German translation + Remove some hardcoded items
+
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
 - **Midi-Qol** if **Merge Rolls to 1 Card** is enabled but have a partial fix. 

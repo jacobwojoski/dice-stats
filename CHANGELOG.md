@@ -1,4 +1,9 @@
 # CHANGELOG  
+
+## [ 1.17.0 ]
+- Add Dragonbane parser. 
+- Could be improved on in the future to parse dice object instead of flavor object. Depends on System Updates though. 
+
 ## [ 1.16.1 ]
 - Fix weird bug on pf2e due to not allowing Ability rolls. 
 - Removing the ability rolls secrion from handlebars, Loading, Adding it back and reloading worked for some reason.
