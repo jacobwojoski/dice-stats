@@ -154,14 +154,7 @@ class DICE_STATS_UTILS {
             return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
         }
 
-        //Return type of roll we received. Only set up for pf2e now.
-        /*
-            Would need to Update 
-            else if here, 
-            Update Forms (Player Data Obj), 
-            Data Pack (Player Data Pack)
-            Roll Types (Maybe)
-        */
+        /* To add a new system update here & datapack */
         if(game.system.id == "pf2e")
         {
             //Check if damage Roll
@@ -213,6 +206,27 @@ class DICE_STATS_UTILS {
             }else if(flavorString.includes("Saving Throw")){
                 return DS_GLOBALS.ROLL_TYPE.SAVE;
 
+            }else{
+                return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+            }
+
+        }else if(game.system.id == "dragonbane")
+        {// Dragonbane also doesn't have a nice way to parse rolls. Need to pull flavor text.
+            // Flavor text doesnt have a good way to see different types of skill rolls
+            let flavorString = msg.flavor;
+            if(flavorString.includes("Skill")){
+                return DS_GLOBALS.ROLL_TYPE.SKILL;
+                
+            }else if(   flavorString.includes("Attack") || flavorString.includes("Topple") || 
+                        flavorString.includes("Disarm") || flavorString.includes("Parry")){
+                return DS_GLOBALS.ROLL_TYPE.ATK;
+
+            }else if(flavorString.includes("Attribute")){
+                return DS_GLOBALS.ROLL_TYPE.ABILITY;
+
+            }else if(flavorString.includes("Damage")){
+                return DS_GLOBALS.ROLL_TYPE.DMG;
+                
             }else{
                 return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
             }

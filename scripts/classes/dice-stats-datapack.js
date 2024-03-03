@@ -255,6 +255,7 @@ class DATA_PACKAGER
         {
             case 'pf2e':
             case 'dnd5e':
+            case 'dragonbane':
                 packedData.HAVE_DICE_SUB_CATAGORIES[DS_GLOBALS.DIE_TYPE.D20] = true;
                 break;
                 
