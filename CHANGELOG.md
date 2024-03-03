@@ -1,5 +1,8 @@
 # CHANGELOG  
 
+## [ 1.17.1 ]
+- Update dnd msg parsing to use flag value. Now it should parse rolls correctly in all langs. 
+
 ## [ 1.17.0 ]
 - Add Dragonbane parser. 
 - Could be improved on in the future to parse dice object instead of flavor object. Depends on System Updates though. 
