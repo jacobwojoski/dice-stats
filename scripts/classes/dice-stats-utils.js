@@ -261,8 +261,8 @@ class DICE_STATS_UTILS {
      * This fn should prob only ever be available to the GM
      */
     static async clearAllData(){
-        let title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
-        let context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.context');
+        let title_txt = game.i18n.localize('DICE_STATS_TEXT.settings.global_enable_clear_all_stats_popup.title');
+        let context_txt = game.i18n.localize('DICE_STATS_TEXT.settings.global_enable_clear_all_stats_popup.context');
         const allClear = await Dialog.confirm({
             title: title_txt,
             content: context_txt,
