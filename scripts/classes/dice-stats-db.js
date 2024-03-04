@@ -155,54 +155,6 @@ class DB_INTERACTION
                 dbDieDataObj.UNKNOWN_ROLLS_BLIND    ? tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND] : "";
             }
         }
-
-        /*
-        tempPlayerObj.USERNAME = dbDataObj.USERNAME
-        tempPlayerObj.USERID =      dbDataObj.USERID;
-        tempPlayerObj.GM =          dbDataObj.GM;
-
-        for(let i=0; i<tempPlayerObj.PLAYER_DICE.length; i++)
-        {
-            let tempDieObj = tempPlayerObj.PLAYER_DICE[i];
-            let dbDieDataObj = dbDataObj.PLAYER_DICE[i];
-
-            tempDieObj.TYPE =          dbDieDataObj.TYPE;
-            tempDieObj.TOTAL_ROLLS =   dbDieDataObj.TOTAL_ROLLS;
-            tempDieObj.ROLLS =         [... dbDieDataObj.ROLLS];  
-            tempDieObj.BLIND_ROLLS =   [... dbDieDataObj.BLIND_ROLLS];
-            tempDieObj.STREAK_SIZE =   dbDieDataObj.STREAK_SIZE;
-            tempDieObj.STREAK_INIT =   dbDieDataObj.STREAK_INIT;
-            tempDieObj.STREAK_ISBLIND = dbDieDataObj.STREAK_ISBLIND;
-            tempDieObj.LONGEST_STREAK =        dbDieDataObj.LONGEST_STREAK;
-            tempDieObj.LONGEST_STREAK_INIT =   dbDieDataObj.LONGEST_STREAK_INIT;
-
-            tempDieObj.MEAN =      dbDieDataObj.MEAN;
-            tempDieObj.MEDIAN =    dbDieDataObj.MEDIAN;
-            tempDieObj.MODE =      dbDieDataObj.MODE;
-
-            if(i == DS_GLOBALS.DIE_TYPE.D20)
-            {
-                tempDieObj.MEANS =          [...dbDieDataObj.MEANS]
-                tempDieObj.MEDIANS =        [...dbDieDataObj.MEDIANS]
-                tempDieObj.MODES =          [...dbDieDataObj.MODES]
-                tempDieObj.ROLL_COUNTERS =  [...dbDieDataObj.ROLL_COUNTERS]
-
-                tempDieObj.ATK_ROLLS =      [...dbDieDataObj.ATK_ROLLS]
-                tempDieObj.DMG_ROLLS =      [...dbDieDataObj.DMG_ROLLS]
-                tempDieObj.SAVES_ROLLS =    [...dbDieDataObj.SAVES_ROLLS]
-                tempDieObj.SKILLS_ROLLS =   [...dbDieDataObj.SKILLS_ROLLS]
-                tempDieObj.ABILITY_ROLLS =  [...dbDieDataObj.ABILITY_ROLLS]
-                tempDieObj.UNKNOWN_ROLLS =  [...dbDieDataObj.UNKNOWN_ROLLS]
-
-                tempDieObj.ATK_ROLLS_BLIND =        [...dbDieDataObj.ATK_ROLLS_BLIND]
-                tempDieObj.DMG_ROLLS_BLIND =        [...dbDieDataObj.DMG_ROLLS_BLIND]
-                tempDieObj.SAVES_ROLLS_BLIND =      [...dbDieDataObj.SAVES_ROLLS_BLIND]
-                tempDieObj.SKILLS_ROLLS_BLIND =     [...dbDieDataObj.SKILLS_ROLLS_BLIND]
-                tempDieObj.ABILITY_ROLLS_BLIND =    [...dbDieDataObj.ABILITY_ROLLS_BLIND]
-                tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND]
-            }
-        }
-        */
     }
 
     /**
