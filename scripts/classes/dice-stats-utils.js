@@ -190,7 +190,8 @@ class DICE_STATS_UTILS {
         }
         else if (game.system.id == "dnd5e")
         {// D&D System is annoying and doesn't have a good way to see the type of roll. Need to parse a String to find out
-            let rollType = msg.flags.dnd5e.roll.type;
+
+            let rollType = msg?.flags?.dnd5e?.roll?.type;
             if(rollType == "skill"){
                 return DS_GLOBALS.ROLL_TYPE.SKILL;
 
