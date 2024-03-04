@@ -130,6 +130,18 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS}.Hint`,
             restricted: true,
         })
+
+        // A setting that creates a popup for the gm everytime they join the game asking if they want to "clear all player data"
+        // This clears all DB values and local values
+        game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP}.Name`,
+            default: true,
+            type: Boolean,
+            scope: 'world', //world = db, client = local
+            config: true,   // show in module config
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP}.Hint`,
+            restricted: true,
+        })
     }
 
     /**

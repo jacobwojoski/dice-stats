@@ -93,19 +93,19 @@ class GlobalStatusPage extends FormApplication{
                 break;
             case 'clearAllDBrollData':
                 title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.title');
-                    context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.context');
-                    const dbClear = await Dialog.confirm({
-                        title: title_txt,
-                        content: context_txt,
-                        yes: () => {return true},
-                        no: () => {return false},
-                        defaultYes: false
-                        });
-    
-                    if (dbClear) {
-                        ui.notifications.warn("All DB Data Cleared");
-                        DS_GLOBALS.DS_OBJ_GLOBAL.clear_database();
-                    }
+                context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.context');
+                const dbClear = await Dialog.confirm({
+                    title: title_txt,
+                    content: context_txt,
+                    yes: () => {return true},
+                    no: () => {return false},
+                    defaultYes: false
+                    });
+
+                if (dbClear) {
+                    ui.notifications.warn("All DB Data Cleared");
+                    DS_GLOBALS.DS_OBJ_GLOBAL.clear_database();
+                }
                 break;
             case 'loadAllFromDB':
                 title_txt = game.i18n.localize('DICE_STATS_TEXT.player_dialogs.load_all_db.title');

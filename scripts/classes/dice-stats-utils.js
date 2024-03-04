@@ -255,6 +255,27 @@ class DICE_STATS_UTILS {
             DS_GLOBALS.FORM_PLAYER_STATS.render();
         }
     }
+
+    /** 
+     * async Utils fn used to make a popup asking if the user wants to clear all data from the DB.
+     * This fn should prob only ever be available to the GM
+     */
+    static async clearAllData(){
+        let  = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.title');
+        let context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.context');
+        const dbClear = await Dialog.confirm({
+            title: title_txt,
+            content: context_txt,
+            yes: () => {return true},
+            no: () => {return false},
+            defaultYes: false
+            });
+
+        if (dbClear) {
+            ui.notifications.warn("All DB Data Cleared");
+            DS_GLOBALS.DS_OBJ_GLOBAL.clear_database();
+        }
+    }
 }
 
 class  ComparePlayerObjUtil

@@ -20,18 +20,24 @@ class DS_GLOBALS {
         TABEDPLAYER_ERROR: 'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'
     };
     static MODULE_SETTINGS= {
-        PLAYERS_SEE_PLAYERS:        'players_see_players', //if players cant see self they cant see others either     [Def: True]      (Global)
-        PLAYERS_SEE_GM:             'players_see_gm',       //If Players can see GM dice roll stats                    [Def: False]     (Global)
-        PLAYERS_SEE_GLOBAL:         'players_see_global',   //If Players Can  Global Dice Stats                        [Def: True]      (Global)
-        PLAYERS_SEE_GM_IN_GLOBAL:   'players_see_gm_in_global',   //If GM roll stats get added into global stats [Def: False]     (Global) 
-        SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', //Allow blind rolls to be saved immediately   [Def: false]  (Global)
-        ENABLE_AUTO_DB:             'enable_auto_db', //Rolling data gets saved to automatically and user load from DB on joining  [Def: true] (Global)
-        OTHER_ACCESS_BUTTON_ICONS:  'player_access_icons', //Change player icons to use custom       [Default: fas fa-dice-d20]  (Global)
+        PLAYERS_SEE_PLAYERS:        'players_see_players',          // If players cant see self they cant see others either     [Def: True]      (Global)
+        PLAYERS_SEE_GM:             'players_see_gm',               // If Players can see GM dice roll stats                    [Def: False]     (Global)
+        PLAYERS_SEE_GLOBAL:         'players_see_global',           // If Players Can  Global Dice Stats                        [Def: True]      (Global)
+        PLAYERS_SEE_GM_IN_GLOBAL:   'players_see_gm_in_global',     // If GM roll stats get added into global stats             [Def: False]     (Global) 
+        SHOW_BLIND_ROLLS_IMMEDIATE: 'enable_blind_rolls_immediate', // Allow blind rolls to be saved immediately                [Def: false]  (Global)
+        ENABLE_AUTO_DB:             'enable_auto_db',               // Rolling data gets saved to automatically and user load from DB on joining  [Def: true] (Global)
+        OTHER_ACCESS_BUTTON_ICONS:  'player_access_icons',          // Change player icons to use custom                        [Default: fas fa-dice-d20]  (Global)
     
-        GLOBAL_ENABLE_OTHER_DB:         'global_enable_other_db',       //Enable the .json file db version (Turn off flags DB)
-        LOCAL_DISABLE_OTHER_DP_POPUP:   'local_enable_other_db_popup',  //Disable the popup notifcation for the file DB version
+        GLOBAL_ENABLE_OTHER_DB:         'global_enable_other_db',       //Enable the .json file db version (Turn off flags DB)  [Def: False] (Global)
+        LOCAL_DISABLE_OTHER_DP_POPUP:   'local_enable_other_db_popup',  //Disable the popup notifcation for the file DB version [Def: False] (Local)
+
+        // Popup that gets shown to GM ONLY. Popup Asks if they want to "Clear ALL" Upon joining the game                       [Def: False] (Global)
+        GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP:   'global_enable_clear_all_stats_popup',
     };
+
     /* ------ GLOBAL DS OBJECTS ------- */
+    // This is quite janky but it was designed before I found out you could bind(this) the HTML callbacks.
+    //  They are used as a way to get access to class info that the callback neeeded
     static DS_OBJ_GLOBAL= null;
     static FORM_GL_STATS= null;
     static FORM_GL_COMPARE= null;
