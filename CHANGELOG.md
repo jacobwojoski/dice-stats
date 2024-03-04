@@ -3,6 +3,7 @@
 ## [ 1.17.2 ]
 - Update DB load fn to validate data that its getting. If data doesnt exist in DB, dont load it in.
 - Add setting to allow a Clear all poup when the GM joins the game. 
+- add chaining operator for 5e parse. Fix for unknown dice not being tracked. 
 
 ## [ 1.17.1 ]
 - Update dnd msg parsing to use flag value. Now it should parse rolls correctly in all langs. 
