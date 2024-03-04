@@ -55,6 +55,8 @@ class DB_INTERACTION
      * @param {PLAYER} tempPlayerObj Object were putting data in
      * @param {PLAYER (DB VERSION)} dbDataObj Object were taking data from
      */
+
+    // TODO: This should validate that the DBOBJ has the value were trying to add before adding it.
     static createPlayerObject(tempPlayerObj, dbDataObj)
     {
         /*
@@ -102,7 +104,60 @@ class DB_INTERACTION
             UNKNOWN_ROLLS_BLIND = [];
         }
     */
-        tempPlayerObj.USERNAME =    dbDataObj.USERNAME;
+        dbDataObj.USERNAME  ? tempPlayerObj.USERNAME = dbDataObj.USERNAME   : "";
+        dbDataObj.USERID    ? tempPlayerObj.USERID = dbDataObj.USERID       : "";
+        dbDataObj.GM        ? tempPlayerObj.GM = dbDataObj.GM               : "";
+        
+        for(let i=0; i<tempPlayerObj.PLAYER_DICE.length; i++)
+        {
+            let tempDieObj = tempPlayerObj.PLAYER_DICE[i];
+            let dbDieDataObj = dbDataObj.PLAYER_DICE[i];
+
+            // If the die obj doesnt exist no db values will exist so skip.
+            if(!dbDieDataObj)
+            {
+                continue;
+            }
+
+            dbDieDataObj.TYPE ?         tempDieObj.TYPE =           dbDieDataObj.TYPE                   : "";
+            dbDieDataObj.TOTAL_ROLLS ?  tempDieObj.TOTAL_ROLLS =    dbDieDataObj.TOTAL_ROLLS            : "";
+            dbDieDataObj.ROLLS ?        tempDieObj.ROLLS =          [... dbDieDataObj.ROLLS]            : "";  
+            dbDieDataObj.BLIND_ROLLS ?  tempDieObj.BLIND_ROLLS =    [... dbDieDataObj.BLIND_ROLLS]      : "";
+            dbDieDataObj.STREAK_SIZE ?  tempDieObj.STREAK_SIZE =    dbDieDataObj.STREAK_SIZE            : "";
+            dbDieDataObj.STREAK_INIT ?  tempDieObj.STREAK_INIT =    dbDieDataObj.STREAK_INIT            : "";
+            dbDieDataObj.STREAK_ISBLIND ? tempDieObj.STREAK_ISBLIND = dbDieDataObj.STREAK_ISBLIND       : "";
+            dbDieDataObj.LONGEST_STREAK ? tempDieObj.LONGEST_STREAK = dbDieDataObj.LONGEST_STREAK       : "";
+            dbDieDataObj.LONGEST_STREAK_INIT ? tempDieObj.LONGEST_STREAK_INIT = dbDieDataObj.LONGEST_STREAK_INIT : "";
+
+            dbDieDataObj.MEAN   ? tempDieObj.MEAN =     dbDieDataObj.MEAN   : "";
+            dbDieDataObj.MEDIAN ? tempDieObj.MEDIAN =   dbDieDataObj.MEDIAN : "";
+            dbDieDataObj.MODE   ? tempDieObj.MODE =     dbDieDataObj.MODE   : "";
+
+            if(i == DS_GLOBALS.DIE_TYPE.D20)
+            {
+                dbDieDataObj.MEANS         ? tempDieObj.MEANS =          [...dbDieDataObj.MEANS]   : "";
+                dbDieDataObj.MEDIANS       ? tempDieObj.MEDIANS =        [...dbDieDataObj.MEDIANS] : "";
+                dbDieDataObj.MODES         ? tempDieObj.MODES =          [...dbDieDataObj.MODES]   : "";
+                dbDieDataObj.ROLL_COUNTERS ? tempDieObj.ROLL_COUNTERS =  [...dbDieDataObj.ROLL_COUNTERS] : "";
+
+                dbDieDataObj.ATK_ROLLS      ? tempDieObj.ATK_ROLLS =      [...dbDieDataObj.ATK_ROLLS]       : "";
+                dbDieDataObj.DMG_ROLLS      ? tempDieObj.DMG_ROLLS =      [...dbDieDataObj.DMG_ROLLS]       : "";
+                dbDieDataObj.SAVES_ROLLS    ? tempDieObj.SAVES_ROLLS =    [...dbDieDataObj.SAVES_ROLLS]     : "";
+                dbDieDataObj.SKILLS_ROLLS   ? tempDieObj.SKILLS_ROLLS =   [...dbDieDataObj.SKILLS_ROLLS]    : "";
+                dbDieDataObj.ABILITY_ROLLS  ? tempDieObj.ABILITY_ROLLS =  [...dbDieDataObj.ABILITY_ROLLS]   : "";
+                dbDieDataObj.UNKNOWN_ROLLS  ? tempDieObj.UNKNOWN_ROLLS =  [...dbDieDataObj.UNKNOWN_ROLLS]   : "";
+
+                dbDieDataObj.ATK_ROLLS_BLIND        ? tempDieObj.ATK_ROLLS_BLIND =        [...dbDieDataObj.ATK_ROLLS_BLIND]     : "";
+                dbDieDataObj.DMG_ROLLS_BLIND        ? tempDieObj.DMG_ROLLS_BLIND =        [...dbDieDataObj.DMG_ROLLS_BLIND]     : "";
+                dbDieDataObj.SAVES_ROLLS_BLIND      ? tempDieObj.SAVES_ROLLS_BLIND =      [...dbDieDataObj.SAVES_ROLLS_BLIND]   : "";
+                dbDieDataObj.SKILLS_ROLLS_BLIND     ? tempDieObj.SKILLS_ROLLS_BLIND =     [...dbDieDataObj.SKILLS_ROLLS_BLIND]  : "";
+                dbDieDataObj.ABILITY_ROLLS_BLIND    ? tempDieObj.ABILITY_ROLLS_BLIND =    [...dbDieDataObj.ABILITY_ROLLS_BLIND] : "";
+                dbDieDataObj.UNKNOWN_ROLLS_BLIND    ? tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND] : "";
+            }
+        }
+
+        /*
+        tempPlayerObj.USERNAME = dbDataObj.USERNAME
         tempPlayerObj.USERID =      dbDataObj.USERID;
         tempPlayerObj.GM =          dbDataObj.GM;
 
@@ -147,6 +202,7 @@ class DB_INTERACTION
                 tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND]
             }
         }
+        */
     }
 
     /**

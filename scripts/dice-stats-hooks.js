@@ -149,8 +149,6 @@ Hooks.once('ready', () => {
         DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
     }
 
-    // TODO: Add popup for swaping DB
-
     // --- GM Clear all POPUP ---
     // Check Setting if popup enabled, (I like tracking stats per session so I clear my data every game)
     if( game.user.isGM &&
