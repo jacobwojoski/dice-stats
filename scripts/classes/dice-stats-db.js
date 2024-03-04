@@ -1,3 +1,14 @@
+/**
+ *  Foundry has 2 types of database options, Flags and Files. (Both are not a real DB)
+ * 
+ *  Files are better if you have alot of info. Where flags are better with less info.
+ * 
+ *  We are getting to what i might consider alot of info but using files for DB storage requires
+ *  all users to have file access. 
+ * 
+ *  Sticking with added DB obj validation and Flags for the time beeing. With the potential option for File access 
+ *  and a .json version of the DB. 
+ */
 class DB_INTERACTION 
 {
     /**
@@ -56,7 +67,6 @@ class DB_INTERACTION
      * @param {PLAYER (DB VERSION)} dbDataObj Object were taking data from
      */
 
-    // TODO: This should validate that the DBOBJ has the value were trying to add before adding it.
     static createPlayerObject(tempPlayerObj, dbDataObj)
     {
         /*
