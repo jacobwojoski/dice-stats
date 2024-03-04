@@ -261,19 +261,19 @@ class DICE_STATS_UTILS {
      * This fn should prob only ever be available to the GM
      */
     static async clearAllData(){
-        let  = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.title');
-        let context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_db_data.context');
-        const dbClear = await Dialog.confirm({
+        let title_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.title');
+        let context_txt = game.i18n.localize('DICE_STATS_TEXT.global_dialogs.clear_all_data.context');
+        const allClear = await Dialog.confirm({
             title: title_txt,
             content: context_txt,
             yes: () => {return true},
             no: () => {return false},
             defaultYes: false
             });
-
-        if (dbClear) {
-            ui.notifications.warn("All DB Data Cleared");
-            DS_GLOBALS.DS_OBJ_GLOBAL.clear_database();
+        if(allClear){
+            ui.notifications.warn("All Player Data Cleared");
+            DS_GLOBALS.MODULE_SOCKET.executeForEveryone("clear_sock", {});
+            DB_INTERACTION.clearDB();
         }
     }
 }
