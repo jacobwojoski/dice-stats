@@ -190,7 +190,8 @@ class DICE_STATS_UTILS {
         }
         else if (game.system.id == "dnd5e")
         {// D&D System is annoying and doesn't have a good way to see the type of roll. Need to parse a String to find out
-            let rollType = msg.flags.dnd5e.roll.type;
+
+            let rollType = msg?.flags?.dnd5e?.roll?.type;
             if(rollType == "skill"){
                 return DS_GLOBALS.ROLL_TYPE.SKILL;
 
@@ -253,6 +254,27 @@ class DICE_STATS_UTILS {
     
         if(DS_GLOBALS.FORM_PLAYER_STATS){
             DS_GLOBALS.FORM_PLAYER_STATS.render();
+        }
+    }
+
+    /** 
+     * async Utils fn used to make a popup asking if the user wants to clear all data from the DB.
+     * This fn should prob only ever be available to the GM
+     */
+    static async clearAllData(){
+        let title_txt = game.i18n.localize('DICE_STATS_TEXT.settings.global_enable_clear_all_stats_popup.title');
+        let context_txt = game.i18n.localize('DICE_STATS_TEXT.settings.global_enable_clear_all_stats_popup.context');
+        const allClear = await Dialog.confirm({
+            title: title_txt,
+            content: context_txt,
+            yes: () => {return true},
+            no: () => {return false},
+            defaultYes: false
+            });
+        if(allClear){
+            ui.notifications.warn("All Player Data Cleared");
+            DS_GLOBALS.MODULE_SOCKET.executeForEveryone("clear_sock", {});
+            DB_INTERACTION.clearDB();
         }
     }
 }

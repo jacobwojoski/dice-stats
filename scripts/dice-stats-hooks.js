@@ -148,6 +148,15 @@ Hooks.once('ready', () => {
     {
         DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
     }
+
+    // --- GM Clear all POPUP ---
+    // Check Setting if popup enabled, (I like tracking stats per session so I clear my data every game)
+    if( game.user.isGM &&
+        game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP))
+    {   // Bring Up Popup
+        DICE_STATS_UTILS.clearAllData();
+    }
+        
 });
 
 // Do something when another user connects to the game 

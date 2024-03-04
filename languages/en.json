@@ -29,6 +29,12 @@
             "player_access_icons":{
                 "Name": "Define Players Icons",
                 "Hint": "Used to change player Icons from D-20's to something custom. Check GITHUB for better guide!\nNeed to use https://fontawesome.com/search?o=r&m=free Font Awesome Icons in a comma seperated list. Order matching players in player list \n EX: fa-solid fa-frog, fa-solid fa-circle, fa-solid fa-skull-crossbones"
+            },
+            "global_enable_clear_all_stats_popup":{
+                "Name": "Enable CLEAR ALL popup",
+                "Hint": "Create a popup for the GM that asks if they want to clear all user data (DB and Local) every time they join the game.",
+                "title": "Clear All Popup",
+                "context": "Clearing ALL Player Data (Local And DB). Are you sure?"
             }
         },
         "both_forms":{
