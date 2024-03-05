@@ -35,6 +35,14 @@
                 "Hint": "Create a popup for the GM that asks if they want to clear all user data (DB and Local) every time they join the game.",
                 "title": "Clear All Popup",
                 "context": "Clearing ALL Player Data (Local And DB). Are you sure?"
+            },
+            "local_enable_d20_details_tab":{
+                "Name": "Enable D20 Info Tab",
+                "Hint": "Allows the user to remove the D20 tab button on the player screen to reduce UI clutter if not needed."
+            },
+            "local_enable_2dx_details_tab":{
+                "Name": "Enable 2DX Info Tab",
+                "Hint": "Allows the user to remove the 2dX tab button on the player screen to reduce UI clutter if not needed."
             }
         },
         "both_forms":{

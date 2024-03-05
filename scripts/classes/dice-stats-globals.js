@@ -33,6 +33,12 @@ class DS_GLOBALS {
 
         // Popup that gets shown to GM ONLY. Popup Asks if they want to "Clear ALL" Upon joining the game                       [Def: False] (Global)
         GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP:   'global_enable_clear_all_stats_popup',
+
+        // Settings to enable or disable tab buttons on the UI [Def: Enabled] (Local)
+        LOCAL_ENABLE_D20_DETAILS_TAB:     'local_enable_d20_details_tab',
+        LOCAL_ENABLE_2DX_DETAILS_TAB:     'local_enable_2dx_details_tab',
+        LOCAL_ENABLE_2D6_DETAILS_TAB:     'local_enable_2d6_details_tab',
+        LOCAL_ENABLE_2D20_DETAILS_TAB:    'local_enable_2d20_details_tab',
     };
 
     /* ------ GLOBAL DS OBJECTS ------- */

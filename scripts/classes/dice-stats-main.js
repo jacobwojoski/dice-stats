@@ -142,6 +142,30 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP}.Hint`,
             restricted: true,
         })
+
+        // -------- START TAB DISABLE SETTINGS -----------
+        //  The following are a series of settings that let the users diable dice stats tabs if they dont want/need them 
+        //      cluttering up the UI
+    
+        // Setting to disable d20-info tab [Def: Enabled]
+        game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_D20_DETAILS_TAB, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_D20_DETAILS_TAB}.Name`,
+            default: true,
+            type: Boolean,
+            scope: 'client', //world = db, client = local
+            config: true,   // show in module config
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_D20_DETAILS_TAB}.Hint`,
+        })
+
+        // Setting to disable 2dx-info tab [Def: Enabled]
+        game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'client', //world = db, client = local
+            config: true,   // show in module config
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB}.Hint`,
+        })
     }
 
     /**
