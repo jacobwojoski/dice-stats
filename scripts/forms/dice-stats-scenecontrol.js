@@ -10,7 +10,10 @@ class CustomSceneControlToolGlobal
     active= false;
     button= true; 
 
-    onClick(){
+    async onClick(){
+        //Make sure Compare Is Closed B4 Opening
+        await DS_GLOBALS.FORM_GL_COMPARE?.close();
+
         if(DS_GLOBALS.FORM_GL_STATS){
             DS_GLOBALS.FORM_GL_STATS.render(true);
         }else{
@@ -33,14 +36,20 @@ class CustomSceneControlToolCompare
     active= false;
     button= true; 
 
-    onClick(){
+    async onClick(){
         let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS);
         if(canSeePlayerData === false){
             //Do nothing, Dont allow players to view player data if setting is set
             ui.notifications.warn("No Accesss to Player Data, Ask GM For Permission");
         }else if(DS_GLOBALS.FORM_GL_COMPARE){
+            // Close Global Stats page if opening Compare popup
+            await DS_GLOBALS?.FORM_GL_STATS?.close(false);
+
             DS_GLOBALS.FORM_GL_COMPARE.render(true);
         }else{
+            // Close Global Stats page if opening Compare popup
+            await DS_GLOBALS?.FORM_GL_STATS?.close(false);
+
             DS_GLOBALS.FORM_GL_COMPARE = new ComparePlayerStatusPage().render(true);
         } 
     }
