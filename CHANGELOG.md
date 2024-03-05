@@ -2,6 +2,7 @@
 ## [ 1.17.3 ]
 - Add ability to disable tabs from appearing in the player sheet though settings
 - Force Global Stats or Compare Stats to close when opening each other. They broke eahothers charts if both open at the same time
+- Updated DB validation part 2
 
 ## [ 1.17.2 ]
 - Update DB load fn to validate data that its getting. If data doesnt exist in DB, dont load it in.

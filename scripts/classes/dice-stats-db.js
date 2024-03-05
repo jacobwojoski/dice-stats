@@ -20,30 +20,6 @@ class DB_INTERACTION
     }
 
     /**
-     * Method called to save user info to the db, Can only save your own data!
-     * @param {PLAYER} playerInfo 
-     */
-    static async saveUserData(playerInfo)
-    {
-        // Get Deep Copy rather than shallow copy the player object
-        let objCpy = JSON.parse(JSON.stringify(playerInfo));
-
-        //Get user ID
-        let userid = objCpy.USERID;
-
-        //Save copy into DB
-        if(userid)
-        {
-            /*
-            * the underlies update fn that set Flag calls seems to mess up and not update the DB causing the ERROR. 
-            * Uncommenting this should fix it but leaving it out to not interact with DB more than needed
-            * await DB_INTERACTION.clearPlayer(game.user);
-            */
-            await game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
-        }
-    }
-
-    /**
      * Method used to load all players info from the db
      * @param {String} userId //Long string of letters and numbers unique to each user
      */
@@ -113,7 +89,7 @@ class DB_INTERACTION
             ABILITY_ROLLS_BLIND = [];
             UNKNOWN_ROLLS_BLIND = [];
         }
-    */
+    
         dbDataObj.USERNAME  ? tempPlayerObj.USERNAME = dbDataObj.USERNAME   : "";
         dbDataObj.USERID    ? tempPlayerObj.USERID = dbDataObj.USERID       : "";
         dbDataObj.GM        ? tempPlayerObj.GM = dbDataObj.GM               : "";
@@ -129,6 +105,7 @@ class DB_INTERACTION
                 continue;
             }
 
+            
             dbDieDataObj.TYPE ?         tempDieObj.TYPE =           dbDieDataObj.TYPE                   : "";
             dbDieDataObj.TOTAL_ROLLS ?  tempDieObj.TOTAL_ROLLS =    dbDieDataObj.TOTAL_ROLLS            : "";
             dbDieDataObj.ROLLS ?        tempDieObj.ROLLS =          [... dbDieDataObj.ROLLS]            : "";  
@@ -165,6 +142,61 @@ class DB_INTERACTION
                 dbDieDataObj.UNKNOWN_ROLLS_BLIND    ? tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND] : "";
             }
         }
+        */
+        
+        dbDataObj?.USERNAME ? tempPlayerObj.USERNAME =    dbDataObj?.USERNAME : console.log("No USERNAME in DB");
+        dbDataObj?.USERID   ? tempPlayerObj.USERID =      dbDataObj?.USERID   : console.log("No USERID in DB");
+        dbDataObj?.GM       ? tempPlayerObj.GM =          dbDataObj?.GM       : console.log("No GM in DB");
+        
+        for(let i=0; i<tempPlayerObj.PLAYER_DICE.length; i++)
+        {
+            let tempDieObj = tempPlayerObj.PLAYER_DICE[i];
+            let dbDieDataObj = dbDataObj.PLAYER_DICE[i];
+
+            // If the die obj doesnt exist no db values will exist so skip.
+            if(!dbDieDataObj)
+            {
+                continue;
+            }
+
+            dbDieDataObj?.DOESNT_EXIST ?    tempDieObj.BLIND_ROLLS =    [... dbDieDataObj.DOESNT_EXIST]    : console.log("No Blind Rolls in DB");
+            dbDieDataObj?.TYPE ?            tempDieObj.TYPE =           dbDieDataObj.TYPE                  : console.log("No TYPE in DB");
+            dbDieDataObj?.TOTAL_ROLLS ?     tempDieObj.TOTAL_ROLLS =    dbDieDataObj.TOTAL_ROLLS           : console.log("No TOTAL ROLLS in DB") ;
+            
+            dbDieDataObj?.ROLLS ?       tempDieObj.ROLLS =          [... dbDieDataObj.ROLLS]            : console.log("No ROLLS in DB");  
+            dbDieDataObj?.BLIND_ROLLS ? tempDieObj.BLIND_ROLLS =    [... dbDieDataObj.BLIND_ROLLS]      : console.log("No BLIND ROLLS in DB");
+            dbDieDataObj?.STREAK_SIZE ? tempDieObj.STREAK_SIZE =    dbDieDataObj.STREAK_SIZE            : console.log("No STREAK SIZE in DB");
+            dbDieDataObj?.STREAK_INIT ? tempDieObj.STREAK_INIT =    dbDieDataObj.STREAK_INIT            : console.log("No STREAK INIT in DB");
+            dbDieDataObj?.STREAK_ISBLIND ? tempDieObj.STREAK_ISBLIND = dbDieDataObj.STREAK_ISBLIND         : console.log("No STREAK ISBLIND in DB");
+            dbDieDataObj?.LONGEST_STREAK ? tempDieObj.LONGEST_STREAK = dbDieDataObj.LONGEST_STREAK         : console.log("No LONGEST STREAK in DB");
+            dbDieDataObj?.LONGEST_STREAK_INIT ? tempDieObj.LONGEST_STREAK_INIT = dbDieDataObj.LONGEST_STREAK_INIT  : console.log("No LONGEST STREAK INIT in DB");
+
+            dbDieDataObj?.MEAN ?    tempDieObj.MEAN =     dbDieDataObj.MEAN   : console.log("No MEAN in DB");
+            dbDieDataObj?.MEDIAN ?  tempDieObj.MEDIAN =   dbDieDataObj.MEDIAN : console.log("No MEDIAN in DB");
+            dbDieDataObj?.MODE ?    tempDieObj.MODE =     dbDieDataObj.MODE   : console.log("No MODE ROLLS in DB");
+
+            if(i == DS_GLOBALS.DIE_TYPE.D20)
+            {
+                dbDieDataObj?.MEANS ?       tempDieObj.MEANS =          [...dbDieDataObj.MEANS]   : console.log("No D20 MEANS  in DB");
+                dbDieDataObj?.MEDIANS ?     tempDieObj.MEDIANS =        [...dbDieDataObj.MEDIANS] : console.log("No D20 MEDIANS in DB");
+                dbDieDataObj?.MODES ?       tempDieObj.MODES =          [...dbDieDataObj.MODES]   : console.log("No  in DB");
+                dbDieDataObj?.ROLL_COUNTERS ? tempDieObj.ROLL_COUNTERS =  [...dbDieDataObj.ROLL_COUNTERS] : console.log("No  in DB");
+
+                dbDieDataObj?.ATK_ROLLS ?       tempDieObj.ATK_ROLLS =      [...dbDieDataObj.ATK_ROLLS]       : console.log("No ATK ROLLS in DB");
+                dbDieDataObj?.DMG_ROLLS ?       tempDieObj.DMG_ROLLS =      [...dbDieDataObj.DMG_ROLLS]       : console.log("No DMG ROLLS in DB");
+                dbDieDataObj?.SAVES_ROLLS ?     tempDieObj.SAVES_ROLLS =    [...dbDieDataObj.SAVES_ROLLS]     : console.log("No SAVE ROLLS in DB");
+                dbDieDataObj?.SKILLS_ROLLS ?    tempDieObj.SKILLS_ROLLS =   [...dbDieDataObj.SKILLS_ROLLS]    : console.log("No SKILL ROLLS in DB");
+                dbDieDataObj?.ABILITY_ROLLS ?   tempDieObj.ABILITY_ROLLS =  [...dbDieDataObj.ABILITY_ROLLS]   : console.log("No ABILITY ROLLS in DB");
+                dbDieDataObj?.UNKNOWN_ROLLS ?   tempDieObj.UNKNOWN_ROLLS =  [...dbDieDataObj.UNKNOWN_ROLLS]   : console.log("No UNKNOWN ROLLS in DB");
+
+                dbDieDataObj?.ATK_ROLLS_BLIND ?     tempDieObj.ATK_ROLLS_BLIND =        [...dbDieDataObj.ATK_ROLLS_BLIND]     : console.log("No BLIND ATK in DB");
+                dbDieDataObj?.DMG_ROLLS_BLIND ?     tempDieObj.DMG_ROLLS_BLIND =        [...dbDieDataObj.DMG_ROLLS_BLIND]     : console.log("No BLIND DMG in DB");
+                dbDieDataObj?.SAVES_ROLLS_BLIND ?   tempDieObj.SAVES_ROLLS_BLIND =      [...dbDieDataObj.SAVES_ROLLS_BLIND]   : console.log("No BLIND SAVES in DB");
+                dbDieDataObj?.SKILLS_ROLLS_BLIND ?  tempDieObj.SKILLS_ROLLS_BLIND =     [...dbDieDataObj.SKILLS_ROLLS_BLIND]  : console.log("No BLIND SKILL in DB");
+                dbDieDataObj?.ABILITY_ROLLS_BLIND ? tempDieObj.ABILITY_ROLLS_BLIND =    [...dbDieDataObj.ABILITY_ROLLS_BLIND] : console.log("No BLIND ATTR in DB");
+                dbDieDataObj?.UNKNOWN_ROLLS_BLIND ? tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND] : console.log("No BLIND UNKNOWN in DB");
+            }
+        }
     }
 
     /**
@@ -199,4 +231,30 @@ class DB_INTERACTION
             }
         }
     }
+
+     /**
+     * Method called to save user info to the db, Can only save your own data!
+     * @param {PLAYER} playerInfo 
+     */
+     static async saveUserData(playerInfo)
+     {
+         // Get Deep Copy rather than shallow copy the player object
+         let objCpy = JSON.parse(JSON.stringify(playerInfo));
+ 
+         //Get user ID
+         let userid = objCpy.USERID;
+ 
+         //Save copy into DB
+         if(userid)
+         {
+             /**
+             * the underlies update fn that set Flag calls seems to mess up and not update the DB causing the ERROR.
+             * Think it has to do with saving data to forms makes a merge call not a obj.set. Doc talks a but about it
+             * Uncommenting this should fix it but leaving it out to not interact with DB more than needed
+             */
+             await DB_INTERACTION.clearPlayer(game.users.get(userid));
+ 
+             await game.users.get(userid)?.setFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG, objCpy);
+         }
+     }
 }
