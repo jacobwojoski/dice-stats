@@ -37,6 +37,49 @@ class CustomTabFormClass extends FormApplication
         //this.PLAYERDATA = dataObject;
     }
 
+    /**
+     * Update the tab object with different tab buttons bassed on the users current configuration settings
+     * @param {*} tabObj Array that stores the tab buttons. 
+     */
+    createTabObj(){
+        let tabObj = [];
+        // Global Player Stats info, This is the default tab and should always be displayed
+        tabObj.push(
+            { 
+                label: "player-stats",
+                title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.all'),
+                content: "<em>Fancy tab1 content.</em>",
+                base: true
+            }
+        );
+
+        // D20 Specific Info Tab. Some game systems like PBTA might want this disabled
+        if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_D20_DETAILS_TAB)) {
+            tabObj.push(
+                { 
+                    label: "player-stats-d20",
+                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.d20'),
+                    content: "<em>Fancy tab2 content.</em>",
+                    d20: true
+                }
+            );
+        }
+
+        // 2DX Info Tab, Stats on rolls like 2d6, 2d12, 2d20. These should make bellcurve looking charts
+        if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB)) {
+            tabObj.push(
+                {
+                    label: "2dx-stats",
+                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.twoDx'),
+                    content: "<em>Fancy tab2 content.</em>",
+                    twoDx: true
+                }
+            );
+        }
+
+        return tabObj;
+    }
+
     // Create data object thats used for the form
     getData(){
 
@@ -49,30 +92,12 @@ class CustomTabFormClass extends FormApplication
         //Object needed to specify tabs
         var baseDataObject = { 
             header: "<h1>HEADER</h1>",
-            tabs: [
-                { 
-                    label: "player-stats",
-                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.all'),
-                    content: "<em>Fancy tab1 content.</em>",
-                    base: true
-                },
-                { 
-                    label: "player-stats-d20",
-                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.d20'),
-                    content: "<em>Fancy tab2 content.</em>",
-                    d20: true
-                }
-                /*,
-                {
-                    label: "2dx-stats",
-                    title: game.i18n.localize('DICE_STATS_TEXT.both_forms.tab_titles.twoDx'),
-                    content: "<em>Fancy tab2 content.</em>",
-                    twoDx: true
-                }
-                */
-            ],
+            tabs: [],
             footer: "<h1>FOOTER</h1>"
         };
+
+        // Create different tab buttons for player form
+        baseDataObject.tabs = this.createTabObj();
 
         if(DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.has(this.SEL_PLAYER)){
             let playerObj = DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(this.SEL_PLAYER);

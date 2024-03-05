@@ -1,4 +1,6 @@
 # CHANGELOG  
+## [ 1.17.3 ]
+- Add ability to disable tabs from appearing in the player sheet though settings
 
 ## [ 1.17.2 ]
 - Update DB load fn to validate data that its getting. If data doesnt exist in DB, dont load it in.
