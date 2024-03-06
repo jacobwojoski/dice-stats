@@ -135,7 +135,7 @@ class DiceStatsTracker {
         // This clears all DB values and local values
         game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP, {
             name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP}.Name`,
-            default: true,
+            default: false,
             type: Boolean,
             scope: 'world', //world = db, client = local
             config: true,   // show in module config

@@ -1,4 +1,8 @@
 # CHANGELOG  
+## [ 1.17.4 ]
+- Make clear popup off by default
+- Add text to clear popup to describe mod its from
+
 ## [ 1.17.3 ]
 - Add ability to disable tabs from appearing in the player sheet though settings
 - Force Global Stats or Compare Stats to close when opening each other. They broke eahothers charts if both open at the same time
