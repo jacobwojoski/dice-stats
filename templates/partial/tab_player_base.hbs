@@ -42,22 +42,22 @@
 
                 <!-- did we select 2dx Button -->
                 {{#if twoDx}}
-                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs' ../playerData }}
+                    {{> modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs ../playerData }}
                 {{/if}}
 
                 <!-- Did we select D20 Button? -->
                 {{#if d20}} 
                     <!-- [DS_GLOBALS.DIE_TYPE.D20] == 7 -->
                     {{#diceStats_isTrue ../playerData.HAVE_DICE_SUB_CATAGORIES.[7] }}
-                        {{> 'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs' ../playerData }}
+                        {{> modules/dice-stats/templates/partial/tab_player_stats_d20.hbs ../playerData }}
                     {{else}}
-                        {{> 'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'}}
+                        {{> modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs}}
                     {{/diceStats_isTrue}}
                 {{/if}}
                
                 <!-- Did we select 'All Stats' Button -->
                 {{#if base }}
-                    {{> 'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs' ../playerData }}
+                    {{> modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs ../playerData }}
                 {{/if}}
             </div>
         {{/each}}
