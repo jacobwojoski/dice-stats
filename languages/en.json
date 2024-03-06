@@ -34,7 +34,7 @@
                 "Name": "Enable CLEAR ALL popup",
                 "Hint": "Create a popup for the GM that asks if they want to clear all user data (DB and Local) every time they join the game.",
                 "title": "Clear All Popup",
-                "context": "Clearing ALL Player Data (Local And DB). Are you sure?"
+                "context": "DICE STATS: Clearing ALL Player Data (Local And DB). Are you sure?"
             },
             "local_enable_d20_details_tab":{
                 "Name": "Enable D20 Info Tab",
