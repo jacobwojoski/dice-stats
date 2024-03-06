@@ -83,11 +83,7 @@ class CustomTabFormClass extends FormApplication
     // Create data object thats used for the form
     getData(){
 
-        loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYERBASE]);
-        loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_ALL]);
-        loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_D20]);
-        loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TEBEDPLAYER_2DX]);
-        loadTemplates([DS_GLOBALS.MODULE_TEMPLATES.TABEDPLAYER_ERROR]);
+        loadTemplates(DS_GLOBALS.TEMPLATE_PATH_ARY);
         
         //Object needed to specify tabs
         var baseDataObject = { 

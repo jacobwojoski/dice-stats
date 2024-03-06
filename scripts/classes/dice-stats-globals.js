@@ -10,6 +10,15 @@ class DS_GLOBALS {
     static MODULE_FLAGS = {
         ROLLDATAFLAG:'player_roll_data'
     };
+    static TEMPLATE_PATH_ARY = [
+        'modules/dice-stats/templates/dice-stats-global.hbs',
+        'modules/dice-stats/templates/dice-stats-compare.hbs',
+        'modules/dice-stats/templates/partial/tab_player_base.hbs',
+        'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
+        'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
+        'modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs',
+        'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'
+    ];
     static MODULE_TEMPLATES= {
         GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
         COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
