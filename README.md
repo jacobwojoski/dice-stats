@@ -26,6 +26,9 @@ Socketlib needs to be active to allow GM to tell other users to push blind rolls
 - Juan Ferrer: Fix for canvas buttons
 - RadicalEd: German translation + Remove some hardcoded items
 
+## SVG IMAGES - CREATIVE COMMONS V3.0
+- d4,d6,d8,d10,d12,d20 Icons By Lonnie Tapscott :: Noun Project
+
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
 - Any system that doesnt print rolls to chat
 - **Midi-Qol** if **Merge Rolls to 1 Card** is enabled but have a partial fix. 
