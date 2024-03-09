@@ -18,18 +18,6 @@
             <input type="checkbox" class="form-checkboxes" data-action="d20checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[7]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d20"}}</span></input>
             <input type="checkbox" class="form-checkboxes" data-action="d100checkbox"    {{{diceStats_IsChecked playerData/IS_DIE_DISPLAYED.[8]}}}><span class="form-checkboxes">{{localize "DICE_STATS_TEXT.both_forms.checkboxes.d100"}}</span></input>
         </div>
-        <br>
-        <!-- Add Buttons to jump to tabs -->
-        <div>
-            <h3>Jump To:</h3>
-            <ahref=""><img src="modules/dice-stats/svgs/noun-d4.svg" alt="D4" width="50" height="50"></ahref>
-            <ahref=""><img src="modules/dice-stats/svgs/noun-d6.svg" alt="D6"  width="50" height="50"></ahref>
-            <ahref=""><img src="modules/dice-stats/svgs/noun-d8.svg" alt="D8"  width="50" height="50"></ahref>
-            <ahref=""><img src="modules/dice-stats/svgs/noun-d10.svg" alt="D10"  width="50" height="50"></ahref>
-            <ahref=""><img src="modules/dice-stats/svgs/noun-d12.svg" alt="D12"  width="50" height="50"></ahref>
-            <ahref=""><img src="modules/dice-stats/svgs/noun-d20.svg" alt="D20"  width="50" height="50"></ahref>
-        </div>
-        <br>
         {{#diceStats_ifHaveBlindRolls playerData/BLIND_ROLL_COUNT}}
         <div class="blind-roll-rollcount">
             <h2>{{localize "DICE_STATS_TEXT.player_data_form.blind_rolls" ui_rolls=playerData/BLIND_ROLL_COUNT }}</h2>
