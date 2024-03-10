@@ -103,6 +103,14 @@ class DS_GLOBALS {
         UNKNOWN: 5    
     };
 
+    static DEGREE_SUCCESS= {
+        UNKNOWN:        0,
+        CRIT_FAIL:      1,
+        FAIL:           2,
+        SUCCESS:        3,
+        CRIT_SUCCESS:   4
+    }
+
     //Convert {DIE_TYPE} to the max value you can roll on that die
     static MAX_DIE_VALUE= [2,3,4,6,8,10,12,20,100];
 

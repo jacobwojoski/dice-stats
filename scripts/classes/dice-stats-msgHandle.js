@@ -16,7 +16,7 @@ class DS_MESSAGE_HANDLER {
         }else if (game.system === 'pf1e'){
             // PF1 Attack rolls dont use isRoll for attacks
             if(msg.systemRolls?.attacks?.length > 0){
-                return true
+                return true;
             }
         }
         return false;
@@ -35,14 +35,21 @@ class DS_MESSAGE_HANDLER {
     /**
      * Get the number of rolls in the message 
      * @param {*} msg 
+     * @returns {*} 
      */
     static getNumberRolls(msg)
     {
 
     }
 
-    /* ROLL INFO OBJ
-        DIE_TYPE, ROLL_TYPE, ROLL VALUE, IS_BLIND, DEG_SUCCESS, 
+    static getDegreeSuccess(msg, rollInfo)
+    {
+
+    }
+
+    /*  ROLL INFO OBJ{
+            DIE_TYPE, ROLL_TYPE, ROLL VALUE, IS_BLIND, DEG_SUCCESS
+        } 
     */
     /**
      * Array of all rolls that were made in the chat message
@@ -51,7 +58,21 @@ class DS_MESSAGE_HANDLER {
      */
     static getRollInfo(msg)
     {
-
+        let retVal = null;
+        if(game.system === "pf1e"){
+            retVal = getPf1RollInfo();
+        }else{
+            retVal = getGenericRollInfo();
+        }
+        return retVal;
     }
+}
 
+/* DIE_TYPE, ROLL_TYPE, ROLL_VALUE, IS_BLIND, DEG_SUCCESS*/
+DS_ROLL_INFO = {
+    DieType:    0, //{DIE_TYPE}
+    RollType:   0, //{ROLL_TYPE}
+    RollValue:  0, //{INT}
+    IsBlind:    0, //{BOOLEAN}
+    DegSuccess: 0, //{DEG_SUCCESS}
 }
