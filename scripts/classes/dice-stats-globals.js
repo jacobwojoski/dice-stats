@@ -91,7 +91,7 @@ class DS_GLOBALS {
      *      hbs
      */ 
     static NUM_ROLL_TYPES= 6;  //Size of {ROLL_TYPE}
-    static ROLL_TYPE= {        //Types of rolls the user can roll
+    static ROLL_TYPE = {        //Types of rolls the user can roll
         ATK: 0,     /* Rolling to Attack */
         DMG: 1,     /* Rolling Damage */
         SAVE: 2,    /* Rolling Will, Fortitude, Reflex*/
@@ -103,7 +103,7 @@ class DS_GLOBALS {
         UNKNOWN: 5    
     };
 
-    static DEGREE_SUCCESS= {
+    static DEGREE_SUCCESS = {
         UNKNOWN:        0,
         CRIT_FAIL:      1,
         FAIL:           2,

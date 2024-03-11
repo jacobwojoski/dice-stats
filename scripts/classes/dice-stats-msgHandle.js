@@ -38,7 +38,7 @@ class DS_MESSAGE_HANDLER {
      * @returns {*} 
      */
     static getNumberRolls(msg)
-    {
+    { 
 
     }
 

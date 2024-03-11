@@ -213,6 +213,30 @@ class DiceStatsTracker {
         }
     }
 
+    handleMessage(msg)
+    {
+        let playerInfo = this.PLAYER_DATA_MAP.get(msg.user.id);
+        let parser = MESSAGE_PARSER_FACTORY.createMessageParser();
+
+        let ROLL_INFO_ARY = parser.parseMsgRoll(msg);
+
+        // Save Each ROLL_INFO OBJECT
+        ROLL_INFO_ARY.forEach(element => {
+            playerInfo.saveRoll(element);
+        });
+
+
+        //If AutoSave is Enabled by GM, only save updates to YOUR ROLLS to the DB
+        if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
+        {
+            //If it was my roll save my data to the db
+            if(msg.user.id == game.user.id)
+            {
+                DB_INTERACTION.saveMyPlayerData();
+            }
+        }
+    }
+
     /**
      * Method used to add toll to a specifc player
      * @param {DIE_TYPE} dieType 
