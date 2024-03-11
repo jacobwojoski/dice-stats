@@ -229,6 +229,7 @@ class DiceStatsTracker {
         //delete parser;
 
         // Save Each ROLL_INFO OBJECT from array into players local data
+        // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object
         ROLL_INFO_ARY.forEach(element => {
             playerInfo.saveRoll(ROLL_INFO_ARY?.IsBlind, ROLL_INFO_ARY?.RollValue, 
                                 ROLL_INFO_ARY?.DieType, ROLL_INFO_ARY?.RollType);
