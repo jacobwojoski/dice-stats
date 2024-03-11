@@ -217,19 +217,25 @@ class DiceStatsTracker {
     // & 
     handleMessage(msg)
     {
+        // Get the player that the roll is associated with
         let playerInfo = this.PLAYER_DATA_MAP.get(msg.user.id);
+
+        // Get the specific system parser to parse msg
         let parser = MESSAGE_PARSER_FACTORY.createMessageParser();
 
+        // Parse the msg
         let ROLL_INFO_ARY = parser.parseMsgRoll(msg);
+        // Parser Should now get deleted here as we dont need it anymore once we have the ary
+        //delete parser;
 
-        // Save Each ROLL_INFO OBJECT
+        // Save Each ROLL_INFO OBJECT from array into players local data
         ROLL_INFO_ARY.forEach(element => {
             playerInfo.saveRoll(ROLL_INFO_ARY?.IsBlind, ROLL_INFO_ARY?.RollValue, 
                                 ROLL_INFO_ARY?.DieType, ROLL_INFO_ARY?.RollType);
         });
 
-
         //If AutoSave is Enabled by GM, only save updates to YOUR ROLLS to the DB
+        //  Each person updates their own DB values but loads everyones in on joining the game
         if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
         {
             //If it was my roll save my data to the db
