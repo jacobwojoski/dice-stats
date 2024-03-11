@@ -8,6 +8,8 @@
         DegSuccess= -1; //{DEG_SUCCESS} HIT OR MISS VALUE
         MissBy=     -1; //{INT}
         HitBy=      -1; //{INT}
+        MissFromAdv = false; //{BOOLEAN}
+        HitFromAdv  = false; //{BOOLEAN}
 
         constructor()
         {
@@ -16,7 +18,9 @@
             RollValue=  0; //{INT}
             IsBlind=    0; //{BOOLEAN}
             DegSuccess= 0; //{DEG_SUCCESS}
-            MissBy=  -1;
-            HitBy=   -1;
+            MissBy=     -1; //{INT}
+            HitBy=      -1; //{INT}
+            MissFromAdv = false; //{BOOLEAN}
+            HitFromAdv  = false; //{BOOLEAN}
         }
     }

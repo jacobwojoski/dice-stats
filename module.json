@@ -22,10 +22,10 @@
     "scripts/dice-stats-handlebars.js",
     "scripts/dice-stats-hooks.js",
     "scripts/dice-stats-sockets.js",
-    "scripts/forms/dice-stats-compareplayerspage.js",
-    "scripts/forms/dice-stats-scenecontrol.js",
-    "scripts/forms/dice-stats-globalstatuspage.js",
-    "scripts/forms/dice-stats-tabedplayerstatspage.js",
+    "scripts/classes/forms/dice-stats-compareplayerspage.js",
+    "scripts/classes/forms/dice-stats-scenecontrol.js",
+    "scripts/classes/forms/dice-stats-globalstatuspage.js",
+    "scripts/classes/forms/dice-stats-tabedplayerstatspage.js",
     "scripts/googleChartImport.js"
   ],
   "styles": [

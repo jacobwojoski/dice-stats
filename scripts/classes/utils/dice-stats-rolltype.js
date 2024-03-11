@@ -134,7 +134,7 @@ class DS_ROLL_TYPE_PARSER {
      * Call the Specific system funtion to get the ROLL_TYPE
      * @param {*} - CHAT_MESSAGE_OBJECT
      */
-    static getGenericRollType(msg){
+    static getRollType(msg){
         switch(game.system.id)
         {
             case "dragonbane":

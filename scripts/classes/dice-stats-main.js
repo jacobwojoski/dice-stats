@@ -213,6 +213,8 @@ class DiceStatsTracker {
         }
     }
 
+    // TODO: This will override the parseMessage fn once each system parser is made
+    // & 
     handleMessage(msg)
     {
         let playerInfo = this.PLAYER_DATA_MAP.get(msg.user.id);
@@ -222,7 +224,8 @@ class DiceStatsTracker {
 
         // Save Each ROLL_INFO OBJECT
         ROLL_INFO_ARY.forEach(element => {
-            playerInfo.saveRoll(element);
+            playerInfo.saveRoll(ROLL_INFO_ARY?.IsBlind, ROLL_INFO_ARY?.RollValue, 
+                                ROLL_INFO_ARY?.DieType, ROLL_INFO_ARY?.RollType);
         });
 
 
