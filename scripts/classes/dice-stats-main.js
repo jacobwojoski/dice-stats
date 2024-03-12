@@ -223,7 +223,7 @@ class DiceStatsTracker {
         // Get the specific system parser to parse msg
         let parser = MESSAGE_PARSER_FACTORY.createMessageParser();
 
-        // Parse the msg
+        // Parse the msg (Parser returns a 2d array of ROLL_INFO) Ary[ROLL_OBJ_IT][DICE_INFO_OBJ_IT]
         let ROLL_INFO_ARY = parser.parseMsgRoll(msg);
         // Parser Should now get deleted here as we dont need it anymore once we have the ary
         //delete parser;

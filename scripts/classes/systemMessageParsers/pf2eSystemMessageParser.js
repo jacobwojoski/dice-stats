@@ -20,40 +20,41 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
-            
+            retRollInfoAry.push(new DS_ROLL_INFO);
+
+            // If it was an attack Roll get some extra info
+            if( retRollInfoAry[tempRoll]?.type == "attack-roll" )
+            {
+                retRollInfoAry[tempRoll] = this.getDegSuccessInfo(msg, retRollInfoAry[tempRoll]);
+                retRollInfoAry[tempRoll] = this.getHitOrMissBy(msg, retRollInfoAry[tempRoll], msg.rolls[tempDieType] );
+                retRollInfoAry[tempRoll] = this.getIsHitMissFromAdvantage(msg, retRollInfoAry[tempRoll]);
+            }
+
             //For multiple dice types per roll
             for(let tempDieType=0; tempDieType<msg.rolls[tempRoll]?.dice.length; tempDieType++){
 
                 //For results of every die roll of that dice type
-                for(let rollResult=0; rollResult < msg.rolls[tempRoll].dice[tempDieType].results.length; rollResult++)
-                {
+                for(let rollResult=0; rollResult < msg.rolls[tempRoll].dice[tempDieType].results.length; rollResult++){
+                    
                     // Create new ROLL_INFO obj to ass to array
-                    let newRollInfo = new DS_ROLL_INFO;
-
+                    let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                    
                     // See if it was a blind roll
-                    newRollInfo[tempDieType].IsBlind = msg.blind;
+                    newDieRollInfo.IsBlind = msg.blind;
 
                     // Get die type
                     let sides = msg.rolls[tempRoll]?.dice[tempDieType].faces;
                     let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
-                    newRollInfo[tempDieType].DieType = dieType;
+                    newDieRollInfo.DieType = dieType;
 
                     //Get type of roll (Atack, Save, ect) 
                     // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                    newRollInfo[tempDieType].RollType = this.getRollType(msg);
+                    newDieRollInfo.RollType = this.getRollType(msg);
 
                     // Get roll value (int)
-                    newRollInfo[tempDieType].RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult];
+                    newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult];
 
-                    // If it was an attack Roll get stats
-                    if(newRollInfo[tempDieType].RollType == DS_GLOBALS.ROLL_TYPE.ATK)
-                    {
-                        newRollInfo = this.getDegSuccessInfo(msg, newRollInfo);
-                        newRollInfo = this.getHitOrMissBy(msg, newRollInfo, msg.rolls[tempDieType] );
-                        newRollInfo = this.getIsHitMissFromAdvantage(msg, newRollInfo);
-                    }
-
-                    retRollInfoAry.push(newRollInfo);
+                    retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                 
                 } // end results
             } // end dice in rolls
@@ -109,7 +110,10 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         CRIT_FAIL:      1,
         FAIL:           2,
         SUCCESS:        3,
-        CRIT_SUCCESS:   4
+        CRIT_SUCCESS:   4,
+        DOWNBEAT:       5, //NOT USED FOR PF2
+        MIXEDBEAT:      6  //NOT USED FOR PF2
+        UPBEAT:         6  //NOT USED FOR PF2
      */
     getDegSuccessInfo(msg, newRollInfo)
     {
@@ -148,9 +152,12 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         let finalResult = msg.flags?.pf2e?.context?.outcome;
         let originalResult = msg.flags?.pf2e?.context?.unadjustedOutcome;
 
+        // Check if we hit because of "advantage"
         if( (originalResult == "criticalFailure" || originalResult == "Failure") && 
             (finalResult == "success" || finalResult == "criticalSuccess") ){
             newRollInfo.HitFromAdv = true;
+        
+        // Check if we missed because of "disadvantage"
         }else if( (finalResult == "criticalFailure" || finalResult == "Failure") && 
         (originalResult == "success" || originalResult == "criticalSuccess")){
             newRollInfo.MissFromAdv = true;
