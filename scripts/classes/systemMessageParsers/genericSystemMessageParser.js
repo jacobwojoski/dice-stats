@@ -36,7 +36,7 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
                     let newRollInfo = new DS_ROLL_INFO;
 
                     //See if it was a blind roll
-                    newRollInfo.IsBlind = msg.blind;
+                    newRollInfo[tempDie].IsBlind = msg.blind;
 
                     //Get die type
                     let sides = msg.rolls[tempRoll]?.dice[tempDie].faces;
@@ -53,9 +53,7 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
                     retRollInfoAry.push(newRollInfo);
                 
                 } // end results
-
             } // end dice in rolls
-            
         } // end rolls
 
     } // end parseMsgRoll()

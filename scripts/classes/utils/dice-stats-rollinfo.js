@@ -6,18 +6,17 @@
         RollValue=  -1; //{INT}
         IsBlind=    -1; //{BOOLEAN}
         DegSuccess= -1; //{DEG_SUCCESS} HIT OR MISS VALUE
-        MissBy=     -1; //{INT}
-        HitBy=      -1; //{INT}
+        CheckDiff = null; //{INT} Integer Hit Or Missed By
         MissFromAdv = false; //{BOOLEAN}
         HitFromAdv  = false; //{BOOLEAN}
 
         constructor()
         {
-            DieType=    0; //{DIE_TYPE}
-            RollType=   0; //{ROLL_TYPE}
-            RollValue=  0; //{INT}
-            IsBlind=    0; //{BOOLEAN}
-            DegSuccess= 0; //{DEG_SUCCESS}
+            DieType=    -1; //{DIE_TYPE}
+            RollType=   -1; //{ROLL_TYPE}
+            RollValue=  -1; //{INT}
+            IsBlind=    -1; //{BOOLEAN}
+            DegSuccess= -1; //{DEG_SUCCESS}
             MissBy=     -1; //{INT}
             HitBy=      -1; //{INT}
             MissFromAdv = false; //{BOOLEAN}

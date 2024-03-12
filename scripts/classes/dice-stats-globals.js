@@ -103,12 +103,19 @@ class DS_GLOBALS {
         UNKNOWN: 5    
     };
 
+    // Degree of success
     static DEGREE_SUCCESS = {
         UNKNOWN:        0,
+        // D20 DEG_SUCCESS
         CRIT_FAIL:      1,
         FAIL:           2,
         SUCCESS:        3,
-        CRIT_SUCCESS:   4
+        CRIT_SUCCESS:   4,
+        
+        // PBTA DEG_SUCCESS
+        DOWN_BREAT:     5,
+        MIXED_BREAT:    6,
+        UPBEAT:         8
     }
 
     //Convert {DIE_TYPE} to the max value you can roll on that die
