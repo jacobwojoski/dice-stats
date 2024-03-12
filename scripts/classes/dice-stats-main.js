@@ -223,17 +223,23 @@ class DiceStatsTracker {
         // Get the specific system parser to parse msg
         let parser = MESSAGE_PARSER_FACTORY.createMessageParser();
 
-        // Parse the msg (Parser returns a 2d array of ROLL_INFO) Ary[ROLL_OBJ_IT][DICE_INFO_OBJ_IT]
-        let ROLL_INFO_ARY = parser.parseMsgRoll(msg);
+        // Parse the msg (Parser returns ROLL_OBJ[] which has some Hit / Miss stats + DIE_OBJ[]  
+        let rollInfoAry = parser.parseMsgRoll(msg);
         // Parser Should now get deleted here as we dont need it anymore once we have the ary
         //delete parser;
 
-        // Save Each ROLL_INFO OBJECT from array into players local data
+        // Save Each ROLL_INFO  from array into players local data
         // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object
-        ROLL_INFO_ARY.forEach(element => {
-            playerInfo.saveRoll(ROLL_INFO_ARY?.IsBlind, ROLL_INFO_ARY?.RollValue, 
-                                ROLL_INFO_ARY?.DieType, ROLL_INFO_ARY?.RollType);
-        });
+        for(let rollIT=0; rollIT<rollInfoAry.length; rollIT++){
+            let dieAry = rollInfoAry[rollIT].DiceInfo;
+
+            for(let dieIT=0; dieIT<dieAry.length; dieIT++){
+                let dieInfo = dieAry[dieIT];
+
+                playerInfo.saveRoll(dieInfo?.IsBlind, dieInfo?.RollValue, 
+                                    dieInfo?.DieType, dieInfo?.RollType);
+            }
+        }
 
         //If AutoSave is Enabled by GM, only save updates to YOUR ROLLS to the DB
         //  Each person updates their own DB values but loads everyones in on joining the game
