@@ -22,10 +22,23 @@
     "scripts/dice-stats-handlebars.js",
     "scripts/dice-stats-hooks.js",
     "scripts/dice-stats-sockets.js",
+    
+    "scripts/messageParserFactory.js",
+
+    "scripts/classes/utils/dice-stats-rollinfo.js",
+    "scripts/classes/utils/dice-stats-rolltype.js",
+
+    "scripts/classes/systemMessageParsers/dnd5eSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/dragonbaneSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/genericSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/pf1eSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/pf2eSystemMessageParser.js",
+
     "scripts/classes/forms/dice-stats-compareplayerspage.js",
     "scripts/classes/forms/dice-stats-scenecontrol.js",
     "scripts/classes/forms/dice-stats-globalstatuspage.js",
     "scripts/classes/forms/dice-stats-tabedplayerstatspage.js",
+
     "scripts/googleChartImport.js"
   ],
   "styles": [
