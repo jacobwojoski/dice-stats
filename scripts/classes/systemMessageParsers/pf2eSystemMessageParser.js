@@ -155,6 +155,13 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         return newRollInfo;
     }
 
+    /**
+     * For any roll against a DC find out how much the user missed by
+     * @param {*} msg - Chat msg obj
+     * @param {DS_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
+     * @param {*} rollValue - msg.roll info that were currently looking at
+     * @returns {DS_ROLL_INFO} newRollInfo
+     */
     getHitOrMissBy(msg, newRollInfo, rollValue)
     {
         let dc = msg?.flags?.pf2e?.context?.dc?.value;
@@ -163,6 +170,12 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         return newRollInfo;
     }
 
+    /**
+     * Check to see if we hit or missed because of advantage or disadvantage 
+     * @param {*} msg - chat msg object
+     * @param {DS_ROLL_INFO} newRollInfo - rollInfoObj were going to update with info and return
+     * @returns {DS_ROLL_INFO} -newRollInfo but with updated values
+     */
     getIsHitMissFromAdvantage(msg, newRollInfo)
     {
         let finalResult = msg.flags?.pf2e?.context?.outcome;
