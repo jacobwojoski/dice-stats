@@ -22,13 +22,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
             retRollInfoAry.push(new DS_ROLL_INFO);
 
-            // If it was an attack Roll get some extra info
-            if( retRollInfoAry[tempRoll]?.type == "attack-roll" )
-            {
-                retRollInfoAry[tempRoll] = this.getDegSuccessInfo(msg, retRollInfoAry[tempRoll]);
-                retRollInfoAry[tempRoll] = this.getHitOrMissBy(msg, retRollInfoAry[tempRoll], msg.rolls[tempDieType] );
-                retRollInfoAry[tempRoll] = this.getIsHitMissFromAdvantage(msg, retRollInfoAry[tempRoll]);
-            }
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll]);
 
             //For multiple dice types per roll
             for(let tempDieType=0; tempDieType<msg.rolls[tempRoll]?.dice.length; tempDieType++){
@@ -59,6 +53,28 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                 } // end results
             } // end dice in rolls
         } // end rolls
+    }
+
+    /**
+     * Update roll obj with any info that system holds in roll compared to specific dice info
+     * NOTE: THESE ARE ONLY ACCESSABLE IF THE USER HAS A PLAYER TARGETED, IF NOT, ITS NOT TRACKED
+     */
+    updateRollInfo(msg, rollObj){
+
+        // For PF2e, If it was an attack Roll get some extra info
+        if( rollObj?.type == "attack-roll" ){
+            retRollInfoAry[tempRoll] = this.getDegSuccessInfo(msg, retRollInfoAry[tempRoll]);
+            retRollInfoAry[tempRoll] = this.getHitOrMissBy(msg, retRollInfoAry[tempRoll], msg.rolls[tempDieType] );
+            retRollInfoAry[tempRoll] = this.getIsHitMissFromAdvantage(msg, retRollInfoAry[tempRoll]);
+        }else if(rollObj.type == "saving-throw" ){
+            // How Did the save faire
+        }else if(rollObj.type.contains("check")){
+            // Was it some check vs a DC? Means the roll was a skill of some kinds
+        }else if(rollObj.type.contains("damage")){
+            // Was a dmg roll? We could tally total damage done 
+            //NOTE: (Wont be super reliable as all flat checks will count as dmg)
+        }
+        return rollObj
     }
 
     /**

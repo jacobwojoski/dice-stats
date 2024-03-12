@@ -5,15 +5,14 @@
 class GENERIC_SYSTEM_MESSAGE_PARSER {
 
     /* ROLL_INFO Vars:
-        DieType=    0; //{DIE_TYPE}
-        RollType=   0; //{ROLL_TYPE}
-        RollValue=  0; //{INT}
-        IsBlind=    0; //{BOOLEAN}
-        DegSuccess= 0; //{DEG_SUCCESS}
-        MissBy=  -1;
-        HitBy=   -1;
-        MissFromAdv = false;
-        HitFromAdv = false;
+    DieType=    0; //{DIE_TYPE}
+    RollType=   0; //{ROLL_TYPE}
+    RollValue=  0; //{INT}
+    IsBlind=    0; //{BOOLEAN}
+    DegSuccess= 0; //{DEG_SUCCESS}
+    CheckDiff=  null;       //{INT}
+    MissFromAdv = false;
+    HitFromAdv = false;
     */
     /**
      * Parse the passed in message
@@ -25,38 +24,48 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
 
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
-            
+            retRollInfoAry.push(new DS_ROLL_INFO);
+
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll]);
+
             //For multiple dice types per roll
-            for(let tempDie=0; tempDie<msg.rolls[tempRoll]?.dice.length ; tempDie++){
+            for(let tempDieType=0; tempDieType<msg.rolls[tempRoll]?.dice.length; tempDieType++){
 
                 //For results of every die roll of that dice type
-                for(let rollResult=0; rollResult < msg.rolls[tempRoll].dice[tempDie].results.length; rollResult++)
-                {
-                    //Create new ROLL_INFO obj to ass to array
-                    let newRollInfo = new DS_ROLL_INFO;
+                for(let rollResult=0; rollResult < msg.rolls[tempRoll].dice[tempDieType].results.length; rollResult++){
+                    
+                    // Create new ROLL_INFO obj to ass to array
+                    let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                    
+                    // See if it was a blind roll
+                    newDieRollInfo.IsBlind = msg.blind;
 
-                    //See if it was a blind roll
-                    newRollInfo[tempDie].IsBlind = msg.blind;
-
-                    //Get die type
-                    let sides = msg.rolls[tempRoll]?.dice[tempDie].faces;
+                    // Get die type
+                    let sides = msg.rolls[tempRoll]?.dice[tempDieType].faces;
                     let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
-                    newRollInfo[tempDie].DieType = dieType;
+                    newDieRollInfo.DieType = dieType;
 
                     //Get type of roll (Atack, Save, ect) 
                     // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                    newRollInfo[tempDie].RollType = DICE_STATS_UTILS.getRollType(msg);
+                    newDieRollInfo.RollType = this.getRollType(msg);
 
-                    //Get roll value (int)
-                    newRollInfo[tempDie].RollValue = msg.rolls[tempRoll].dice[tempDie].results[rollResult];
+                    // Get roll value (int)
+                    newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult];
 
-                    retRollInfoAry.push(newRollInfo);
+                    retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                 
                 } // end results
             } // end dice in rolls
         } // end rolls
+    }
 
-    } // end parseMsgRoll()
+    /**
+     * Update roll obj with any info that system holds.
+     * Generic sytsem doesnt so anything here but specific systems do
+     */
+    updateRollInfo(msg, rollObj){
+        return rollObj
+    }
 
     /**
      * Get Roll Type, This will be overriden for specific system parsing
