@@ -23,7 +23,7 @@
     "scripts/dice-stats-hooks.js",
     "scripts/dice-stats-sockets.js",
     
-    "scripts/messageParserFactory.js",
+    "scripts/classes/messageParserFactory.js",
 
     "scripts/classes/utils/dice-stats-rollinfo.js",
     "scripts/classes/utils/dice-stats-rolltype.js",

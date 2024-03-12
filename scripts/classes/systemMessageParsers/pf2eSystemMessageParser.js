@@ -22,7 +22,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
             retRollInfoAry.push(new DS_ROLL_INFO);
 
-            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll]);
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], tempRoll);
 
             //For multiple dice types per roll
             for(let tempDieType=0; tempDieType<msg.rolls[tempRoll]?.dice.length; tempDieType++){
@@ -59,20 +59,26 @@ class PF2E_SYSTEM_MESSAGE_PARSER
      * Update roll obj with any info that system holds in roll compared to specific dice info
      * NOTE: THESE ARE ONLY ACCESSABLE IF THE USER HAS A PLAYER TARGETED, IF NOT, ITS NOT TRACKED
      */
-    updateRollInfo(msg, rollObj){
+    updateRollInfo(msg, rollObj, rollIT){
+
+        let rollToParse = msg.rolls[rollIT];
 
         // For PF2e, If it was an attack Roll get some extra info
-        if( rollObj?.type == "attack-roll" ){
+        if( rollToParse?.type == "attack-roll" ){
             retRollInfoAry[tempRoll] = this.getDegSuccessInfo(msg, retRollInfoAry[tempRoll]);
-            retRollInfoAry[tempRoll] = this.getHitOrMissBy(msg, retRollInfoAry[tempRoll], msg.rolls[tempDieType] );
             retRollInfoAry[tempRoll] = this.getIsHitMissFromAdvantage(msg, retRollInfoAry[tempRoll]);
+            retRollInfoAry[tempRoll] = this.getHitOrMissBy(msg, retRollInfoAry[tempRoll], rollToParse);
         }else if(rollObj.type == "saving-throw" ){
             // How Did the save faire
-        }else if(rollObj.type.contains("check")){
+        }else if(rollObj?.type?.includes("skill-check")){
             // Was it some check vs a DC? Means the roll was a skill of some kinds
-        }else if(rollObj.type.contains("damage")){
+        }else if(rollObj?.isDamageRoll){
             // Was a dmg roll? We could tally total damage done 
             //NOTE: (Wont be super reliable as all flat checks will count as dmg)
+        }else if(rollObj?.type?.includes("perception-check")){
+
+        }else if(rollObj?.type?.includes("initiative")){
+
         }
         return rollObj
     }
