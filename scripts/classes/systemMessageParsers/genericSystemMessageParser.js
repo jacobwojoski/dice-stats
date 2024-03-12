@@ -60,7 +60,7 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
     }
 
     /**
-     * Update roll obj with any info that system holds.
+     * Update roll obj with any info that system holds. Usually hit or miss/ degree success values
      * Generic sytsem doesnt so anything here but specific systems do
      */
     updateRollInfo(msg, rollObj){
