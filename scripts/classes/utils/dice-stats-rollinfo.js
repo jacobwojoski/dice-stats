@@ -8,10 +8,10 @@
 
         constructor()
         {
-            DieType=    -1; //{DIE_TYPE}
-            RollType=   -1; //{ROLL_TYPE}
-            RollValue=  -1; //{INT}
-            IsBlind=    -1; //{BOOLEAN}
+            this.DieType=    -1; //{DIE_TYPE}
+            this.RollType=   -1; //{ROLL_TYPE}
+            this.RollValue=  -1; //{INT}
+            this.IsBlind=    -1; //{BOOLEAN}
         }
     }
 

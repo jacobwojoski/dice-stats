@@ -46,41 +46,42 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                     newDieRollInfo.RollType = this.getRollType(msg);
 
                     // Get roll value (int)
-                    newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult];
+                    newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult].result;
 
                     retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                 
                 } // end results
             } // end dice in rolls
         } // end rolls
+        return retRollInfoAry;
     }
 
     /**
      * Update roll obj with any info that system holds in roll compared to specific dice info
      * NOTE: THESE ARE ONLY ACCESSABLE IF THE USER HAS A PLAYER TARGETED, IF NOT, ITS NOT TRACKED
      */
-    updateRollInfo(msg, rollObj, rollIT){
+    updateRollInfo(msg, retRollInfoObj, rollIT){
 
         let rollToParse = msg.rolls[rollIT];
 
         // For PF2e, If it was an attack Roll get some extra info
         if( rollToParse?.type == "attack-roll" ){
-            retRollInfoAry[tempRoll] = this.getDegSuccessInfo(msg, retRollInfoAry[tempRoll]);
-            retRollInfoAry[tempRoll] = this.getIsHitMissFromAdvantage(msg, retRollInfoAry[tempRoll]);
-            retRollInfoAry[tempRoll] = this.getHitOrMissBy(msg, retRollInfoAry[tempRoll], rollToParse);
-        }else if(rollObj.type == "saving-throw" ){
+            retRollInfoObj = this.getDegSuccessInfo(msg, retRollInfoObj);
+            retRollInfoObj = this.getIsHitMissFromAdvantage(msg, retRollInfoObj);
+            retRollInfoObj = this.getHitOrMissBy(msg, retRollInfoObj, rollToParse);
+        }else if(rollToParse?.type == "saving-throw" ){
             // How Did the save faire
-        }else if(rollObj?.type?.includes("skill-check")){
+        }else if(rollToParse?.type?.includes("skill-check")){
             // Was it some check vs a DC? Means the roll was a skill of some kinds
-        }else if(rollObj?.isDamageRoll){
+        }else if(rollToParse?.isDamageRoll){
             // Was a dmg roll? We could tally total damage done 
             //NOTE: (Wont be super reliable as all flat checks will count as dmg)
-        }else if(rollObj?.type?.includes("perception-check")){
+        }else if(rollToParse?.type?.includes("perception-check")){
 
-        }else if(rollObj?.type?.includes("initiative")){
+        }else if(rollToParse?.type?.includes("initiative")){
 
         }
-        return rollObj
+        return retRollInfoObj;
     }
 
     /**
@@ -165,7 +166,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
      * For any roll against a DC find out how much the user missed by
      * @param {*} msg - Chat msg obj
      * @param {DS_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
-     * @param {*} rollValue - msg.roll info that were currently looking at
+     * @param {MSG.ROLL_OBT} rollValue - msg.roll info that were currently looking at
      * @returns {DS_ROLL_INFO} newRollInfo
      */
     getHitOrMissBy(msg, newRollInfo, rollValue)
