@@ -100,7 +100,9 @@ class DS_GLOBALS {
         /* UNKNOWN includes flat checks. No way to distingush them as there is no "flat check roll. 
         Its just has no details. Same output as typing /r 1d20 in chat and using result for something. 
         Its not assigned as Damage or atack ect */
-        UNKNOWN: 5    
+        UNKNOWN: 5,
+        INITIATIVE: 6, /* Any initiative Rolls */
+        PERCEPTION: 7  /* Any perception Rolls */  
     };
 
     // Degree of success

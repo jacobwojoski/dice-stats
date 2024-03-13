@@ -248,7 +248,7 @@ class DiceStatsTracker {
             //If it was my roll save my data to the db
             if(msg.user.id == game.user.id)
             {
-                DB_INTERACTION.saveMyPlayerData();
+                this.saveMyPlayerData();
             }
         }
     }

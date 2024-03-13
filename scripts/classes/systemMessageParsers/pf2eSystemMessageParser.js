@@ -73,7 +73,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
             // How Did the save faire
         }else if(rollToParse?.type?.includes("skill-check")){
             // Was it some check vs a DC? Means the roll was a skill of some kinds
-        }else if(rollToParse?.isDamageRoll){
+        }else if(msg?.isDamageRoll){
             // Was a dmg roll? We could tally total damage done 
             //NOTE: (Wont be super reliable as all flat checks will count as dmg)
         }else if(rollToParse?.type?.includes("perception-check")){
