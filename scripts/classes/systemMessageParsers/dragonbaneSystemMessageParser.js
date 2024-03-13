@@ -22,7 +22,7 @@ class DRAGONBANE_SYSTEM_MESSAGE_PARSER
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
             retRollInfoAry.push(new DS_ROLL_INFO);
 
-            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll]);
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], tempRoll);
 
             //For multiple dice types per roll
             for(let tempDieType=0; tempDieType<msg.rolls[tempRoll]?.dice.length; tempDieType++){
@@ -39,20 +39,24 @@ class DRAGONBANE_SYSTEM_MESSAGE_PARSER
                     // Get die type
                     let sides = msg.rolls[tempRoll]?.dice[tempDieType].faces;
                     let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
-                    newDieRollInfo.DieType = dieType;
+                    if(dieType)
+                    {
+                        newDieRollInfo.DieType = dieType;
 
-                    //Get type of roll (Atack, Save, ect) 
-                    // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                    newDieRollInfo.RollType = this.getRollType(msg);
+                        //Get type of roll (Atack, Save, ect) 
+                        // Generally this should always return unknown as specific system parsers are the only ones that can get this info
+                        newDieRollInfo.RollType = this.getRollType(msg);
 
-                    // Get roll value (int)
-                    newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult];
+                        // Get roll value (int)
+                        newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult].result;
 
-                    retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
+                        retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
+                    }
                 
                 } // end results
             } // end dice in rolls
         } // end rolls
+        return retRollInfoAry;
     }
 
     /**
