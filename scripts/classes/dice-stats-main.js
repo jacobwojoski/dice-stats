@@ -230,6 +230,7 @@ class DiceStatsTracker {
 
         // Save Each ROLL_INFO  from array into players local data
         // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object
+        let updatedLocalRollValue = false;
         for(let rollIT=0; rollIT<rollInfoAry.length; rollIT++){
             let dieAry = rollInfoAry[rollIT].DiceInfo;
 
@@ -238,6 +239,8 @@ class DiceStatsTracker {
 
                 playerInfo.saveRoll(dieInfo?.IsBlind, dieInfo?.RollValue, 
                                     dieInfo?.DieType, dieInfo?.RollType);
+
+                updatedLocalRollValue = true;
             }
         }
 
@@ -246,7 +249,7 @@ class DiceStatsTracker {
         if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
         {
             //If it was my roll save my data to the db
-            if(msg.user.id == game.user.id)
+            if(msg.user.id == game.user.id && updatedLocalRollValue)
             {
                 this.saveMyPlayerData();
             }

@@ -39,16 +39,19 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                     // Get die type
                     let sides = msg.rolls[tempRoll]?.dice[tempDieType].faces;
                     let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
-                    newDieRollInfo.DieType = dieType;
+                    if(dieType)
+                    {
+                        newDieRollInfo.DieType = dieType;
 
-                    //Get type of roll (Atack, Save, ect) 
-                    // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                    newDieRollInfo.RollType = this.getRollType(msg);
+                        //Get type of roll (Atack, Save, ect) 
+                        // Generally this should always return unknown as specific system parsers are the only ones that can get this info
+                        newDieRollInfo.RollType = this.getRollType(msg);
 
-                    // Get roll value (int)
-                    newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult].result;
+                        // Get roll value (int)
+                        newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult].result;
 
-                    retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
+                        retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
+                    }
                 
                 } // end results
             } // end dice in rolls
