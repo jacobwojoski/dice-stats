@@ -16,6 +16,8 @@ class PF1E_SYSTEM_MESSAGE_PARSER
      * @returns {ROLL_OBJECT[]} 
      */
     parseMsgRoll(msg){
+        if(!msg.isRoll && !msg?.systemRolls?.attacks){
+            return;}
         let retRollInfoAry = [];
 
         //For multiple rolls in chat (Any roll made from a card)

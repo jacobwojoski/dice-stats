@@ -16,6 +16,9 @@ class DRAGONBANE_SYSTEM_MESSAGE_PARSER
      * @returns {ROLL_OBJECT[]} 
      */
     parseMsgRoll(msg){
+        if(!msg.isRoll){
+            return;}
+            
         let retRollInfoAry = [];
 
         //For multiple rolls in chat
