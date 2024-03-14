@@ -18,4 +18,22 @@ class MESSAGE_PARSER_FACTORY  {
                 return new GENERIC_SYSTEM_MESSAGE_PARSER;
         }
     }
+
+    static createMessageParser(system)
+    {
+        switch(system)
+        {
+            case "pf1e":
+                return new PF1E_SYSTEM_MESSAGE_PARSER;
+            case "pf2e" :
+                return new PF2E_SYSTEM_MESSAGE_PARSER;
+            case "dnd5e" :
+                return new DND5E_SYSTEM_MESSAGE_PARSER;
+            case "dragonbane" :
+                return new DRAGONBANE_SYSTEM_MESSAGE_PARSER;
+
+            default :
+                return new GENERIC_SYSTEM_MESSAGE_PARSER;
+        }
+    }
 }
