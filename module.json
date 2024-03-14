@@ -12,7 +12,7 @@
     "verified": "11"
   },
   "scripts": [
-    "scripts/classes/appdatastorage/dice-stats-dice-info.js",
+    "scripts/classes/appdatastorage/dice-stats-diceinfo.js",
     "scripts/classes/appdatastorage/dice-stats-player.js",
     "scripts/classes/appdatastorage/dice-stats-rollmsginfo.js",
 
