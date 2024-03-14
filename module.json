@@ -12,32 +12,32 @@
     "verified": "11"
   },
   "scripts": [
-    "scripts/classes/dice-stats-main.js",
-    "scripts/classes/dice-stats-globals.js",
-    "scripts/classes/dice-stats-utils.js",
-    "scripts/classes/dice-stats-datapack.js",
-    "scripts/classes/dice-stats-db.js",
-    "scripts/classes/dice-stats-diceinfo.js",
-    "scripts/classes/dice-stats-player.js",
-    "scripts/dice-stats-handlebars.js",
-    "scripts/dice-stats-hooks.js",
-    "scripts/dice-stats-sockets.js",
-    
-    "scripts/messageParserFactory.js",
+    "scripts/classes/appdatastorage/dice-stats-dice-info.js",
+    "scripts/classes/appdatastorage/dice-stats-player.js",
+    "scripts/classes/appdatastorage/dice-stats-rollmsginfo.js",
 
-    "scripts/classes/utils/dice-stats-rollinfo.js",
-    "scripts/classes/utils/dice-stats-rolltype.js",
+    "scripts/classes/asyncinteraction/dice-stats-handlebars.js",
+    "scripts/classes/asyncinteraction/dice-stats-hooks.js",
+    "scripts/classes/asyncinteraction/dice-stats-socket.js",
 
+    "scripts/classes/database/dice-stats-datapack.js",
+    "scripts/classes/database/db.js",
+
+    "scripts/classes/forms/dice-stats-compareplayerspage.js",
+    "scripts/classes/forms/dice-stats-scenecontrol.js",
+    "scripts/classes/forms/dice-stats-globalstatuspage.js",
+    "scripts/classes/forms/dice-stats-tabedplayerstatspage.js",
+
+    "scripts/classes/systemMessageParsers/dice-stats-messageparserfactory.js",
     "scripts/classes/systemMessageParsers/dnd5eSystemMessageParser.js",
     "scripts/classes/systemMessageParsers/dragonbaneSystemMessageParser.js",
     "scripts/classes/systemMessageParsers/genericSystemMessageParser.js",
     "scripts/classes/systemMessageParsers/pf1eSystemMessageParser.js",
     "scripts/classes/systemMessageParsers/pf2eSystemMessageParser.js",
 
-    "scripts/classes/forms/dice-stats-compareplayerspage.js",
-    "scripts/classes/forms/dice-stats-scenecontrol.js",
-    "scripts/classes/forms/dice-stats-globalstatuspage.js",
-    "scripts/classes/forms/dice-stats-tabedplayerstatspage.js",
+    "scripts/classes/dice-stats-globals.js",
+    "scripts/classes/dice-stats-main.js",
+    "scripts/classes/dice-stats-utils.js",
 
     "scripts/googleChartImport.js"
   ],
