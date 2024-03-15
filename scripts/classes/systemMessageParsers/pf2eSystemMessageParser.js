@@ -15,33 +15,42 @@ class PF2E_SYSTEM_MESSAGE_PARSER
      * @param {*} msg 
      * @returns {ROLL_OBJECT[]} 
      */
+    /**
+     * Parse the passed in message
+     * @param {*} msg 
+     * @returns {ROLL_OBJECT[]} 
+     */
     parseMsgRoll(msg){
         if(!msg.isRoll){
             return;}
-            
+
         let retRollInfoAry = [];
 
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
             retRollInfoAry.push(new DS_ROLL_INFO);
+            let rollObjSel = msg.rolls[tempRoll];
 
-            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], tempRoll);
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
 
             //For multiple dice types per roll
-            for(let tempDieType=0; tempDieType<msg.rolls[tempRoll]?.dice.length; tempDieType++){
+            for(let tempDieType=0; tempDieType<rollObjSel?.dice?.length; tempDieType++){
+                let dieTypeSel = rollObjSel.dice[tempDieType];
+                
+                // Convert die type selected to local {DIE_TYPE} enum
+                let sides = dieTypeSel?.faces;
+                let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
 
                 //For results of every die roll of that dice type
-                for(let rollResult=0; rollResult < msg.rolls[tempRoll].dice[tempDieType].results.length; rollResult++){
-                    
+                for(let rollResult=0; rollResult < dieTypeSel.results.length; rollResult++){
+                    let dieResultSel = rollObjSel.dice[tempDieType];
+
                     // Create new ROLL_INFO obj to ass to array
                     let newDieRollInfo = new DS_DIE_ROLL_INFO;
                     
                     // See if it was a blind roll
                     newDieRollInfo.IsBlind = msg.blind;
 
-                    // Get die type
-                    let sides = msg.rolls[tempRoll]?.dice[tempDieType].faces;
-                    let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
                     if(dieType)
                     {
                         newDieRollInfo.DieType = dieType;
@@ -51,11 +60,10 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                         newDieRollInfo.RollType = this.getRollType(msg);
 
                         // Get roll value (int)
-                        newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult].result;
+                        newDieRollInfo.RollValue = dieResultSel.result;
 
                         retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                     }
-                
                 } // end results
             } // end dice in rolls
         } // end rolls
@@ -66,9 +74,9 @@ class PF2E_SYSTEM_MESSAGE_PARSER
      * Update roll obj with any info that system holds in roll compared to specific dice info
      * NOTE: THESE ARE ONLY ACCESSABLE IF THE USER HAS A PLAYER TARGETED, IF NOT, ITS NOT TRACKED
      */
-    updateRollInfo(msg, retRollInfoObj, rollIT){
+    updateRollInfo(msg, retRollInfoObj, rollObjSel){
 
-        let rollToParse = msg.rolls[rollIT];
+        let rollToParse = rollObjSel;
 
         // For PF2e, If it was an attack Roll get some extra info
         if( rollToParse?.type == "attack-roll" ){
