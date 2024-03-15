@@ -43,7 +43,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
                 //For results of every die roll of that dice type
                 for(let rollResult=0; rollResult < dieTypeSel.results.length; rollResult++){
-                    let dieResultSel = dieTypeSel.results[tempDieType];
+                    let dieResultSel = dieTypeSel.results[rollResult];
 
                     // Create new ROLL_INFO obj to ass to array
                     let newDieRollInfo = new DS_DIE_ROLL_INFO;
@@ -62,6 +62,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                         // Get roll value (int)
                         newDieRollInfo.RollValue = dieResultSel.result;
 
+                        // Add die info to roll storage obj
                         retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                     }
                 } // end results
