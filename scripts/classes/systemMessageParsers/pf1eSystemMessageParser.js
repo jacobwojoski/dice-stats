@@ -47,7 +47,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
 
                         //Get type of roll (Atack, Save, ect) 
                         // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                        newDieRollInfo.RollType = this.getRollType(msg);
+                        newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
 
                         // Get roll value (int)
                         newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult].result;
@@ -93,7 +93,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
 
                         //Get type of roll (Atack, Save, ect) 
                         // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                        newDieRollInfo.RollType = this.getRollType(msg);
+                        newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
 
                         // Get roll value (int)
                         newDieRollInfo.RollValue = rollResSel.result;
@@ -139,7 +139,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
 
                             //Get type of roll (Atack, Save, ect) 
                             // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                            newDieRollInfo.RollType = this.getRollType(msg);
+                            newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
 
                             // Get roll value (int)
                             newDieRollInfo.RollValue = rollResSel.result;
@@ -184,5 +184,10 @@ class PF1E_SYSTEM_MESSAGE_PARSER
 
         }
         return retRollInfoObj;
+    }
+
+    getRollType(msg,rollObjSel)
+    {
+        
     }
 }

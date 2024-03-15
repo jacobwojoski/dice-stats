@@ -57,7 +57,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
                         //Get type of roll (Atack, Save, ect) 
                         // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                        newDieRollInfo.RollType = this.getRollType(msg);
+                        newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
 
                         // Get roll value (int)
                         newDieRollInfo.RollValue = dieResultSel.result;
@@ -104,36 +104,27 @@ class PF2E_SYSTEM_MESSAGE_PARSER
      * @param {*} msg 
      * @returns {ROLL_TYPE} - type of roll object
      */
-    getRollType(msg)
+    getRollType(msg, rollData)
     {
         //Check if damage Roll
         if(msg.isDamageRoll)
         {
             return DS_GLOBALS.ROLL_TYPE.DMG;
         }
-        
-        let domains = msg.rolls[0].options.domains;
-        //Check if Save | Atack roll | Skill check
-        if(domains)
-        {
-            for (var i=0; i<domains.length; i++) {
-                if(domains[i].match("attack"))
-                {
-                    return DS_GLOBALS.ROLL_TYPE.ATK;
-                }
-                else if (domains[i].match("saving-throw"))
-                {
-                    return DS_GLOBALS.ROLL_TYPE.SAVE;
-                }
-                else if(domains[i].match("skill-check"))
-                {
-                    return DS_GLOBALS.ROLL_TYPE.SKILL
-                }
-            }
-            return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+
+        switch(rollData.type){
+            case "attack-roll":
+                return DS_GLOBALS.ROLL_TYPE.ATK;
+            case "saving-throw":
+                return DS_GLOBALS.ROLL_TYPE.SAVE;
+            case "skill-check":
+            case "perception-check":
+            case "initiative":
+                return DS_GLOBALS.ROLL_TYPE.SKILL;
+            default :
+                return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+
         }
-        //unknown so return unknown type
-        return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
     }
 
     /**
@@ -187,7 +178,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     {
         let dc = msg?.flags?.pf2e?.context?.dc?.value;
         let rollTotal = rollValue?._total;
-        newRollInfo.CheckDiff = (dc - rollTotal);
+        newRollInfo.CheckDiff = (rollTotal - dc);
         return newRollInfo;
     }
 
@@ -211,7 +202,12 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         }else if( (finalResult == "criticalFailure" || finalResult == "Failure") && 
         (originalResult == "success" || originalResult == "criticalSuccess")){
             newRollInfo.MissFromAdv = true;
+
+        }else if(finalResult && originalResult){
+            newRollInfo.MissFromAdv = true;
+            newRollInfo.HitFromAdv = false;
         }
+        
         
         return newRollInfo;
     }

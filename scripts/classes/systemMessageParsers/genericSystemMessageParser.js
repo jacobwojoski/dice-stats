@@ -56,7 +56,7 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
 
                         //Get type of roll (Atack, Save, ect) 
                         // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                        newDieRollInfo.RollType = this.getRollType(msg);
+                        newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
 
                         // Get roll value (int)
                         newDieRollInfo.RollValue = dieResultSel.result;
@@ -82,7 +82,7 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
      * @param {*} msg 
      * @returns {ROLL_TYPE} - type of roll object
      */
-    getRollType(msg)
+    getRollType(msg,rollObjSel)
     {
         return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
     }
