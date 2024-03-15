@@ -20,27 +20,32 @@ class PF1E_SYSTEM_MESSAGE_PARSER
             return;}
         let retRollInfoAry = [];
 
-        //For multiple rolls in chat (Any roll made from a card)
+        /* ========== ANY NON ATTACK || DAMAGE ROLL ============= */
+        //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
             retRollInfoAry.push(new DS_ROLL_INFO);
+            let rollObjSel = msg.rolls[tempRoll];
 
-            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], tempRoll);
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
 
             //For multiple dice types per roll
-            for(let tempDieType=0; tempDieType<msg.rolls[tempRoll]?.dice.length; tempDieType++){
+            for(let tempDieType=0; tempDieType<rollObjSel?.dice?.length; tempDieType++){
+                let dieTypeSel = rollObjSel.dice[tempDieType];
+                
+                // Convert die type selected to local {DIE_TYPE} enum
+                let sides = dieTypeSel?.faces;
+                let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
 
                 //For results of every die roll of that dice type
-                for(let rollResult=0; rollResult < msg.rolls[tempRoll].dice[tempDieType].results.length; rollResult++){
-                    
+                for(let rollResult=0; rollResult < dieTypeSel.results.length; rollResult++){
+                    let dieResultSel = dieTypeSel.results[rollResult];
+
                     // Create new ROLL_INFO obj to ass to array
                     let newDieRollInfo = new DS_DIE_ROLL_INFO;
                     
                     // See if it was a blind roll
                     newDieRollInfo.IsBlind = msg.blind;
 
-                    // Get die type
-                    let sides = msg.rolls[tempRoll]?.dice[tempDieType].faces;
-                    let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
                     if(dieType)
                     {
                         newDieRollInfo.DieType = dieType;
@@ -50,11 +55,11 @@ class PF1E_SYSTEM_MESSAGE_PARSER
                         newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
 
                         // Get roll value (int)
-                        newDieRollInfo.RollValue = msg.rolls[tempRoll].dice[tempDieType].results[rollResult].result;
+                        newDieRollInfo.RollValue = dieResultSel.result;
 
+                        // Add die info to roll storage obj
                         retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                     }
-                
                 } // end results
             } // end dice in rolls
         } // end rolls
@@ -63,30 +68,31 @@ class PF1E_SYSTEM_MESSAGE_PARSER
         // PF1 Splits rolls into 'ROLLS' and 'SYSTEM ROLLS'. 
         //  The latter are used when a player presses a card on their character sheer
         //For multiple rolls in chat (Any roll made from a card)
+        //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.systemRolls.attacks.length; tempRoll++) {
             retRollInfoAry.push(new DS_ROLL_INFO);
             let rollObjSel = msg.systemRolls.attacks[tempRoll].attack;
 
-            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObj);
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
 
             //For multiple dice types per roll
-            for(let tempDieType=0; rollObjSel.dice.length; tempDieType++){
+            for(let tempDieType=0; tempDieType<rollObjSel?.dice?.length; tempDieType++){
                 let dieTypeSel = rollObjSel.dice[tempDieType];
-                let sides = dieTypeSel.faces;
+                
+                // Convert die type selected to local {DIE_TYPE} enum
+                let sides = dieTypeSel?.faces;
                 let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
 
                 //For results of every die roll of that dice type
                 for(let rollResult=0; rollResult < dieTypeSel.results.length; rollResult++){
-                    
+                    let dieResultSel = dieTypeSel.results[rollResult];
+
                     // Create new ROLL_INFO obj to ass to array
                     let newDieRollInfo = new DS_DIE_ROLL_INFO;
-
-                    let rollResSel = dieType.results[rollResult];
                     
                     // See if it was a blind roll
                     newDieRollInfo.IsBlind = msg.blind;
-                    
-                    // Get die type
+
                     if(dieType)
                     {
                         newDieRollInfo.DieType = dieType;
@@ -96,60 +102,56 @@ class PF1E_SYSTEM_MESSAGE_PARSER
                         newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
 
                         // Get roll value (int)
-                        newDieRollInfo.RollValue = rollResSel.result;
+                        newDieRollInfo.RollValue = dieResultSel.result;
 
+                        // Add die info to roll storage obj
                         retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                     }
-                
                 } // end results
             } // end dice in rolls
         } // end rolls
-
 
         /* ================== DAMAGE ROLLS LOOP ============= */
         for (let tempRoll = 0; tempRoll < msg.systemRolls.damage.length; tempRoll++) {
             retRollInfoAry.push(new DS_ROLL_INFO);
             let rollObjSel = msg.systemRolls.attacks[tempRoll].damage;
 
-            for(let tempdmgRoll = 0; tempdmgRoll < rollObjSel.damage.length; tempdmgRoll++)
-            {
-                retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObj);
+            retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
 
-                //For multiple dice types per roll
-                for(let tempDieType=0; rollObjSel.dice.length; tempDieType++){
-                    let dieTypeSel = rollObjSel.dice[tempDieType];
-                    let sides = dieTypeSel.faces;
-                    let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
+            //For multiple dice types per roll
+            for(let tempDieType=0; tempDieType<rollObjSel?.dice?.length; tempDieType++){
+                let dieTypeSel = rollObjSel.dice[tempDieType];
+                
+                // Convert die type selected to local {DIE_TYPE} enum
+                let sides = dieTypeSel?.faces;
+                let dieType = DS_GLOBALS.MAX_TO_DIE.get(sides);
 
-                    //For results of every die roll of that dice type
-                    for(let rollResult=0; rollResult < dieTypeSel.results.length; rollResult++){
-                        
-                        // Create new ROLL_INFO obj to ass to array
-                        let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                //For results of every die roll of that dice type
+                for(let rollResult=0; rollResult < dieTypeSel.results.length; rollResult++){
+                    let dieResultSel = dieTypeSel.results[rollResult];
 
-                        let rollResSel = dieType.results[rollResult];
-                        
-                        // See if it was a blind roll
-                        newDieRollInfo.IsBlind = msg.blind;
-                        
-                        // Get die type
-                        if(dieType)
-                        {
-                            newDieRollInfo.DieType = dieType;
-
-                            //Get type of roll (Atack, Save, ect) 
-                            // Generally this should always return unknown as specific system parsers are the only ones that can get this info
-                            newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
-
-                            // Get roll value (int)
-                            newDieRollInfo.RollValue = rollResSel.result;
-
-                            retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
-                        }
+                    // Create new ROLL_INFO obj to ass to array
+                    let newDieRollInfo = new DS_DIE_ROLL_INFO;
                     
-                    } // end results
-                } // end dice in rolls
-            }// end damage roll loop
+                    // See if it was a blind roll
+                    newDieRollInfo.IsBlind = msg.blind;
+
+                    if(dieType)
+                    {
+                        newDieRollInfo.DieType = dieType;
+
+                        //Get type of roll (Atack, Save, ect) 
+                        // Generally this should always return unknown as specific system parsers are the only ones that can get this info
+                        newDieRollInfo.RollType = this.getRollType(msg,rollObjSel);
+
+                        // Get roll value (int)
+                        newDieRollInfo.RollValue = dieResultSel.result;
+
+                        // Add die info to roll storage obj
+                        retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
+                    }
+                } // end results
+            } // end dice in rolls
         } // end rolls
 
         return retRollInfoAry;
