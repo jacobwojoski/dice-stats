@@ -65,9 +65,7 @@ function midiQolSupport(){
 
 //Parse chat message when one gets displayed
 Hooks.on('createChatMessage', (chatMessage) => {
-    if (chatMessage.isRoll) {
-        DS_GLOBALS.DS_OBJ_GLOBAL.parseMessage(chatMessage)
-    }
+    DS_GLOBALS.DS_OBJ_GLOBAL.parseMessage(chatMessage);
 });
 
 // Initialize dialog and settings on foundry boot up

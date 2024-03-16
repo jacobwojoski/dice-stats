@@ -12,21 +12,34 @@
     "verified": "11"
   },
   "scripts": [
-    "scripts/classes/dice-stats-main.js",
+    "scripts/classes/appdatastorage/dice-stats-diceinfo.js",
+    "scripts/classes/appdatastorage/dice-stats-player.js",
+    "scripts/classes/appdatastorage/dice-stats-rollmsginfo.js",
+
+    "scripts/classes/asyncinteraction/dice-stats-handlebars.js",
+    "scripts/classes/asyncinteraction/dice-stats-hooks.js",
+    "scripts/classes/asyncinteraction/dice-stats-sockets.js",
+
+    "scripts/classes/database/dice-stats-datapack.js",
+    "scripts/classes/database/dice-stats-db.js",
+
+    "scripts/classes/forms/dice-stats-compareplayerspage.js",
+    "scripts/classes/forms/dice-stats-scenecontrol.js",
+    "scripts/classes/forms/dice-stats-globalstatuspage.js",
+    "scripts/classes/forms/dice-stats-tabedplayerstatspage.js",
+
+    "scripts/classes/systemMessageParsers/dice-stats-messageparserfactory.js",
+    "scripts/classes/systemMessageParsers/dnd5eSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/dragonbaneSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/genericSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/pf1eSystemMessageParser.js",
+    "scripts/classes/systemMessageParsers/pf2eSystemMessageParser.js",
+
     "scripts/classes/dice-stats-globals.js",
+    "scripts/classes/dice-stats-main.js",
     "scripts/classes/dice-stats-utils.js",
-    "scripts/classes/dice-stats-datapack.js",
-    "scripts/classes/dice-stats-db.js",
-    "scripts/classes/dice-stats-diceinfo.js",
-    "scripts/classes/dice-stats-player.js",
-    "scripts/dice-stats-handlebars.js",
-    "scripts/dice-stats-hooks.js",
-    "scripts/dice-stats-sockets.js",
-    "scripts/forms/dice-stats-compareplayerspage.js",
-    "scripts/forms/dice-stats-scenecontrol.js",
-    "scripts/forms/dice-stats-globalstatuspage.js",
-    "scripts/forms/dice-stats-tabedplayerstatspage.js",
-    "scripts/googleChartImport.js"
+
+    "scripts/classes/import/googleChartImport.js"
   ],
   "styles": [
     "styles/dice-stats.css"
@@ -46,8 +59,8 @@
     }
   ],
   "socket": true,
-  "version": "1.17.4",
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.17.4.zip",
+  "version": "1.17.5",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.17.5.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
   "readme": "https://github.com/jacobwojoski/dice-stats",

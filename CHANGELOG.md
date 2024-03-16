@@ -1,4 +1,9 @@
 # CHANGELOG  
+## [ 1.17.5 ]
+- Redesign data storage structure for msg parsing
+- Create factory object for parsers
+- Update pf1 parser to handle atack rolls & crit confirms
+
 ## [ 1.17.4 ]
 - Make clear popup off by default
 - Add text to clear popup to describe mod its from
