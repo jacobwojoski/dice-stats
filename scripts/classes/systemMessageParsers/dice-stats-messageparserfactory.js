@@ -9,7 +9,7 @@ class MESSAGE_PARSER_FACTORY  {
 
         switch(systemid)
         {
-            case "pf1e":
+            case "pf1":
                 return new PF1E_SYSTEM_MESSAGE_PARSER;
             case "pf2e" :
                 return new PF2E_SYSTEM_MESSAGE_PARSER;
