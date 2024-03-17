@@ -29,6 +29,7 @@
         CheckDiff = null; //{INT} Integer Hit Or Missed By
         MissFromAdv = false; //{BOOLEAN}
         HitFromAdv  = false; //{BOOLEAN}
+        RollType=   -1; //{ROLL_TYPE} Type of roll that was made; Save, attack etc
 
         constructor(){
             this.DiceInfo = [];

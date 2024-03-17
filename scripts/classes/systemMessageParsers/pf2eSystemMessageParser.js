@@ -208,8 +208,6 @@ class PF2E_SYSTEM_MESSAGE_PARSER
             newRollInfo.MissFromAdv = true;
             newRollInfo.HitFromAdv = false;
         }
-        
-        
         return newRollInfo;
     }
 }
