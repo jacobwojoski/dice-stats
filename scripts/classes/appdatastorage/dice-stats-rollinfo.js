@@ -58,8 +58,8 @@ class LOCAL_ROLL_INFO {
      * @returns {VOID} - It updates the local obj
      */
     updateRollInfo(msgRollObj){
-        /*
-        MSG OBJ INFO:
+        /* msgRollObj vars:
+        MSG OBJ INFO {DS_ROLL_INFO}:
         DiceInfo = [];         // {DS_DIE_ROLL_INFO}
         RollType=   null;      // {ROLL_TYPE} Type of roll that was made; Save, attack etc
         DegSuccess= null;      // {DEG_SUCCESS} HIT OR MISS VALUE

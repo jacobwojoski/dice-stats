@@ -62,6 +62,23 @@ class DATA_PACKAGER
         D20_ROLLCOUNT:  [DS_GLOBALS.MAX_DIE_VALUE[DS_GLOBALS.NUM_ROLL_TYPES]], 
 
         BLIND_ROLL_COUNT: 0,
+
+        /* ---- START ROLL DATA ---- */
+        // Attack Info
+        ATK_OUTCOME_TRACKER: [DS_GLOBALS.NUM_ROLL_TYPES],        // {INT[]} Degree success for every attack; length=DEGREE_SUCCESS.size 
+        NUM_UNTARGETED_ATKS: 0,      // {INT}
+        TOTAL_ATTACKS: 0,            // {INT}
+
+        // Save Info
+        SAVE_OUTCOME_TRACKER: [DS_GLOBALS.NUM_ROLL_TYPES],       // {INT[]} Degree success for Saves length=DEGREE_SUCCESS.size 
+        NUM_UNTARGETED_SAVES: 0,     // {INT}
+        TOTAL_SAVES: 0,              // {INT}
+
+        // Advantage Info
+        NUM_ROLL_WITH_ADVANTAGE: 0,  // {INT}
+        MISS_FROM_ADV:  0,           // {INT}
+        HIT_FROM_ADV:   0,           // {INT}
+        ADV_DO_NOTHING: 0,           // {INT}
     }
 
     // Data displayed on the Global Dice Stats page (Combines all player data together)
@@ -278,6 +295,23 @@ class DATA_PACKAGER
         }
 
         packedData.BLIND_ROLL_COUNT = playerInfo.getBlindRollsCount();
+
+        /* ---- Package roll info, Num hits crits etc ----*/
+        packedData.ATK_OUTCOME_TRACKER = [...playerInfo.PLAYER_ROLL_INFO.ATK_OUTCOME_TRACKER];       
+        packedData.NUM_UNTARGETED_ATKS = playerInfo.PLAYER_ROLL_INFO.NUM_UNTARGETED_ATKS;     
+        packedData.TOTAL_ATTACKS = playerInfo.PLAYER_ROLL_INFO.TOTAL_ATTACKS;           
+
+        // Save Info
+        packedData.SAVE_OUTCOME_TRACKER =[...playerInfo.PLAYER_ROLL_INFO.SAVE_OUTCOME_TRACKER];      
+        packedData.NUM_UNTARGETED_SAVES = playerInfo.PLAYER_ROLL_INFO.NUM_UNTARGETED_SAVES;     
+        packedData.TOTAL_SAVES = playerInfo.PLAYER_ROLL_INFO.TOTAL_SAVES;              
+
+        // Advantage Info
+        packedData.NUM_ROLL_WITH_ADVANTAGE = playerInfo.PLAYER_ROLL_INFO.NUM_ROLL_WITH_ADVANTAGE; 
+        packedData.MISS_FROM_ADV =  playerInfo.PLAYER_ROLL_INFO.MISS_FROM_ADV;           
+        packedData.HIT_FROM_ADV =   playerInfo.PLAYER_ROLL_INFO.HIT_FROM_ADV;                    
+        packedData.ADV_DO_NOTHING=  playerInfo.PLAYER_ROLL_INFO.ADV_DO_NOTHING;            
+
         return packedData;
     }
 
