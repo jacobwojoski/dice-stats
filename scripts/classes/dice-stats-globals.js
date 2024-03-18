@@ -90,7 +90,7 @@ class DS_GLOBALS {
      *      
      *      hbs
      */ 
-    static NUM_ROLL_TYPES= 6;  //Size of {ROLL_TYPE}
+    static NUM_ROLL_TYPES= 8;  //Size of {ROLL_TYPE}
     static ROLL_TYPE = {        //Types of rolls the user can roll
         ATK: 0,     /* Rolling to Attack */
         DMG: 1,     /* Rolling Damage */

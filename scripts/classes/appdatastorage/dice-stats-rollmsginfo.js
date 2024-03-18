@@ -24,18 +24,20 @@
      * Trim out all the useless bits from the MSG.ROLL obj
      */
     class DS_ROLL_INFO {
-        DiceInfo = []; //{DS_DIE_ROLL_INFO}
-        DegSuccess= -1; //{DEG_SUCCESS} HIT OR MISS VALUE
-        CheckDiff = null; //{INT} Integer Hit Or Missed By
-        MissFromAdv = false; //{BOOLEAN}
-        HitFromAdv  = false; //{BOOLEAN}
-        RollType=   -1; //{ROLL_TYPE} Type of roll that was made; Save, attack etc
+        DiceInfo = [];         // {DS_DIE_ROLL_INFO}
+        RollType=   null;      // {ROLL_TYPE} Type of roll that was made; Save, attack etc
+        DegSuccess= null;      // {DEG_SUCCESS} HIT OR MISS VALUE
+        CheckDiff = null;      // {INT} Integer Hit Or Missed By
+        UsedAdvantage = null;  // {BOOLEAN}
+        MissFromAdv = null;    // {BOOLEAN}
+        HitFromAdv  = null;    // {BOOLEAN}
 
         constructor(){
             this.DiceInfo = [];
-            this.DegSuccess = null;
-            this.CheckDiff = null;
-            this.MissFromAdv = null;
-            this.HitFromAdv = null;
+            this.DegSuccess =   null;
+            this.CheckDiff =    null;
+            this.UsedAdvantage = false;
+            this.MissFromAdv =  false;
+            this.HitFromAdv =   false;
         }
     }

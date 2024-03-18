@@ -6,6 +6,7 @@ class PLAYER {
     USERNAME = '';
     USERID = 0;
     GM = false;
+    PLAYER_ROLL_INFO = new LOCAL_ROLL_INFO();
     
     constructor(userid){
         if(userid)
