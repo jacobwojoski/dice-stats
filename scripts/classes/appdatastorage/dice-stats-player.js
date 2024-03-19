@@ -6,7 +6,7 @@ class PLAYER {
     USERNAME = '';
     USERID = 0;
     GM = false;
-    PLAYER_ROLL_INFO = new LOCAL_ROLL_INFO();
+    PLAYER_ROLL_INFO;
     
     constructor(userid){
         if(userid)
@@ -22,10 +22,14 @@ class PLAYER {
             this.GM = false;
         }
 
+        // Create dice objects (Tracks each die roll)
         for(let i in Object.values(DS_GLOBALS.DIE_TYPE))
         {
             this.PLAYER_DICE[i] = new DIE_INFO(i);
         }
+
+        // Create roll info obj (Trags Generall roll stats; Hits Misses deg success etc)
+        this.PLAYER_ROLL_INFO = new LOCAL_ROLL_INFO();
     }
 
     /**
@@ -80,6 +84,20 @@ class PLAYER {
      */
     saveRoll(isBlind, rollVal, dieType, rollType){
         this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind,rollType);
+    }
+
+    /**
+     * Take the roll info obj that we created from the msg and store the data
+     * @param {DS_ROLL_INFO} msgRollInfo - roll info we want from msg
+     */
+    saveRoll(msgRollInfo){
+        this.PLAYER_ROLL_INFO.updateRollInfo(msgRollInfo);
+        
+        for(let dieIT in msgRollInfo.DiceInfo)
+        {
+            this.PLAYER_DICE[dieIT.dieType].addRoll(dieIT.RollValue,dieIT.IsBlind,dieIT.RollType);
+        }
+
     }
 
     /**

@@ -19,19 +19,21 @@ class LOCAL_ROLL_INFO {
     NUM_UNTARGETED_SAVES = null;    // {INT}
     TOTAL_SAVES = null;             // {INT}
 
+    // TODO: 
     // Other Checks Info
-    CHECKS_OUTCOME_TRACKER = [];    // {INT[]} Degree success for All Other Checks length=DEGREE_SUCCESS.size 
+    // CHECKS_OUTCOME_TRACKER = [];    // {INT[]} Degree success for All Other Checks length=DEGREE_SUCCESS.size 
 
-    // advantage & disadvantage info
-    NUM_ROLL_WITH_ADVANTAGE = null; // {INT}
-    MISS_FROM_ADV = null;   //{INT}
-    HIT_FROM_ADV = null;    //{INT}
-    ADV_MISS_BOTH = null;   //{INT}
-    ADV_HIT_BOTH = null;    //{INT}
-    ADV_DO_NOTHING = null;  //{INT}
+    // // advantage & disadvantage info
+    // IS_ADV_INFO_TRACKED = false;
+    // NUM_ROLL_WITH_ADVANTAGE = null; // {INT}
+    // MISS_FROM_ADV = null;   //{INT}
+    // HIT_FROM_ADV = null;    //{INT}
+    // ADV_MISS_BOTH = null;   //{INT}
+    // ADV_HIT_BOTH = null;    //{INT}
+    // ADV_DO_NOTHING = null;  //{INT}
 
-    // Damage
-    TOTAL_DAMAGE = null;    //{INT} Total ammount of damage done
+    // // Damage
+    // TOTAL_DAMAGE = null;    //{INT} Total ammount of damage done
 
     constructor(){
         this.ATK_OUTCOME_TRACKER = new Array(DS_GLOBALS.NUM_ROLL_TYPES);
@@ -44,12 +46,12 @@ class LOCAL_ROLL_INFO {
         this.NUM_UNTARGETED_SAVES = 0;
         this.TOTAL_SAVES = 0;
         
-        this.NUM_ROLL_WITH_ADVANTAGE = 0;
-        this.MISS_FROM_ADV = 0;
-        this.HIT_FROM_ADV = 0;
-        this.ADV_HIT_BOTH = 0;
-        this.ADV_MISS_BOTH = 0;
-        this.ADV_DO_NOTHING = 0;
+        // this.NUM_ROLL_WITH_ADVANTAGE = 0;
+        // this.MISS_FROM_ADV = 0;
+        // this.HIT_FROM_ADV = 0;
+        // this.ADV_HIT_BOTH = 0;
+        // this.ADV_MISS_BOTH = 0;
+        // this.ADV_DO_NOTHING = 0;
     }
 
     /**

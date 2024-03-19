@@ -58,6 +58,10 @@
                 {{#if base }}
                     {{> modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs ../playerData }}
                 {{/if}}
+
+                {{#if hitMiss}}
+                    {{> modules/dice-stats/templates/partial/tab_player_hit_miss.hbs ../playerData }}
+                {{/if}}
             </div>
         {{/each}}
     </section>

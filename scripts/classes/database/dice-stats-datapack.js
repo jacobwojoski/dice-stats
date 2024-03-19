@@ -75,10 +75,10 @@ class DATA_PACKAGER
         TOTAL_SAVES: 0,              // {INT}
 
         // Advantage Info
-        NUM_ROLL_WITH_ADVANTAGE: 0,  // {INT}
-        MISS_FROM_ADV:  0,           // {INT}
-        HIT_FROM_ADV:   0,           // {INT}
-        ADV_DO_NOTHING: 0,           // {INT}
+        // NUM_ROLL_WITH_ADVANTAGE: 0,  // {INT}
+        // MISS_FROM_ADV:  0,           // {INT}
+        // HIT_FROM_ADV:   0,           // {INT}
+        // ADV_DO_NOTHING: 0,           // {INT}
     }
 
     // Data displayed on the Global Dice Stats page (Combines all player data together)
@@ -307,10 +307,10 @@ class DATA_PACKAGER
         packedData.TOTAL_SAVES = playerInfo.PLAYER_ROLL_INFO.TOTAL_SAVES;              
 
         // Advantage Info
-        packedData.NUM_ROLL_WITH_ADVANTAGE = playerInfo.PLAYER_ROLL_INFO.NUM_ROLL_WITH_ADVANTAGE; 
-        packedData.MISS_FROM_ADV =  playerInfo.PLAYER_ROLL_INFO.MISS_FROM_ADV;           
-        packedData.HIT_FROM_ADV =   playerInfo.PLAYER_ROLL_INFO.HIT_FROM_ADV;                    
-        packedData.ADV_DO_NOTHING=  playerInfo.PLAYER_ROLL_INFO.ADV_DO_NOTHING;            
+        // packedData.NUM_ROLL_WITH_ADVANTAGE = playerInfo.PLAYER_ROLL_INFO.NUM_ROLL_WITH_ADVANTAGE; 
+        // packedData.MISS_FROM_ADV =  playerInfo.PLAYER_ROLL_INFO.MISS_FROM_ADV;           
+        // packedData.HIT_FROM_ADV =   playerInfo.PLAYER_ROLL_INFO.HIT_FROM_ADV;                    
+        // packedData.ADV_DO_NOTHING=  playerInfo.PLAYER_ROLL_INFO.ADV_DO_NOTHING;            
 
         return packedData;
     }

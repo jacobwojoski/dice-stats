@@ -81,11 +81,13 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
         // For PF2e, If it was an attack Roll get some extra info
         if( rollToParse?.type == "attack-roll" ){
+            // How did our attack do?
             retRollInfoObj = this.getDegSuccessInfo(msg, retRollInfoObj);
-            retRollInfoObj = this.getIsHitMissFromAdvantage(msg, retRollInfoObj);
-            retRollInfoObj = this.getHitOrMissBy(msg, retRollInfoObj, rollToParse);
+
         }else if(rollToParse?.type == "saving-throw" ){
-            // How Did the save faire
+            // How did our save do?
+            retRollInfoObj = this.getDegSuccessInfo(msg, retRollInfoObj);
+
         }else if(rollToParse?.type?.includes("skill-check")){
             // Was it some check vs a DC? Means the roll was a skill of some kinds
         }else if(msg?.isDamageRoll){
@@ -124,7 +126,6 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                 return DS_GLOBALS.ROLL_TYPE.SKILL;
             default :
                 return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
-
         }
     }
 
