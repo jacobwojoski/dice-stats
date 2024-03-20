@@ -24,6 +24,7 @@
      * Trim out all the useless bits from the MSG.ROLL obj
      */
     class DS_ROLL_INFO {
+        IsRollInfoChecked = false;
         DiceInfo = [];         // {DS_DIE_ROLL_INFO}
         RollType=   null;      // {ROLL_TYPE} Type of roll that was made; Save, attack etc
         DegSuccess= null;      // {DEG_SUCCESS} HIT OR MISS VALUE

@@ -184,6 +184,9 @@ class DiceStatsTracker {
         let rollInfoAry = parser.parseMsgRoll(msg);
         // Parser Should now get deleted here as we dont need it anymore once we have the ary
         //delete parser;
+        
+        // Guard for no roll info found
+        if(!rollInfoAry?.length == 0){return;}
 
         // Save Each ROLL_INFO  from array into players local data
         // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object

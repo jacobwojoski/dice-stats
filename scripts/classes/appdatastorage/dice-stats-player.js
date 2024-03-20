@@ -93,9 +93,11 @@ class PLAYER {
     saveRoll(msgRollInfo){
         this.PLAYER_ROLL_INFO.updateRollInfo(msgRollInfo);
         
-        for(let dieIT in msgRollInfo.DiceInfo)
+        for(let dieIT=0; dieIT < msgRollInfo.DiceInfo.length; dieIT++)
         {
-            this.PLAYER_DICE[dieIT.dieType].addRoll(dieIT.RollValue,dieIT.IsBlind,dieIT.RollType);
+            let tmpDieInfo = msgRollInfo.DiceInfo[dieIT];
+
+            this.PLAYER_DICE[tmpDieInfo.DieType].addRoll(tmpDieInfo.RollValue, tmpDieInfo.IsBlind, tmpDieInfo.RollType);
         }
 
     }

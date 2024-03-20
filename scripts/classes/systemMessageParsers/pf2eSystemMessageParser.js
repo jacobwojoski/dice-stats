@@ -83,20 +83,27 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         if( rollToParse?.type == "attack-roll" ){
             // How did our attack do?
             retRollInfoObj = this.getDegSuccessInfo(msg, retRollInfoObj);
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.ATK;
+            retRollInfoObj.IsRollInfoChecked = true;
 
         }else if(rollToParse?.type == "saving-throw" ){
             // How did our save do?
             retRollInfoObj = this.getDegSuccessInfo(msg, retRollInfoObj);
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.SAVE;
+            retRollInfoObj.IsRollInfoChecked = true;
 
         }else if(rollToParse?.type?.includes("skill-check")){
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.SKILL;
             // Was it some check vs a DC? Means the roll was a skill of some kinds
         }else if(msg?.isDamageRoll){
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.DMG;
             // Was a dmg roll? We could tally total damage done 
             //NOTE: (Wont be super reliable as all flat checks will count as dmg)
         }else if(rollToParse?.type?.includes("perception-check")){
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.PERCEPTION;
 
         }else if(rollToParse?.type?.includes("initiative")){
-
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.INITIATIVE;
         }
         return retRollInfoObj;
     }

@@ -163,8 +163,8 @@ class DIE_INFO {
     /**
      * A roll was made with this die so update the value that was rolled
      * @param {int} roll - value of roll 
-     * @param {bool} isBlind 
-     * @param {ROLL_TYPE} rollType
+     * @param {bool} isBlind - was the roll a blind roll
+     * @param {ROLL_TYPE} rollType - type of roll that was just made, Attack, Basic etc
      */
     addRoll(roll, isBlind, rollType){
         this.TOTAL_ROLLS++;
