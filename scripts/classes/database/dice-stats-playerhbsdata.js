@@ -6,6 +6,10 @@ class D20_HBS_DATA {
 
 }
 
+class TWODX_HBS_DATA {
+
+}
+
 class HIT_MISS_HBS_DATA {
     // Used to make arrays of info for each roll type
     //      Can store data like ["Untracked Rolls Count", 13] ["Total Rolls Count", 3]
