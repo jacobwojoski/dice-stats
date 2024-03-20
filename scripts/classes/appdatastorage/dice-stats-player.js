@@ -127,6 +127,7 @@ class PLAYER {
      * Clear All DIE_INFO objects
      */
     clearAllRollData(){
+        this.PLAYER_ROLL_INFO.clearData();
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].clearData();
         }

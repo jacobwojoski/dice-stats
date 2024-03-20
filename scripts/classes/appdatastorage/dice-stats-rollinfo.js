@@ -113,4 +113,22 @@ class LOCAL_ROLL_INFO {
             }
         }
     }
+
+    /**
+     * Clear all current data
+     * @returns void
+     */
+    clearData(){
+        this.IS_ROLL_INFO_TRACKED = false;    // {BOOLEAN} Did we record any roll info?
+
+        // Attack Info
+        this.ATK_OUTCOME_TRACKER = [];       // {INT[]} Degree success for every attack; length=DEGREE_SUCCESS.size 
+        this.NUM_UNTARGETED_ATKS = null;     // {INT}
+        this.TOTAL_ATTACKS = null;           // {INT}
+
+        // Save Info
+        this.SAVE_OUTCOME_TRACKER = [];      // {INT[]} Degree success for Saves length=DEGREE_SUCCESS.size 
+        this.NUM_UNTARGETED_SAVES = null;    // {INT}
+        this.TOTAL_SAVES = null;             // {INT}
+    }
 }

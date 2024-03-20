@@ -186,7 +186,7 @@ class DiceStatsTracker {
         //delete parser;
         
         // Guard for no roll info found
-        if(!rollInfoAry?.length == 0){return;}
+        if(rollInfoAry?.length == 0){return;}
 
         // Save Each ROLL_INFO  from array into players local data
         // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object
