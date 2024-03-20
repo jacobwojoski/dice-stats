@@ -64,6 +64,8 @@ class DATA_PACKAGER
         BLIND_ROLL_COUNT: 0,
 
         /* ---- START ROLL DATA ---- */
+        ROLL_DATA_IS_TRACKED: false,
+
         // Attack Info
         ATK_OUTCOME_TRACKER: [DS_GLOBALS.NUM_ROLL_TYPES],        // {INT[]} Degree success for every attack; length=DEGREE_SUCCESS.size 
         NUM_UNTARGETED_ATKS: 0,      // {INT}
@@ -297,6 +299,8 @@ class DATA_PACKAGER
         packedData.BLIND_ROLL_COUNT = playerInfo.getBlindRollsCount();
 
         /* ---- Package roll info, Num hits crits etc ----*/
+        packedData.ROLL_DATA_IS_TRACKED = playerInfo.PLAYER_ROLL_INFO.IS_ROLL_INFO_TRACKED;
+
         packedData.ATK_OUTCOME_TRACKER = [...playerInfo.PLAYER_ROLL_INFO.ATK_OUTCOME_TRACKER];       
         packedData.NUM_UNTARGETED_ATKS = playerInfo.PLAYER_ROLL_INFO.NUM_UNTARGETED_ATKS;     
         packedData.TOTAL_ATTACKS = playerInfo.PLAYER_ROLL_INFO.TOTAL_ATTACKS;           

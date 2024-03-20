@@ -60,7 +60,11 @@
                 {{/if}}
 
                 {{#if hitMiss}}
-                    {{> modules/dice-stats/templates/partial/tab_player_hit_miss.hbs ../playerData }}
+                    {{#diceStats_isTrue ../playerData.ROLL_DATA_IS_TRACKED}}
+                        {{> modules/dice-stats/templates/partial/tab_player_hit_miss.hbs ../playerData }}
+                    {{else}}
+                        {{> modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs}}
+                    {{/diceStats_isTrue}}
                 {{/if}}
             </div>
         {{/each}}

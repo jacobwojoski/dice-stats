@@ -222,19 +222,10 @@ class DiceStatsTracker {
         // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object
         let updatedLocalRollValue = false;
         for(let rollIT=0; rollIT<rollInfoAry.length; rollIT++){
-            let dieAry = rollInfoAry[rollIT].DiceInfo;
 
             playerInfo.saveRoll(rollInfoAry[rollIT]);
+            updatedLocalRollValue = true;
 
-            for(let dieIT=0; dieIT<dieAry.length; dieIT++){
-                let dieInfo = dieAry[dieIT];
-
-                // playerInfo.saveRoll(dieInfo?.IsBlind, dieInfo?.RollValue, 
-                //                     dieInfo?.DieType, dieInfo?.RollType);
-                //playerInfo.saveRoll(dieInfo);
-
-                updatedLocalRollValue = true;
-            }
         }
 
         //If AutoSave is Enabled by GM, only save updates to YOUR ROLLS to the DB
