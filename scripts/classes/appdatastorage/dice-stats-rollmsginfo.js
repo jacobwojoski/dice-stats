@@ -1,7 +1,7 @@
     /* DIE_TYPE, ROLL_TYPE, ROLL_VALUE, IS_BLIND, DEG_SUCCESS*/
     /* Any Negative value is invalid */
     /* Storage of any info related to the DICE that in the message (Trim out all the useless bits)*/
-    class DS_DIE_ROLL_INFO {
+    class DS_MSG_DIE_ROLL_INFO {
         DieType=    -1; //{DIE_TYPE}
         RollType=   -1; //{ROLL_TYPE}
         RollValue=  -1; //{INT}
@@ -23,7 +23,7 @@
      * Storage Holds Roll Info and an array of Dice Info, Also helps if Hit and Miss's Require multiple dice
      * Trim out all the useless bits from the MSG.ROLL obj
      */
-    class DS_ROLL_INFO {
+    class DS_MSG_ROLL_INFO {
         IsRollInfoChecked = false;
         DiceInfo = [];         // {DS_DIE_ROLL_INFO}
         RollType=   null;      // {ROLL_TYPE} Type of roll that was made; Save, attack etc

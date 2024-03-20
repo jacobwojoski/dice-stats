@@ -28,7 +28,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
-            retRollInfoAry.push(new DS_ROLL_INFO);
+            retRollInfoAry.push(new DS_MSG_ROLL_INFO);
             let rollObjSel = msg.rolls[tempRoll];
 
             retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
@@ -46,7 +46,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                     let dieResultSel = dieTypeSel.results[rollResult];
 
                     // Create new ROLL_INFO obj to ass to array
-                    let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                    let newDieRollInfo = new DS_MSG_DIE_ROLL_INFO;
                     
                     // See if it was a blind roll
                     newDieRollInfo.IsBlind = msg.blind;
