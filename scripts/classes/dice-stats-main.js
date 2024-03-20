@@ -191,11 +191,14 @@ class DiceStatsTracker {
         for(let rollIT=0; rollIT<rollInfoAry.length; rollIT++){
             let dieAry = rollInfoAry[rollIT].DiceInfo;
 
+            playerInfo.saveRoll(rollInfoAry[rollIT]);
+
             for(let dieIT=0; dieIT<dieAry.length; dieIT++){
                 let dieInfo = dieAry[dieIT];
 
-                playerInfo.saveRoll(dieInfo?.IsBlind, dieInfo?.RollValue, 
-                                    dieInfo?.DieType, dieInfo?.RollType);
+                // playerInfo.saveRoll(dieInfo?.IsBlind, dieInfo?.RollValue, 
+                //                     dieInfo?.DieType, dieInfo?.RollType);
+                //playerInfo.saveRoll(dieInfo);
 
                 updatedLocalRollValue = true;
             }

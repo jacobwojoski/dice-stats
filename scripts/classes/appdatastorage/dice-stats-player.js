@@ -82,9 +82,9 @@ class PLAYER {
      * @param {DIE_TYPE} dieType 
      * @param {DIE_ROLL_TYPE} rollType
      */
-    saveRoll(isBlind, rollVal, dieType, rollType){
-        this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind,rollType);
-    }
+    // saveRoll(isBlind, rollVal, dieType, rollType){
+    //     this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind,rollType);
+    // }
 
     /**
      * Take the roll info obj that we created from the msg and store the data

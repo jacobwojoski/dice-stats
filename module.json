@@ -14,6 +14,7 @@
   "scripts": [
     "scripts/classes/appdatastorage/dice-stats-diceinfo.js",
     "scripts/classes/appdatastorage/dice-stats-player.js",
+    "scripts/classes/appdatastorage/dice-stats-rollinfo.js",
     "scripts/classes/appdatastorage/dice-stats-rollmsginfo.js",
 
     "scripts/classes/asyncinteraction/dice-stats-handlebars.js",

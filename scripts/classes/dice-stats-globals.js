@@ -17,6 +17,7 @@ class DS_GLOBALS {
         'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
         'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
         'modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs',
+        'modules/dice-stats/templates/partial/tab_player_hit_miss.hbs',
         'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'
     ];
     static MODULE_TEMPLATES= {
