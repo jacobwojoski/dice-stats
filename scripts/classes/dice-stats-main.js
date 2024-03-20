@@ -1,5 +1,35 @@
 //Were using this class as a singleton although its not quite set up correctly as one. 
 // This is the main dice stats class. It holds all the data.
+/**
+ * Quick discrip on how mod works:
+ *      Hook into Foundry scene render to add dce stats buttons [async/hooks & form/scenecontrol]
+ *      Hook into Foundry chat msg creation to add roll to data storage
+ *          Data Storage:
+ *              DICE_STATS_CLASS - Main class that holds backend data for dice stats
+ *                  PLAYER_DATA -    Main class holds a player data class for every player for the world
+ *                      DICE_DATA -     Player Data holds a dice data class for every type of dice roll we track
+ * 
+ *          Initalize:
+ *              - creates hooks
+ *              - create button on scene
+ *              - load any data from database if we have it
+ * 
+ *          Process Desc:
+ *              - Hook gets called -> Main -> parseChatMsg(MSG_WE_JUST_GOT_FROM_HOOK);
+ *              - parseChatMsg -> createSystemSpecificParser
+ *              - parse Using System Specific Parser and create rollmMsgInfo (Convert system specific info into generic dice stats info obj)
+ *              - Save the dice stats info obj to the backend
+ * 
+ *          Open Form:
+ *              - Openeing form calls the associated forms getData()
+ *              - get data calls datapack functions to convert the dice stats data into data for the form. 
+ *                  Because of the handlebars templating language not liking multi dimentional arrays I need to convert all backend data 
+ *                  into a different object that the handlebars forms can handle. Its a reak pain in the ass and is implemented like shit right now.
+ *              - form buttons all have id's that have a corresponding switch case in _handleButtonClick(). This is a build in foundry form fn that gets called whenever
+ *                  a button is selected on any from. 
+ *               - These buttons interacts with the DiceStats object as its global/singleton and call getData() again to update the display  
+ * 
+ */
 class DiceStatsTracker {
     AM_I_GM = false;
 
