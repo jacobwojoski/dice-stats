@@ -43,6 +43,10 @@
             "local_enable_2dx_details_tab":{
                 "Name": "Enable 2DX Info Tab",
                 "Hint": "Allows the user to remove the 2dX tab button on the player screen to reduce UI clutter if not needed."
+            },
+            "local_enable_hit_miss_info_tab":{
+                "Name": "Enable Hit And Miss Info",
+                "Hint": "Displays info about degree success's rolled for Attacks and Saves"
             }
         },
         "both_forms":{

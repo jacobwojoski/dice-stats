@@ -196,6 +196,16 @@ class DiceStatsTracker {
             config: true,   // show in module config
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB}.Hint`,
         })
+
+        // Setting to disable Hit Miss tab [Def: Enabled]
+        game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB}.Name`,
+            default: true,
+            type: Boolean,
+            scope: 'client',    //world = db, client = local
+            config: true,       // show in module config
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB}.Hint`,
+        })
     }
 
     /**

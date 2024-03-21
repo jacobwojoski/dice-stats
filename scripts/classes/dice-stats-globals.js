@@ -48,7 +48,10 @@ class DS_GLOBALS {
         LOCAL_ENABLE_D20_DETAILS_TAB:     'local_enable_d20_details_tab',
         LOCAL_ENABLE_2DX_DETAILS_TAB:     'local_enable_2dx_details_tab',
         LOCAL_ENABLE_2D6_DETAILS_TAB:     'local_enable_2d6_details_tab',
+        LOCAL_ENABLE_2D12_DETAILS_TAB:    'local_enable_2d12_details_tab',
         LOCAL_ENABLE_2D20_DETAILS_TAB:    'local_enable_2d20_details_tab',
+
+        LOCAL_ENABLE_HIT_MISS_INFO_TAB:   'local_enable_hit_miss_info_tab',
     };
 
     /* ------ GLOBAL DS OBJECTS ------- */
