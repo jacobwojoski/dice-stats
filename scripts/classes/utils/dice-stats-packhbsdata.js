@@ -1,0 +1,15 @@
+class PACKAGE_HIT_MISS_DATA {
+
+}
+
+class PACKAGE_ALL_STATS_DATA {
+
+}
+
+class PACKAGE_TWODX_STATS_DATA {
+
+}
+
+class PACKAGE_D20_STATS_DATA {
+
+}

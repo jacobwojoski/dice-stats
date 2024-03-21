@@ -95,9 +95,9 @@ class PLAYER {
         
         for(let dieIT=0; dieIT < msgRollInfo.DiceInfo.length; dieIT++)
         {
-            let tmpDieInfo = msgRollInfo.DiceInfo[dieIT];
+            let tmpMsgDieInfo = msgRollInfo.DiceInfo[dieIT];
 
-            this.PLAYER_DICE[tmpDieInfo.DieType].addRoll(tmpDieInfo.RollValue, tmpDieInfo.IsBlind, tmpDieInfo.RollType);
+            this.PLAYER_DICE[tmpMsgDieInfo.DieType].addRoll(tmpMsgDieInfo);
         }
 
     }

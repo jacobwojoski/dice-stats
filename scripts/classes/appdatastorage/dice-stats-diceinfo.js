@@ -32,6 +32,8 @@ class DIE_INFO {
     SKILLS_ROLLS = [];
     ABILITY_ROLLS = [];
     UNKNOWN_ROLLS = [];
+    PERCEPTION_ROLLS = [];
+    INITIATIVE_ROLLS = [];
 
     ATK_ROLLS_BLIND = [];
     DMG_ROLLS_BLIND = [];
@@ -39,6 +41,8 @@ class DIE_INFO {
     SKILLS_ROLLS_BLIND = [];
     ABILITY_ROLLS_BLIND = [];
     UNKNOWN_ROLLS_BLIND = [];
+    PERCEPTION_ROLLS_BLIND = [];
+    INITIATIVE_ROLLS_BLIND = [];
 
     /**
      * constructor set values to defaults
@@ -161,12 +165,18 @@ class DIE_INFO {
     }
 
     /**
-     * A roll was made with this die so update the value that was rolled
-     * @param {int} roll - value of roll 
-     * @param {bool} isBlind - was the roll a blind roll
-     * @param {ROLL_TYPE} rollType - type of roll that was just made, Attack, Basic etc
+     * Add a roll for whatever die we currently are
+     * @param {DS_MSG_DIE_ROLL_INFO} msgDieInfo 
      */
-    addRoll(roll, isBlind, rollType){
+    addRoll(msgDieInfo){
+        // Guard for being in wrong die object & we got a valid roll value
+        if(msgDieInfo.DieType != this.TYPE && msgDieInfo.RollValue <= this.MAX ){
+            return;}
+
+        let roll = msgDieInfo.RollValue;
+        let isBlind = msgDieInfo.IsBlind;
+        let rollType = msgDieInfo.RollType;
+
         this.TOTAL_ROLLS++;
         this.ROLL_COUNTERS[rollType] ++;
         this.updateStreak(roll, isBlind)
@@ -216,6 +226,8 @@ class DIE_INFO {
                     this.ABILITY_ROLLS[roll-1] = this.ABILITY_ROLLS[roll-1]+1;
                 }
                 break;
+            case DS_GLOBALS.ROLL_TYPE.PERCEPTION:
+            case DS_GLOBALS.ROLL_TYPE.INITIATIVE:
             case DS_GLOBALS.ROLL_TYPE.UNKNOWN :
                 if(isBlind){
                     this.UNKNOWN_ROLLS_BLIND[roll-1] = this.UNKNOWN_ROLLS_BLIND[roll-1]+1;
