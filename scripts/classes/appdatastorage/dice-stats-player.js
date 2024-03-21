@@ -88,7 +88,7 @@ class PLAYER {
 
     /**
      * Take the roll info obj that we created from the msg and store the data
-     * @param {DS_ROLL_INFO} msgRollInfo - roll info we want from msg
+     * @param {DS_MSG_ROLL_INFO} msgRollInfo - roll info we want from msg
      */
     saveRoll(msgRollInfo){
         this.PLAYER_ROLL_INFO.updateRollInfo(msgRollInfo);

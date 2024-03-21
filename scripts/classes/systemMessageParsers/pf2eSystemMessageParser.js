@@ -139,8 +139,8 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     /**
      * Get hit and miss info from the attack roll
      * @param {*} msg - Chat Message Object
-     * @param {DS_ROLL_INFO} newRollInfo - Current Roll info Obj without Hit Info
-     * @returns {DS_ROLL_INFO} updatedNewRollInfo 
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - Current Roll info Obj without Hit Info
+     * @returns {DS_MSG_ROLL_INFO} updatedNewRollInfo 
      * 
      * DEG_SUCCESS 
      * UNKNOWN:        0,
@@ -179,9 +179,9 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     /**
      * For any roll against a DC find out how much the user missed by
      * @param {*} msg - Chat msg obj
-     * @param {DS_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
      * @param {MSG.ROLL_OBT} rollValue - msg.roll info that were currently looking at
-     * @returns {DS_ROLL_INFO} newRollInfo
+     * @returns {DS_MSG_ROLL_INFO} newRollInfo
      */
     getHitOrMissBy(msg, newRollInfo, rollValue)
     {
@@ -194,8 +194,8 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     /**
      * Check to see if we hit or missed because of advantage or disadvantage 
      * @param {*} msg - chat msg object
-     * @param {DS_ROLL_INFO} newRollInfo - rollInfoObj were going to update with info and return
-     * @returns {DS_ROLL_INFO} -newRollInfo but with updated values
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - rollInfoObj were going to update with info and return
+     * @returns {DS_MSG_ROLL_INFO} -newRollInfo but with updated values
      */
     getIsHitMissFromAdvantage(msg, newRollInfo)
     {

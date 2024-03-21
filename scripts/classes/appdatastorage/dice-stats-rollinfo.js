@@ -3,7 +3,7 @@
  * to the roll as a whole rather than specific dice. 
  * 
  * This stuff is all system specific so check system parser on how we get this data from msg's
- * We load it from the DS_ROLL_INFO obj
+ * We load it from the DS_MSG_ROLL_INFO obj
  */
 class LOCAL_ROLL_INFO {
     
@@ -55,14 +55,14 @@ class LOCAL_ROLL_INFO {
     }
 
     /**
-     * Take the DS_ROLL_INFO obj (message roll data) and convert it to local storage obj
-     * @param {DS_ROLL_INFO} msgRollObj 
+     * Take the DS_MSG_ROLL_INFO obj (message roll data) and convert it to local storage obj
+     * @param {DS_MSG_ROLL_INFO} msgRollObj 
      * @returns {VOID} - It updates the local obj
      */
     updateRollInfo(msgRollObj){
         /* msgRollObj vars:
-        MSG OBJ INFO {DS_ROLL_INFO}:
-        DiceInfo = [];         // {DS_DIE_ROLL_INFO}
+        MSG OBJ INFO {DS_MSG_ROLL_INFO}:
+        DiceInfo = [];         // {DS_MSG_DIE_ROLL_INFO}
         RollType=   null;      // {ROLL_TYPE} Type of roll that was made; Save, attack etc
         DegSuccess= null;      // {DEG_SUCCESS} HIT OR MISS VALUE
         CheckDiff = null;      // {INT} Integer Hit Or Missed By

@@ -73,7 +73,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
         //For multiple rolls in chat (Any roll made from a card)
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg?.systemRolls?.attacks?.length; tempRoll++) {
-            retRollInfoAry.push(new DS_ROLL_INFO);
+            retRollInfoAry.push(new DS_MSG_ROLL_INFO);
             let rollObjSel = msg.systemRolls.attacks[tempRoll].attack;
 
             retRollInfoAry[retRollInfoAry.length-1] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
@@ -91,7 +91,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
                     let dieResultSel = dieTypeSel.results[rollResult];
 
                     // Create new ROLL_INFO obj to ass to array
-                    let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                    let newDieRollInfo = new DS_MSG_DIE_ROLL_INFO;
                     
                     // See if it was a blind roll
                     newDieRollInfo.IsBlind = msg.blind;
@@ -121,7 +121,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
 
             // for all crit confirm rolls in each attack roll
             for (let tempRoll = 0; tempRoll < attckRollObjSel.damage.length; tempRoll++) {
-                retRollInfoAry.push(new DS_ROLL_INFO);
+                retRollInfoAry.push(new DS_MSG_ROLL_INFO);
                 let rollObjSel = attckRollObjSel.critConfirm;
     
                 retRollInfoAry[retRollInfoAry.length-1] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
@@ -139,7 +139,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
                         let dieResultSel = dieTypeSel.results[rollResult];
     
                         // Create new ROLL_INFO obj to ass to array
-                        let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                        let newDieRollInfo = new DS_MSG_DIE_ROLL_INFO;
                         
                         // See if it was a blind roll
                         newDieRollInfo.IsBlind = msg.blind;
@@ -170,7 +170,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
 
             // for all crit confirm rolls in each attack roll
             for (let tempRoll = 0; tempRoll < attckRollObjSel.damage.length; tempRoll++) {
-                retRollInfoAry.push(new DS_ROLL_INFO);
+                retRollInfoAry.push(new DS_MSG_ROLL_INFO);
                 let rollObjSel = attckRollObjSel.critDamage[tempRoll];
     
                 retRollInfoAry[retRollInfoAry.length-1] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
@@ -188,7 +188,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
                         let dieResultSel = dieTypeSel.results[rollResult];
     
                         // Create new ROLL_INFO obj to ass to array
-                        let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                        let newDieRollInfo = new DS_MSG_DIE_ROLL_INFO;
                         
                         // See if it was a blind roll
                         newDieRollInfo.IsBlind = msg.blind;
@@ -219,7 +219,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
 
             // for all damage rolls in each attack roll
             for (let tempRoll = 0; tempRoll < attckRollObjSel.damage.length; tempRoll++) {
-                retRollInfoAry.push(new DS_ROLL_INFO);
+                retRollInfoAry.push(new DS_MSG_ROLL_INFO);
                 let rollObjSel = attckRollObjSel.damage[tempRoll];
     
                 retRollInfoAry[retRollInfoAry.length-1] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
@@ -237,7 +237,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
                         let dieResultSel = dieTypeSel.results[rollResult];
     
                         // Create new ROLL_INFO obj to ass to array
-                        let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                        let newDieRollInfo = new DS_MSG_DIE_ROLL_INFO;
                         
                         // See if it was a blind roll
                         newDieRollInfo.IsBlind = msg.blind;
@@ -272,7 +272,7 @@ class PF1E_SYSTEM_MESSAGE_PARSER
     /**
      * 
      * @param {*} msg - chat message obj (Prob not needed now that we have the rollObj)
-     * @param {DS_ROLL_INFO} retRollInfoObj - data struct that were going to modify and return
+     * @param {DS_MSG_ROLL_INFO} retRollInfoObj - data struct that were going to modify and return
      * @param {MSG.ROLL_INFO} rollOBJ - Roll Obj We want to parse
      * @returns retRollInfoObj
      */

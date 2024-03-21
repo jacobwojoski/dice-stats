@@ -219,7 +219,7 @@ class DiceStatsTracker {
         if(!rollInfoAry?.length || rollInfoAry.length == 0){return;}
 
         // Save Each ROLL_INFO  from array into players local data
-        // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object
+        // TODO: Update player & Die Stats to take in {DS_MSG_ROLL_INFO} object
         let updatedLocalRollValue = false;
         for(let rollIT=0; rollIT<rollInfoAry.length; rollIT++){
 
