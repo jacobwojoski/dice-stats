@@ -1,7 +1,7 @@
 /**
  * Data object that can be interated over in hbs for Die info
  */
-class DIE_SEC_INFO  {
+class HBS_DICE_DATA  {
     Is_displ= false;
     Total_Rolls= 0;
     Mean= 0;
@@ -13,7 +13,7 @@ class DIE_SEC_INFO  {
     DiceHeading= "";
 }
 
-class ALLDICE_HBS_DATA {
+class HBS_ALLDICE_DATA {
     TOTAL_ROLLS= [];
     IS_DISP= [];
     D2_INFO= [];
@@ -26,28 +26,30 @@ class ALLDICE_HBS_DATA {
     D20_INFO= [];
     D100_INFO= [];
 
-    HBS_DIE_INFO= []; /*{DIE_SEC_INFO[]}*/
+    HBS_DIE_INFO= []; /*{HBS_DICE_DATA[]}*/
 }
 
-class D20_HBS_DATA {
+class HBS_D20_DATA {
 
 }
 
-class TWODX_HBS_DATA {
+class HBS_2DX_DATA {
 
 }
 
 /**
  * Data info for His Miss class that can be easily iterated over as its sys agnostic
  *  */
-class HIT_MISS_HBS_DATA {
+class HBS_HIT_MISS_DATA {
     // Used to make arrays of info for each roll type
     //      Can store data like ["Untracked Rolls Count", 13] ["Total Rolls Count", 3]
+    ROLL_INFO_TITLE = "";
     ROLL_TYPE_INFO = {
         TEXT_STRING: "",
         VALUE: 0
     }
 
+    DEG_SUCCESS_TITLE = "";
     DEG_SUCCESS_DATA = {
         // Use handlebars helper to convert enum to degree success string
         DEG_SUCCESS_ENUM: 0,

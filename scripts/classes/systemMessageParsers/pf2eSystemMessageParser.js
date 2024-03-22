@@ -166,7 +166,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
             case "success":
                 newRollInfo.DegSuccess = DS_GLOBALS.DEGREE_SUCCESS.SUCCESS;
                 break;
-            case "criticalsuccess":
+            case "criticalSuccess":
                 newRollInfo.DegSuccess = DS_GLOBALS.DEGREE_SUCCESS.CRIT_SUCCESS;
                 break;
             default:

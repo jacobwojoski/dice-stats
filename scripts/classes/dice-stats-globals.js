@@ -106,7 +106,8 @@ class DS_GLOBALS {
         Its not assigned as Damage or atack ect */
         UNKNOWN: 5,
         INITIATIVE: 6, /* Any initiative Rolls */
-        PERCEPTION: 7  /* Any perception Rolls */  
+        PERCEPTION: 7,  /* Any perception Rolls */  
+        FLATCHECK:  8
     };
 
     // Degree of success
