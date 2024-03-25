@@ -105,6 +105,27 @@ class CustomSceneControlToolPlayer
     }
 }
 
+// Compare Scene Control Icon
+class CustomSceneControlToolExport
+{
+    name = 'Export';
+    title = game.i18n.localize('DICE_STATS_TEXT.export_data_form.button');
+    icon = 'fa-solid fa-file-export';
+
+    visible= true;
+    toggle= false;
+    active= false;
+    button= true;
+
+    async onClick(){
+        if (game.user.isGM) {
+            DS_GLOBALS.FORM_EXPORT = new ExportDataPage().render(true);
+        }
+    }
+
+    constructor(){}
+}
+
 // Scene Controller outer button to view player buttons
 class CustomSceneControl
 {

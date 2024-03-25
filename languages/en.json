@@ -151,6 +151,12 @@
             "title": "Compare Player Stats",
             "button": "Compare Players"
         },
+        "export_data_form":{
+            "title": "Export Data",
+            "button": "Export",
+            "export_csv_btn": "Export as CSV",
+            "header": "Export Dice Stats Data"
+        },
         "google_chart":{
             "die": "Die Number",
             "rolls": "Number Of Rolls"
