@@ -27,6 +27,7 @@
     "scripts/classes/forms/dice-stats-scenecontrol.js",
     "scripts/classes/forms/dice-stats-globalstatuspage.js",
     "scripts/classes/forms/dice-stats-tabedplayerstatspage.js",
+    "scripts/classes/forms/dice-stats-exportdatapage.js",
 
     "scripts/classes/systemMessageParsers/dice-stats-messageparserfactory.js",
     "scripts/classes/systemMessageParsers/dnd5eSystemMessageParser.js",
