@@ -26,7 +26,7 @@ class HBS_ALLDICE_DATA {
     D20_INFO= [];
     D100_INFO= [];
 
-    HBS_DIE_INFO= []; /*{HBS_DICE_DATA[]}*/
+    HBS_DICE_INFO= []; /*{HBS_DICE_DATA[]}*/
 }
 
 class HBS_D20_DATA {

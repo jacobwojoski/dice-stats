@@ -131,6 +131,8 @@ class PLAYER {
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].clearData();
         }
+
+        this.PLAYER_ROLL_INFO.clearData();
     }
 
     /**
@@ -148,5 +150,12 @@ class PLAYER {
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].clearData();
         }
+    }
+
+    /**
+     * Clear all roll specific info (Hits misses etc)
+     */
+    clearRollData(){
+        this.PLAYER_ROLL_INFO.clearData();
     }
 }

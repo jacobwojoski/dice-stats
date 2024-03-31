@@ -122,13 +122,13 @@ class LOCAL_ROLL_INFO {
         this.IS_ROLL_INFO_TRACKED = false;    // {BOOLEAN} Did we record any roll info?
 
         // Attack Info
-        this.ATK_OUTCOME_TRACKER = [];       // {INT[]} Degree success for every attack; length=DEGREE_SUCCESS.size 
-        this.NUM_UNTARGETED_ATKS = null;     // {INT}
-        this.TOTAL_ATTACKS = null;           // {INT}
+        this.ATK_OUTCOME_TRACKER.fill(0);       // {INT[]} Degree success for every attack; length=DEGREE_SUCCESS.size 
+        this.NUM_UNTARGETED_ATKS = 0;     // {INT}
+        this.TOTAL_ATTACKS = 0;           // {INT}
 
         // Save Info
-        this.SAVE_OUTCOME_TRACKER = [];      // {INT[]} Degree success for Saves length=DEGREE_SUCCESS.size 
-        this.NUM_UNTARGETED_SAVES = null;    // {INT}
-        this.TOTAL_SAVES = null;             // {INT}
+        this.SAVE_OUTCOME_TRACKER.fill(0);      // {INT[]} Degree success for Saves length=DEGREE_SUCCESS.size 
+        this.NUM_UNTARGETED_SAVES = 0;    // {INT}
+        this.TOTAL_SAVES = 0;             // {INT}
     }
 }
