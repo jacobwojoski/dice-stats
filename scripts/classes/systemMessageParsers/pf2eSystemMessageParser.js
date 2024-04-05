@@ -13,12 +13,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     /**
      * Parse the passed in message
      * @param {*} msg 
-     * @returns {ROLL_OBJECT[]} 
-     */
-    /**
-     * Parse the passed in message
-     * @param {*} msg 
-     * @returns {ROLL_OBJECT[]} 
+     * @returns {DS_MSG_ROLL_INFO[]} 
      */
     parseMsgRoll(msg){
         if(!msg.isRoll){
@@ -72,6 +67,9 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     }
 
     /**
+     * @param {MSG} msg
+     * @param {DS_MSG_ROLL_INFO} retRollInfoObj - our conversion of message info into local info
+     * @param {MSG.ROLL[it]} rollObjSel - 
      * Update roll obj with any info that system holds in roll compared to specific dice info
      * NOTE: THESE ARE ONLY ACCESSABLE IF THE USER HAS A PLAYER TARGETED, IF NOT, ITS NOT TRACKED
      */

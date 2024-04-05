@@ -113,6 +113,7 @@ class DS_GLOBALS {
     // Degree of success
     static DEGREE_SUCCESS = {
         UNKNOWN:        0,
+        
         // D20 DEG_SUCCESS
         CRIT_FAIL:      1,
         FAIL:           2,
@@ -122,7 +123,13 @@ class DS_GLOBALS {
         // PBTA DEG_SUCCESS
         DOWN_BREAT:     5,
         MIXED_BREAT:    6,
-        UPBEAT:         8
+        UPBEAT:         8,
+
+        // Dagger Heart DEG_SUCCESS + CRIT_SUCCESS
+        FAIL_FEAR: 9,
+        FAIL_HOPE: 10,
+        SUCC_FEAR: 11,
+        SUCC_HOPE: 12
     }
 
     //Convert {DIE_TYPE} to the max value you can roll on that die
