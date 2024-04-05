@@ -1,4 +1,10 @@
 # CHANGELOG  
+## [ 1.18.0 ]
+- redesigned how roll info is pulled from messages
+- redesigned backend for how data is stored to now follow ROLL_INFO.DICE_INFO
+- started to add ability to track ROLL STATS. 
+- pf2e has ROLL stats tab for DEG_SUCC for attacks and saves. info properly saves and loads from DB
+
 ## [ 1.17.5 ]
 - Redesign data storage structure for msg parsing
 - Create factory object for parsers
