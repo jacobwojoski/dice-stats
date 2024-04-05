@@ -148,7 +148,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         CRIT_SUCCESS:   4,
         DOWNBEAT:       5, //NOT USED FOR PF2
         MIXEDBEAT:      6  //NOT USED FOR PF2
-        UPBEAT:         6  //NOT USED FOR PF2
+        UPBEAT:         7  //NOT USED FOR PF2
      */
     getDegSuccessInfo(msg, newRollInfo)
     {

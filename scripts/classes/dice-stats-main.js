@@ -187,7 +187,7 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_D20_DETAILS_TAB}.Hint`,
         })
 
-        // Setting to disable 2dx-info tab [Def: Enabled]
+        // Setting to disable 2dx-info tab [Def: Disabled]
         game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB, {
             name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB}.Name`,
             default: false,

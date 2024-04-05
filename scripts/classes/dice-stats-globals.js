@@ -84,6 +84,11 @@ class DS_GLOBALS {
         D12:    6,
         D20:    7,
         D100:   8
+        /*
+        TWOd6
+        TWOd12
+        TWOd20
+        */
     };
     
     /** Adding a roll type involves updating the following
@@ -96,6 +101,7 @@ class DS_GLOBALS {
      */ 
     static NUM_ROLL_TYPES= 8;  //Size of {ROLL_TYPE}
     static ROLL_TYPE = {        //Types of rolls the user can roll
+        /* D20 ROLL TYPES */
         ATK: 0,     /* Rolling to Attack */
         DMG: 1,     /* Rolling Damage */
         SAVE: 2,    /* Rolling Will, Fortitude, Reflex*/
@@ -108,12 +114,15 @@ class DS_GLOBALS {
         INITIATIVE: 6, /* Any initiative Rolls */
         PERCEPTION: 7,  /* Any perception Rolls */  
         FLATCHECK:  8
+
+        /* OTHER SYSTEM ROLL TYPES */
+
     };
 
     // Degree of success
     static DEGREE_SUCCESS = {
         UNKNOWN:        0,
-        
+
         // D20 DEG_SUCCESS
         CRIT_FAIL:      1,
         FAIL:           2,
