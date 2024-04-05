@@ -77,6 +77,9 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
         let rollToParse = rollObjSel;
 
+        // We track hit & miss info for pf2e, So this should always be true. 
+        retRollInfoObj.IsRollInfoChecked = true;
+
         // For PF2e, If it was an attack Roll get some extra info
         if( rollToParse?.type == "attack-roll" ){
             // How did our attack do?
