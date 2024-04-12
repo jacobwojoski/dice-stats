@@ -50,7 +50,8 @@ class ExportDataPage extends FormApplication{
         }
         // Get data
         let players = game.users.filter(x => playerList.includes(x.name));
-        let rollData = players.map(player => player.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG));
+        let rollData = players.map(player => DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(player.id));
+        console.log(rollData);
         let rolls = {};
         for (const data of rollData) {
             if (!data) continue;
