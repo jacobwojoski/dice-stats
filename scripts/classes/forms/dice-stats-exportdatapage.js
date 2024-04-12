@@ -30,21 +30,42 @@ class ExportDataPage extends FormApplication{
 
     //Every Form has this fn. Its returns data object that handlebars template uses
     getData(){
-        let dataObject = {};
+        let dataObject = {
+            players: game.users.map(x => x.name),
+        };
 
         return dataObject;
     }
 
-    createCsv(dieMax) {
-        let csvString = "Username,";
-        for (let i = 1; i <= dieMax; i++) {
-            csvString += i.toString() + (i == dieMax ? "" : ",");
+    /**
+     * Generates a CSV with statistics for all die types, given a list of player names
+     * @param {string[]} playerList - A list of player usernames to be included in the statistics 
+     * @returns {string} The CSV contents as a string
+     */
+    createCsv(playerList) {
+        // Write CSV header
+        let csvString = "Die Type,";
+        for (let i = 1; i <= 100; i++) {
+            csvString += i.toString() + (i == 100 ? "" : ",");
         }
-        for (let player of game.users) {
-            let rollData = player.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG);
-            if (!rollData) continue;
-            let playerRolls = rollData.PLAYER_DICE.filter(x => x.MAX == dieMax)[0];
-            csvString += "\n" + rollData.USERNAME + "," + playerRolls.ROLLS.join(",");
+        // Get data
+        let players = game.users.filter(x => playerList.includes(x.name));
+        let rollData = players.map(player => player.getFlag(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_FLAGS.ROLLDATAFLAG));
+        let rolls = {};
+        for (const data of rollData) {
+            if (!data) continue;
+            for (const dieType of data.PLAYER_DICE) {
+                // Add player's rolls to total
+                if (rolls[dieType.MAX] === undefined) {
+                    rolls[dieType.MAX] = dieType.ROLLS;
+                } else {
+                    rolls[dieType.MAX] = rolls[dieType.MAX].map((val, ind) => val + dieType.ROLLS[ind]);
+                }
+            }
+        }
+        // Format roll data in CSV
+        for (const die in rolls) {
+            csvString += `\nD${die},${rolls[die].join(",")}`;
         }
         return csvString;
     }
@@ -67,44 +88,15 @@ class ExportDataPage extends FormApplication{
 
         if (!game.user.isGM) return;
 
-        switch(action) {
-            case "export-csv-d100":
-                this.downloadCsvFile(this.createCsv(100),
-                    `D100 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d20":
-                this.downloadCsvFile(this.createCsv(20),
-                    `D20 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d12":
-                this.downloadCsvFile(this.createCsv(12),
-                    `D12 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d10":
-                this.downloadCsvFile(this.createCsv(10),
-                    `D10 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d8":
-                this.downloadCsvFile(this.createCsv(8),
-                    `D8 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d6":
-                this.downloadCsvFile(this.createCsv(6),
-                    `D6 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d4":
-                this.downloadCsvFile(this.createCsv(4),
-                    `D4 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d3":
-                this.downloadCsvFile(this.createCsv(3),
-                    `D3 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
-            case "export-csv-d2":
-                this.downloadCsvFile(this.createCsv(2),
-                    `D2 dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
-                break;
+        if (action.startsWith("export-csv-player-")) {
+            const playerName = action.substr(18);
+            this.downloadCsvFile(this.createCsv(playerName),
+                `${playerName} dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
+        } else if (action === ("export-csv-allplayers")) {
+            this.downloadCsvFile(this.createCsv(game.users.map(x => x.name)),
+                `total dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
         }
+
     }
 
     activateListeners(html) {
