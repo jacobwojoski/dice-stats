@@ -1,3 +1,18 @@
+    /* 
+      FILE DESCRIPTION:
+    
+      This file includes classes that are used for extracting important info from the foundry MSG 
+        object. This gets parsed again and added into our local storage data structures later.
+        
+        Only some systems have implementations for storing roll data where die data can usually
+        be taken from any system.
+        
+        There are different system parsers to get this data because its 
+        implemented differently depending on the system
+        
+        */
+    
+    
     /* DIE_TYPE, ROLL_TYPE, ROLL_VALUE, IS_BLIND, DEG_SUCCESS*/
     /* Any Negative value is invalid */
     /* Storage of any info related to the DICE that in the message (Trim out all the useless bits)*/
