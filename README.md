@@ -25,6 +25,7 @@ Socketlib needs to be active to allow GM to tell other users to push blind rolls
 - Jacobwojo: Lead Developer
 - Juan Ferrer: Fix for canvas buttons
 - RadicalEd: German translation + Remove some hardcoded items
+- Willumz: Added CSV, export by player options
 
 ## SVG IMAGES - CREATIVE COMMONS V3.0
 - d4,d6,d8,d10,d12,d20 Icons By Lonnie Tapscott :: Noun Project
