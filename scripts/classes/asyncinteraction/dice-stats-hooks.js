@@ -96,6 +96,10 @@ Hooks.on("getSceneControlButtons", controls => {
         playersAsTools.push(new CustomSceneControlToolGlobal());
         playersAsTools.push(new CustomSceneControlToolCompare());
 
+        if (game.user.isGM) {
+            playersAsTools.push(new CustomSceneControlToolExport());
+        }
+
         let string = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.OTHER_ACCESS_BUTTON_ICONS);
         let icons = string.split(',');
         let i=0;
