@@ -13,6 +13,7 @@ class DS_GLOBALS {
     static TEMPLATE_PATH_ARY = [
         'modules/dice-stats/templates/dice-stats-global.hbs',
         'modules/dice-stats/templates/dice-stats-compare.hbs',
+        'modules/dice-stats/templates/dice-stats-export.hbs',
         'modules/dice-stats/templates/partial/tab_player_base.hbs',
         'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
         'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
@@ -23,6 +24,7 @@ class DS_GLOBALS {
     static MODULE_TEMPLATES= {
         GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
         COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
+        EXPORTFORM:        'modules/dice-stats/templates/dice-stats-export.hbs',
         TABEDPLAYERBASE:    'modules/dice-stats/templates/partial/tab_player_base.hbs',
         TABEDPLAYER_ALL:   'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
         TABEDPLAYER_D20:   'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
@@ -62,6 +64,7 @@ class DS_GLOBALS {
     static FORM_GL_COMPARE= null;
     static FORM_PLAYER_STATS= null;
     static SCENE_CONTROL_BTNS= null;
+    static FORM_EXPORT = null;
 
     /* ------ UTIL GLOBALS ------- */
     /**
