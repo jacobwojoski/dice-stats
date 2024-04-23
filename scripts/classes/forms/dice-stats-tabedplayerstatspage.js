@@ -77,6 +77,17 @@ class CustomTabFormClass extends FormApplication
             );
         }
 
+        if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB)){
+            tabObj.push(
+                {
+                    label: "hit-miss",
+                    title: "Hit Miss Tracker",
+                    content: "<em>Fancy tab2 content.</em>",
+                    hitMiss: true
+                }
+            )
+        }
+
         return tabObj;
     }
 

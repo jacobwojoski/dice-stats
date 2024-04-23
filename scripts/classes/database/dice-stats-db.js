@@ -196,7 +196,25 @@ class DB_INTERACTION
                 dbDieDataObj?.ABILITY_ROLLS_BLIND ? tempDieObj.ABILITY_ROLLS_BLIND =    [...dbDieDataObj.ABILITY_ROLLS_BLIND] : console.log("No BLIND ATTR in DB");
                 dbDieDataObj?.UNKNOWN_ROLLS_BLIND ? tempDieObj.UNKNOWN_ROLLS_BLIND =    [...dbDieDataObj.UNKNOWN_ROLLS_BLIND] : console.log("No BLIND UNKNOWN in DB");
             }
+        }// end for(DIE in PLAYER_DICE)
+
+        // -- Load in PLAYER_ROLL Info --
+        if(dbDataObj?.PLAYER_ROLL_INFO)
+        {
+            let playerRollInfo = tempPlayerObj.PLAYER_ROLL_INFO;
+            let dbRollInfo = dbDataObj.PLAYER_ROLL_INFO;
+
+            playerRollInfo.IS_ROLL_INFO_TRACKED = dbRollInfo.IS_ROLL_INFO_TRACKED;
+
+            playerRollInfo.ATK_OUTCOME_TRACKER = [...dbRollInfo.ATK_OUTCOME_TRACKER];
+            playerRollInfo.NUM_UNTARGETED_ATKS = dbRollInfo.NUM_UNTARGETED_ATKS;
+            playerRollInfo.TOTAL_ATTACKS = dbRollInfo.TOTAL_ATTACKS;
+
+            playerRollInfo.SAVE_OUTCOME_TRACKER = [...dbRollInfo.SAVE_OUTCOME_TRACKER];
+            playerRollInfo.NUM_UNTARGETED_SAVES = dbRollInfo.NUM_UNTARGETED_SAVES;
+            playerRollInfo.TOTAL_SAVES = dbRollInfo.TOTAL_SAVES;
         }
+        
     }
 
     /**

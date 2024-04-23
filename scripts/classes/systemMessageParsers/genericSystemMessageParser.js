@@ -27,7 +27,7 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
 
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
-            retRollInfoAry.push(new DS_ROLL_INFO);
+            retRollInfoAry.push(new DS_MSG_ROLL_INFO);
             let rollObjSel = msg.rolls[tempRoll];
 
             retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
@@ -45,7 +45,7 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
                     let dieResultSel = dieTypeSel.results[rollResult];
 
                     // Create new ROLL_INFO obj to ass to array
-                    let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                    let newDieRollInfo = new DS_MSG_DIE_ROLL_INFO;
                     
                     // See if it was a blind roll
                     newDieRollInfo.IsBlind = msg.blind;
@@ -91,8 +91,8 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
     /**
      * Get any roll info not tied to specific dice
      * @param {*} msg - Chat Message Object
-     * @param {DS_ROLL_INFO} newRollInfo - Current Roll info Obj without Hit Info
-     * @returns {DS_ROLL_INFO} updatedNewRollInfo 
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - Current Roll info Obj without Hit Info
+     * @returns {DS_MSG_ROLL_INFO} updatedNewRollInfo 
      * 
      */
     getDegSuccessInfo(msg, newRollInfo){
@@ -103,9 +103,9 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
     /**
      * For any roll against a DC find out how much the user missed by
      * @param {*} msg - Chat msg obj
-     * @param {DS_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
      * @param {*} rollValue - msg.roll info that were currently looking at
-     * @returns {DS_ROLL_INFO} newRollInfo
+     * @returns {DS_MSG_ROLL_INFO} newRollInfo
      */
     getHitOrMissBy(msg, newRollInfo, rollValue){
         // USED ONLY IN SPECIFIC SYSTEM PARSERS
@@ -115,8 +115,8 @@ class GENERIC_SYSTEM_MESSAGE_PARSER {
     /**
      * Check to see if we hit or missed because of advantage or disadvantage 
      * @param {*} msg - chat msg object
-     * @param {DS_ROLL_INFO} newRollInfo - rollInfoObj were going to update with info and return
-     * @returns {DS_ROLL_INFO} -newRollInfo but with updated values
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - rollInfoObj were going to update with info and return
+     * @returns {DS_MSG_ROLL_INFO} -newRollInfo but with updated values
      */
     getIsHitMissFromAdvantage(msg, newRollInfo){
         // USED ONLY IN SPECIFIC SYSTEM PARSERS

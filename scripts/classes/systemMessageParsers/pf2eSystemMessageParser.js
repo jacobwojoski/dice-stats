@@ -13,12 +13,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     /**
      * Parse the passed in message
      * @param {*} msg 
-     * @returns {ROLL_OBJECT[]} 
-     */
-    /**
-     * Parse the passed in message
-     * @param {*} msg 
-     * @returns {ROLL_OBJECT[]} 
+     * @returns {DS_MSG_ROLL_INFO[]} 
      */
     parseMsgRoll(msg){
         if(!msg.isRoll){
@@ -28,7 +23,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
         //For multiple rolls in chat
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
-            retRollInfoAry.push(new DS_ROLL_INFO);
+            retRollInfoAry.push(new DS_MSG_ROLL_INFO);
             let rollObjSel = msg.rolls[tempRoll];
 
             retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
@@ -46,7 +41,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                     let dieResultSel = dieTypeSel.results[rollResult];
 
                     // Create new ROLL_INFO obj to ass to array
-                    let newDieRollInfo = new DS_DIE_ROLL_INFO;
+                    let newDieRollInfo = new DS_MSG_DIE_ROLL_INFO;
                     
                     // See if it was a blind roll
                     newDieRollInfo.IsBlind = msg.blind;
@@ -72,6 +67,9 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     }
 
     /**
+     * @param {MSG} msg
+     * @param {DS_MSG_ROLL_INFO} retRollInfoObj - our conversion of message info into local info
+     * @param {MSG.ROLL[it]} rollObjSel - 
      * Update roll obj with any info that system holds in roll compared to specific dice info
      * NOTE: THESE ARE ONLY ACCESSABLE IF THE USER HAS A PLAYER TARGETED, IF NOT, ITS NOT TRACKED
      */
@@ -79,22 +77,34 @@ class PF2E_SYSTEM_MESSAGE_PARSER
 
         let rollToParse = rollObjSel;
 
+        // We track hit & miss info for pf2e, So this should always be true. 
+        retRollInfoObj.IsRollInfoChecked = true;
+
         // For PF2e, If it was an attack Roll get some extra info
         if( rollToParse?.type == "attack-roll" ){
+            // How did our attack do?
             retRollInfoObj = this.getDegSuccessInfo(msg, retRollInfoObj);
-            retRollInfoObj = this.getIsHitMissFromAdvantage(msg, retRollInfoObj);
-            retRollInfoObj = this.getHitOrMissBy(msg, retRollInfoObj, rollToParse);
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.ATK;
+            retRollInfoObj.IsRollInfoChecked = true;
+
         }else if(rollToParse?.type == "saving-throw" ){
-            // How Did the save faire
+            // How did our save do?
+            retRollInfoObj = this.getDegSuccessInfo(msg, retRollInfoObj);
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.SAVE;
+            retRollInfoObj.IsRollInfoChecked = true;
+
         }else if(rollToParse?.type?.includes("skill-check")){
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.SKILL;
             // Was it some check vs a DC? Means the roll was a skill of some kinds
         }else if(msg?.isDamageRoll){
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.DMG;
             // Was a dmg roll? We could tally total damage done 
             //NOTE: (Wont be super reliable as all flat checks will count as dmg)
         }else if(rollToParse?.type?.includes("perception-check")){
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.PERCEPTION;
 
         }else if(rollToParse?.type?.includes("initiative")){
-
+            retRollInfoObj.RollType = DS_GLOBALS.ROLL_TYPE.INITIATIVE;
         }
         return retRollInfoObj;
     }
@@ -124,15 +134,14 @@ class PF2E_SYSTEM_MESSAGE_PARSER
                 return DS_GLOBALS.ROLL_TYPE.SKILL;
             default :
                 return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
-
         }
     }
 
     /**
      * Get hit and miss info from the attack roll
      * @param {*} msg - Chat Message Object
-     * @param {DS_ROLL_INFO} newRollInfo - Current Roll info Obj without Hit Info
-     * @returns {DS_ROLL_INFO} updatedNewRollInfo 
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - Current Roll info Obj without Hit Info
+     * @returns {DS_MSG_ROLL_INFO} updatedNewRollInfo 
      * 
      * DEG_SUCCESS 
      * UNKNOWN:        0,
@@ -142,7 +151,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
         CRIT_SUCCESS:   4,
         DOWNBEAT:       5, //NOT USED FOR PF2
         MIXEDBEAT:      6  //NOT USED FOR PF2
-        UPBEAT:         6  //NOT USED FOR PF2
+        UPBEAT:         7  //NOT USED FOR PF2
      */
     getDegSuccessInfo(msg, newRollInfo)
     {
@@ -158,7 +167,7 @@ class PF2E_SYSTEM_MESSAGE_PARSER
             case "success":
                 newRollInfo.DegSuccess = DS_GLOBALS.DEGREE_SUCCESS.SUCCESS;
                 break;
-            case "criticalsuccess":
+            case "criticalSuccess":
                 newRollInfo.DegSuccess = DS_GLOBALS.DEGREE_SUCCESS.CRIT_SUCCESS;
                 break;
             default:
@@ -171,9 +180,9 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     /**
      * For any roll against a DC find out how much the user missed by
      * @param {*} msg - Chat msg obj
-     * @param {DS_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - Cur roll info Obj were going to update and return 
      * @param {MSG.ROLL_OBT} rollValue - msg.roll info that were currently looking at
-     * @returns {DS_ROLL_INFO} newRollInfo
+     * @returns {DS_MSG_ROLL_INFO} newRollInfo
      */
     getHitOrMissBy(msg, newRollInfo, rollValue)
     {
@@ -186,8 +195,8 @@ class PF2E_SYSTEM_MESSAGE_PARSER
     /**
      * Check to see if we hit or missed because of advantage or disadvantage 
      * @param {*} msg - chat msg object
-     * @param {DS_ROLL_INFO} newRollInfo - rollInfoObj were going to update with info and return
-     * @returns {DS_ROLL_INFO} -newRollInfo but with updated values
+     * @param {DS_MSG_ROLL_INFO} newRollInfo - rollInfoObj were going to update with info and return
+     * @returns {DS_MSG_ROLL_INFO} -newRollInfo but with updated values
      */
     getIsHitMissFromAdvantage(msg, newRollInfo)
     {
@@ -208,8 +217,6 @@ class PF2E_SYSTEM_MESSAGE_PARSER
             newRollInfo.MissFromAdv = true;
             newRollInfo.HitFromAdv = false;
         }
-        
-        
         return newRollInfo;
     }
 }

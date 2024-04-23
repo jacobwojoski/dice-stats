@@ -43,6 +43,10 @@
             "local_enable_2dx_details_tab":{
                 "Name": "Enable 2DX Info Tab",
                 "Hint": "Allows the user to remove the 2dX tab button on the player screen to reduce UI clutter if not needed."
+            },
+            "local_enable_hit_miss_info_tab":{
+                "Name": "Enable Hit And Miss Info",
+                "Hint": "Displays info about degree success's rolled for Attacks and Saves"
             }
         },
         "both_forms":{
@@ -135,7 +139,7 @@
             "clear_your_both":"Clear YOUR Local And DB Values",
             "tab_unsupported":{
                 "tab_unsuported_heading":   "Feature not supported for your current system",
-                "tab_unsuported_body":      "This page subcatagorizes D20 rolls into Attack, Damage, Skill, etc. Please submit a feature request on the github if you would like the information added for whatever system your using",
+                "tab_unsuported_body":      "This page either subcatagorizes D20 rolls into Attack, Damage, Skill, etc. Or Shows Roll Stats like #Hits, #Misses, #Failed Saves, #Success Saves etc \n Please submit a feature request on the github if you would like the information added for whatever system your using. \n \n This tab button can be removed though the settings.",
                 "tab_unsuported_link":      "Link to Feature Request Page"
             },
             "tab_d20_rolls":{

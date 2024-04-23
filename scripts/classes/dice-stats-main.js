@@ -1,5 +1,35 @@
 //Were using this class as a singleton although its not quite set up correctly as one. 
 // This is the main dice stats class. It holds all the data.
+/**
+ * Quick discrip on how mod works:
+ *      Hook into Foundry scene render to add dce stats buttons [async/hooks & form/scenecontrol]
+ *      Hook into Foundry chat msg creation to add roll to data storage
+ *          Data Storage:
+ *              DICE_STATS_CLASS - Main class that holds backend data for dice stats
+ *                  PLAYER_DATA -    Main class holds a player data class for every player for the world
+ *                      DICE_DATA -     Player Data holds a dice data class for every type of dice roll we track
+ * 
+ *          Initalize:
+ *              - creates hooks
+ *              - create button on scene
+ *              - load any data from database if we have it
+ * 
+ *          Process Desc:
+ *              - Hook gets called -> Main -> parseChatMsg(MSG_WE_JUST_GOT_FROM_HOOK);
+ *              - parseChatMsg -> createSystemSpecificParser
+ *              - parse Using System Specific Parser and create rollmMsgInfo (Convert system specific info into generic dice stats info obj)
+ *              - Save the dice stats info obj to the backend
+ * 
+ *          Open Form:
+ *              - Openeing form calls the associated forms getData()
+ *              - get data calls datapack functions to convert the dice stats data into data for the form. 
+ *                  Because of the handlebars templating language not liking multi dimentional arrays I need to convert all backend data 
+ *                  into a different object that the handlebars forms can handle. Its a reak pain in the ass and is implemented like shit right now.
+ *              - form buttons all have id's that have a corresponding switch case in _handleButtonClick(). This is a build in foundry form fn that gets called whenever
+ *                  a button is selected on any from. 
+ *               - These buttons interacts with the DiceStats object as its global/singleton and call getData() again to update the display  
+ * 
+ */
 class DiceStatsTracker {
     AM_I_GM = false;
 
@@ -157,7 +187,7 @@ class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_D20_DETAILS_TAB}.Hint`,
         })
 
-        // Setting to disable 2dx-info tab [Def: Enabled]
+        // Setting to disable 2dx-info tab [Def: Disabled]
         game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB, {
             name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB}.Name`,
             default: false,
@@ -165,6 +195,16 @@ class DiceStatsTracker {
             scope: 'client', //world = db, client = local
             config: true,   // show in module config
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_2DX_DETAILS_TAB}.Hint`,
+        })
+
+        // Setting to disable Hit Miss tab [Def: Enabled]
+        game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB}.Name`,
+            default: true,
+            type: Boolean,
+            scope: 'client',    //world = db, client = local
+            config: true,       // show in module config
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB}.Hint`,
         })
     }
 
@@ -184,21 +224,18 @@ class DiceStatsTracker {
         let rollInfoAry = parser.parseMsgRoll(msg);
         // Parser Should now get deleted here as we dont need it anymore once we have the ary
         //delete parser;
+        
+        // Guard for no roll info found
+        if(!rollInfoAry?.length || rollInfoAry.length == 0){return;}
 
         // Save Each ROLL_INFO  from array into players local data
-        // TODO: Update player & Die Stats to take in {DS_ROLL_INFO} object
+        // TODO: Update player & Die Stats to take in {DS_MSG_ROLL_INFO} object
         let updatedLocalRollValue = false;
         for(let rollIT=0; rollIT<rollInfoAry.length; rollIT++){
-            let dieAry = rollInfoAry[rollIT].DiceInfo;
 
-            for(let dieIT=0; dieIT<dieAry.length; dieIT++){
-                let dieInfo = dieAry[dieIT];
+            playerInfo.saveRoll(rollInfoAry[rollIT]);
+            updatedLocalRollValue = true;
 
-                playerInfo.saveRoll(dieInfo?.IsBlind, dieInfo?.RollValue, 
-                                    dieInfo?.DieType, dieInfo?.RollType);
-
-                updatedLocalRollValue = true;
-            }
         }
 
         //If AutoSave is Enabled by GM, only save updates to YOUR ROLLS to the DB

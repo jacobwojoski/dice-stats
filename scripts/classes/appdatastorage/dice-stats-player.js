@@ -6,6 +6,7 @@ class PLAYER {
     USERNAME = '';
     USERID = 0;
     GM = false;
+    PLAYER_ROLL_INFO;
     
     constructor(userid){
         if(userid)
@@ -21,10 +22,14 @@ class PLAYER {
             this.GM = false;
         }
 
+        // Create dice objects (Tracks each die roll)
         for(let i in Object.values(DS_GLOBALS.DIE_TYPE))
         {
             this.PLAYER_DICE[i] = new DIE_INFO(i);
         }
+
+        // Create roll info obj (Trags Generall roll stats; Hits Misses deg success etc)
+        this.PLAYER_ROLL_INFO = new LOCAL_ROLL_INFO();
     }
 
     /**
@@ -77,8 +82,24 @@ class PLAYER {
      * @param {DIE_TYPE} dieType 
      * @param {DIE_ROLL_TYPE} rollType
      */
-    saveRoll(isBlind, rollVal, dieType, rollType){
-        this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind,rollType);
+    // saveRoll(isBlind, rollVal, dieType, rollType){
+    //     this.PLAYER_DICE[dieType].addRoll(rollVal,isBlind,rollType);
+    // }
+
+    /**
+     * Take the roll info obj that we created from the msg and store the data
+     * @param {DS_MSG_ROLL_INFO} msgRollInfo - roll info we want from msg
+     */
+    saveRoll(msgRollInfo){
+        this.PLAYER_ROLL_INFO.updateRollInfo(msgRollInfo);
+        
+        for(let dieIT=0; dieIT < msgRollInfo.DiceInfo.length; dieIT++)
+        {
+            let tmpMsgDieInfo = msgRollInfo.DiceInfo[dieIT];
+
+            this.PLAYER_DICE[tmpMsgDieInfo.DieType].addRoll(tmpMsgDieInfo);
+        }
+
     }
 
     /**
@@ -106,9 +127,12 @@ class PLAYER {
      * Clear All DIE_INFO objects
      */
     clearAllRollData(){
+        this.PLAYER_ROLL_INFO.clearData();
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].clearData();
         }
+
+        this.PLAYER_ROLL_INFO.clearData();
     }
 
     /**
@@ -126,5 +150,12 @@ class PLAYER {
         for(let i=0; i<this.PLAYER_DICE.length; i++){
             this.PLAYER_DICE[i].clearData();
         }
+    }
+
+    /**
+     * Clear all roll specific info (Hits misses etc)
+     */
+    clearRollData(){
+        this.PLAYER_ROLL_INFO.clearData();
     }
 }

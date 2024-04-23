@@ -18,6 +18,7 @@ class DS_GLOBALS {
         'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
         'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
         'modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs',
+        'modules/dice-stats/templates/partial/tab_player_hit_miss.hbs',
         'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'
     ];
     static MODULE_TEMPLATES= {
@@ -49,7 +50,10 @@ class DS_GLOBALS {
         LOCAL_ENABLE_D20_DETAILS_TAB:     'local_enable_d20_details_tab',
         LOCAL_ENABLE_2DX_DETAILS_TAB:     'local_enable_2dx_details_tab',
         LOCAL_ENABLE_2D6_DETAILS_TAB:     'local_enable_2d6_details_tab',
+        LOCAL_ENABLE_2D12_DETAILS_TAB:    'local_enable_2d12_details_tab',
         LOCAL_ENABLE_2D20_DETAILS_TAB:    'local_enable_2d20_details_tab',
+
+        LOCAL_ENABLE_HIT_MISS_INFO_TAB:   'local_enable_hit_miss_info_tab',
     };
 
     /* ------ GLOBAL DS OBJECTS ------- */
@@ -83,6 +87,11 @@ class DS_GLOBALS {
         D12:    6,
         D20:    7,
         D100:   8
+        /*
+        TWOd6
+        TWOd12
+        TWOd20
+        */
     };
     
     /** Adding a roll type involves updating the following
@@ -93,8 +102,9 @@ class DS_GLOBALS {
      *      
      *      hbs
      */ 
-    static NUM_ROLL_TYPES= 6;  //Size of {ROLL_TYPE}
+    static NUM_ROLL_TYPES= 8;  //Size of {ROLL_TYPE}
     static ROLL_TYPE = {        //Types of rolls the user can roll
+        /* D20 ROLL TYPES */
         ATK: 0,     /* Rolling to Attack */
         DMG: 1,     /* Rolling Damage */
         SAVE: 2,    /* Rolling Will, Fortitude, Reflex*/
@@ -105,12 +115,17 @@ class DS_GLOBALS {
         Its not assigned as Damage or atack ect */
         UNKNOWN: 5,
         INITIATIVE: 6, /* Any initiative Rolls */
-        PERCEPTION: 7  /* Any perception Rolls */  
+        PERCEPTION: 7,  /* Any perception Rolls */  
+        FLATCHECK:  8
+
+        /* OTHER SYSTEM ROLL TYPES */
+
     };
 
     // Degree of success
     static DEGREE_SUCCESS = {
         UNKNOWN:        0,
+
         // D20 DEG_SUCCESS
         CRIT_FAIL:      1,
         FAIL:           2,
@@ -120,7 +135,13 @@ class DS_GLOBALS {
         // PBTA DEG_SUCCESS
         DOWN_BREAT:     5,
         MIXED_BREAT:    6,
-        UPBEAT:         8
+        UPBEAT:         8,
+
+        // Dagger Heart DEG_SUCCESS + CRIT_SUCCESS
+        FAIL_FEAR: 9,
+        FAIL_HOPE: 10,
+        SUCC_FEAR: 11,
+        SUCC_HOPE: 12
     }
 
     //Convert {DIE_TYPE} to the max value you can roll on that die

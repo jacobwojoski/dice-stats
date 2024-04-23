@@ -14,6 +14,7 @@
   "scripts": [
     "scripts/classes/appdatastorage/dice-stats-diceinfo.js",
     "scripts/classes/appdatastorage/dice-stats-player.js",
+    "scripts/classes/appdatastorage/dice-stats-rollinfo.js",
     "scripts/classes/appdatastorage/dice-stats-rollmsginfo.js",
 
     "scripts/classes/asyncinteraction/dice-stats-handlebars.js",
@@ -60,8 +61,8 @@
     }
   ],
   "socket": true,
-  "version": "1.17.5",
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.17.5.zip",
+  "version": "1.18.0",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.18.0.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
   "readme": "https://github.com/jacobwojoski/dice-stats",
