@@ -220,7 +220,8 @@ class DiceStatsTracker {
         // Get the specific system parser to parse msg
         let parser = MESSAGE_PARSER_FACTORY.createMessageParser();
 
-        // Parse the msg (Parser returns ROLL_OBJ[] which has some Hit / Miss stats + DIE_OBJ[]  
+        // Parse the msg (Parser returns ROLL_OBJ[] which has some Hit / Miss stats + DIE_OBJ[] 
+        /*{DS_MSG_ROLL_INFO[]}*/
         let rollInfoAry = parser.parseMsgRoll(msg);
         // Parser Should now get deleted here as we dont need it anymore once we have the ary
         //delete parser;
@@ -251,18 +252,36 @@ class DiceStatsTracker {
     }
 
     /**
-     * Method used to add toll to a specifc player
-     * @param {DIE_TYPE} dieType 
-     * @param {int[]} rolls - array of rolled values in chat. might get array from things like advantage ect 
-     * @param {String} user - userid 
-     * @param {bool} isBlind 
+     * Method used to add roll to a specifc player
+     * @param {DS_MSG_ROLL_INFO[]} rollMessageObjectAry
+     * @param {USER_ID} owner - message owners player ID
      */
-    addRoll(dieType=7, rolls=[], user=game.user.id, isBlind=false){
-        let playerInfo = this.PLAYER_DATA_MAP.get(user);
+    addRoll(msgRollInfoAry, owner=undefined){
+        // get roll info player object and guard against not getting a player
+        let playerInfo = this.PLAYER_DATA_MAP.get(owner);
+        if(playerInfo == undefined){return;}
 
-        rolls.forEach(element => {
-            playerInfo.saveRoll(isBlind, element, dieType)
-        });
+        // Guard for no roll info found
+        if(!msgRollInfoAry?.length || msgRollInfoAry.length == 0){return;}
+
+        // Save Each ROLL_INFO  from array into players local data
+        // TODO: Update player & Die Stats to take in {DS_MSG_ROLL_INFO} object
+        let updatedLocalRollValue = false;
+        for(let rollIT=0; rollIT<msgRollInfoAry.length; rollIT++){
+            playerInfo.saveRoll(msgRollInfoAry[rollIT]);
+            updatedLocalRollValue = true;
+        }
+
+        //If AutoSave is Enabled by GM, only save updates to YOUR ROLLS to the DB
+        //  Each person updates their own DB values but loads everyones in on joining the game
+        if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
+        {
+            //If it was my roll save my data to the db
+            if(owner == game.user.id && updatedLocalRollValue)
+            {
+                this.saveMyPlayerData();
+            }
+        } 
     }
 
     /**

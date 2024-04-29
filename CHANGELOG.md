@@ -1,4 +1,7 @@
 # CHANGELOG  
+## [ 1.18.1 ]
+- Fix issue with midiqol not working with new message objects
+
 ## [ 1.18.0 ]
 - redesigned how roll info is pulled from messages
 - redesigned backend for how data is stored to now follow ROLL_INFO.DICE_INFO

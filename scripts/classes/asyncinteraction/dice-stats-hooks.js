@@ -10,8 +10,11 @@
 function midiQolSupport(){
     /*Add Hook for Midi-QoL */
     Hooks.on("midi-qol.RollComplete", (workflow) => {
+
         //Deal with Attack Rolls
         if(workflow.attackRollCount > 0){
+            let /* {DS_MSG_ROLL_INFO} */ rollInfo = DS_MSG_ROLL_INFO();
+            rollInfo.RollType = DS_GLOBALS.ROLL_TYPE.ATK;
             let dieType = DS_GLOBALS.MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
             let isBlind = false;
 
@@ -19,13 +22,16 @@ function midiQolSupport(){
                 isBlind = true;
             }
 
-            let rolls = [];
             for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
-                rolls.push(workflow.attackRoll.terms[0].results[i].result);
+                let /* {DS_MSG_DIE_ROLL_INFO} */ dieInfo = new DS_MSG_DIE_ROLL_INFO();
+                dieInfo.RollValue = workflow.attackRoll.terms[0].results[i].result;
+                dieInfo.DieType = dieType;
+                dieInfo.IsBlind = isBlind;
+
+                rollInfo.DiceInfo.push(dieInfo);
             }
 
             //Get Associated Player
-            let myId = game.userId;
             let owners = Object.keys(workflow.actor.ownership);
             let owner = owners[owners.length-1];
             //If no owner found first pos should be GM ID
@@ -33,11 +39,13 @@ function midiQolSupport(){
                 owner = owners[1];
             }
                 
-            DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(dieType, rolls, owner, isBlind)
+            DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(rollInfo, owner);
         }
             
         //Deal with dmg rolls
         if(workflow.damageRollCount > 0){
+            let /* {DS_MSG_ROLL_INFO} */ rollInfo = DS_MSG_ROLL_INFO();
+            rollInfo.RollType = DS_GLOBALS.ROLL_TYPE.DMG;
             let dieType = DS_GLOBALS.MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
             let isBlind = false;
 
@@ -45,20 +53,23 @@ function midiQolSupport(){
                 isBlind = true;
             }
 
-            let rolls = []
             for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
-                rolls.push(workflow.damageRoll.terms[0].results[i].result);
+                let /* {DS_MSG_DIE_ROLL_INFO} */ dieInfo = new DS_MSG_DIE_ROLL_INFO();
+                dieInfo.RollValue = workflow.attackRoll.terms[0].results[i].result;
+                dieInfo.DieType = dieType;
+                dieInfo.IsBlind = isBlind;
             }
 
             //Get Associated Player
             let owners = Object.keys(workflow.actor.ownership);
             let owner = owners[owners.length-1];
+
             //If no owner found first pos should be GM ID
             if(owner === undefined){
                 owner = owners[1];
             }
                 
-            DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(dieType, rolls, owner, isBlind)
+            DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(rollInfo, owner);
         }
     })
 }
