@@ -13,18 +13,19 @@ function midiQolSupport(){
 
         //Deal with Attack Rolls
         if(workflow.attackRollCount > 0){
-            let /* {DS_MSG_ROLL_INFO} */ rollInfo = DS_MSG_ROLL_INFO();
+            let /* {DS_MSG_ROLL_INFO} */ rollInfo = new DS_MSG_ROLL_INFO();
             rollInfo.RollType = DS_GLOBALS.ROLL_TYPE.ATK;
             let dieType = DS_GLOBALS.MAX_TO_DIE.get(workflow.attackRoll.terms[0].faces);
             let isBlind = false;
 
-            if( workflow.attackRoll.options.defaultRollMode != 'publicroll'){
+            if( workflow.attackRoll.options.rollMode != 'publicroll'){
                 isBlind = true;
             }
 
             for (let i = 0; i < workflow.attackRoll.terms[0].results.length; i++) {
                 let /* {DS_MSG_DIE_ROLL_INFO} */ dieInfo = new DS_MSG_DIE_ROLL_INFO();
                 dieInfo.RollValue = workflow.attackRoll.terms[0].results[i].result;
+                dieInfo.RollType = rollInfo.RollType;
                 dieInfo.DieType = dieType;
                 dieInfo.IsBlind = isBlind;
 
@@ -44,32 +45,45 @@ function midiQolSupport(){
             
         //Deal with dmg rolls
         if(workflow.damageRollCount > 0){
-            let /* {DS_MSG_ROLL_INFO} */ rollInfo = DS_MSG_ROLL_INFO();
-            rollInfo.RollType = DS_GLOBALS.ROLL_TYPE.DMG;
-            let dieType = DS_GLOBALS.MAX_TO_DIE.get(workflow.damageRoll.terms[0].faces);
-            let isBlind = false;
+            for(let rollIt = 0;  rollIt < workflow.damageRolls.length; rollIt++)
+            {
+                let /* {DS_MSG_ROLL_INFO} */ rollInfo = new DS_MSG_ROLL_INFO();
+                rollInfo.RollType = DS_GLOBALS.ROLL_TYPE.DMG;
+                let isBlind = false;
 
-            if( workflow.damageRoll.options.defaultRollMode != 'publicroll'){
-                isBlind = true;
-            }
+                if( workflow.damageRolls[rollIt].options.rollMode != 'publicroll'){
+                    isBlind = true;
+                }
 
-            for (let i = 0; i < workflow.damageRoll.terms[0].results.length; i++) {
-                let /* {DS_MSG_DIE_ROLL_INFO} */ dieInfo = new DS_MSG_DIE_ROLL_INFO();
-                dieInfo.RollValue = workflow.attackRoll.terms[0].results[i].result;
-                dieInfo.DieType = dieType;
-                dieInfo.IsBlind = isBlind;
-            }
+                for(let termIt = 0;  termIt < workflow.damageRolls[rollIt].terms.length; termIt++)
+                {
+                    
+                    let termInfo = workflow.damageRolls[rollIt].terms[termIt];
+                    let dieType = DS_GLOBALS.MAX_TO_DIE.get(termInfo.faces);
 
-            //Get Associated Player
-            let owners = Object.keys(workflow.actor.ownership);
-            let owner = owners[owners.length-1];
+                    for (let i = 0; i < termInfo.results.length; i++) {
+                        let /* {DS_MSG_DIE_ROLL_INFO} */ dieInfo = new DS_MSG_DIE_ROLL_INFO();
+                        dieInfo.RollValue = termInfo.results[i].result;
+                        dieInfo.RollType = rollInfo.RollType;
+                        dieInfo.DieType = dieType;
+                        dieInfo.IsBlind = isBlind;
+        
+                        rollInfo.DiceInfo.push(dieInfo);
+                    }
+                }// end die type it
 
-            //If no owner found first pos should be GM ID
-            if(owner === undefined){
-                owner = owners[1];
-            }
-                
-            DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(rollInfo, owner);
+                //Get Associated Player
+                let owners = Object.keys(workflow.actor.ownership);
+                let owner = owners[owners.length-1];
+
+                //If no owner found first pos should be GM ID
+                if(owner === undefined){
+                    owner = owners[1];
+                }
+                    
+                DS_GLOBALS.DS_OBJ_GLOBAL.addRoll(rollInfo, owner);
+
+            }// End roll it        
         }
     })
 }

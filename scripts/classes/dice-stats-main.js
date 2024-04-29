@@ -253,24 +253,31 @@ class DiceStatsTracker {
 
     /**
      * Method used to add roll to a specifc player
-     * @param {DS_MSG_ROLL_INFO[]} rollMessageObjectAry
+     * @param {DS_MSG_ROLL_INFO[]} msgRollInfoObj - Important Roll and Die info from the msg
      * @param {USER_ID} owner - message owners player ID
      */
-    addRoll(msgRollInfoAry, owner=undefined){
+    addRoll(msgRollInfoObj, owner=undefined){
         // get roll info player object and guard against not getting a player
         let playerInfo = this.PLAYER_DATA_MAP.get(owner);
         if(playerInfo == undefined){return;}
 
         // Guard for no roll info found
-        if(!msgRollInfoAry?.length || msgRollInfoAry.length == 0){return;}
+        if(msgRollInfoObj == undefined || msgRollInfoObj.DiceInfo.length == 0){return;}
 
-        // Save Each ROLL_INFO  from array into players local data
-        // TODO: Update player & Die Stats to take in {DS_MSG_ROLL_INFO} object
+        // Only 1 roll object vs aray of roll objects
         let updatedLocalRollValue = false;
-        for(let rollIT=0; rollIT<msgRollInfoAry.length; rollIT++){
-            playerInfo.saveRoll(msgRollInfoAry[rollIT]);
-            updatedLocalRollValue = true;
+        if(!msgRollInfoObj.length){
+            playerInfo.saveRoll(msgRollInfoObj);
+        }else{
+            // Save Each ROLL_INFO  from array into players local data
+            // saveRoll( {DS_MSG_ROLL_INFO} )
+            for(let rollIT=0; rollIT<msgRollInfoObj.length; rollIT++){
+                playerInfo.saveRoll(msgRollInfoObj[rollIT]);
+                updatedLocalRollValue = true;
+            }
         }
+
+        
 
         //If AutoSave is Enabled by GM, only save updates to YOUR ROLLS to the DB
         //  Each person updates their own DB values but loads everyones in on joining the game
