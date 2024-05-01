@@ -1,4 +1,8 @@
 # CHANGELOG  
+
+## [ 1.18.2 ]
+- Add json data export
+
 ## [ 1.18.1 ]
 - Fix issue with midiqol not working with new message objects
 

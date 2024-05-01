@@ -48,6 +48,7 @@ class ExportDataPage extends FormApplication{
         for (let i = 1; i <= 100; i++) {
             csvString += i.toString() + (i == 100 ? "" : ",");
         }
+
         // Get data
         let players = game.users.filter(x => playerList.includes(x.name));
         let rollData = players.map(player => DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(player.id));
@@ -63,6 +64,7 @@ class ExportDataPage extends FormApplication{
                 }
             }
         }
+
         // Format roll data in CSV
         for (const die in rolls) {
             csvString += `\nD${die},${rolls[die].join(",")}`;
@@ -70,7 +72,13 @@ class ExportDataPage extends FormApplication{
         return csvString;
     }
 
-    downloadCsvFile(contents, fileName) {
+    /**
+     * Download a text file
+     * @param {String} contents - Contents of the file
+     * @param {String} fileName - Name with extention of file
+     * returns DOWNLOADS A FILE
+     */
+    downloadFile(contents, fileName) {
         let hiddenElement = document.createElement('a');
         hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(contents);
         hiddenElement.target = '_blank';
@@ -78,6 +86,47 @@ class ExportDataPage extends FormApplication{
         hiddenElement.click();
     }
 
+    /**
+     * Turn a specific players {PLAYER} data into a json file and download it
+     * @param {String} playerName - the player we want to download
+     * @returns {String} Playerdata as Json String
+     */
+    createSinglePlayerJson(playerName){
+        /* Get Players Data */
+        // Get an ary of every player with given name
+        let players = game.users.filter(playerName);
+
+        // For all players with given name get their player data
+        let playerDataAry = players.map(player => DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(player.id));
+
+        /* Create Json String */
+        let playerJsonString = JSON.stringify(playerDataAry);
+
+        return playerJsonString;
+    }
+
+    /** 
+     * 1. Get every players {PLAYER} data and convert it to a json string
+     * 2. Convert json string into file and download it
+     * @returns All Playerdata as Json String
+     */
+    createAllPlayerJson(){
+        /* Stop non GM's from downloading files */
+        if (!game.user.isGM) {
+            ui.notifications.warn("Only the GM can download full player file");
+            return;
+        }
+
+        /* Create Json String */
+        let localPlayerDataAry = [];
+        for (let playerData in DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.values()){
+            localPlayerDataAry.push(playerData);
+        }
+        
+        let jsonString = JSON.stringify(playerDataAry);
+
+        return jsonString;
+    }
 
     //Handle button events made on the form
     async _handleButtonClick(event){
@@ -88,13 +137,29 @@ class ExportDataPage extends FormApplication{
 
         if (!game.user.isGM) return;
 
+        /* Export CSV DATA */
         if (action.startsWith("export-csv-player-")) {
             const playerName = action.substr(18);
-            this.downloadCsvFile(this.createCsv(playerName),
+            this.downloadFile(this.createCsv(playerName),
                 `${playerName} dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
+
         } else if (action === ("export-csv-allplayers")) {
-            this.downloadCsvFile(this.createCsv(game.users.map(x => x.name)),
+            this.downloadFile(this.createCsv(game.users.map(x => x.name)),
                 `total dice-stats-${new Date().toISOString().split(".").shift()}.csv`);
+
+        /* Export JSON Data */
+        } else if (action.startsWith("export-json-player-")){
+            const playerName = action.substr(19);
+            let filename = `${playerName}-dice-stats-json-data.json`;
+            let jsonDataString = this.createSinglePlayerJson(playerName);
+
+            this.downloadFile(jsonDataString, filename);
+
+        } else if (action === ("export-json-allplayers")){
+            let filename = `allPlayers-dice-stats-json-data.json`;
+            let jsonDataString = this.createAllPlayerJson();
+
+            this.downloadFile(jsonDataString, filename);
         }
 
     }
