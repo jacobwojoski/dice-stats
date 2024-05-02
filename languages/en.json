@@ -159,6 +159,7 @@
             "title": "Export Data",
             "button": "Export",
             "export_csv_btn": "Export as CSV",
+            "export_json_btn": "Export as Json",
             "header": "Export Dice Stats Data"
         },
         "google_chart":{

@@ -94,13 +94,17 @@ class ExportDataPage extends FormApplication{
     createSinglePlayerJson(playerName){
         /* Get Players Data */
         // Get an ary of every player with given name
-        let players = game.users.filter(playerName);
+        let players = game.users.filter(x => x.name === playerName);
+        let rollData = players.map(player => DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(player.id));
 
-        // For all players with given name get their player data
-        let playerDataAry = players.map(player => DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(player.id));
+
+        if(!rollData){
+            ui.anouncements.warn(`No Rolls for ${playerName} Found`);
+            return;
+        }
 
         /* Create Json String */
-        let playerJsonString = JSON.stringify(playerDataAry);
+        let playerJsonString = JSON.stringify(rollData);
 
         return playerJsonString;
     }
@@ -119,11 +123,11 @@ class ExportDataPage extends FormApplication{
 
         /* Create Json String */
         let localPlayerDataAry = [];
-        for (let playerData in DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.values()){
+        for(const [key, playerData] of DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.entries()){
             localPlayerDataAry.push(playerData);
         }
         
-        let jsonString = JSON.stringify(playerDataAry);
+        let jsonString = JSON.stringify(localPlayerDataAry);
 
         return jsonString;
     }
