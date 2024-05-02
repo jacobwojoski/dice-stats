@@ -93,19 +93,18 @@ class ExportDataPage extends FormApplication{
      */
     createSinglePlayerJson(playerName){
         /* Get Players Data */
-        // Get an ary of every player with given name
+        // Find player with specified name in game list & get their dice stats data object
         let players = game.users.filter(x => x.name === playerName);
         let rollData = players.map(player => DS_GLOBALS.DS_OBJ_GLOBAL.PLAYER_DATA_MAP.get(player.id));
 
-
+        // Break and siaply warning if no data found
         if(!rollData){
             ui.anouncements.warn(`No Rolls for ${playerName} Found`);
             return;
         }
 
-        /* Create Json String */
+        /* Create Json String of player data */
         let playerJsonString = JSON.stringify(rollData);
-
         return playerJsonString;
     }
 
