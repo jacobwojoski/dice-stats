@@ -138,8 +138,8 @@
             "clear_my_db_info":"Clear YOUR DB values",
             "clear_your_both":"Clear YOUR Local And DB Values",
             "tab_unsupported":{
-                "tab_unsuported_heading":   "Feature not supported for your current system",
-                "tab_unsuported_body":      "This page either subcatagorizes D20 rolls into Attack, Damage, Skill, etc. Or Shows Roll Stats like #Hits, #Misses, #Failed Saves, #Success Saves etc \n Please submit a feature request on the github if you would like the information added for whatever system your using. \n \n This tab button can be removed though the settings.",
+                "tab_unsuported_heading":   "Feature not supported for your current system or No Data Saved",
+                "tab_unsuported_body":      "Hit and miss info is only supported for PF2e. This page either subcatagorizes D20 rolls into Attack, Damage, Skill, etc. Or Shows Roll Stats like #Hits, #Misses, #Failed Saves, #Success Saves etc \n Please submit a feature request on the github if you would like the information added for whatever system your using. \n \n This tab button can be removed though the settings.",
                 "tab_unsuported_link":      "Link to Feature Request Page"
             },
             "tab_d20_rolls":{
