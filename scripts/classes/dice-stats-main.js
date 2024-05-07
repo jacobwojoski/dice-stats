@@ -306,7 +306,11 @@ class DiceStatsTracker {
      */
     clearAllRollData(){
         for (let user of game.users) {
-            this.PLAYER_DATA_MAP.get(user.id)?.clearDiceData();
+            let ds_playerData = this.PLAYER_DATA_MAP.get(user.id);
+            if(ds_playerData){
+                ds_playerData.clearDiceData();
+                ds_playerData.clearRollData();
+            }     
         }
     }
 
