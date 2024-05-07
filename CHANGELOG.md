@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.18.3 ]
+- Fix hit and miss tracker clearing
+- Add some details to hit and miss tracker "Unsupported" popup
+
 ## [ 1.18.2 ]
 - Add json data export feature
 
