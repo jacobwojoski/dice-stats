@@ -1,9 +1,11 @@
+import { DS_MSG_ROLL_INFO } from "./dice-stats-rollmsginfo";
+
 /**
  * Class to hold any info we want to track that applies 
  * to the roll as a whole rather than specific dice. 
  * 
  * This stuff is all system specific so check system parser on how we get this data from msg's
- * We load it from the DS_MSG_ROLL_INFO obj
+ * We fill in this data from the DS_MSG_ROLL_INFO obj
  */
 export class LOCAL_ROLL_INFO {
     

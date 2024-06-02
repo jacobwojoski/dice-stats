@@ -1,3 +1,6 @@
+import { DS_GLOBALS } from "../dice-stats-globals";
+import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo";
+
 /**
  * Parse a generic system parser,
  * All parsers must implment parseMsgRoll

@@ -1,3 +1,16 @@
+import { DS_GLOBALS } from "../dice-stats-globals";
+/**
+ * These classes use the foundry SceneControll Classes to add a new set of buttons. The buttons are used to view players
+ * dice stats. 
+ * 
+ * Button layout it as follows
+ *  OPEN_DICE_STATS_BUTTONS
+ *  - GLOBAL STATS BUTTON
+ *  - COMPARE STATS BUTTON
+ *  - EXPORT FORM BUTTON
+ *  - PLAYER STATS BUTTON
+ */
+
 // Global Scene Control Icon 
 export class CustomSceneControlToolGlobal 
 {
@@ -105,7 +118,7 @@ export class CustomSceneControlToolPlayer
     }
 }
 
-// Compare Scene Control Icon
+// Export Scene Control Icon
 export class CustomSceneControlToolExport
 {
     name = 'Export';

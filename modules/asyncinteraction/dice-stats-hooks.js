@@ -1,7 +1,10 @@
-
 //==========================================================
 //===================== HOOKS SHIT =========================
 //==========================================================
+import { DS_GLOBALS } from "../dice-stats-globals";
+import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo";
+import { DS_MSG_DIE_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo";
+
 // Hooks 'hook' into different external triggers
 //  - EX: Loading of A page, When a roll gets made etc
 // Some hooks get made from modules while most we use are prebuild into foundry

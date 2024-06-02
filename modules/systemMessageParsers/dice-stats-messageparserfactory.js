@@ -1,3 +1,12 @@
+import { PF1E_SYSTEM_MESSAGE_PARSER } from "./pf1eSystemMessageParser";
+import { PF2E_SYSTEM_MESSAGE_PARSER } from "./pf2eSystemMessageParser";
+import { DND5E_SYSTEM_MESSAGE_PARSER } from "./dnd5eSystemMessageParser";
+import { DRAGONBANE_SYSTEM_MESSAGE_PARSER } from "./dragonbaneSystemMessageParser";
+import { GENERIC_SYSTEM_MESSAGE_PARSER } from "./genericSystemMessageParser";
+
+/**
+ * Get message parser based off the system we're using
+ */
 export class MESSAGE_PARSER_FACTORY  {
     
     /* Create a message parser object bassed on the current system Different systems need to do different stuff to parse the msg*/

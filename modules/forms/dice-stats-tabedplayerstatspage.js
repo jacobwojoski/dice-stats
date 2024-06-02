@@ -1,3 +1,9 @@
+import { DS_GLOBALS } from "../dice-stats-globals";
+
+/**
+ * This is the player stats class. One of these classes gets made for every player added in the game.
+ * 
+ */
 export class CustomTabFormClass extends FormApplication
 {
     SEL_PLAYER = 0;

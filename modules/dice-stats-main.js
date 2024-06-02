@@ -1,3 +1,8 @@
+import { DS_GLOBALS } from "./dice-stats-globals";
+import { MESSAGE_PARSER_FACTORY } from "./systemMessageParsers/dice-stats-messageparserfactory";
+import { PLAYER } from "./appdatastorage/dice-stats-player";
+import { DB_INTERACTION } from "./database/dice-stats-db";
+
 //Were using this class as a singleton although its not quite set up correctly as one. 
 // This is the main dice stats class. It holds all the data.
 /**

@@ -1,3 +1,9 @@
+import { DS_GLOBALS } from "../dice-stats-globals";
+import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo";
+
+/**
+ * Parse Chat message obj and gather all the info we might use
+ */
 export class DRAGONBANE_SYSTEM_MESSAGE_PARSER 
 {
     /* ROLL_INFO Vars:

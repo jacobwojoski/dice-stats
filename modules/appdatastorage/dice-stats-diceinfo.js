@@ -1,3 +1,6 @@
+import { DS_GLOBALS } from "../dice-stats-globals";
+import { DICE_STATS_UTILS } from "../dice-stats-utils";
+import { DS_MSG_DIE_ROLL_INFO } from "./dice-stats-rollmsginfo";
 
 //Storage Class for Each Die
 //Die rolls are stored in array thats size of the die type 

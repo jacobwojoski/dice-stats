@@ -1,5 +1,8 @@
-
-
+import { DS_GLOBALS } from "./dice-stats-globals";
+import { DB_INTERACTION } from "./database/dice-stats-db";
+/**
+ * Mic utility funtions that get used in different parts of the code. 
+ */
 export class DICE_STATS_UTILS {
     /**
      * Build hook hook that waits for A DsN msg then return
