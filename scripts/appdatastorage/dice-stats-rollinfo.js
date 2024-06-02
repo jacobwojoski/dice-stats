@@ -1,4 +1,4 @@
-import { DS_MSG_ROLL_INFO } from "./dice-stats-rollmsginfo";
+import { DS_MSG_ROLL_INFO } from "./dice-stats-rollmsginfo.js";
 
 /**
  * Class to hold any info we want to track that applies 

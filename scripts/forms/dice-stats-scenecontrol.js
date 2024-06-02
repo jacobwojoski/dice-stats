@@ -1,4 +1,4 @@
-import { DS_GLOBALS } from "../dice-stats-globals";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
 /**
  * These classes use the foundry SceneControll Classes to add a new set of buttons. The buttons are used to view players
  * dice stats. 

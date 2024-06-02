@@ -1,5 +1,5 @@
-import { DS_GLOBALS } from "../dice-stats-globals";
-import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 
 /**
  * Parse Chat message obj and gather all the info we might use

@@ -1,10 +1,10 @@
-import { DS_GLOBALS } from "../dice-stats-globals";
-import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 
 /**
  * Parse Chat message obj and gather all the info we might use
  */
-export class DND5E_SYSTEM_MESSAGE_PARSER
+export class DRAGONBANE_SYSTEM_MESSAGE_PARSER 
 {
     /* ROLL_INFO Vars:
     DieType=    0; //{DIE_TYPE}
@@ -87,22 +87,23 @@ export class DND5E_SYSTEM_MESSAGE_PARSER
      */
     getRollType(msg,rollObjSel)
     {
-        let rollType = msg?.flags?.dnd5e?.roll?.type;
-        if(rollType == "skill"){
+        // Dragonbane also doesn't have a nice way to parse rolls. Need to pull flavor text.
+        // Flavor text doesnt have a good way to see different types of skill rolls
+        // THIS IS BAD DUE TO LOCALIZED LANG, Wait for system update to fix
+        let flavorString = msg.flavor;
+        if(flavorString.includes("Skill")){
             return DS_GLOBALS.ROLL_TYPE.SKILL;
-
-        }else if(rollType == "ability"){
-            return DS_GLOBALS.ROLL_TYPE.ABILITY;
-
-        }else if(rollType == "attack"){
+            
+        }else if(   flavorString.includes("Attack") || flavorString.includes("Topple") || 
+                    flavorString.includes("Disarm") || flavorString.includes("Parry")){
             return DS_GLOBALS.ROLL_TYPE.ATK;
 
-        }else if(rollType == "damage"){
+        }else if(flavorString.includes("Attribute")){
+            return DS_GLOBALS.ROLL_TYPE.ABILITY;
+
+        }else if(flavorString.includes("Damage")){
             return DS_GLOBALS.ROLL_TYPE.DMG;
-
-        }else if(rollType == "save"){
-            return DS_GLOBALS.ROLL_TYPE.SAVE;
-
+            
         }else{
             return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
         }

@@ -1,12 +1,11 @@
-import { DS_GLOBALS } from "../dice-stats-globals";
-import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 
 /**
- * Parse a generic system parser,
- * All parsers must implment parseMsgRoll
+ * Parse Chat message obj and gather all the info we might use
  */
-export class GENERIC_SYSTEM_MESSAGE_PARSER {
-
+export class DND5E_SYSTEM_MESSAGE_PARSER
+{
     /* ROLL_INFO Vars:
     DieType=    0; //{DIE_TYPE}
     RollType=   0; //{ROLL_TYPE}
@@ -88,7 +87,25 @@ export class GENERIC_SYSTEM_MESSAGE_PARSER {
      */
     getRollType(msg,rollObjSel)
     {
-        return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+        let rollType = msg?.flags?.dnd5e?.roll?.type;
+        if(rollType == "skill"){
+            return DS_GLOBALS.ROLL_TYPE.SKILL;
+
+        }else if(rollType == "ability"){
+            return DS_GLOBALS.ROLL_TYPE.ABILITY;
+
+        }else if(rollType == "attack"){
+            return DS_GLOBALS.ROLL_TYPE.ATK;
+
+        }else if(rollType == "damage"){
+            return DS_GLOBALS.ROLL_TYPE.DMG;
+
+        }else if(rollType == "save"){
+            return DS_GLOBALS.ROLL_TYPE.SAVE;
+
+        }else{
+            return DS_GLOBALS.ROLL_TYPE.UNKNOWN;
+        }
     }
 
     /**
@@ -125,4 +142,4 @@ export class GENERIC_SYSTEM_MESSAGE_PARSER {
         // USED ONLY IN SPECIFIC SYSTEM PARSERS
         return newRollInfo
     }
-} //enc GENERIC_SYSTEM_MESSAGE_PARSER
+}

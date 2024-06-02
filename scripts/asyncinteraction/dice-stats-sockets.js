@@ -1,8 +1,8 @@
 //==========================================================
 //==================== SOCKET SHIT =========================
 //==========================================================
-import { DS_GLOBALS } from "../dice-stats-globals";
-import { DICE_STATS_UTILS } from "../dice-stats-utils";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DICE_STATS_UTILS } from "../dice-stats-utils.js";
 
 // Global Method to load socket stuff
 Hooks.once("socketlib.ready", () => {

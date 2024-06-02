@@ -1,5 +1,5 @@
-import { DS_GLOBALS } from "../dice-stats-globals";
-import { DATA_PACKAGER } from "../database/dice-stats-datapack";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DATA_PACKAGER } from "../database/dice-stats-datapack.js";
 
 //==========================================================
 //===================== FORMS SHIT =========================

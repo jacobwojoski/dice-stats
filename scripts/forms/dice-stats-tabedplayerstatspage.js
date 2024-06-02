@@ -1,4 +1,4 @@
-import { DS_GLOBALS } from "../dice-stats-globals";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
 
 /**
  * This is the player stats class. One of these classes gets made for every player added in the game.

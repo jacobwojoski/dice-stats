@@ -1,7 +1,7 @@
 //==========================================================
 //================== HANDLEBARS SHIT =======================
 //==========================================================
-import { DS_GLOBALS } from "../dice-stats-globals";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
 
 //handelabars fn used to get true or false of a bool
 Handlebars.registerHelper('diceStats_isTrue', function (passedInBool, options) {

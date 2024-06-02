@@ -1,6 +1,6 @@
-import { DS_GLOBALS } from "../dice-stats-globals";
-import { DICE_STATS_UTILS } from "../dice-stats-utils";
-import { PLAYER } from "../appdatastorage/dice-stats-player";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DICE_STATS_UTILS } from "../dice-stats-utils.js";
+import { PLAYER } from "../appdatastorage/dice-stats-player.js";
 
 //This file is for packaging data to be used in handlebars functions
 // It converts the dice stats data into a format that is used by the displays
