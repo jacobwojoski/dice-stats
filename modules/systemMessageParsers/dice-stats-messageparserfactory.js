@@ -1,4 +1,4 @@
-class MESSAGE_PARSER_FACTORY  {
+export class MESSAGE_PARSER_FACTORY  {
     
     /* Create a message parser object bassed on the current system Different systems need to do different stuff to parse the msg*/
     static createMessageParser(systemid)

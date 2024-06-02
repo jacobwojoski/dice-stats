@@ -1,6 +1,6 @@
 
 
-class DICE_STATS_UTILS {
+export class DICE_STATS_UTILS {
     /**
      * Build hook hook that waits for A DsN msg then return
      * This funtion returns after Hook is made so this code returns and now were 
@@ -279,7 +279,7 @@ class DICE_STATS_UTILS {
     }
 }
 
-class  ComparePlayerObjUtil
+export class  ComparePlayerObjUtil
 {
     name = '';
     id = '';

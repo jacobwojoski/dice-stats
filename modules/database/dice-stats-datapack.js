@@ -4,7 +4,7 @@
 //  we have to make a special object that is all 1D arrays and convert the info  
 //  the display needs into the new object
 
-class DATA_PACKAGER
+export class DATA_PACKAGER
 {
     //======================================================
     //================ Handlebars Data =====================

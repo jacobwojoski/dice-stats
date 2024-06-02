@@ -1,7 +1,7 @@
 /**
  * Data object that can be interated over in hbs for Die info
  */
-class HBS_DICE_DATA  {
+export class HBS_DICE_DATA  {
     Is_displ= false;
     Total_Rolls= 0;
     Mean= 0;
@@ -13,7 +13,7 @@ class HBS_DICE_DATA  {
     DiceHeading= "";
 }
 
-class HBS_ALLDICE_DATA {
+export class HBS_ALLDICE_DATA {
     TOTAL_ROLLS= [];
     IS_DISP= [];
     D2_INFO= [];
@@ -29,18 +29,18 @@ class HBS_ALLDICE_DATA {
     HBS_DICE_INFO= []; /*{HBS_DICE_DATA[]}*/
 }
 
-class HBS_D20_DATA {
+export class HBS_D20_DATA {
 
 }
 
-class HBS_2DX_DATA {
+export class HBS_2DX_DATA {
 
 }
 
 /**
  * Data info for His Miss class that can be easily iterated over as its sys agnostic
  *  */
-class HBS_HIT_MISS_DATA {
+export class HBS_HIT_MISS_DATA {
     // Used to make arrays of info for each roll type
     //      Can store data like ["Untracked Rolls Count", 13] ["Total Rolls Count", 3]
     ROLL_INFO_TITLE = "";

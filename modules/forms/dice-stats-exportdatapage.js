@@ -2,7 +2,7 @@
 //==========================================================
 //===================== FORMS SHIT =========================
 //==========================================================
-class ExportDataPage extends FormApplication{
+export class ExportDataPage extends FormApplication{
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;

@@ -1,5 +1,9 @@
 # CHANGELOG  
 
+## [ 1.19.0 ]
+- Version 12 release 
+- refactor to use esmodules
+
 ## [ 1.18.2 ]
 - Add json data export feature
 

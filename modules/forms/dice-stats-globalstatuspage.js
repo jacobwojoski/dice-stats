@@ -4,7 +4,7 @@
 //==========================================================
 
 
-class GlobalStatusPage extends FormApplication{
+export class GlobalStatusPage extends FormApplication{
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;

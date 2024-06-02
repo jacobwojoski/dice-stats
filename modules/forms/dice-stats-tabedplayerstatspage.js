@@ -1,4 +1,4 @@
-class CustomTabFormClass extends FormApplication
+export class CustomTabFormClass extends FormApplication
 {
     SEL_PLAYER = 0;
 

@@ -5,7 +5,7 @@
  * This stuff is all system specific so check system parser on how we get this data from msg's
  * We load it from the DS_MSG_ROLL_INFO obj
  */
-class LOCAL_ROLL_INFO {
+export class LOCAL_ROLL_INFO {
     
     IS_ROLL_INFO_TRACKED = false;    // {BOOLEAN} Did we record any roll info?
 

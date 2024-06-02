@@ -1,7 +1,10 @@
+import { DIE_INFO } from "./dice-stats-diceinfo";
+import { LOCAL_ROLL_INFO } from "./dice-stats-rollinfo";
+import { DS_GLOBALS } from "../dice-stats-globals";
 
 //Class that defines a player. Players are all connected people to server including gm
 //Player has Die Info for each die type they roll & some other misc data
-class PLAYER {
+export class PLAYER {
     PLAYER_DICE = new Array(DS_GLOBALS.NUM_DIE_TYPES); //Aray of type<DIE_INFO>
     USERNAME = '';
     USERID = 0;

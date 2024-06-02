@@ -1,4 +1,4 @@
-class PACKAGE_HIT_MISS_DATA {
+export class PACKAGE_HIT_MISS_DATA {
     /**
      * Create a hit_miss data object that will be merged with other handlebars info
      * @param {PLAYER} playerData - dice stats player data object
@@ -12,14 +12,14 @@ class PACKAGE_HIT_MISS_DATA {
     }
 }
 
-class PACKAGE_ALL_STATS_DATA {
+export class PACKAGE_ALL_STATS_DATA {
 
 }
 
-class PACKAGE_TWODX_STATS_DATA {
+export class PACKAGE_TWODX_STATS_DATA {
 
 }
 
-class PACKAGE_D20_STATS_DATA {
+export class PACKAGE_D20_STATS_DATA {
     
 }

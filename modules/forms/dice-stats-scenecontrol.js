@@ -1,5 +1,5 @@
 // Global Scene Control Icon 
-class CustomSceneControlToolGlobal 
+export class CustomSceneControlToolGlobal 
 {
     name = 'Global';
     title = game.i18n.localize('DICE_STATS_TEXT.global_data_form.button');
@@ -25,7 +25,7 @@ class CustomSceneControlToolGlobal
 }
 
 // Compare Scene Control Icon
-class CustomSceneControlToolCompare
+export class CustomSceneControlToolCompare
 {
     name = 'Compare';
     title = game.i18n.localize('DICE_STATS_TEXT.compare_data_form.button');
@@ -58,7 +58,7 @@ class CustomSceneControlToolCompare
 }
 
 // Player Scene Control Icons (Icon can be customized in settings)
-class CustomSceneControlToolPlayer
+export class CustomSceneControlToolPlayer
 {
     name = '';
     title = '';
@@ -106,7 +106,7 @@ class CustomSceneControlToolPlayer
 }
 
 // Compare Scene Control Icon
-class CustomSceneControlToolExport
+export class CustomSceneControlToolExport
 {
     name = 'Export';
     title = game.i18n.localize('DICE_STATS_TEXT.export_data_form.button');
@@ -127,7 +127,7 @@ class CustomSceneControlToolExport
 }
 
 // Scene Controller outer button to view player buttons
-class CustomSceneControl
+export class CustomSceneControl
 {
     activeTool = '';
     name = 'dstats';

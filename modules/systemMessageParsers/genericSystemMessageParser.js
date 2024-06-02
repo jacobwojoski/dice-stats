@@ -2,7 +2,7 @@
  * Parse a generic system parser,
  * All parsers must implment parseMsgRoll
  */
-class GENERIC_SYSTEM_MESSAGE_PARSER {
+export class GENERIC_SYSTEM_MESSAGE_PARSER {
 
     /* ROLL_INFO Vars:
     DieType=    0; //{DIE_TYPE}

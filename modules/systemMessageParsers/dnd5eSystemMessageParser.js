@@ -1,4 +1,4 @@
-class DND5E_SYSTEM_MESSAGE_PARSER
+export class DND5E_SYSTEM_MESSAGE_PARSER
 {
     /* ROLL_INFO Vars:
     DieType=    0; //{DIE_TYPE}

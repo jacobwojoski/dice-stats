@@ -9,7 +9,7 @@
  *  Sticking with added DB obj validation and Flags for the time beeing. With the potential option for File access 
  *  and a .json version of the DB. 
  */
-class DB_INTERACTION 
+export class DB_INTERACTION 
 {
     /**
      * Method to create flags if they dont exist

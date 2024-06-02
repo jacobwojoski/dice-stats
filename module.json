@@ -9,9 +9,9 @@
   ],
   "compatibility": {
     "minimum": "10",
-    "verified": "11"
+    "verified": "12"
   },
-  "scripts": [
+  "esmodules": [
     "scripts/classes/appdatastorage/dice-stats-diceinfo.js",
     "scripts/classes/appdatastorage/dice-stats-player.js",
     "scripts/classes/appdatastorage/dice-stats-rollinfo.js",
@@ -61,8 +61,8 @@
     }
   ],
   "socket": true,
-  "version": "1.18.2",
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.18.2.zip",
+  "version": "1.19.0",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.19.0.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
   "readme": "https://github.com/jacobwojoski/dice-stats",

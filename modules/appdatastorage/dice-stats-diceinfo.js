@@ -3,7 +3,7 @@
 //Die rolls are stored in array thats size of the die type 
 //That way can just incrament each position rather then store array of increasing size
 //Ex, D20 roll was 16 -> Rolls[(16-1)]++;
-class DIE_INFO {
+export class DIE_INFO {
     TYPE =          0;  //Type of die <DIE_TYPE> varable
     MAX =           0;  //MAX Value On Die , ex 6, 10, 12, 20
     TOTAL_ROLLS =   0;

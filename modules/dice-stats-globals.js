@@ -2,7 +2,7 @@
 // ------------ GLOBAL VALUES --------------
 // -----------------------------------------
 
-class DS_GLOBALS {
+export class DS_GLOBALS {
     /* ------ SYSTEM GLOBALS ------*/
     static GAME_SYSTEM_ID= '';
     static MODULE_SOCKET= null;

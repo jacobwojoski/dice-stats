@@ -2,7 +2,7 @@
 //==========================================================
 //===================== FORMS SHIT =========================
 //==========================================================
-class ComparePlayerStatusPage extends FormApplication{
+export class ComparePlayerStatusPage extends FormApplication{
 
     static get defaultOptions() {
         const defaults = super.defaultOptions;

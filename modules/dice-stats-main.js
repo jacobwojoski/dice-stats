@@ -30,7 +30,7 @@
  *               - These buttons interacts with the DiceStats object as its global/singleton and call getData() again to update the display  
  * 
  */
-class DiceStatsTracker {
+export class DiceStatsTracker {
     AM_I_GM = false;
 
     ID = 'dice-stats';

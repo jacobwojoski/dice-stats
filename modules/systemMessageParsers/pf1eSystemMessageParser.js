@@ -1,4 +1,4 @@
-class PF1E_SYSTEM_MESSAGE_PARSER
+export class PF1E_SYSTEM_MESSAGE_PARSER
 {
     /* ROLL_INFO Vars:
     DieType=    0; //{DIE_TYPE}
