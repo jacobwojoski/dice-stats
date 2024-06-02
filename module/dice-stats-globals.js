@@ -11,25 +11,25 @@ export class DS_GLOBALS {
         ROLLDATAFLAG:'player_roll_data'
     };
     static TEMPLATE_PATH_ARY = [
-        'modules/dice-stats/templates/dice-stats-global.hbs',
-        'modules/dice-stats/templates/dice-stats-compare.hbs',
-        'modules/dice-stats/templates/dice-stats-export.hbs',
-        'modules/dice-stats/templates/partial/tab_player_base.hbs',
-        'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
-        'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
-        'modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs',
-        'modules/dice-stats/templates/partial/tab_player_hit_miss.hbs',
-        'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'
+        'modules/dice-stats/templates/global-data/dice-stats-global.hbs',
+        'modules/dice-stats/templates/compare-data/dice-stats-compare.hbs',
+        'modules/dice-stats/templates/export-data/dice-stats-export.hbs',
+        'modules/dice-stats/templates/player-data/tab_player_base.hbs',
+        'modules/dice-stats/templates/player-data/partials/tab_player_stats_all_dice.hbs',
+        'modules/dice-stats/templates/player-data/partials/tab_player_stats_d20.hbs',
+        'modules/dice-stats/templates/player-data/partials/tab_player_stats_2dx.hbs',
+        'modules/dice-stats/templates/player-data/partials/tab_player_hit_miss.hbs',
+        'modules/dice-stats/templates/player-data/partials/tab_player_unsupported_info.hbs'
     ];
     static MODULE_TEMPLATES= {
-        GLOBALDATAFORM:     'modules/dice-stats/templates/dice-stats-global.hbs',
-        COMPAREFORM:        'modules/dice-stats/templates/dice-stats-compare.hbs',
-        EXPORTFORM:        'modules/dice-stats/templates/dice-stats-export.hbs',
-        TABEDPLAYERBASE:    'modules/dice-stats/templates/partial/tab_player_base.hbs',
-        TABEDPLAYER_ALL:   'modules/dice-stats/templates/partial/tab_player_stats_all_dice.hbs',
-        TABEDPLAYER_D20:   'modules/dice-stats/templates/partial/tab_player_stats_d20.hbs',
-        TEBEDPLAYER_2DX:   'modules/dice-stats/templates/partial/tab_player_stats_2dx.hbs',
-        TABEDPLAYER_ERROR: 'modules/dice-stats/templates/partial/tab_player_unsupported_info.hbs'
+        GLOBALDATAFORM:     'modules/dice-stats/templates/global-data/dice-stats-global.hbs',
+        COMPAREFORM:        'modules/dice-stats/templates/compare-data/dice-stats-compare.hbs',
+        EXPORTFORM:         'modules/dice-stats/templates/export-data/dice-stats-export.hbs',
+        TABEDPLAYERBASE:    'modules/dice-stats/templates/player-data/tab_player_base.hbs',
+        TABEDPLAYER_ALL:    'modules/dice-stats/templates/player-data/partials/tab_player_stats_all_dice.hbs',
+        TABEDPLAYER_D20:    'modules/dice-stats/templates/player-data/partials/tab_player_stats_d20.hbs',
+        TEBEDPLAYER_2DX:    'modules/dice-stats/templates/player-data/partials/tab_player_stats_2dx.hbs',
+        TABEDPLAYER_ERROR:  'modules/dice-stats/templates/player-data/partials/tab_player_unsupported_info.hbs'
     };
     static MODULE_SETTINGS= {
         PLAYERS_SEE_PLAYERS:        'players_see_players',          // If players cant see self they cant see others either     [Def: True]      (Global)
