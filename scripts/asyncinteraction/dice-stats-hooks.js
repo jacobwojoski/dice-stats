@@ -1,9 +1,13 @@
 //==========================================================
 //===================== HOOKS SHIT =========================
 //==========================================================
-import { DS_GLOBALS } from "../dice-stats-globals.js";
 import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 import { DS_MSG_DIE_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
+import { DiceStatsTracker } from "../dice-stats-main.js";
+import { DB_INTERACTION } from "../database/dice-stats-db.js";
+import { CustomSceneControl, CustomSceneControlToolCompare, CustomSceneControlToolExport, CustomSceneControlToolGlobal, CustomSceneControlToolPlayer } from "../forms/dice-stats-scenecontrol.js";
+import { DICE_STATS_UTILS } from "../dice-stats-utils.js";
+import { DS_GLOBALS } from "../dice-stats-globals.js";
 
 // Hooks 'hook' into different external triggers
 //  - EX: Loading of A page, When a roll gets made etc
@@ -91,6 +95,40 @@ function midiQolSupport(){
     })
 }
 
+function initDiceStats(){
+    //Load {MAP} MAX_TO_DIE To be used in DICE_STATS message parsing
+    DS_GLOBALS.MAX_TO_DIE.set(2,   DS_GLOBALS.DIE_TYPE.D2);
+    DS_GLOBALS.MAX_TO_DIE.set(3,   DS_GLOBALS.DIE_TYPE.D3);
+    DS_GLOBALS.MAX_TO_DIE.set(4,   DS_GLOBALS.DIE_TYPE.D4);
+    DS_GLOBALS.MAX_TO_DIE.set(6,   DS_GLOBALS.DIE_TYPE.D6);
+    DS_GLOBALS.MAX_TO_DIE.set(8,   DS_GLOBALS.DIE_TYPE.D8);
+    DS_GLOBALS.MAX_TO_DIE.set(10,  DS_GLOBALS.DIE_TYPE.D10);
+    DS_GLOBALS.MAX_TO_DIE.set(12,  DS_GLOBALS.DIE_TYPE.D12);
+    DS_GLOBALS.MAX_TO_DIE.set(20,  DS_GLOBALS.DIE_TYPE.D20);
+    DS_GLOBALS.MAX_TO_DIE.set(100, DS_GLOBALS.DIE_TYPE.D100);
+
+    DS_GLOBALS.GAME_SYSTEM_ID = `${game.system.id}`;
+
+    //New Players might get added throught the game so update map on playerlist render. 
+    DS_GLOBALS.DS_OBJ_GLOBAL.updateMap();
+
+    //Comparison form needs player list which needs to wait for game to be in ready state.
+    DS_GLOBALS.DS_OBJ_GLOBAL.updateComparisonFormCheckboxes() 
+
+    if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
+    {
+        DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
+    }
+
+    // --- GM Clear all POPUP ---
+    // Check Setting if popup enabled, (I like tracking stats per session so I clear my data every game)
+    if( game.user.isGM &&
+        game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP))
+    {   // Bring Up Popup
+        DICE_STATS_UTILS.clearAllData();
+    }
+}
+
 //Parse chat message when one gets displayed
 Hooks.on('createChatMessage', (chatMessage) => {
     DS_GLOBALS.DS_OBJ_GLOBAL.parseMessage(chatMessage);
@@ -138,6 +176,7 @@ Hooks.on("getSceneControlButtons", controls => {
         for(let user of game.users){
             if(!user){return;}
 
+            let icon;
             if(icons.length > 0 && icons[i])
             {
                 icon = icons[i];
@@ -166,27 +205,7 @@ Hooks.on("getSceneControlButtons", controls => {
 
 //Autoload DB info on connection if setting is checked
 Hooks.once('ready', () => {
-    DS_GLOBALS.GAME_SYSTEM_ID = `${game.system.id}`;
-
-    //New Players might get added throught the game so update map on playerlist render. 
-    DS_GLOBALS.DS_OBJ_GLOBAL.updateMap();
-
-    //Comparison form needs player list which needs to wait for game to be in ready state.
-    DS_GLOBALS.DS_OBJ_GLOBAL.updateComparisonFormCheckboxes() 
-
-    if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
-    {
-        DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
-    }
-
-    // --- GM Clear all POPUP ---
-    // Check Setting if popup enabled, (I like tracking stats per session so I clear my data every game)
-    if( game.user.isGM &&
-        game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP))
-    {   // Bring Up Popup
-        DICE_STATS_UTILS.clearAllData();
-    }
-        
+        initDiceStats();
 });
 
 // Do something when another user connects to the game 

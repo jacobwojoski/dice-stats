@@ -151,18 +151,6 @@ export class DS_GLOBALS {
     //Used when parcing message. Message sends Number of faces. We need to convert to DIE_TYPE enum
     static MAX_TO_DIE=         new Map();
 }
-
-//Load {MAP} MAX_TO_DIE To be used in DICE_STATS message parsing
-DS_GLOBALS.MAX_TO_DIE.set(2,   DS_GLOBALS.DIE_TYPE.D2);
-DS_GLOBALS.MAX_TO_DIE.set(3,   DS_GLOBALS.DIE_TYPE.D3);
-DS_GLOBALS.MAX_TO_DIE.set(4,   DS_GLOBALS.DIE_TYPE.D4);
-DS_GLOBALS.MAX_TO_DIE.set(6,   DS_GLOBALS.DIE_TYPE.D6);
-DS_GLOBALS.MAX_TO_DIE.set(8,   DS_GLOBALS.DIE_TYPE.D8);
-DS_GLOBALS.MAX_TO_DIE.set(10,  DS_GLOBALS.DIE_TYPE.D10);
-DS_GLOBALS.MAX_TO_DIE.set(12,  DS_GLOBALS.DIE_TYPE.D12);
-DS_GLOBALS.MAX_TO_DIE.set(20,  DS_GLOBALS.DIE_TYPE.D20);
-DS_GLOBALS.MAX_TO_DIE.set(100, DS_GLOBALS.DIE_TYPE.D100);
-
 // -------------------------------------------
 // ---------- END GLOBAL VALUES --------------
 // -------------------------------------------

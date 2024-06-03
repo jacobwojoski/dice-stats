@@ -1,6 +1,6 @@
 import { PF1E_SYSTEM_MESSAGE_PARSER } from "./pf1eSystemMessageParser.js";
 import { PF2E_SYSTEM_MESSAGE_PARSER } from "./pf2eSystemMessageParser.js";
-import { DND5E_SYSTEM_MESSAGE_PARSER } from "./dnd5eSystemMessageParser";
+import { DND5E_SYSTEM_MESSAGE_PARSER } from "./dnd5eSystemMessageParser.js";
 import { DRAGONBANE_SYSTEM_MESSAGE_PARSER } from "./dragonbaneSystemMessageParser.js";
 import { GENERIC_SYSTEM_MESSAGE_PARSER } from "./genericSystemMessageParser.js";
 

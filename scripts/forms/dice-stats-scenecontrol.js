@@ -1,4 +1,9 @@
 import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { GlobalStatusPage } from "./dice-stats-globalstatuspage.js";
+import { ComparePlayerStatusPage } from "./dice-stats-compareplayerspage.js";
+import { ExportDataPage } from "./dice-stats-exportdatapage.js";
+import { CustomTabFormClass } from "./dice-stats-tabedplayerstatspage.js";
+
 /**
  * These classes use the foundry SceneControll Classes to add a new set of buttons. The buttons are used to view players
  * dice stats. 
