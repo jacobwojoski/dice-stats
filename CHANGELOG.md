@@ -1,5 +1,8 @@
 # CHANGELOG  
 
+## [ 1.18.4 ]
+- joonhohw - Allow GM access when canSeePlayerData is false
+
 ## [ 1.18.3 ]
 - Fix hit and miss tracker clearing
 - Add some details to hit and miss tracker "Unsupported" popup
