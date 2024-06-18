@@ -179,6 +179,17 @@ export class DiceStatsTracker {
             restricted: true,
         })
 
+        // A setting to allow quick enable or disable of saving roll data
+        game.settings.register(ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_PAUSE_SAVING_DATA, {
+            name: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.GLOBAL_PAUSE_SAVING_DATA}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world', //world = db, client = local
+            config: true,   // show in module config
+            hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.GLOBAL_PAUSE_SAVING_DATA}.Hint`,
+            restricted: true,
+        })
+
         // -------- START TAB DISABLE SETTINGS -----------
         //  The following are a series of settings that let the users diable dice stats tabs if they dont want/need them 
         //      cluttering up the UI

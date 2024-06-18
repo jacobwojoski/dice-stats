@@ -43,6 +43,8 @@ export class DS_GLOBALS {
         GLOBAL_ENABLE_OTHER_DB:         'global_enable_other_db',       //Enable the .json file db version (Turn off flags DB)  [Def: False] (Global)
         LOCAL_DISABLE_OTHER_DP_POPUP:   'local_enable_other_db_popup',  //Disable the popup notifcation for the file DB version [Def: False] (Local)
 
+        GLOBAL_PAUSE_SAVING_DATA:       'global_pause_recording_data',  //Easily enable or disable the saving or roll data
+        
         // Popup that gets shown to GM ONLY. Popup Asks if they want to "Clear ALL" Upon joining the game                       [Def: False] (Global)
         GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP:   'global_enable_clear_all_stats_popup',
 

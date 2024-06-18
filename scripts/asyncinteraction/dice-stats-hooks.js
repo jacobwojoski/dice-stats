@@ -131,7 +131,10 @@ function initDiceStats(){
 
 //Parse chat message when one gets displayed
 Hooks.on('createChatMessage', (chatMessage) => {
-    DS_GLOBALS.DS_OBJ_GLOBAL.parseMessage(chatMessage);
+    // Check if were pausing saving player roll data
+    if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_PAUSE_SAVING_DATA) === false){
+        DS_GLOBALS.DS_OBJ_GLOBAL.parseMessage(chatMessage);
+    }
 });
 
 // Initialize dialog and settings on foundry boot up
