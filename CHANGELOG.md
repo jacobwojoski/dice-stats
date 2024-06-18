@@ -1,5 +1,10 @@
 # CHANGELOG  
 
+## [ 1.19.0 ]
+- Version 12 release 
+- refactor to use esmodules
+- Add setting to temp disable recording of stats
+
 ## [ 1.18.4 ]
 - joonhohw - Allow GM access when canSeePlayerData is false
 

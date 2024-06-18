@@ -36,6 +36,10 @@
                 "title": "Clear All Popup",
                 "context": "DICE STATS: Clearing ALL Player Data (Local And DB). Are you sure? \n NOTE: This popup can be disabled in settings."
             },
+            "global_pause_recording_data":{
+                "Name":"Pause Saving Roll Data",
+                "Hint":"Quickly disable the saving of roll data. Can be useful to disable saving of rolls when not in the session."
+            },
             "local_enable_d20_details_tab":{
                 "Name": "Enable D20 Info Tab",
                 "Hint": "Allows the user to remove the D20 tab button on the player screen to reduce UI clutter if not needed."
