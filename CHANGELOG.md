@@ -1,5 +1,8 @@
 # CHANGELOG  
 
+## [ 1.19.1 ]
+- Update db load logging statements to be debug only
+
 ## [ 1.19.0 ]
 - Version 12 release 
 - refactor to use esmodules
