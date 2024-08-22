@@ -232,7 +232,7 @@ export class DiceStatsTracker {
     parseMessage(msg)
     {
         // Get the player that the roll is associated with
-        let playerInfo = this.PLAYER_DATA_MAP.get(msg.user.id);
+        let playerInfo = this.PLAYER_DATA_MAP.get(msg.author.id);
 
         // Get the specific system parser to parse msg
         let parser = MESSAGE_PARSER_FACTORY.createMessageParser();
@@ -261,7 +261,7 @@ export class DiceStatsTracker {
         if(game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
         {
             //If it was my roll save my data to the db
-            if(msg.user.id == game.user.id && updatedLocalRollValue)
+            if(msg.author.id == game.user.id && updatedLocalRollValue)
             {
                 this.saveMyPlayerData();
             }
