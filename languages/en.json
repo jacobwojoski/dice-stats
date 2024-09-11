@@ -4,27 +4,27 @@
         "settings":{
             "players_see_players": {
                 "Name" : "See players stats?",
-                "Hint" : "If enabled, the player can see other players stats. Impacts Comparison Screen. Doesn't Impact Global Stats Page.\n Reccomended: On"
+                "Hint" : "If enabled, the player can see other players stats. Impacts Comparison Screen. Doesn't Impact Global Stats Page.\n Recommended: On"
             },
             "players_see_gm": {
                 "Name" : "See GM roll data?",
-                "Hint" : "If enabled, the player can see the GM's stats. If you are the GM this is useless. \n Reccomended: Off"
+                "Hint" : "If enabled, the player can see the GM's stats. If you are the GM this is useless. \n Recommended: Off"
             },
             "players_see_global": {
                 "Name" : "See GLOBAL roll data?",
-                "Hint" : "If enabled, the player can see the global stats. \n Reccomended: On"
+                "Hint" : "If enabled, the player can see the global stats. \n Recommended: On"
             },
             "players_see_gm_in_global": {
                 "Name" : "See GM Stats In Global Roll Data?",
-                "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacts GM global stats button too) \n Reccomended: off"
+                "Hint" : "GM Dice Stats will not be included in Global Stats Screen unless this is enabled. (This impacts GM global stats button too) \n Recommended: off"
             },
             "enable_blind_rolls_immediate": {
                 "Name" : "Allow blind rolls to be immediately added to player stats",
-                "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats. \n Reccomended: Off"
+                "Hint" : "If enabled hidden rolls can be seen by players just by looking at their stats. \n Recommended: Off"
             },
             "enable_auto_db": {
                 "Name" : "Automatically use DB",
-                "Hint" : "Enabled means rolls will get saved and loaded from DB automatically. Could Negatively Impact Player Performance. Seems Minimal From Testing. \n Reccomended: On"
+                "Hint" : "Enabled means rolls will get saved and loaded from DB automatically. Could Negatively Impact Player Performance. Seems Minimal From Testing. \n Recommended: On"
             },
             "player_access_icons":{
                 "Name": "Define Players Icons",
