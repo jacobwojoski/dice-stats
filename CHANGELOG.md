@@ -3,6 +3,8 @@
 ## [ 1.19.2 ]
 - Stop V 11 Support 
 - Fix depricated warnings : ThiefMaster
+- Fix some spelling mistakes
+- Validate working for v12
 
 ## [ 1.19.1 ]
 - Update db load logging statements to be debug only
