@@ -94,11 +94,56 @@ export class COC7E_SYSTEM_MESSAGE_PARSER extends GENERIC_SYSTEM_MESSAGE_PARSER {
                 d100_info.DieType=DS_GLOBALS.DIE_TYPE.D100;
                 d100_info.IsBlind=msg.blind;
                 d100_info.RollType=DS_GLOBALS.ROLL_TYPE.UNKNOWN;
-                d100_info.RollValue=(dt_val + d10_val);
+                //d100_info.RollValue=(dt_val + d10_val);
+
+                // Get the die outcome from the html
+                const parser = new DOMParser();
+                const tmpdoc = parser.parseFromString(msg.content, "text/html");
+                let resultElement = tmpdoc.getElementById("diceResult");
+                d100_info.RollValue=resultElement.textContent;
+                d100_info.RollValue = parseInt(d100_info);
+
+                if(d100_info.RollValue > 100){
+                    d100_info.RollValue = 100;
+                }else if (d100_info.RollValue < 1){
+                    d100_info.RollValue = 1;
+                }
+
                 retRollInfoAry[tempRoll].DiceInfo.push(d100_info);
+                // WOJO: Check content id='diceResult`
             }
             
         } // end rolls
         return retRollInfoAry;
+    } // end parseMessageRoll
+
+    /**
+     * @param {MSG} msg - Foundry/ System message object 
+     * @param {DS_MSG_ROLL_INFO} retRollInfoObj - our conversion of message info into local info
+     * @param {MSG.ROLL[it]} rollObjSel - 
+     * Update roll obj with any info that system holds in roll compared to specific dice info
+     * NOTE: THESE ARE ONLY ACCESSABLE IF THE USER HAS A PLAYER TARGETED, IF NOT, ITS NOT TRACKED
+     */
+    updateRollInfo(msg, retRollInfoObj, rollObjSel){
+        // Get Degree success from roll result html item
+        // const parser = new DOMParser();
+        // const tmpdoc = parser.parseFromString(msg.content, "text/html");
+        // let d100_result = resultElement.textContent;
+
+        // var resultElement = tmpdoc.getElementById("diceResult");
+
+        // if(resultElement.classList.contains('extreme-success')){
+
+        // }else if(resultElement.classList.contains('critical') && resultElement.classList.contains('success')){
+
+        // }else if(resultElement.classList.contains('success')){
+
+        // }else if(resultElement.classList.contains('failure') && resultElement.classList.contains('critical')){
+        
+        // }else if(resultElement.classList.contains('failure')){
+
+        // };
+
+        return retRollInfoObj;
     }
 }
