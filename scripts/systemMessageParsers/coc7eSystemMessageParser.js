@@ -100,8 +100,8 @@ export class COC7E_SYSTEM_MESSAGE_PARSER extends GENERIC_SYSTEM_MESSAGE_PARSER {
                 const parser = new DOMParser();
                 const tmpdoc = parser.parseFromString(msg.content, "text/html");
                 let resultElement = tmpdoc.getElementById("diceResult");
-                d100_info.RollValue=resultElement.textContent;
-                d100_info.RollValue = parseInt(d100_info);
+                let roll_value=resultElement.textContent;
+                d100_info.RollValue = parseInt(roll_value);
 
                 if(d100_info.RollValue > 100){
                     d100_info.RollValue = 100;

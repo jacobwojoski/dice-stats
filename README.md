@@ -135,4 +135,25 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 
 ### Global Clear Local Data Button
 ![GLB CLR](https://i.imgur.com/GtGz0h4.png)
+
+
+### Design Format to update/start following
+### I've royalled fucked up the casing for class vars and gotta fix them (way way way too many UPPER_CASE vars)
+- Globals           = GL_Pascale_Snake_Case?
+- Constants         = UPPER_CASE
+- Static Vars       = STAT_(follow other)
+
+- Class Names       = PascaleCase
+- Public Funtions   = cammelCase
+- Private Funtions  = _cammelCase
+
+- Public Vars       = cammelCase
+- Priv Vars         = _cammelCase
+- local             = snake_case
+
+- fn input refs     = ptr_snake_case
+- fn input vars     = PasecaleCase
+
+- arrays            = plurals!
+- bools             = is/has: Var Name
   
