@@ -1,5 +1,8 @@
 # CHANGELOG  
 
+## [ 1.20.0 ]
+- Added starting support for Call Of Cathulu 7E
+
 ## [ 1.19.2 ]
 - Stop V 11 Support 
 - Fix depricated warnings : ThiefMaster
