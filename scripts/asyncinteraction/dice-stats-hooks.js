@@ -148,6 +148,22 @@ Hooks.once('init', () => {
     if(game.modules.get("midi-qol")?.active){
         midiQolSupport();
     }
+
+    class DiceStatsAPI {
+        static getPlayers(){
+            // Return list of player id's
+        }
+
+        static getGlobals(){
+            // Retrun pointer to globals
+        }
+    }
+
+    // Avoid overwriting if already defined
+    window.DiceStatsAPI = window.DiceStatsAPI || {}; 
+
+    // Add API to global access
+    window.DiceStatsAPI.DiceStatsAPI = DiceStatsAPI;
 })
 
 // Hook to interact when scenecontrols get created Method used to have a better location to access player data
