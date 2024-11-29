@@ -156,4 +156,21 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 
 - arrays            = plurals!
 - bools             = is/has: Var Name
+
+# DICE STATS API
+#### View scripts/utils/open-displays-macro.js for example
+#### View scripts/asyncinteraction/dice-stats-api.js for Funtion calls
+
+## Current Funtions & Funtionality
+- saveRollValue({STRING:Player_id}, {ENUM:DIE_TYPE: #}, {INT: #}) -> Save a roll result to a player
+- saveRollInfo({STRING:Player_id},{DS_MSG_ROLL_INFO}) -> Save a DS_MSG_ROLL_INFO roll object to database (Will only save data to global db if you are the player_ID thats being added)
+
+- getPlayerList({VOID})        -> String[]=    Array of [{id:(STRING), name:(STRING)},...] that are stored in the dice stats database
+- getGlobals({VOID})           -> DS_GLOBALS=  Global Dice Stats Object & Enums (NOTE: Globals will be refactoed to only be enums at some point down the line)
+
+- openGlobalStats({VOID})      -> Open Global Stats UI
+- openCompareStats({VOID})     -> Open Compare Stats UI
+- openPlayerStats({INT} player_id) -> Open the players stats for the player ID selected
+- openExportStats({BOOL} isGM) -> Open Export page if they're the GM
+
   
