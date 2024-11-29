@@ -8,6 +8,7 @@ import { DB_INTERACTION } from "../database/dice-stats-db.js";
 import { CustomSceneControl, CustomSceneControlToolCompare, CustomSceneControlToolExport, CustomSceneControlToolGlobal, CustomSceneControlToolPlayer } from "../forms/dice-stats-scenecontrol.js";
 import { DICE_STATS_UTILS } from "../dice-stats-utils.js";
 import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DiceStatsAPI } from "./dice-stats-api.js";
 
 // Hooks 'hook' into different external triggers
 //  - EX: Loading of A page, When a roll gets made etc
@@ -149,62 +150,19 @@ Hooks.once('init', () => {
         midiQolSupport();
     }
 
-    class DiceStatsAPI {
-        /**
-         * @returns {String []} - Array of player id's that are stored in the map
-         */
-        static getPlayerList(){
-            // Return list of player id's saved in map
-        }
-
-        /**
-         * @returns {DS_GLOBALS} - Globals object for enums & other global vars, Def not the most secure and should
-         * be used sparingly.
-         */
-        static getGlobals(){
-            // Retrun pointer to global data struct
-        }
-
-        /**
-         * @returns {VOID} - Renders UI Component
-         */
-        static openGlobalStats(){
-
-        }
-
-        /**
-         * @returns {VOID} - Renders UI Component
-         */
-        static openCompareStats(){
-
-        }
-
-        /**
-         * @returns {VOID} - Renders UI Component
-         */
-        static openPlayerStats(/*String*/player_id){
-
-        }
-
-        /**
-         * @returns {VOID} - Renders UI Component
-         */
-        static openExportStats(/*Bool*/isGM){
-
-        }
-
-        /**
-         * @returns {VOID} - Renders UI Component
-         */
-        static saveRoll(/*player-id*/player_id,/*int:enum*/die_type, /*result*/roll_value){
-
-        }
-    }
-
     /* Create Dice Stats API */
     game.modules.get('dice-stats').api = {
-        //DiceStatsMethod: DiceStatsAPI.method,
-        //
+        saveRollValue: DiceStatsAPI.saveRollValue(/*player-id*/player_id,/*int:enum*/die_type, /*result*/roll_value),
+        saveRollInfo: DiceStatsAPI.saveRollInfo(/*player-id*/player_id, /*roll_info*/roll_info),
+
+        getPlayerList: DiceStatsAPI.getPlayerList(),
+        getGlobals: DiceStatsAPI.getGlobals(),
+
+        openGlobalStats: DiceStatsAPI.openGlobalStats(),
+        openCompareStats: DiceStatsAPI.openCompareStats(),
+        openPlayerStats: DiceStatsAPI.openPlayerStats(/*String*/player_id),
+        openExportStats: DiceStatsAPI.openExportStats(/*Bool*/isGM)
+
     };
 
     // Call hook to tell people API is ready
@@ -212,13 +170,13 @@ Hooks.once('init', () => {
 
     /* --- Examples on how to use API
         // if I need to do something as soon as the cool-module is ready
-        Hooks.on('coolModuleReady', (api) => {
+        Hooks.on('diceStatsReady', (api) => {
         // do what I need with their api
         });
 
         // alternatively if I know that the API should be populated when I need it,
         // I can defensively use the api on game.modules
-        game.modules.get('cool-module')?.api?.coolStaticMethod(someInput)
+        game.modules.get('diceStatsReady')?.api?.diceStatsApiStaticMethod(someInput)
     */
 })
 

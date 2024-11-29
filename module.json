@@ -17,6 +17,7 @@
     "scripts/appdatastorage/dice-stats-rollinfo.js",
     "scripts/appdatastorage/dice-stats-rollmsginfo.js",
 
+    "scripts/asyncinteraction/dice-stats-api.js",
     "scripts/asyncinteraction/dice-stats-handlebars.js",
     "scripts/asyncinteraction/dice-stats-hooks.js",
     "scripts/asyncinteraction/dice-stats-sockets.js",
