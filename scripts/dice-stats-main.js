@@ -446,6 +446,15 @@ export class DiceStatsTracker {
      * @returns {STRING[]} = Array of player ID's
      */
     getPlayerIDs(){
-        return this.PLAYER_DATA_MAP.keys();
+        let ary;
+        for (user_id in this.PLAYER_DATA_MAP.keys()){
+            
+            ary.push(
+                {
+                    id: user_id, 
+                    name: game.users.get(user_id).name
+                });
+        }
+        return ary;
     }
 }

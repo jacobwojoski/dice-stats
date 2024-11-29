@@ -24,6 +24,17 @@ import { CustomTabFormClass } from "./dice-stats-tabedplayerstatspage.js";
  * openExportStats({BOOL} isGM) -> Open Export page if they're the GM
  * 
  */
+
+/* --- Examples on how to use API
+    // if I need to do something as soon as the cool-module is ready
+    Hooks.on('diceStatsReady', (api) => {
+    // do what I need with their api
+    });
+
+    // alternatively if I know that the API should be populated when I need it,
+    // I can defensively use the api on game.modules
+    game.modules.get('diceStatsReady')?.api?.diceStatsApiStaticMethod(someInput)
+*/
 export class DiceStatsAPI {
     /**
     * @returns {VOID} - Save specific roll value to player stats
