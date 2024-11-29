@@ -4,10 +4,10 @@ import { DiceStatsTracker } from "../dice-stats-main.js";
 import { DS_MSG_ROLL_INFO, DS_MSG_DIE_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 
 /* Import UI's */
-import { GlobalStatusPage } from "./dice-stats-globalstatuspage.js";
-import { ComparePlayerStatusPage } from "./dice-stats-compareplayerspage.js";
-import { ExportDataPage } from "./dice-stats-exportdatapage.js";
-import { CustomTabFormClass } from "./dice-stats-tabedplayerstatspage.js";
+import { GlobalStatusPage } from "../forms/dice-stats-globalstatuspage.js";
+import { ComparePlayerStatusPage } from "../forms/dice-stats-compareplayerspage.js";
+import { ExportDataPage } from "../forms/dice-stats-exportdatapage.js";
+import { CustomTabFormClass } from "../forms/dice-stats-tabedplayerstatspage.js";
 
 /**
  * This class is the API for dice stats. Used to allow other modules & macros easily access the data.

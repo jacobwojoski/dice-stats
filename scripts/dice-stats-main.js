@@ -79,7 +79,7 @@ export class DiceStatsTracker {
      * @returns pointer to DiceStatsTracker
      */
     static getInstance(){
-        if(_singleton_pointer == null){
+        if(DiceStatsTracker._singleton_pointer == null){
             DiceStatsTracker._singleton_pointer = new DiceStatsTracker();
         }
         return DiceStatsTracker._singleton_pointer;
@@ -242,8 +242,8 @@ export class DiceStatsTracker {
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB}.Hint`,
         })
 
-        if(_singleton_pointer == null){
-            _singleton_pointer = this;
+        if(DiceStatsTracker._singleton_pointer == null){
+            DiceStatsTracker._singleton_pointer = this;
         }
     }
 
@@ -447,7 +447,7 @@ export class DiceStatsTracker {
      */
     getPlayerIDs(){
         let ary;
-        for (user_id in this.PLAYER_DATA_MAP.keys()){
+        for (user_id of this.PLAYER_DATA_MAP.keys()){
             
             ary.push(
                 {
