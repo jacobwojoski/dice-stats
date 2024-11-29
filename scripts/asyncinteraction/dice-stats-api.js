@@ -15,6 +15,7 @@ import { CustomTabFormClass } from "../forms/dice-stats-tabedplayerstatspage.js"
  * Different Functions:        Fn Returns
  * 
  * saveRollValue({STRING:Player_id}, {ENUM:DIE_TYPE: #}, {INT: #}) -> Save a roll result to a player
+ * saveRollInfo({STRING:Player_id}, {DS_MSG_ROLL_INFO}) -> Save a roll object
  * getPlayerList({VOID})        -> String[]=    Array of player ID's that are stored in the dice stats database
  * getGlobals({VOID})           -> DS_GLOBALS=  Global Dice Stats Object & Enums 
  * 
