@@ -1,3 +1,12 @@
+/*
+NOTE: You can't have imports in macros making building the custom data structs a bit of a bitch
+if you want to add a full roll object buts you can make the roll object the same as Mine and push it.
+It should still work as long as vars are all the same name.
+
+Note: Copy Paste this macro should work to allow the user to open displays. They do need macro perms ofc.
+
+Any problems with macro or ideas for new ones submit an Issue on the github!
+*/
 // import { DS_GLOBALS } from "modules/diceStats/scripts/dice-stats-globals.js";
 // import { GlobalStatusPage } from "modules/diceStats/scripts/forms/dice-stats-globalstatuspage.js";
 // import { ComparePlayerStatusPage } from "modules/diceStats/scripts/forms/dice-stats-compareplayerspage.js";
