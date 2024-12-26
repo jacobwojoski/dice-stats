@@ -28,6 +28,7 @@ Socketlib needs to be active to allow GM to tell other users to push blind rolls
 - Willumz: Added CSV, export by player options
 - joonhohw: Allow GM access when canSeePlayerData is false
 - ThiefMaster: Fix Depricated warning from V12 Updates
+- cuyima: API Fix
 
 ## SVG IMAGES - CREATIVE COMMONS V3.0
 - d4,d6,d8,d10,d12,d20 Icons By Lonnie Tapscott :: Noun Project

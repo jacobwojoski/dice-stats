@@ -1,4 +1,6 @@
 # CHANGELOG  
+## [ 1.21.1 ]
+- Fix for API from cuyima
 
 ## [ 1.21.0 ]
 - Added API for other modules || macros to interact with dice stats data
