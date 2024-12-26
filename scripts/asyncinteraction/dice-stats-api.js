@@ -41,24 +41,24 @@ export class DiceStatsAPI {
     * @returns {VOID} - Save specific roll value to player stats
     */
     static saveRollValue(/*player-id*/player_id,/*int:enum*/die_type, /*result*/roll_value){
-
         // Fill In die Structure
         let dieValue = new DS_MSG_DIE_ROLL_INFO;
         dieValue.DieType = die_type;
-        dieValue.dieValue = roll_value;
+        dieValue.RollValue = roll_value;
+        dieValue.IsBlind = false;
 
         // Fill in Roll Structure
-        rollDataStruct.DiceInfo.push(dieValue);
+        const msgRollInfoObj = {DiceInfo: [dieValue]};
 
         // Save to Dice Stats data storage
-        DiceStatsTracker.addRoll(rollDataStruct, player_id);
+        DiceStatsTracker.getInstance().addRoll(msgRollInfoObj, player_id);
     }
 
     /**
     * @returns {VOID} - Save roll specific details, Requires building roll specific info
     */
     static saveRollInfo(/*player-id*/player_id, /*roll_info*/roll_info){
-        DiceStatsTracker.addRoll(roll_info, player_id);
+        DiceStatsTracker.getInstance().addRoll(roll_info, player_id);
     }
 
     /**
