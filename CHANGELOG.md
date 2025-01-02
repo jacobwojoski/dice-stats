@@ -1,4 +1,7 @@
 # CHANGELOG  
+## [ 1.21.2 ]
+- Add validation for roll results (Make sure die's rolled value is between 0 & num sides on die)
+
 ## [ 1.21.1 ]
 - Fix for API from cuyima
 

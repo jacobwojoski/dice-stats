@@ -64,6 +64,15 @@ export class DRAGONBANE_SYSTEM_MESSAGE_PARSER
                         // Get roll value (int)
                         newDieRollInfo.RollValue = dieResultSel.result;
 
+                        // validate roll result 
+                        if ( newDieRollInfo.RollValue > sides ){
+                            newDieRollInfo.RollValue = sides;
+
+                        // ( need to use 0 instead of 1 as min because of d10's )
+                        }else if ( newDieRollInfo.RollValue < 0 ){
+                            newDieRollInfo.RollValue = 0;
+                        }
+
                         // Add die info to roll storage obj
                         retRollInfoAry[tempRoll].DiceInfo.push(newDieRollInfo);
                     }
