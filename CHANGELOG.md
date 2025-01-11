@@ -1,4 +1,9 @@
 # CHANGELOG  
+## [ 1.21.2 ]
+- Update API to allow a player to override DB Data with local data 
+- add saveAllPlayerDataToDB()         save all players local data
+- add savePlayerDataToDB(player_id)   save specific players local data
+
 ## [ 1.21.1 ]
 - Fix for API from cuyima
 
