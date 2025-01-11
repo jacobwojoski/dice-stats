@@ -14,8 +14,12 @@ import { CustomTabFormClass } from "../forms/dice-stats-tabedplayerstatspage.js"
  * 
  * Different Functions:        Fn Returns
  * 
+ * saveAllLocalDataToDB()       -> Save all stored playerdata into the DB. Needed for if someone adds rolls manually
+ * savePlayerDataToDB({STRING:Player_id}) -> store local player data into DB
+ * 
  * saveRollValue({STRING:Player_id}, {ENUM:DIE_TYPE: #}, {INT: #}) -> Save a roll result to a player
  * saveRollInfo({STRING:Player_id}, {DS_MSG_ROLL_INFO}) -> Save a roll object
+ * 
  * getPlayerList({VOID})        -> String[]=    Array of player ID's that are stored in the dice stats database
  * getGlobals({VOID})           -> DS_GLOBALS=  Global Dice Stats Object & Enums 
  * 
@@ -37,6 +41,24 @@ import { CustomTabFormClass } from "../forms/dice-stats-tabedplayerstatspage.js"
     game.modules.get('diceStatsReady')?.api?.diceStatsApiStaticMethod(someInput)
 */
 export class DiceStatsAPI {
+    /**
+     * Save a specific players local data into the DB. 
+     * NOTE: User will need to reload data from DB or log out and log back in to load data
+     * @param {*} player_id 
+     */
+    static savePlayerDataToDB(/*player-id*/player_id){
+        DiceStatsTracker.getInstance().savePlayerData(player_id);
+    }
+
+    /**
+     * Save all locally stored data into the DB.
+     * This is needed if GM adds rolls manualy for other players
+     * NOTE: User will need to reload data from DB or log out and log back in to load data
+     */
+    static saveAllLocalDataToDB(){
+        DiceStatsTracker.getInstance().saveAllPlayerData();
+    }
+
     /**
     * @returns {VOID} - Save specific roll value to player stats
     */

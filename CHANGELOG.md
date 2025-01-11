@@ -1,4 +1,9 @@
 # CHANGELOG  
+## [ 1.21.3 ]
+- Update API to allow a player to override DB Data with local data 
+- add saveAllPlayerDataToDB()         save all players local data
+- add savePlayerDataToDB(player_id)   save specific players local data
+
 ## [ 1.21.2 ]
 - Add validation for roll results (Make sure die's rolled value is between 0 & num sides on die)
 

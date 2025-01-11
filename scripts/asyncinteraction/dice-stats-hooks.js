@@ -152,6 +152,9 @@ Hooks.once('init', () => {
 
     /* Create Dice Stats API */
     game.modules.get('dice-stats').api = {
+        savePlayerDataToDB: DiceStatsAPI.savePlayerDataToDB, //(/*Player-id*/)
+        saveAllLocalDataToDB: DiceStatsAPI.saveAllLocalDataToDB,//()
+
         saveRollValue: DiceStatsAPI.saveRollValue,//(/*player-id*/player_id,/*int:enum*/die_type, /*result*/roll_value),
         saveRollInfo: DiceStatsAPI.saveRollInfo,//(/*player-id*/player_id, /*roll_info*/roll_info),
 

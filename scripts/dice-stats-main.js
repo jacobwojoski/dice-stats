@@ -371,6 +371,30 @@ export class DiceStatsTracker {
             DB_INTERACTION.saveUserData(myData); 
         }
     }
+
+    /**
+     * Save a specific local players data into the DB
+     * @param {*} player_id  - ID of player we want to save
+     */
+    savePlayerData(player_id){
+        let myData = this.PLAYER_DATA_MAP.get(player_id)
+        if(myData)
+        {
+            DB_INTERACTION.saveUserData(myData); 
+        }
+    }
+
+    /**
+     * Save all local player to db. 
+     * This is mainly for gm to use the API to save data.
+     */
+    saveAllPlayerData(){
+        for ( let playerData of this.PLAYER_DATA_MAP.values()){
+            if (playerData){
+                DB_INTERACTION.saveUserData(playerData)
+            }
+        }
+    }
      
     /**
      * Load Every Players Data from the DB
