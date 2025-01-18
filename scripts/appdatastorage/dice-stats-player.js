@@ -47,7 +47,7 @@ export class PLAYER {
         if(len === -1){
             return "NO DICE ROLLED"
         }else if(len === 1){
-            return "No Strings Made"
+            return "No Streaks Made"
         }else{
             // this value is index 0, loop starts at 1
             // User can have a streak of 1 

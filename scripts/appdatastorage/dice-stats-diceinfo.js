@@ -12,6 +12,7 @@ export class DIE_INFO {
     TOTAL_ROLLS =   0;
     ROLLS =         []; //Array size of die 
     BLIND_ROLLS = [];
+    STREAK_DIR =    0;  // 0=UNKNOWN, 1 = increasing, -1 = decreasing
     STREAK_SIZE =   -1;
     STREAK_INIT =   -1;
     STREAK_ISBLIND = false;
@@ -112,11 +113,14 @@ export class DIE_INFO {
      */
     updateStreak(currentRoll, isBlind){
         //Streak Size will always be at least 1 unless its right after initalization
-        if(this.STREAK_INIT + this.STREAK_SIZE != currentRoll){
+        if(this.STREAK_INIT + this.STREAK_SIZE != currentRoll && 
+            this.STREAK_INIT - this.STREAK_SIZE != currentRoll
+        ){
             //Streak resets
             this.STREAK_SIZE = 1;
             this.STREAK_INIT = currentRoll;
             this.STREAK_ISBLIND = isBlind;
+            this.STREAK_DIR = 1;
         }else{
             //Streak Incramented
             this.STREAK_SIZE++;
@@ -126,6 +130,37 @@ export class DIE_INFO {
                 this.LONGEST_STREAK = this.STREAK_SIZE;
                 this.LONGEST_STREAK_INIT = this.STREAK_INIT;
             }
+        }
+
+        // increasing streak
+        if(this.STREAK_DIR >= 0 && this.STREAK_INIT + this.STREAK_SIZE == currentRoll){
+            this.STREAK_SIZE++;
+            this.STREAK_ISBLIND = this.STREAK_ISBLIND || isBlind;
+            //Check if longest streak and update if it is
+            if(this.STREAK_SIZE > this.LONGEST_STREAK){
+                this.LONGEST_STREAK = this.STREAK_SIZE;
+                this.LONGEST_STREAK_INIT = this.STREAK_INIT;
+            }
+            this.STREAK_DIR = 1;
+
+        // decreasing streak
+        }else if(this.STREAK_DIR <= 0 && this.STREAK_INIT - this.STREAK_SIZE == currentRoll){
+            this.STREAK_SIZE++;
+            this.STREAK_ISBLIND = this.STREAK_ISBLIND || isBlind;
+            //Check if longest streak and update if it is
+            if(this.STREAK_SIZE > this.LONGEST_STREAK){
+                this.LONGEST_STREAK = this.STREAK_SIZE;
+                this.LONGEST_STREAK_INIT = this.STREAK_INIT;
+            }
+            this.STREAK_DIR = -1;
+
+        // reset
+        }else{
+            //Streak resets
+            this.STREAK_SIZE = 1;
+            this.STREAK_INIT = currentRoll;
+            this.STREAK_ISBLIND = isBlind;
+            this.STREAK_DIR = 0;
         }
     }
 
@@ -159,6 +194,7 @@ export class DIE_INFO {
         this.STREAK_SIZE =   -1;
         this.STREAK_INIT =   -1;
         this.STREAK_ISBLIND = false;
+        this.STREAK_DIR = 0;
         this.LONGEST_STREAK =        -1;
         this.LONGEST_STREAK_INIT =   -1;
 
