@@ -34,7 +34,8 @@ export class Pf2eSystemData {
 
     /* Dmg values including modifiers to rolls Ex: 6d4+10 */
     damage_done_with_mods = 0;
-    damage_expected_with_mods = 0;    
+    damage_expected_with_mods = 0;
+    damage_taken_to_player = 0;    
 
     /* Misc Info */
     hero_points_used = 0;
@@ -52,6 +53,8 @@ export class Pf2eSystemData {
     disadvantage_unknown = 0;
     disadvantage_total = 0;
 
+
+
     constructor(){
         /* INIT 2d arrays */
         for(let i=0; i<this.DIE_MAX; i++){
@@ -66,6 +69,11 @@ export class Pf2eSystemData {
             /* Its very unlinkly to have an unknown attack with a degree success */
             this.unknown[i] = new Array(this.NUM_DEG_SUCCESS);
         }
+
+        this.degree_success_with_advantage = new Array(this.NUM_DEG_SUCCESS);
+        this.degree_success_with_disadvantage = new Array(this.NUM_DEG_SUCCESS);
+
+        this.clear_data();
     }
 
     clear_data(){
@@ -83,23 +91,66 @@ export class Pf2eSystemData {
             }
         }/* for die_max */
 
-        hero_points_used = 0; 
+        this.hero_points_used = 0; 
 
-        degree_success_with_advantage = [];
-        degree_success_with_disadvantage = [];
+        /* Degree success for D20 rolls with advantage(Xd20kh1) or disadvantage(Xd20kl1) */
+        this.degree_success_with_advantage.fill(0);
+        this.degree_success_with_disadvantage.fill(0);
 
-        advantage_changed_result = 0;
-        advantage_did_nothing = 0;
-        disadvantage_changed_result = 0;
-        disadvantage_did_nothing = 0;
+        this.advantage_changed_result = 0;
+        this.advantage_did_nothing = 0;
+        this.disadvantage_changed_result = 0;
+        this.disadvantage_did_nothing = 0;
 
-        damage_done = 0;
-        damage_max = 0;
-        damage_min = 0;
-        damage_expected = 0;
-        damage_done_with_mods = 0;
-        damage_expected_with_mods = 0;    
+        this.damage_done = 0;
+        this.damage_max = 0;
+        this.damage_min = 0;
+        this.damage_expected = 0;
+        this.damage_done_with_mods = 0;
+        this.damage_expected_with_mods = 0;
+        this.damage_taken_to_player = 0;
     }
+
+    /**
+     * Add temp_data into this data
+     * @param {Pf2eSystemData} temp_data 
+     */
+    add(temp_data){
+        for(let i=0; i<this.DIE_MAX; i++){
+            for(let j=0; j<this.NUM_DEG_SUCCESS; j++){
+                this.atk_rolls[i][j] +=     temp_data.atk_rolls[i][j];
+                this.dmg_rolls[i][j] +=     temp_data.atk_rolls[i][j];
+                this.player_saves[i][j] +=  temp_data.atk_rolls[i][j];
+                this.npc_saves[i][j] +=     temp_data.atk_rolls[i][j];
+                this.skills[i][j] +=        temp_data.atk_rolls[i][j];
+                this.ability[i][j] +=       temp_data.atk_rolls[i][j];
+                this.initiative[i][j] +=    temp_data.atk_rolls[i][j];
+                this.unknown[i][j]+=        temp_data.atk_rolls[i][j];
+            }
+        }/* for die_max */
+
+        this.hero_points_used = 0; 
+
+        for(let i=0; i<NUM_DEG_SUCCESS; i++){
+            this.degree_success_with_advantage[i]       +=temp_data.degree_success_with_advantage[i];
+            this.degree_success_with_disadvantage[i]    +=temp_data.degree_success_with_disadvantage[i];
+        }
+
+        this.advantage_changed_result       += temp_data.advantage_changed_result;
+        this.advantage_did_nothing          += temp_data.advantage_did_nothing;
+        this.disadvantage_changed_result    += temp_data.disadvantage_changed_result;
+        this.disadvantage_did_nothing       += temp_data.advantage_did_nothing;
+
+        this.damage_done                += temp_data.damage_done;
+        this.damage_max                 += temp_data.damage_max;
+        this.damage_min                 += temp_data.damage_min;
+        this.damage_expected            += temp_data.damage_expected;
+        this.damage_done_with_mods      += temp_data.damage_done_with_mods;
+        this.damage_expected_with_mods  += temp_data.damage_expected_with_mods; 
+        this.this.damage_taken_to_player += temp_data.damage_taken_to_player;  
+    }
+
+    
 }
 
 /* Example for later 
