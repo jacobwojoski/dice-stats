@@ -1,3 +1,6 @@
+/*import { Pf2eSystemData } from "./pf2eSystemData";*/
+
+import { Pf2eSystemAndDisplayData } from "./systemDisplayData/pf2eSystemDisplayData"
 
 
 /**
@@ -11,6 +14,7 @@ export class SystemDataFactory {
         {
             case "pf1":
             case "pf2e" :
+                new Pf2eSystemAndDisplayData;
             case "dnd5e" :
             case "dragonbane" :
             case "CoC7" :

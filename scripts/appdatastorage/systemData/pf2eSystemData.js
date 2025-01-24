@@ -9,7 +9,19 @@ export class Pf2eSystemData {
         CRIT_FAIL: 1,
         FAIL: 2,
         SUCCESS: 3,
-        CRIT_SUCCESS: 4
+        CRIT_SUCCESS: 4,
+    }
+
+    static NUM_SYS_ROLL_TYPES = 8;
+    static SYS_ROLL_TYPES = {
+        UNKNOWN,
+        ATK_ROLL,
+        DMG_ROLL,
+        PLAYER_SAVE,
+        NPC_SAVE,
+        SKILL,
+        ABILITY,
+        INITIATIVE
     }
 
     /* All system arrays are 2d: [D20_RESULT][DEGREE_SUCCESS] = num_of_degree_success_rolls*/
@@ -25,6 +37,9 @@ export class Pf2eSystemData {
 
     /* Its very unlinkly to have an unknown attack with a degree success */
     unknown = [];
+
+    /* Total rolls for each roll type */
+    totals = [];
 
     /* Dmg values just from dice */
     damage_done = 0;
@@ -54,7 +69,6 @@ export class Pf2eSystemData {
     disadvantage_total = 0;
 
 
-
     constructor(){
         /* INIT 2d arrays */
         for(let i=0; i<this.DIE_MAX; i++){
@@ -70,6 +84,7 @@ export class Pf2eSystemData {
             this.unknown[i] = new Array(this.NUM_DEG_SUCCESS);
         }
 
+        this.totals = new Array(this.NUM_SYS_ROLL_TYPES);
         this.degree_success_with_advantage = new Array(this.NUM_DEG_SUCCESS);
         this.degree_success_with_disadvantage = new Array(this.NUM_DEG_SUCCESS);
 
@@ -79,18 +94,17 @@ export class Pf2eSystemData {
     clear_data(){
         /* Fill all arays with 0 */
         for(let i=0; i<this.DIE_MAX; i++){
-            for(let j=0; j<this.NUM_DEG_SUCCESS; j++){
-                this.atk_rolls[i][j].fill(0);
-                this.dmg_rolls[i][j].fill(0);
-                this.player_saves[i][j].fill(0);
-                this.npc_saves[i][j].fill(0);
-                this.skills[i][j].fill(0);
-                this.ability[i][j].fill(0);
-                this.initiative[i][j].fill(0);
-                this.unknown[i][j].fill(0);
-            }
+            this.atk_rolls[i].fill(0);
+            this.dmg_rolls[i].fill(0);
+            this.player_saves[i].fill(0);
+            this.npc_saves[i].fill(0);
+            this.skills[i].fill(0);
+            this.ability[i].fill(0);
+            this.initiative[i].fill(0);
+            this.unknown[i].fill(0);
         }/* for die_max */
 
+        this.totals.fill(0);
         this.hero_points_used = 0; 
 
         /* Degree success for D20 rolls with advantage(Xd20kh1) or disadvantage(Xd20kl1) */
@@ -118,18 +132,18 @@ export class Pf2eSystemData {
     add(temp_data){
         for(let i=0; i<this.DIE_MAX; i++){
             for(let j=0; j<this.NUM_DEG_SUCCESS; j++){
-                this.atk_rolls[i][j] +=     temp_data.atk_rolls[i][j];
-                this.dmg_rolls[i][j] +=     temp_data.atk_rolls[i][j];
-                this.player_saves[i][j] +=  temp_data.atk_rolls[i][j];
-                this.npc_saves[i][j] +=     temp_data.atk_rolls[i][j];
-                this.skills[i][j] +=        temp_data.atk_rolls[i][j];
-                this.ability[i][j] +=       temp_data.atk_rolls[i][j];
-                this.initiative[i][j] +=    temp_data.atk_rolls[i][j];
-                this.unknown[i][j]+=        temp_data.atk_rolls[i][j];
+                this.atk_rolls[i][j]        += temp_data.atk_rolls[i][j];
+                this.dmg_rolls[i][j]        += temp_data.dmg_rolls[i][j];
+                this.player_saves[i][j]     += temp_data.player_saves[i][j];
+                this.npc_saves[i][j]        += temp_data.npc_saves[i][j];
+                this.skills[i][j]           += temp_data.skills[i][j];
+                this.ability[i][j]          += temp_data.ability[i][j];
+                this.initiative[i][j]       += temp_data.initiative[i][j];
+                this.unknown[i][j]          += temp_data.unknown[i][j];
             }
         }/* for die_max */
 
-        this.hero_points_used = 0; 
+        this.hero_points_used += temp_data.hero_points_used; 
 
         for(let i=0; i<NUM_DEG_SUCCESS; i++){
             this.degree_success_with_advantage[i]       +=temp_data.degree_success_with_advantage[i];
@@ -150,28 +164,32 @@ export class Pf2eSystemData {
         this.this.damage_taken_to_player += temp_data.damage_taken_to_player;  
     }
 
-    
 }
 
-/* Example for later 
-var data = google.visualization.arrayToDataTable([
-          ['Category', 'Group 1', 'Group 2', 'Expected Distribution'],
-          ['A', 5, 5, 12],
-          ['B', 7, 7, 15],
-          ['C', 8, 8, 16],
-          ['D', 10, 12, 18],
-          ['E', 13, 15, 25]
+/* Example for later to make a multi dim array
+        var data = google.visualization.arrayToDataTable([
+          ['Die Res', 'Fail', 'Mixed', 'Success', 'Expected Distribution'],
+          ['1', 2, 5, 12, 30],
+          ['2', 7, 7, 15, 30],
+          ['3', 8, 8, 16, 30],
+          ['4', 10, 12, 18, 30],
+          ['5', 13, 15, 25, 30]
         ]);
 
         var options = {
           title: 'Stacked Bar Chart with Overlay Line',
-		  width: 1500,
+		  width: 1700,
 		  height: 500,
-          hAxis: { title: 'Category' },
+          hAxis: { title: 'Die Res' },
           vAxis: { title: 'Value' },
           isStacked: true,  // Enables stacked bars
           seriesType: 'bars',  // Default type for all series
           series: {
-            2: { type: 'line', color: 'red', lineWidth: 3, pointSize: 5 } // Line chart for the third column (Expected Distribution)
-          }
+            3: { type: 'line', color: 'red', lineWidth: 3, pointSize: 5 } 
+		  },		   
+		};
+
+        // Instantiate and draw our CHART 1, passing in some options.
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
 */

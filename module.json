@@ -17,6 +17,10 @@
     "scripts/appdatastorage/dice-stats-rollinfo.js",
     "scripts/appdatastorage/dice-stats-rollmsginfo.js",
 
+    "scripts/appdatastorage/systemData/systemDataFactory.js",
+    "scripts/appdatastorage/systemData/pf2eSystemData.js",
+    "scripts/appdatastorage/systemData/systemDisplayData/pf2eSystemDisplayData.js",
+
     "scripts/asyncinteraction/dice-stats-api.js",
     "scripts/asyncinteraction/dice-stats-handlebars.js",
     "scripts/asyncinteraction/dice-stats-hooks.js",
