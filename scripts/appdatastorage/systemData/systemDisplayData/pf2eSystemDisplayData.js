@@ -3,10 +3,16 @@ import { Pf2eSystemData } from "../pf2eSystemData";
 export class Pf2eSystemAndDisplayData extends Pf2eSystemData {
     /* ========================================================================================================== */
     /* ==================== Convert Class data into data to be used for HTML/HBS Displays ======================= */
-    display_data = {}; /* data that will be passed to HBS for display */
+    system_display_data = {
+        num_charts: 0,
+        chart_data: [],         /* {Pf2eChartData}[] */
 
-    num_charts_disp = 0;
-    disp_chart_data = []; 
+        hero_points_used: 0,
+        
+        advantage_data: {},
+        damage_data: {}
+    }; /* data that will be passed to HBS for display */
+
     /**
      * Convert 2d array data into a data struct for stacked bar charts.
      * @param {int[DIE_MAX][NUM_DEG_SUCCESS]} roll_type - Roll Data
@@ -56,3 +62,32 @@ class Pf2eChartData {
         }
     }
 }
+
+
+/* Example for later to make a multi dim array
+        var data = google.visualization.arrayToDataTable([
+          ['Die Res', 'Fail', 'Mixed', 'Success', 'Expected Distribution'],
+          ['1', 2, 5, 12, 30],
+          ['2', 7, 7, 15, 30],
+          ['3', 8, 8, 16, 30],
+          ['4', 10, 12, 18, 30],
+          ['5', 13, 15, 25, 30]
+        ]);
+
+        var options = {
+          title: 'Stacked Bar Chart with Overlay Line',
+		  width: 1700,
+		  height: 500,
+          hAxis: { title: 'Die Res' },
+          vAxis: { title: 'Value' },
+          isStacked: true,  // Enables stacked bars
+          seriesType: 'bars',  // Default type for all series
+          series: {
+            3: { type: 'line', color: 'red', lineWidth: 3, pointSize: 5 } // 3rd data row for line chart
+		  },		   
+		};
+
+        // Instantiate and draw our CHART 1, passing in some options.
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+*/

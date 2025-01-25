@@ -1,4 +1,5 @@
 import { DS_GLOBALS } from "../../dice-stats-globals";
+
 export class Pf2eSystemData {
     static DIE_TYPE = DS_GLOBALS.DIE_TYPE.D20;
     static DIE_MAX = 20;
@@ -31,26 +32,11 @@ export class Pf2eSystemData {
     skills = [];
     ability = [];
     initiative = [];
-
-    /* msg rolls dont have degree successs so its 2d arrays of [DIE_TYPE][NUM_DICE] = dmg_done*/
-    dmg_rolls = [];
-
     /* Its very unlinkly to have an unknown attack with a degree success */
     unknown = [];
 
-    /* Total rolls for each roll type */
+    /* Total rolls for each roll type Array(SYS_ROLL_TYPE) */
     totals = [];
-
-    /* Dmg values just from dice */
-    damage_done = 0;
-    damage_max = 0;
-    damage_min = 0;
-    damage_expected = 0;
-
-    /* Dmg values including modifiers to rolls Ex: 6d4+10 */
-    damage_done_with_mods = 0;
-    damage_expected_with_mods = 0;
-    damage_taken_to_player = 0;    
 
     /* Misc Info */
     hero_points_used = 0;
@@ -67,6 +53,19 @@ export class Pf2eSystemData {
     disadvantage_did_nothing = 0;
     disadvantage_unknown = 0;
     disadvantage_total = 0;
+
+    /* Dmg values just from dice */
+    total_damage_done_from_dice = 0;
+    total_damage_done_with_mods = 0;
+    expected_damage_done_from_dice = 0;
+    expected_damage_done_with_mods = 0;
+    max_damage_done_from_dice = 0;
+    max_damage_done_with_mods = 0;
+
+    // dmg_rolls = []; /* Have some fancy charts for damage dice later: int[DIE_TYPE][NUM_DICE] = Dmg Done? */
+
+    /* Dmg values including modifiers to rolls Ex: 6d4+10 */
+    damage_taken_to_player = 0;    
 
 
     constructor(){
@@ -146,12 +145,13 @@ export class Pf2eSystemData {
         this.hero_points_used += temp_data.hero_points_used; 
 
         for(let i=0; i<NUM_DEG_SUCCESS; i++){
-            this.degree_success_with_advantage[i]       +=temp_data.degree_success_with_advantage[i];
-            this.degree_success_with_disadvantage[i]    +=temp_data.degree_success_with_disadvantage[i];
+            this.degree_success_with_advantage[i]       += temp_data.degree_success_with_advantage[i];
+            this.degree_success_with_disadvantage[i]    += temp_data.degree_success_with_disadvantage[i];
         }
 
         this.advantage_changed_result       += temp_data.advantage_changed_result;
         this.advantage_did_nothing          += temp_data.advantage_did_nothing;
+
         this.disadvantage_changed_result    += temp_data.disadvantage_changed_result;
         this.disadvantage_did_nothing       += temp_data.advantage_did_nothing;
 
@@ -161,35 +161,27 @@ export class Pf2eSystemData {
         this.damage_expected            += temp_data.damage_expected;
         this.damage_done_with_mods      += temp_data.damage_done_with_mods;
         this.damage_expected_with_mods  += temp_data.damage_expected_with_mods; 
-        this.this.damage_taken_to_player += temp_data.damage_taken_to_player;  
+        this.damage_taken_to_player     += temp_data.damage_taken_to_player;  
     }
 
+    /**
+     * Store a degree success value
+     * @param {Pf2eSystemData.SYS_ROLL_TYPES} roll_type - type of d20 roll
+     * @param {int} roll_value - value from 1-20 on d20
+     * @param {Pf2eSystemData.DEGREE_SUCCESS} deg_success - degree success on the roll
+     */
+    add_deg_success_roll(roll_type, roll_value, deg_success){
+
+    }
+
+    /**
+     * Store a damage value
+     * @param {DS_GLOBALS.DIE_TYPE} die_type - type of die that was rolled for damage (d6?, d4?, etc)
+     * @param {int} num_dice - number of damage dice rolled
+     * @param {int} dice_dmg - damage values from dice
+     * @param {int} dmg_mods - damage values from modiefiers
+     */
+    add_damage_roll(die_type, num_dice, dice_dmg, dmg_mods){
+
+    }
 }
-
-/* Example for later to make a multi dim array
-        var data = google.visualization.arrayToDataTable([
-          ['Die Res', 'Fail', 'Mixed', 'Success', 'Expected Distribution'],
-          ['1', 2, 5, 12, 30],
-          ['2', 7, 7, 15, 30],
-          ['3', 8, 8, 16, 30],
-          ['4', 10, 12, 18, 30],
-          ['5', 13, 15, 25, 30]
-        ]);
-
-        var options = {
-          title: 'Stacked Bar Chart with Overlay Line',
-		  width: 1700,
-		  height: 500,
-          hAxis: { title: 'Die Res' },
-          vAxis: { title: 'Value' },
-          isStacked: true,  // Enables stacked bars
-          seriesType: 'bars',  // Default type for all series
-          series: {
-            3: { type: 'line', color: 'red', lineWidth: 3, pointSize: 5 } 
-		  },		   
-		};
-
-        // Instantiate and draw our CHART 1, passing in some options.
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-*/

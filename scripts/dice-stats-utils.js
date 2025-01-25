@@ -280,6 +280,35 @@ export class DICE_STATS_UTILS {
             DB_INTERACTION.clearDB();
         }
     }
+
+    /**
+     * Get average result for a given die roll 
+     * @param {DS_GLOBALS.DIE_TYPE} die_type - Die type we want average of
+     */
+    static get_die_average(die_type){
+        switch(die_type){
+            case DS_GLOBALS.DIE_TYPE.D2:
+                return 1.5;
+            case DS_GLOBALS.DIE_TYPE.D3:
+                return 2;
+            case DS_GLOBALS.DIE_TYPE.D4:
+                return 2.5;
+            case DS_GLOBALS.DIE_TYPE.D6:
+                return 3.5;
+            case DS_GLOBALS.DIE_TYPE.D8:
+                return 4.5;
+            case DS_GLOBALS.DIE_TYPE.D10:
+                return 5.5;
+            case DS_GLOBALS.DIE_TYPE.D12:
+                return 6.5;
+            case DS_GLOBALS.DIE_TYPE.D20:
+                return 10.5;
+            case DS_GLOBALS.DIE_TYPE.D100:
+                return 50.5;
+            default:
+                return 0;
+        }
+    }
 }
 
 export class  ComparePlayerObjUtil
