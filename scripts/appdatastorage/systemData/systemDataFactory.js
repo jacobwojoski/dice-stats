@@ -1,6 +1,4 @@
-/*import { Pf2eSystemData } from "./pf2eSystemData";*/
-
-import { Pf2eSystemAndDisplayData } from "./systemDisplayData/pf2eSystemDisplayData"
+import { Pf2eSystemAndDisplayData } from "../displayData/pf2eSystemDisplayData"
 
 
 /**
@@ -12,9 +10,10 @@ export class SystemDataFactory {
     static create_system_data(system_id){
         switch(system_id)
         {
-            case "pf1":
+            case "pf1" :
             case "pf2e" :
                 new Pf2eSystemAndDisplayData;
+            case "sf2e" :
             case "dnd5e" :
             case "dragonbane" :
             case "CoC7" :
@@ -42,5 +41,9 @@ export class GenericSystemData {
     roll_data = []; /* roll_data[DIE_TYPE][DEGREE_SUCCESS] */
     constructor(){
         
+    }
+
+    getDisplayData(){
+        return {}
     }
 }

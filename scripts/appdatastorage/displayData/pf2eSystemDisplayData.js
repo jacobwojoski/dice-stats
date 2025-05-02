@@ -1,16 +1,28 @@
-import { Pf2eSystemData } from "../pf2eSystemData";
+import { Pf2eSystemData } from "../systemData/pf2eSystemData";
 
 export class Pf2eSystemAndDisplayData extends Pf2eSystemData {
     /* ========================================================================================================== */
     /* ==================== Convert Class data into data to be used for HTML/HBS Displays ======================= */
     system_display_data = {
-        num_charts: 0,
-        chart_data: [],         /* {Pf2eChartData}[] */
+        /* Atk Rolls, Dmg Rolls, Player Saves, npc saves, skills, ability, initiative, unknown, adv_deg_suc, disadv_deg_suc*/
+        num_charts: 10,
+        chart_data: [
+            new Pf2eChartData()/*Atk Rolls*/, new Pf2eChartData()/*skill rolls*/,  
+            new Pf2eChartData()/*plyr saves*/, new Pf2eChartData()/*npc saves*/, 
+            new Pf2eChartData()/*initiative*/, new Pf2eChartData()/*unknown*/, 
+            new Pf2eChartData()/*adv_deg*/, new Pf2eChartData()/*disadv_deg*/,
+            new Pf2eChartData()/*dmg Rolls*/, new Pf2eChartData()/*ability rolls*/,
+        ], /* {Pf2eChartData}[NUM CHART TYPES] */
 
         hero_points_used: 0,
-        
-        advantage_data: {},
-        damage_data: {}
+
+        advantage_data: {
+
+        },
+        damage_data: {
+
+        },
+
     }; /* data that will be passed to HBS for display */
 
     /**
@@ -44,6 +56,13 @@ export class Pf2eSystemAndDisplayData extends Pf2eSystemData {
         ['19', twoD_data_ary[18][0], twoD_data_ary[18][1], twoD_data_ary[18][2], twoD_data_ary[18][3],twoD_data_ary[18][4], expected_roll_count],
         ['20', twoD_data_ary[19][0], twoD_data_ary[19][1], twoD_data_ary[19][2], twoD_data_ary[19][3],twoD_data_ary[19][4], expected_roll_count]
        ]; /* END Google Charts Data Struct */
+    }
+
+    /**
+     * Update system_display_data struct to be used in display
+     */
+    create_display_data(){
+        this.system_display_data
     }
 }
 

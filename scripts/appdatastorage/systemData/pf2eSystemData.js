@@ -15,14 +15,14 @@ export class Pf2eSystemData {
 
     static NUM_SYS_ROLL_TYPES = 8;
     static SYS_ROLL_TYPES = {
-        UNKNOWN,
-        ATK_ROLL,
-        DMG_ROLL,
-        PLAYER_SAVE,
-        NPC_SAVE,
-        SKILL,
-        ABILITY,
-        INITIATIVE
+        UNKNOWN: 0,
+        ATK_ROLL: 1,
+        DMG_ROLL: 2,
+        PLAYER_SAVE: 3,
+        NPC_SAVE: 4,
+        SKILL: 5,
+        ABILITY: 6,
+        INITIATIVE: 7
     }
 
     /* All system arrays are 2d: [D20_RESULT][DEGREE_SUCCESS] = num_of_degree_success_rolls*/
@@ -55,6 +55,7 @@ export class Pf2eSystemData {
     disadvantage_total = 0;
 
     /* Dmg values just from dice */
+    total_mod_damage_done = 0;
     total_damage_done_from_dice = 0;
     total_damage_done_with_mods = 0;
     expected_damage_done_from_dice = 0;
@@ -65,7 +66,7 @@ export class Pf2eSystemData {
     // dmg_rolls = []; /* Have some fancy charts for damage dice later: int[DIE_TYPE][NUM_DICE] = Dmg Done? */
 
     /* Dmg values including modifiers to rolls Ex: 6d4+10 */
-    damage_taken_to_player = 0;    
+    total_damage_taken_to_player = 0;    
 
 
     constructor(){
