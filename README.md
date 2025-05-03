@@ -150,10 +150,11 @@ $/PATH_TO_FOUNDRY_DATA(Prolly AppData foulder on windows)/Sources/Modules
 
 - Public Vars       = cammelCase
 - Priv Vars         = _cammelCase
-- local             = snake_case
 
-- fn input refs     = ptr_snake_case
-- fn input vars     = PasecaleCase
+- fn input refs     = in_ptr_snake_case
+- fn input vars     = in_snake_case
+
+- local             = cammelCase
 
 - arrays            = plurals!
 - bools             = is/has: Var Name
