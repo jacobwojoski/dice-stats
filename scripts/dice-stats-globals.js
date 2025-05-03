@@ -69,32 +69,6 @@ export class DS_GLOBALS {
     static FORM_EXPORT = null;
 
     /* ------ UTIL GLOBALS ------- */
-    /**
-     * If more dice types want to be added or number of dice types changed you need to edit the following:
-     * main/NUM_DIE_TYPES
-     * main/DIE_TYPE
-     * main/DIE_MAX
-     * main/MAX_TO_DIE
-     * datapack/PLAYER_HANDL_INFO/DICE_ROLL_DATA
-     * datapack/GLOBAL_HANDL_INFO/DICE_ROLL_DATA
-     */
-    static NUM_DIE_TYPES= 9;   //Size of {DIE_TYPE}
-    static DIE_TYPE= {         //TYPES of DICE I TRACK
-        D2:     0,
-        D3:     1,
-        D4:     2,
-        D6:     3,
-        D8:     4,
-        D10:    5,
-        D12:    6,
-        D20:    7,
-        D100:   8
-        /*
-        TWOd6
-        TWOd12
-        TWOd20
-        */
-    };
     
     /** Adding a roll type involves updating the following
      *      DB interaction

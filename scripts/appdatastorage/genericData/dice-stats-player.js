@@ -162,3 +162,71 @@ export class PLAYER {
         this.PLAYER_ROLL_INFO.clearData();
     }
 }
+
+import { SystemDataFactory } from "../systemData/systemDataFactory.js";
+import { DieInfo } from "./dice-stats-diceinfo.js";
+
+export class DiceStatsPlayer {
+
+    _userId = '';           // {string} - Unique player id
+    _userName = '';         // {string} - Readable Name
+    _isGm = false;          // {bool} - Is the player a GM
+
+    _diceInfo = null;       // {DieInfo[]}
+    _systemInfo = null;     // System Specific Data (Different class onject depending on the system were in)
+
+    /**
+     * Create Player Object
+     * @param {string} in_user_id - The unique user id
+     * @param {string} in_user_name - the Readable username
+     * @param {boolean} in_is_gm - Is the player a GM
+     * @param {string} system_id - System specific id ex: dnd5e or pf2e
+     */
+    constructor(in_user_id, in_user_name, in_is_gm, system_id){
+        this._userId = in_user_id;
+        this._userName = in_user_name;
+        this._isGm = in_is_gm;
+        
+        this._genericInfo = DieInfo.createGenericDiceData()
+        this._systemInfo = SystemDataFactory.createSystemData(system_id)
+    }
+
+    // ====== Getters & Setters ======
+    getUsername(){return this._userName}
+    getUserID(){return this._userId}
+    getIsGm(){return this.isGm}
+
+    /**
+     * @param {string} in_user_name 
+     */
+    setUsername(in_user_name){this._userName = in_user_name}
+    /**
+     * @param {int} in_user_id 
+     */
+    setUserID(in_user_id){this._userId = in_user_id}
+    /**
+     * @param {boolean} in_is_gm 
+     */
+    setIsGm(in_is_gm){this.isGm = in_is_gm}
+
+    // ====== Public Funtions ======
+    // ---- System Funtions ----
+    clearSystemData(){
+
+    }
+    addSystemData(){
+
+    }
+
+    // ---- Dice Functions ---- 
+    clearAllDiceData(){
+
+    }
+    clearDieData(){
+
+    }
+    addDieData(){
+
+    }
+
+}
