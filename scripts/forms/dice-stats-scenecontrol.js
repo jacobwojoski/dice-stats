@@ -17,18 +17,20 @@ import { CustomTabFormClass } from "./dice-stats-tabedplayerstatspage.js";
  */
 
 // Global Scene Control Icon 
-export class CustomSceneControlToolGlobal 
+export class CustomSceneControlToolGlobal
 {
-    name = 'Global';
-    title = game.i18n.localize('DICE_STATS_TEXT.global_data_form.button');
-    icon = 'fa-solid fa-earth-americas';
-
-    visible= true;
-    toggle= false;
     active= false;
-    button= true; 
+    button= true;
 
-    async onClick(){
+    icon = 'fa-solid fa-earth-americas';
+    name = 'Global';
+    order= 0;
+    title = game.i18n.localize('DICE_STATS_TEXT.global_data_form.button');
+
+    toggle= false;
+    visible= true;
+
+    async onChange(event, active){
         //Make sure Compare Is Closed B4 Opening
         await DS_GLOBALS.FORM_GL_COMPARE?.close();
 
@@ -38,23 +40,24 @@ export class CustomSceneControlToolGlobal
             DS_GLOBALS.FORM_GL_STATS = new GlobalStatusPage().render(true);
         } 
     }
-
     constructor(){}
 }
 
 // Compare Scene Control Icon
 export class CustomSceneControlToolCompare
 {
-    name = 'Compare';
-    title = game.i18n.localize('DICE_STATS_TEXT.compare_data_form.button');
-    icon = 'fa-solid fa-users-line';
-
-    visible= true;
-    toggle= false;
     active= false;
-    button= true; 
+    button= true;
 
-    async onClick(){
+    icon = 'fa-solid fa-users-line';
+    name = 'Compare';
+    order= 0;
+    title = game.i18n.localize('DICE_STATS_TEXT.compare_data_form.button');
+
+    toggle= false;
+    visible= true;
+
+    async onChange(event, active){
         let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS);
         if(canSeePlayerData === false && game.user.isGM === false){
             //Do nothing, Dont allow players to view player data if setting is set
@@ -81,6 +84,7 @@ export class CustomSceneControlToolPlayer
     name = '';
     title = '';
     icon = '';
+    order= 0;
 
     visible = true;
     toggle = false;
@@ -88,7 +92,7 @@ export class CustomSceneControlToolPlayer
     button = true;
     associatedPlayerId = null;
 
-    onClick(){
+    onChange(event, active){
         let canSeeGM = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_GM);
         let canSeePlayerData = game.settings.get(DS_GLOBALS.MODULE_ID,DS_GLOBALS.MODULE_SETTINGS.PLAYERS_SEE_PLAYERS);
         let amIGM = game.users.get(game.userId)?.isGM;
@@ -129,13 +133,14 @@ export class CustomSceneControlToolExport
     name = 'Export';
     title = game.i18n.localize('DICE_STATS_TEXT.export_data_form.button');
     icon = 'fa-solid fa-file-export';
+    order= 0;
 
     visible= true;
     toggle= false;
     active= false;
     button= true;
 
-    async onClick(){
+    async onChange(event, active){
         if (game.user.isGM) {
             DS_GLOBALS.FORM_EXPORT = new ExportDataPage().render(true);
         }
@@ -148,15 +153,25 @@ export class CustomSceneControlToolExport
 export class CustomSceneControl
 {
     activeTool = '';
-    name = 'dstats';
+    icon = 'fas fa-dice-d20';
+    name = 'dice-stats';
     title = game.i18n.localize('DICE_STATS_TEXT.title');
     layer = 'diceStats';
-    icon = 'fas fa-dice-d20';
     visible = true;
-    tools = [];
+    tools = {};
+    order=69;
 
     constructor(customTools)
     {
-        this.tools = [...customTools];
+        let tool_cnt = 1;
+        for (let tool of customTools){
+            tool.order = tool_cnt;
+            tool_cnt++;
+            this.tools[tool.name] = tool
+        }
+    }
+
+    async onChange(event, active){
+
     }
 }

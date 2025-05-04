@@ -232,9 +232,9 @@ Hooks.on("getSceneControlButtons", controls => {
         Object.assign(DS_GLOBALS.SCENE_CONTROL_BTNS, temp);
     }
 
-    if(DS_GLOBALS.SCENE_CONTROL_BTNS!=null && !controls.includes(DS_GLOBALS.SCENE_CONTROL_BTNS))
+    if(DS_GLOBALS.SCENE_CONTROL_BTNS!=null && !controls.hasOwnProperty('dice-stats'))
     {
-        controls.push(DS_GLOBALS.SCENE_CONTROL_BTNS);
+        controls['dice-stats']=DS_GLOBALS.SCENE_CONTROL_BTNS;
     }
     
 });
