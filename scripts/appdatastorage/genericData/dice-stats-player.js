@@ -166,6 +166,11 @@ export class PLAYER {
 import { SystemDataFactory } from "../systemData/systemDataFactory.js";
 import { DieInfo } from "./dice-stats-diceinfo.js";
 
+/**
+ * DESC: 
+ *  Class that defines a player. Players are all connected people to server including gm
+ *  Players hold system agnostic info (DiceInfo) and System Specific info (SystemInfo)
+ */
 export class DiceStatsPlayer {
 
     _userId = '';           // {string} - Unique player id
@@ -210,6 +215,12 @@ export class DiceStatsPlayer {
     setIsGm(in_is_gm){this.isGm = in_is_gm}
 
     // ====== Public Funtions ======
+
+    // ---- Clear all dice and system info ----
+    clearAllGenericAndSystemData(){
+
+    }
+
     // ---- System Funtions ----
     clearSystemData(){
 
@@ -228,5 +239,7 @@ export class DiceStatsPlayer {
     addDieData(){
 
     }
+
+    
 
 }
