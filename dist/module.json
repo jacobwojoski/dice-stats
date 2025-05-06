@@ -1,0 +1,36 @@
+{
+    "id": "foundry-module-ts",
+    "title": "Typescript Template Module",
+    "description": "A template module using Typescript. You should change name, title, and description in module.json.",
+    "version": "2.0.0",
+    "packs": [],
+    "dependencies": [],
+    "scripts": [],
+    "compatibility": {
+        "minimum": "13",
+        "verified": "13",
+        "maximum": "13"
+    },
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "languages/en.json"
+        }
+    ],
+    "styles": [
+        "style.css"
+    ],
+    "esmodules": [
+        "scripts/module.js"
+    ],
+    "relationships": {
+        "requires": [
+            {
+                "id": "socketlib",
+                "type": "module",
+                "compatibility": {}
+            }
+        ]
+    }
+}
