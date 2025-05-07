@@ -2,5 +2,17 @@
   "MYMODULE.dog-browser": "Dog browser",
   "MYMODULE.dogs": "Dogs",
   "MYMODULE.fetch-random-dog": "Fetch random dog photo",
-  "MYMODULE.random-dog-alt": "Image of a random dog"
+  "MYMODULE.random-dog-alt": "Image of a random dog",
+  
+  "DiceStats": {
+    "Forms": {
+
+    },
+    "SceneControls": {
+
+    },
+    "Settings": {
+
+    }
+  }
 }

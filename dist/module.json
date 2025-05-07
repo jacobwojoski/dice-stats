@@ -1,15 +1,17 @@
 {
+    "$schema": "https://json.schemastore.org/foundryvtt-manifest.json",
     "id": "foundry-module-ts",
     "title": "Typescript Template Module",
     "description": "A template module using Typescript. You should change name, title, and description in module.json.",
     "version": "2.0.0",
     "packs": [],
+    "system": [],
     "dependencies": [],
     "scripts": [],
     "compatibility": {
-        "minimum": "13",
-        "verified": "13",
-        "maximum": "13"
+        "minimum": "9",
+        "verified": "10",
+        "maximum": "10"
     },
     "languages": [
         {
@@ -23,14 +25,5 @@
     ],
     "esmodules": [
         "scripts/module.js"
-    ],
-    "relationships": {
-        "requires": [
-            {
-                "id": "socketlib",
-                "type": "module",
-                "compatibility": {}
-            }
-        ]
-    }
+    ]
 }
