@@ -177,7 +177,7 @@ export class DiceStatsPlayer {
     _userName = '';         // {string} - Readable Name
     _isGm = false;          // {bool} - Is the player a GM
 
-    _diceInfo = null;       // {DieInfo[]}
+    _diceInfo = null;       // {DieInfo[]} - System agnostic info
     _systemInfo = null;     // System Specific Data (Different class onject depending on the system were in)
 
     /**
@@ -240,6 +240,6 @@ export class DiceStatsPlayer {
 
     }
 
-    
+
 
 }
