@@ -1,7 +1,7 @@
 import { DieInfo } from "./genericData/dice.js";
-import { RollInfo } from "./genericData/roll.js";
 import { GenericSystemData } from "./systemData/genericSystemData.js";
 import { SystemDataFactory } from "./systemData/systemDataFactory.js";
+import { DIE_TYPE } from "../constants.js";
 
 /**
  * DESC: 
@@ -14,8 +14,9 @@ export class DiceStatsPlayer {
     _userName:string = '';          // {string} - Readable Name
     _isGm:boolean = false;          // {bool} - Is the player a GM
 
+    _playerForm = 0;                // {Tabbed Dice Stats Player Form Obj}
+
     _diceInfo:DieInfo[];            // {DieInfo[]}
-    _rollInfo:RollInfo;
     _systemInfo:GenericSystemData;     // System Specific Data (Different class onject depending on the system were in)
 
     /**
@@ -31,7 +32,6 @@ export class DiceStatsPlayer {
         this._isGm = in_is_gm;
         
         this._diceInfo = DieInfo.createDieInfoAry()
-        this._rollInfo = new RollInfo()
         this._systemInfo = SystemDataFactory.createSystemData(system_id)
     }
 
@@ -57,33 +57,38 @@ export class DiceStatsPlayer {
 
     // ---- Clear all dice, Roll, and system Data ----
     clearAllData(){
-        for (let die of this._diceInfo){
-            die.clear()
-        }
-        this._rollInfo.clear()
+        this.clearAllDiceData()
         this._systemInfo.clear()
         
     }
 
     // ---- System Funtions ----
     clearSystemData(){
-
+        this._systemInfo.clear()
     }
-    addSystemData(){
-
+    addSystemData(system_info:GenericSystemData){
+        this._systemInfo.addSystemData(system_info)
     }
 
     // ---- Dice Functions ---- 
     clearAllDiceData(){
-
+        for (let die of this._diceInfo){
+            die.clear()
+        }
     }
-    clearDieData(){
-
+    clearDieData(die_type:DIE_TYPE){
+        this._diceInfo[die_type]?.clear()
     }
-    addDieData(){
-
+    addDieData(die_info:DieInfo){
+        this._diceInfo[die_info.type].addDieInfo(die_info)
+    }
+    addRollData(roll_value:number, die_type:DIE_TYPE){
+        this._diceInfo[die_type].addNewRoll(roll_value)
     }
 
-    
+    // ---- Player Form Functions ----
+    openPlayerForm(){
+        //this._playerForm.render(true)
+    }
 
 }

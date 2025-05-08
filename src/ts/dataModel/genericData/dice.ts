@@ -12,8 +12,10 @@ export class DieInfo {
     type: DIE_TYPE =    DIE_TYPE.UNKNOWN;   // {int}    Type of die <DIE_TYPE> varable
     max: number =       0;                  // {int}    MAX Value On Die , ex 6 for d6, 10 for d10, 12, 20
 
+    rolledValue = -1;                       // {int}    Last rolled value on Die
+
     totalRolls:number =     0;              // {int}    Total number of rolls made
-    rolls: number[] =       [];             // {int[]}  Size of die to track number of times each value was rolled on the die 
+    rolls: number[] =       [];             // {int[] 1d array}  Size of die to track number of times each value was rolled on the die 
 
     mean:number =       0.0;                // {Double} Average
     median: number =    0;                  // {int}    Middle accourances wise 
@@ -31,9 +33,9 @@ export class DieInfo {
      * Constructor should be private and only called by the static fn above
      */
     constructor(die_type: DIE_TYPE){
-        this.type =          die_type;                               // {int}    Type of die <DIE_TYPE> varable
+        this.type =          die_type;                          // {int}    Type of die <DIE_TYPE> varable
         this.max =           Utils.getDieMax(die_type);         // {int}    MAX Value On Die , ex 6 for d6, 10 for d10, 12, 20
-        this.rolls = new Array(this.max)
+        this.rolls = new Array(this.max+1)                      // Add 1 to include 0 as option and not req index adjustment from roll value
 
         this.clear()
     }
@@ -70,8 +72,12 @@ export class DieInfo {
      *  Does not recalculate math funtions.
      * @param {DieInfo} die_info 
      */
-    addDieInfo(die_info:DieInfo, hasStreakInfo=false){
-        if (die_info.type == this.type && die_info.max == this.max){
+    addDieInfo(die_info:DieInfo, hasStreakInfo=false, hasSingleRoll = false){
+        // Adding a singled rolled value to storage
+        if (hasSingleRoll && die_info.type == this.type && die_info.rolledValue > -1 && die_info.rolledValue <= this.max){
+            this.addNewRoll(die_info.rolledValue)
+        // Adding a die with multiple rolls to storage 
+        }else if (die_info.type == this.type && die_info.max == this.max){
 
             // -- Add roll values --
             this.totalRolls +=   die_info.totalRolls;
@@ -100,6 +106,8 @@ export class DieInfo {
                     this.longestStreakSize = die_info.longestStreakSize;
                 }
             }
+        }else{
+            Utils.dsLogError("Failed to add "+die_info+" to "+this)
         }
     }
 

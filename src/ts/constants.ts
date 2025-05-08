@@ -14,13 +14,15 @@ export enum DIE_TYPE {
     D12,
     D20,
     D50,
-    D100
+    D100,
+    LENGTH = 11
 }
 
 export enum STREAK_DIRECTION {
     UNKNOWN = 0,
     DESCENDING = 1,
-    ASCENDING = 2
+    ASCENDING = 2,
+    LENGTH = 3
 }
 
 export class Utils {
@@ -77,5 +79,9 @@ export class Utils {
             default:
                 return 0;
         }
+    }
+
+    public static dsLogError(err_string:string){
+        console.log("DICE-STATS ERROR: "+err_string)
     }
 }
