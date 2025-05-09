@@ -1,8 +1,6 @@
-const GENERIC_TEMPLATE = `<form><h1>GENERIC TEST FORM</h1></form>`;
-
-type DocumentSheetV2 = {
-
-}
+// declare class ApplicationV2 {
+//     element:any
+// }
 
 /**
  * Migrating to app V2:
@@ -10,110 +8,65 @@ type DocumentSheetV2 = {
  * https://foundryvtt.wiki/en/development/guides/converting-to-appv2
  */
 
-class MyApplication implements DocumentSheetV2 {
-    static DEFAULT_OPTIONS = {
-      tag: "form",
-      form: {
-        handler: MyApplication.myFormHandler,
-        submitOnChange: false,
-        closeOnSubmit: false
-      }
-    }
-  
-    /**
-     * Process form submission for the sheet
-     * @this {MyApplication}                      The handler is called with the application as its bound scope
-     * @param {SubmitEvent} event                   The originating form submission event
-     * @param {HTMLFormElement} form                The form element that was submitted
-     * @param {FormDataExtended} formData           Processed data for the submitted form
-     * @returns {Promise<void>}
-     */
-    static async myFormHandler(event, form, formData) {
-      // Do things with the returned FormData
-    }
-  }
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
-class CustomGenericSheet extends DocumentSheet {
-    static override get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
-            title: "Generic Popup",
-            template: "modules/my-module/templates/my-popup.html",
-            width: 400,
-            height: "auto",
-            resizable: true
-        });
+class MyGenericApplication extends ApplicationV2 {
+    static instance = new MyGenericApplication()
+    static override DEFAULT_OPTIONS:any = {
+        id: "ds-generic-form-1",
+        form: {
+          handler: MyGenericApplication.#onSubmit,
+          closeOnSubmit: true,
+        },
+        position: {
+          width: 640,
+          height: "auto",
+        },
+        tag: "form", // The default is "div"
+        window: {
+          icon: "fas fa-gear", // You can now add an icon to the header
+          title: "Test Title",
+          contentClasses: ["standard-form"]
+        },
+        actions: {
+            refresh: MyGenericApplication.refresh
+        },
     }
 
-    override async getData(): Promise<object> {
-        return { message: "Hello, this is a popup!" };
-    }
-}
-
-
-User.registerSheet("my-module", MyPopup, {
-    label: "My Custom Popup",
-    makeDefault: false
-});
-
-// Open the popup
-new MyPopup().render(true);
-
-
-export class CustomGenericForm extends DocumentSheet {
-
-    static override defaultOptions() {
-        const defaults = super.defaultOptions;
-      
-        const overrides = {
-            height: 700,
-            width: 1000,
-            popOut: true,
-            resizable: true,
-            id: 'Generic-Test-Form',
-            template: GENERIC_TEMPLATE,
-            userId: '',
-            title: 'Generic Form',
-        };
-      
-        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
-        
-        return mergedOptions;
+    override get title() {
+        return `My Module: Dice Stats Module`;
     }
 
-    constructor(options:any={}, dataObject = null) {  
-        // the first argument is the object, the second are the options
-        options['userId'] = (game as Game).userId;
-        super(options)
-    }
-
-    //Every Form has this fn. Its returns data object that handlebars template uses
-    override getData(){
-        var dataObject:any = {}
-        dataObject['playerName'] = 'Generic Player Name';
-
-        return dataObject;
-    }
-
-    protected override _updateObject(event: Event, formData?: object): Promise<unknown> {
-        return Promise.resolve(formData)
-    }
-
-    //Handle button events made on the form
-    async _handleButtonClick(event:any){
-        const clickedElement = $(event.currentTarget);
-        const action = clickedElement.data().action;
-
-        if(DS_GLOBALS.FORM_GL_COMPARE == null){return;}
-
-        switch(action){
-            default:
-                console.log("GENERIC FORM: HANDLE BUTTON CLICK");
-                return;
+    static PARTS = {
+        form: {
+          template: "./modules/dice-stats/templates/genericTemplate.hbs"
         }
     }
 
-    override activateListeners(html:any) {
-        super.activateListeners(html);
-        html.on('click', "[data-action]", this._handleButtonClick.bind(this));
+    // getData(options) replacement
+    override async _prepareContext(options:any) {
+        const context:any = {};
+
+        // Be mindful of mutating other objects in memory when you enrich
+        context.customHeading = "WOJO's Custom Heading"
+
+        return context;
+    }
+
+    override _onRender(context:any, options:any): any {
+        this.element.querySelector("input[name=GenBtn]")?.addEventListener("click", MyGenericApplication.refresh);
+    }
+
+    static async refresh(){
+        await console.log("Dice Stats GenericApp On Refresh")
+    }
+
+    static async #onSubmit(event:any, form:any, formData:any) {
+        // const settings = foundry.utils.expandObject(formData.object);
+        // await Promise.all(
+        //     Object.entries(settings)
+        //         .map(([key, value]) => (game as Game).settings.set("foo", key, value))
+        // );
+        console.log("Dice Stats GenericApp On Submit!")
     }
 }

@@ -1,25 +1,33 @@
 // Do not remove this import. If you do Vite will think your styles are dead
 // code and not include them in the build output.
 import "../styles/style.scss";
-import DogBrowser from "./apps/dogBrowser";
+// import DogBrowser from "./apps/dogBrowser";
 import { moduleId } from "./constants";
-import { MyModule } from "./types/types";
+import { DiceStatsDataModel } from "./dataModel/dataModel";
+// import { MyModule } from "./types/types";
 
-let module: MyModule;
+//let module: MyModule;
 
-Hooks.once("init", () => {
+Hooks.once('init', () => {
   console.log(`Initializing ${moduleId}`);
+  DiceStatsDataModel.getInstance();
 
-  module = (game as Game).modules.get(moduleId) as MyModule;
-  module.dogBrowser = new DogBrowser();
-});
 
-Hooks.on("renderActorDirectory", (_: Application, html: JQuery) => {
-  const button = $(
-    `<button class="cc-sidebar-button" type="button">🐶</button>`
-  );
-  button.on("click", () => {
-    module.dogBrowser.render(true);
+  // module = (game as Game).modules.get(moduleId) as MyModule;
+  // module.dogBrowser = new DogBrowser();
   });
-  html.find(".directory-header .action-buttons").append(button);
+
+Hooks.once('ready', () => {
+  console.log('Scene Ready, We can load player data now!')
+  DiceStatsDataModel.getInstance().loadPlayers()
 });
+
+// Hooks.on("renderActorDirectory", (_: Application, html: JQuery) => {
+//   const button = $(
+//     `<button class="cc-sidebar-button" type="button">🐶</button>`
+//   );
+//   button.on("click", () => {
+//     module.dogBrowser.render(true);
+//   });
+//   html.find(".directory-header .action-buttons").append(button);
+// });

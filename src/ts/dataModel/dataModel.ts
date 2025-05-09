@@ -23,6 +23,19 @@ export class DiceStatsDataModel {
         // Create Player Map
     }
 
+    public loadPlayers(){
+        let UsersAry = (game as Game)?.users
+        let systemId = (game as Game).system.id
+        if (UsersAry) {
+            for (var user of UsersAry){
+                let playerObj = new DiceStatsPlayer(user._id, user.name, user.isGM, systemId);
+
+                this.diceStatsPlayerMap.set(user.name, playerObj);
+                this.diceStatsPlayerMap.set(user._id, playerObj);
+            }
+        }
+    }
+
     private _isPaused = false;
     private _globalForm;
     private _compareForm;
@@ -66,7 +79,7 @@ export class DiceStatsDataModel {
     public openSettingsForm(isGM: boolean = false){
         var loc_game: Game = game as Game
         loc_game.user?.isGM
-        loc_game.i18n.localize("")
+        loc_game.i18n?.localize('')
         //this._settingsForm.render(true)
     }
 

@@ -11,7 +11,7 @@
  *  - PLAYER STATS BUTTON
  */
 
-import { CustomSceneControlToolPlayer,CustomSceneControlToolGlobal, CustomSceneControlToolExport, CustomSceneControlToolCompare, CustomSceneControlToolSettings } from "./sceneControlTools";
+import { CustomSceneControlToolSettings, CustomSceneControlToolPause, CustomSceneControlToolExport, CustomSceneControlToolGlobal, CustomSceneControlToolCompare, CustomSceneControlToolPlayer } from "./sceneControlTools";
 
 // Scene Controller outer button to view player buttons
 export class CustomSceneControl
@@ -19,7 +19,7 @@ export class CustomSceneControl
     activeTool = '';
     icon = 'fas fa-dice-d20';
     name = 'dice-stats';
-    title = (game as Game).i18n.localize('');
+    title = (game as Game).i18n?.localize('') ?? '';
     layer = 'diceStats';
     visible = true;
     tools:any = {};
@@ -30,6 +30,20 @@ export class CustomSceneControl
     {
         var toolCount = 0
 
+        var settingsTool = new CustomSceneControlToolSettings()
+        settingsTool.order = ++toolCount
+        this.tools[settingsTool.name] = settingsTool
+
+        /*
+            var pauseTool = new CustomSceneControlToolPause()
+            pauseTool.order = ++toolCount
+            this.tools[pauseTool.name] = pauseTool
+
+            var exportTool = new CustomSceneControlToolExport()
+            exportTool.order = ++toolCount
+            this.tools[exportTool.name] = exportTool
+        */
+
         var globalTool = new CustomSceneControlToolGlobal()
         globalTool.order = ++toolCount
         this.tools[globalTool.name] = globalTool
@@ -38,13 +52,7 @@ export class CustomSceneControl
         compareTool.order = ++toolCount
         this.tools[compareTool.name] = compareTool
 
-        var exportTool = new CustomSceneControlToolExport()
-        exportTool.order = ++toolCount
-        this.tools[exportTool.name] = exportTool
-
-        var settingsTool = new CustomSceneControlToolSettings()
-        settingsTool.order = ++toolCount
-        this.tools[settingsTool.name] = settingsTool
+        
 
         for (var id of player_ids){
             var playerTool = new CustomSceneControlToolPlayer("",id, "fas fa-dice-d20")

@@ -1,0 +1,21 @@
+{
+  "name": "dice-stats",
+  "version": "2.0.0",
+  "description": "Dice Stats Typescript rerwrite",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc && vite build",
+    "watch": "tsc && vite build --watch"
+  },
+  "devDependencies": {
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
+    "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-scss": "^3.0.0",
+    "sass": "^1.54.8",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

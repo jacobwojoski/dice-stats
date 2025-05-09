@@ -1,17 +1,25 @@
 {
-    "$schema": "https://json.schemastore.org/foundryvtt-manifest.json",
-    "id": "foundry-module-ts",
-    "title": "Typescript Template Module",
-    "description": "A template module using Typescript. You should change name, title, and description in module.json.",
+    "id": "dice-stats",
+    "title": "Dice Stats",
+    "description": "A module which tracks all dice rolls of every dice type and allows player to see end of session stats.",
+    "socket": true,
     "version": "2.0.0",
-    "packs": [],
-    "system": [],
-    "dependencies": [],
-    "scripts": [],
+    "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v2.0.0.zip",
+    "manifest": "https://github.com/jacobwojoski/dice-stats/releases/download/v2.0.0/module.json",
+    "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
+    "readme": "https://github.com/jacobwojoski/dice-stats",
+    "url": "https://github.com/jacobwojoski/dice-stats",
+    "authors": [
+        {
+            "name": "jacobwojo",
+            "discord": "jacobwojo#6005",
+            "flags": {}
+        }
+    ],
     "compatibility": {
-        "minimum": "9",
-        "verified": "10",
-        "maximum": "10"
+        "minimum": "13",
+        "verified": "13",
+        "maximum": "13"
     },
     "languages": [
         {
@@ -25,5 +33,14 @@
     ],
     "esmodules": [
         "scripts/module.js"
-    ]
+    ],
+    "relationships": {
+        "requires": [
+            {
+                "id": "socketlib",
+                "type": "module",
+                "compatibility": {}
+            }
+        ]
+    }
 }
