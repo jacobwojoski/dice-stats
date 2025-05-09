@@ -8,10 +8,9 @@
  * https://foundryvtt.wiki/en/development/guides/converting-to-appv2
  */
 
-const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
+const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
 
-class MyGenericApplication extends ApplicationV2 {
-    static instance = new MyGenericApplication()
+export class MyGenericApplication extends ApplicationV2 {
     static override DEFAULT_OPTIONS:any = {
         id: "ds-generic-form-1",
         form: {
@@ -23,14 +22,14 @@ class MyGenericApplication extends ApplicationV2 {
           height: "auto",
         },
         tag: "form", // The default is "div"
-        window: {
-          icon: "fas fa-gear", // You can now add an icon to the header
-          title: "Test Title",
-          contentClasses: ["standard-form"]
-        },
         actions: {
             refresh: MyGenericApplication.refresh
         },
+        window: {
+            icon: "fas fa-gear", // You can now add an icon to the header
+            title: "Test Title",
+            contentClasses: ["standard-form"]
+        }
     }
 
     override get title() {

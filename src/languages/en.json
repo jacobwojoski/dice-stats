@@ -10,43 +10,43 @@
     },
     "SceneControls": {
       "DiceStatsSceneControl":{
+        "Name": "dsSceneControl",
         "Title": "Dice Stats",
         "Tooltip": "View saved Dice Stats info.",
         "PermsErr": "ERROR: Unable to view Dice Stats info. Ask GM for permissions."
       },
+      "Settings":{
+        "Name": "dsSceneControl-Settings",
+        "Title": "Settings",
+        "Tooltip": "View saved Dice Stats info.",
+        "PermsErr": "ERROR: Unable to view Dice Stats info. Ask GM for permissions."
+      },
       "GlobalStats":{
-        "Title": "Global Dice Stats",
+        "Name": "dsSceneControl-GlobalStats",
+        "Title": "Global",
         "Tooltip": "View Combined Player Stats",
         "PermsErr": "ERROR: Unable to view combined player Dice Stats, Ask GM for permissions"
       },
       "CompareStats":{
+        "Name": "dsSceneControl-CompreStats",
         "Title": "Compare",
         "Tooltip": "",
         "PermsErr": "ERROR: Unable to view comparison stats. Ask GM for permissions."
       },
-      "ExportStats":{
-        "Title": "Export",
-        "Tooltip": "",
-        "PermsErr": "ERROR: Unable to view comparison stats. Ask GM for permissions."
-      },
-      "PauseStats":{
-        "PauseTitle": "Pause",
-        "PlayTitle": "Play",
-        "TooltipPause": "Pause the saving of Dice Stats.",
-        "TooltipPlay": "Resume the saving of Dice Stats.",
-        "PermsErr": "ERROR: Unable to play/pause Dice Stats. Ask GM for permissions."
-      },
       "GmStats":{
+        "Name": "dsSceneControl-GmStats",
         "Title": "Gamemaster",
         "Tooltip": "View the gamemasters dice stats!",
         "PermsErr": "ERROR: Unable to view the GM's Dice Stats. Ask GM for permissions."
       },
       "PersonalStats":{
+        "Name": "dsSceneControl-PersonalStats",
         "Title": "Self (This should get overwritten with your players name)",
         "Tooltip": "View your own Dice Stats!",
         "PermsErr": "ERROR: Unable to view Personal Stats. Ask GM for permissions."
       },
       "PlayerStats":{
+        "Name": "dsSceneControl-OtherPlayerStats",
         "Title": "Player (This Should get overwritten with player name)",
         "Tooltip": "View a specific players Dice Stats",
         "PermsErr": "ERROR: Unable to view player specific stats. Ask GM for permissions."

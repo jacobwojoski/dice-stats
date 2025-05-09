@@ -4,6 +4,7 @@ import "../styles/style.scss";
 // import DogBrowser from "./apps/dogBrowser";
 import { moduleId } from "./constants";
 import { DiceStatsDataModel } from "./dataModel/dataModel";
+import { CustomSceneControl } from "./ui/sceneControls/sceneControls";
 // import { MyModule } from "./types/types";
 
 //let module: MyModule;
@@ -31,3 +32,25 @@ Hooks.once('ready', () => {
 //   });
 //   html.find(".directory-header .action-buttons").append(button);
 // });
+
+// Hook to interact when scenecontrols get created Method used to have a better location to access player data
+Hooks.on("getSceneControlButtons", controls => {
+  
+  let playerIds = []
+  let playerKeys:[string,string] = ['',''];
+  
+  let users = (game as Game).users
+  if (users){
+    for (let user of users){
+      playerKeys[0] = user._id;
+      playerKeys[1] = user.name;
+      playerIds.push(playerKeys)
+    }
+  }
+
+  var customSceneCtrl = new CustomSceneControl(playerIds)
+
+  let key:any = 'dice-stats'
+  controls[key] = customSceneCtrl
+  
+});

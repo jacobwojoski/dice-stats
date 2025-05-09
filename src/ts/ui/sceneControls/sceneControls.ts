@@ -11,38 +11,30 @@
  *  - PLAYER STATS BUTTON
  */
 
-import { CustomSceneControlToolSettings, CustomSceneControlToolPause, CustomSceneControlToolExport, CustomSceneControlToolGlobal, CustomSceneControlToolCompare, CustomSceneControlToolPlayer } from "./sceneControlTools";
+import { CustomSceneControlToolSettings, CustomSceneControlToolGlobal, CustomSceneControlToolCompare, CustomSceneControlToolPlayer } from "./sceneControlTools";
 
 // Scene Controller outer button to view player buttons
-export class CustomSceneControl
+export class CustomSceneControl extends SceneControls
 {
-    activeTool = '';
+    //activeTool = '';
     icon = 'fas fa-dice-d20';
     name = 'dice-stats';
-    title = (game as Game).i18n?.localize('') ?? '';
+    //title = (game as Game).i18n?.localize('DiceStats.SceneControls.DiceStatsSceneControl.Title') ?? 'Dice Stats';
     layer = 'diceStats';
     visible = true;
     tools:any = {};
     order=69;
 
     // UUID of players
-    constructor(player_ids:string[])
+    constructor(player_ids: [string, string][])
     {
+        super()
         var toolCount = 0
 
         var settingsTool = new CustomSceneControlToolSettings()
         settingsTool.order = ++toolCount
         this.tools[settingsTool.name] = settingsTool
 
-        /*
-            var pauseTool = new CustomSceneControlToolPause()
-            pauseTool.order = ++toolCount
-            this.tools[pauseTool.name] = pauseTool
-
-            var exportTool = new CustomSceneControlToolExport()
-            exportTool.order = ++toolCount
-            this.tools[exportTool.name] = exportTool
-        */
 
         var globalTool = new CustomSceneControlToolGlobal()
         globalTool.order = ++toolCount
@@ -54,8 +46,8 @@ export class CustomSceneControl
 
         
 
-        for (var id of player_ids){
-            var playerTool = new CustomSceneControlToolPlayer("",id, "fas fa-dice-d20")
+        for (var [id,name] of player_ids){
+            var playerTool = new CustomSceneControlToolPlayer(name,id, "fas fa-dice-d20")
             playerTool.order = ++toolCount;
 
             this.tools[playerTool.name] = playerTool
@@ -65,4 +57,14 @@ export class CustomSceneControl
     async onChange(event:any, active:any){
 
     }
+
+    override get title() {
+        return (game as Game).i18n?.localize('DiceStats.SceneControls.DiceStatsSceneControl.Title') ?? 'Dice Stats'
+    }
+
+    override get activeTool() {
+        return ""
+    }
+
+    
 }
