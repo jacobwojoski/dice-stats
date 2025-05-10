@@ -68,4 +68,8 @@ export class MyGenericApplication extends ApplicationV2 {
         // );
         console.log("Dice Stats GenericApp On Submit!")
     }
+
+    override _renderHTML(context:any, options:any){
+        super._renderHTML(context:any, options:any)
+    }
 }
