@@ -54,16 +54,16 @@ function updateModuleManifestPlugin(): Plugin {
         string,
         unknown
       >;
-      manifestJson["version"] = version;
-      if (githubProject) {
-        const baseUrl = `https://github.com/${githubProject}/releases`;
-        manifestJson["manifest"] = `${baseUrl}/latest/download/module.json`;
-        if (githubTag) {
-          manifestJson[
-            "download"
-          ] = `${baseUrl}/download/${githubTag}/module.zip`;
-        }
-      }
+      // manifestJson["version"] = version;
+      // if (githubProject) {
+      //   const baseUrl = `https://github.com/${githubProject}/releases`;
+      //   manifestJson["manifest"] = `${baseUrl}/latest/download/module.json`;
+      //   if (githubTag) {
+      //     manifestJson[
+      //       "download"
+      //     ] = `${baseUrl}/download/${githubTag}/module.zip`;
+      //   }
+      // }
       await fsPromises.writeFile(
         "dist/module.json",
         JSON.stringify(manifestJson, null, 4)

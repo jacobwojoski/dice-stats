@@ -10,25 +10,21 @@
 
 const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
 
-export class MyGenericApplication extends ApplicationV2 {
+export class MyGenericApplication extends HandlebarsApplicationMixin(ApplicationV2) {
+    constructor(options = {}){
+        super(options)
+    }
+
     static override DEFAULT_OPTIONS:any = {
-        id: "ds-generic-form-1",
+        tag: "form",
         form: {
-          handler: MyGenericApplication.#onSubmit,
-          closeOnSubmit: true,
+            handler: MyGenericApplication.#onSubmit,
+            submitOnChange: false,
+            closeOnSubmit: false
         },
-        position: {
-          width: 640,
-          height: "auto",
-        },
-        tag: "form", // The default is "div"
-        actions: {
-            refresh: MyGenericApplication.refresh
-        },
-        window: {
-            icon: "fas fa-gear", // You can now add an icon to the header
-            title: "Test Title",
-            contentClasses: ["standard-form"]
+        position: { 
+            width: 600 ,
+            height: 400
         }
     }
 
@@ -36,9 +32,9 @@ export class MyGenericApplication extends ApplicationV2 {
         return `My Module: Dice Stats Module`;
     }
 
-    static PARTS = {
+    static override PARTS = {
         form: {
-          template: "./modules/dice-stats/templates/genericTemplate.hbs"
+          template: 'modules/dice-stats/templates/genericTemplate.hbs'
         }
     }
 
@@ -47,7 +43,7 @@ export class MyGenericApplication extends ApplicationV2 {
         const context:any = {};
 
         // Be mindful of mutating other objects in memory when you enrich
-        context.customHeading = "WOJO's Custom Heading"
+        context.customHeading = "WOJO's Custom Heading";
 
         return context;
     }
@@ -57,7 +53,7 @@ export class MyGenericApplication extends ApplicationV2 {
     }
 
     static async refresh(){
-        await console.log("Dice Stats GenericApp On Refresh")
+        await console.log("Dice Stats GenericApp On Refresh");
     }
 
     static async #onSubmit(event:any, form:any, formData:any) {
@@ -66,10 +62,14 @@ export class MyGenericApplication extends ApplicationV2 {
         //     Object.entries(settings)
         //         .map(([key, value]) => (game as Game).settings.set("foo", key, value))
         // );
-        console.log("Dice Stats GenericApp On Submit!")
+        console.log("Dice Stats GenericApp On Submit!");
     }
 
-    override _renderHTML(context:any, options:any){
-        super._renderHTML(context:any, options:any)
-    }
+    // override _renderHTML(context:any, options:any): any{
+    //     super._renderHTML(context, options);
+    // }
+
+    // override _replaceHTML(result:any, context:any, options:any): any{
+    //     super._replaceHTML(result, context, options);
+    // }
 }

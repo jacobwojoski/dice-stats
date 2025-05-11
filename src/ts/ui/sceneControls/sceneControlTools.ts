@@ -5,7 +5,7 @@ export class CustomSceneControlToolSettings implements SceneControls.ToolNoToggl
 {
     name = (game as Game).i18n?.localize('DiceStats.SceneControls.Settings.Name') ?? '';
     title = (game as Game).i18n?.localize('DiceStats.SceneControls.Settings.Title') ?? '';
-    icon = 'fa-solid fa-file-export';
+    icon = 'fa-solid fa-gears';
     order= 0;
 
     visible= true;
@@ -30,7 +30,7 @@ export class CustomSceneControlToolGlobal implements SceneControls.ToolNoToggle
 
     name = (game as Game).i18n?.localize('DiceStats.SceneControls.GlobalStats.Name') ?? '';
     title = (game as Game).i18n?.localize('DiceStats.SceneControls.GlobalStats.Title') ?? '';
-    icon = 'fa-solid fa-users-line';
+    icon = 'fa-solid fa-earth-americas';
     order= 0;
 
     visible= true;
@@ -64,6 +64,7 @@ export class CustomSceneControlToolCompare implements SceneControls.ToolNoToggle
 // Player Scene Control Icons (Icon can be customized in settings)
 export class CustomSceneControlToolPlayer implements SceneControls.ToolNoToggle
 {
+    static app: MyGenericApplication|undefined = undefined
     active = false;
     button = true;
     icon = '';
@@ -74,8 +75,14 @@ export class CustomSceneControlToolPlayer implements SceneControls.ToolNoToggle
     associatedPlayerId = "";
 
     async onChange(event:any, active:any){
-        DiceStatsDataModel.getInstance().openPlayerForm(this.associatedPlayerId)
-        new MyGenericApplication().render()
+        // DiceStatsDataModel.getInstance().openPlayerForm(this.associatedPlayerId);
+
+        if (CustomSceneControlToolPlayer.app == undefined){
+            CustomSceneControlToolPlayer.app = new MyGenericApplication()
+        }
+        CustomSceneControlToolPlayer.app.render(true)
+        CustomSceneControlToolPlayer.app.bringToFront()
+        CustomSceneControlToolPlayer.app.maximize()
     }
 
     constructor(player_name:string, player_id:string, player_icon:string){
