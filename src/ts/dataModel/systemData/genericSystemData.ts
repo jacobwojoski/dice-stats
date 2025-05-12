@@ -8,13 +8,16 @@ export class GenericSystemData {
     public getDisplayData(){
     }
 
-    public addSystemData(system_info:GenericSystemData){
+    public addSystemData(system_info: undefined|GenericSystemData){
+        if (!system_info){
+            return;
+        }
     }
 
-    public parseRollMessage(message_obj:any){
+    public parseRollMessage(message_obj:any): undefined|GenericSystemData {
+        return undefined;
     }
 
     public clear(){
-        
     }
 }

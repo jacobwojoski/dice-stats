@@ -14,7 +14,7 @@ export class DiceStatsPlayer {
     _userName:string = '';          // {string} - Readable Name
     _isGm:boolean = false;          // {bool} - Is the player a GM
 
-    _playerForm = 0;                // {Tabbed Dice Stats Player Form Obj}
+    _playerForm = 0;                // {Dice Stats Player Form Obj}
 
     _diceInfo:DieInfo[];            // {DieInfo[]}
     _systemInfo:GenericSystemData;     // System Specific Data (Different class onject depending on the system were in)
@@ -54,6 +54,18 @@ export class DiceStatsPlayer {
     setIsGm(in_is_gm:boolean){this._isGm = in_is_gm}
 
     // ====== Public Funtions ======
+    // ---- AddD Data to Player ----
+    addGenericInfo(dice_info:DieInfo[]){
+        for (let die of dice_info){
+            this._diceInfo[die.type].addDieInfo(die);
+        }
+    }
+
+    addSystemInfo(system_info:GenericSystemData|undefined){
+        if(system_info){
+            this._systemInfo.addSystemData(system_info);
+        }
+    }
 
     // ---- Clear all dice, Roll, and system Data ----
     clearAllData(){

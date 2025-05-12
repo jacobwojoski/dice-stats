@@ -1,6 +1,10 @@
 import { DIE_TYPE } from "../constants";
 import { DiceStatsPlayer } from "./player";
 import { MyGenericApplication } from "../ui/forms/GenericForm";
+import { SystemDataFactory } from "./systemData/systemDataFactory";
+import { DieInfo } from "./genericData/dice";
+import { GenericSystemData } from "./systemData/genericSystemData";
+import { GenericDataParser } from "./genericData/genericDataParser";
 
 /* Create a singleton DataModel Class */
 export class DiceStatsDataModel {
@@ -14,14 +18,17 @@ export class DiceStatsDataModel {
     }
 
     private constructor() {
-        // Private to prevent direct instantiation
+        //let id:core = 'dice-stats'
+        DiceStatsModuleSettings.registerSettings();
 
         // TODO: Create Form Objects
         this._settingsForm = new MyGenericApplication();
         this._globalForm = new MyGenericApplication();
-        this._compareForm = new MyGenericApplication()
+        this._compareForm = new MyGenericApplication();
 
         // Create Player Map
+
+
     }
 
     public loadPlayers(){
@@ -38,6 +45,7 @@ export class DiceStatsDataModel {
     }
 
     /* ========================================================= */
+    static id:any = 'dice-stats';
     private _isPaused = false;
     private _settingsForm;
     private _globalForm;
@@ -57,6 +65,26 @@ export class DiceStatsDataModel {
         // Get Player Associated With msg
         // Player -> Parse System Data
         // Player -> Parse Generic Data
+
+        /* ================================================== */
+        // Get author of message
+        let authorId = message.author.id;
+
+        // Get the player that the roll is associated with
+        let playerInfo:DiceStatsPlayer|undefined = this.diceStatsPlayerMap.get(authorId);
+
+        // Get the specific system parser to parse msg
+        let systemParser = SystemDataFactory.createSystemData((game as Game).system.id);
+        let systemInfo = systemParser.parseRollMessage(message);
+
+        let genericInfoAry:DieInfo[] = GenericDataParser.parseMessageData(message);
+        
+        if (playerInfo){
+            playerInfo.addGenericInfo(genericInfoAry);
+            playerInfo.addSystemInfo(systemInfo);
+        }
+
+        this.saveDataToDB();
     }
 
     /* ================= API FN's ==================== */
@@ -97,4 +125,46 @@ export class DiceStatsDataModel {
         playerObj?.addRollData(die_value, die_type)
     }
 
+    public saveDataToDB(){
+
+    }
+}
+
+export class DiceStatsModuleSettings {
+    static settingsRegisterd = false;
+
+    static registerSettings(){
+        // Only register settings once
+        if (this.settingsRegisterd == true){
+            return;
+        }
+        this.settingsRegisterd = true;
+
+        // ---- Possible Settings ----
+        //      Setting                 Scope: World(Global) | Client       Default Value
+        // Plyr See Settings                    Global                          True
+        // Plyr See Global                      Global                          True
+        // Plyr See Compare                     Global                          True
+        // Plyr See GM                          Global                          True
+        // Plyr See Other Players               Global                          True
+        // Plyr See Self                        Global                          True
+        // Plyr Hide Blind Rolls                Global                          False
+
+        // Include GM In Global                 Global                          True
+        // Clear All On Login Popup             Global                          False
+
+        // 
+        var players_see_gm:any = 'players_see_gm';
+        (game as Game).settings.register(DiceStatsDataModel.id, players_see_gm, {
+            name: `DiceStats.Settings.${players_see_gm}.Name`,
+            default: false,
+            type: Boolean,
+            scope: 'world',
+            config: true,
+            hint: `DiceStats.Settings.${players_see_gm}.Hint`
+            //restricted: true    // Restric item to gamemaster only 
+            //Only used for non world lvl items. All World items are already gm only
+        })
+
+    }
 }

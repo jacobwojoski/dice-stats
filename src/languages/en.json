@@ -1,12 +1,103 @@
 {
-  "MYMODULE.dog-browser": "Dog browser",
-  "MYMODULE.dogs": "Dogs",
-  "MYMODULE.fetch-random-dog": "Fetch random dog photo",
-  "MYMODULE.random-dog-alt": "Image of a random dog",
-  
   "DiceStats": {
     "Forms": {
+      "PlayerData": {
+        "Unknown" : {
+          "DieData": "Generic System Info: Die Data Error - Die info not properly Made",
+          "SystemChartInfo": "System Info Chart Data: No Info Found - System likely doesn't have data parser. Provide feature request on github!",
+          "SystemDataInfo": "System Roll Data: No Info Found - System likely doesn't have data parser. Provide feature request on github!"
+        },
+        "GenericInfo": {
+          "DiceInfo":{
+            "Common": {
+              "Total": "Total Dice Rolled:",
+              "Mean": "Dice Mean (Average):",
+              "Median": "Dice Median (Middle #):",
+              "Mode": "Dice Mode (Most Common):",
+              "Streak": "Longest Sequential Roll (Streak):"
+            },
+            "D2": {
+              "Checkbox": "D2",
+              "Title": "D-2 Info"
+            },
+            "D3": {
+              "Checkbox": "D3",
+              "Title": "D-3 Info"
+            },
+            "D4": {
+              "Checkbox": "D4",
+              "Title": "D-4 Info"
+            },
+            "D5": {
+              "Checkbox": "D5",
+              "Title": "D-5 Info"
+            },
+            "D6": {
+              "Checkbox": "D6",
+              "Title": "D-6 Info"
+            },
+            "D7": {
+              "Checkbox": "D7",
+              "Title": "D-7 Info"
+            },
+            "D8": {
+              "Checkbox": "D8",
+              "Title": "D-8 Info"
+            },
+            "D9": {
+              "Checkbox": "D9",
+              "Title": "D-9 Info"
+            },
+            "D10": {
+              "Checkbox": "D10",
+              "Title": "D-10 Info"
+            },
+            "D12": {
+              "Checkbox": "D12",
+              "Title": "D-12 Info"
+            },
+            "D20": {
+              "Checkbox": "D20",
+              "Title": "D-20 Info"
+            },
+            "D50": {
+              "Checkbox": "D50",
+              "Title": "D-50 Info"
+            },
+            "D100": {
+              "Checkbox": "D100",
+              "Title": "D-100 Info"
+            }
+          }
+        },
+        "Pf2e": {
+          "DegreeSuccess":{
+            "Unknown": "Unknown",
+            "CF": "Critical Fails",
+            "F": "Fails",
+            "S": "Success",
+            "CS": "Critical Success"
+          }
+        },
+        "Dnd5e": {
 
+        },
+        "DrawSteel": {
+
+        },
+        "Daggerheart": {
+
+        }
+      },
+      "Settings": {
+        "Pause": {
+          "ChangeState": "Change Pause State",
+          "Paused": "Paused Recording Dice Data",
+          "Unpaused": "Not Paused, Recording all dice rolls"
+        },
+        "ModifyIcons": "To update a player icon select an element from the dropdown for each player or input your own using free elements from the font awesome library",
+
+      }
     },
     "SceneControls": {
       "DiceStatsSceneControl":{

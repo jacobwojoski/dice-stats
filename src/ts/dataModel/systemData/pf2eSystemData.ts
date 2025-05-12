@@ -17,11 +17,12 @@ export class Pf2eSystemData extends GenericSystemData{
     override getDisplayData(){
     }
 
-    override addSystemData(system_info:GenericSystemData){
+    override addSystemData(system_info:GenericSystemData|undefined){
         let inSysInfo = system_info as Pf2eSystemData;
     }
 
-    override parseRollMessage(message_obj:any){
+    override parseRollMessage(message_obj:any): GenericSystemData|undefined {
+        return undefined
     }
 
     override clear(){
