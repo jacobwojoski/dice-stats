@@ -2,6 +2,10 @@
 echo "Rebuilding Doc"
 cd  ~/Desktop/Development/GIT/dice-stats
 yarn build
+if [ $status != 0 ]; then
+	echo "Yarn Build failed! Exiting!"
+	exit -1
+fi
 
 echo ""
 

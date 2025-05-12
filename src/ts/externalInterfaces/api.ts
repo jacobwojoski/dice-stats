@@ -67,7 +67,7 @@ export class DiceStatsAPI {
     /**
      * @returns {VOID} - Renders UI Component
      */
-    static openExportStats(isGM:boolean){
-        DiceStatsDataModel.getInstance().openImportExportForm(isGM);
+    static openDiceStatsSettings(isGM:boolean){
+        DiceStatsDataModel.getInstance().openSettingsForm(isGM);
     }
 }
