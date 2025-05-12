@@ -10,11 +10,12 @@
     <hr>
 
     <section class="content">
-    {{#each tabs}}
-    <div class="tab" data-tab="{{label}}" data-group="primary-tabs">
-        Fixed content for tab {{title}}<br>
-        {{{content}}}
-    </div>
-    {{/each}}
+        {{#each tabs}}
+        <div class="tab" data-tab="{{label}}" data-group="primary-tabs">
+            Tab Title: {{title}}
+            <br>
+            {{{content}}}
+        </div>
+        {{/each}}
     </section>
 </section>

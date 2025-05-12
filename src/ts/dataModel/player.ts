@@ -2,6 +2,7 @@ import { DieInfo } from "./genericData/dice.js";
 import { GenericSystemData } from "./systemData/genericSystemData.js";
 import { SystemDataFactory } from "./systemData/systemDataFactory.js";
 import { DIE_TYPE } from "../constants.js";
+import { PlayerDataForm } from "../ui/forms/playerDataForm.js";
 
 /**
  * DESC: 
@@ -14,7 +15,7 @@ export class DiceStatsPlayer {
     _userName:string = '';          // {string} - Readable Name
     _isGm:boolean = false;          // {bool} - Is the player a GM
 
-    _playerForm = 0;                // {Dice Stats Player Form Obj}
+    _playerForm:PlayerDataForm;     // {Dice Stats Player Form Obj}
 
     _diceInfo:DieInfo[];            // {DieInfo[]}
     _systemInfo:GenericSystemData;     // System Specific Data (Different class onject depending on the system were in)
@@ -33,6 +34,8 @@ export class DiceStatsPlayer {
         
         this._diceInfo = DieInfo.createDieInfoAry()
         this._systemInfo = SystemDataFactory.createSystemData(system_id)
+
+        this._playerForm = new PlayerDataForm(in_user_id, {})
     }
 
     // ====== Getters & Setters ======
@@ -100,7 +103,7 @@ export class DiceStatsPlayer {
 
     // ---- Player Form Functions ----
     openPlayerForm(){
-        //this._playerForm.render(true)
+        this._playerForm.render(true)
     }
 
 }

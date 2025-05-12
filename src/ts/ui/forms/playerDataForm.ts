@@ -13,8 +13,11 @@ import { template } from "handlebars";
 const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
-    constructor(options = {}){
+    associatedPlayerId = '';
+
+    constructor(playerId:string = '', options = {}){
         super(options)
+        this.associatedPlayerId = playerId;
     }
 
     static override DEFAULT_OPTIONS:any = {
@@ -39,7 +42,6 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             template: 'systems/my-system/templates/actor/header.hbs',
         },
         tabs: {
-            // Foundry-provided generic template
             template: 'templates/generic/tab-navigation.hbs',
         },
         genericData: {
@@ -58,16 +60,51 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
 
     // getData(options) replacement
     override async _prepareContext(options:any) {
-        const context:any = {};
+        let context:any = {};
+        
+        // Set Generic Data as default selected 
+        if (!context.tabGroups.primary) {
+            context.tabGroups.primary = 'genericData';
+        }
+
+        // Get Display Data from data model
+        let myGenericDiceData = {};
+        let mySystemChartData = {};
+        let mySystemDetailsData = {};
+
+        context.tabs = {
+            genericData: {
+                cssClass: this.tabGroups.primary === 'aptitudes' ? 'active' : '',
+                group: 'primary',
+                id: 'genericData',
+                icon: 'fa-solid fa-dice-d20',
+                label: 'Dice Data - Label',
+                genericData: myGenericDiceData
+            },
+            systemCharts: {
+                cssClass: this.tabGroups.primary === 'traits' ? 'active' : '',
+                group: 'primary',
+                id: 'systemCharts',
+                icon: 'fa-solid fa-hands-holding-circle',
+                label: 'System Chart Data - Label',
+                systemChartData: mySystemChartData
+            },
+            systemDetails: {
+                cssClass: this.tabGroups.primary === 'traits' ? 'active' : '',
+                group: 'primary',
+                id: 'systemDetails',
+                icon: 'fa-solid fa-pen-to-square',
+                label: 'System Details Data - Label',
+                systemDetailsData: mySystemDetailsData
+            }
+        }
 
         // Be mindful of mutating other objects in memory when you enrich
-        context.customHeading = "WOJO's Custom Heading";
-
         return context;
     }
 
     override _onRender(context:any, options:any): any {
-        this.element.querySelector("input[name=GenBtn]")?.addEventListener("click", MyGenericApplication.refresh);
+        this.element.querySelector("input[name=gen-btn]")?.addEventListener("click", PlayerDataForm.refresh);
     }
 
     static async refresh(){

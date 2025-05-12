@@ -95,8 +95,7 @@
           "Paused": "Paused Recording Dice Data",
           "Unpaused": "Not Paused, Recording all dice rolls"
         },
-        "ModifyIcons": "To update a player icon select an element from the dropdown for each player or input your own using free elements from the font awesome library",
-
+        "ModifyIcons": "To update a player icon select an element from the dropdown for each player or input your own using free elements from the font awesome library"
       }
     },
     "SceneControls": {
