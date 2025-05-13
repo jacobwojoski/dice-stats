@@ -14,6 +14,12 @@ const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.a
 
 export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     associatedPlayerId = '';
+    // Default Template Locations. System templates should be overwritten when a system gets loaded
+    static templates = {
+        genericDataTab: 'templates/player-data/tabs/generic-dice-data-tab.hbs',
+        systemChartTab: 'templates/player-data/tabs/systemForms/unknown/unknown-system-chart-form.hbs',
+        systemDetailsTab: 'templates/player-data/tabs/systemForms/unknown/unknown-system-data-form.hbs'
+    }
 
     constructor(playerId:string = '', options = {}){
         super(options)
@@ -61,7 +67,7 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     // getData(options) replacement
     override async _prepareContext(options:any) {
         let context:any = {};
-        
+
         // Set Generic Data as default selected 
         if (!context.tabGroups.primary) {
             context.tabGroups.primary = 'genericData';

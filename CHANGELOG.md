@@ -1,4 +1,14 @@
-# CHANGELOG  
+# CHANGELOG 
+## [ 2.0.0 ]
+- Overhaul codebase to typescript
+- Create Typescript build guide
+- Overhaul System Specific Data And Generic Dice Data storage.
+- Update Forms to use ApplicationV2 setup
+- Redesign Templates to use Handlebars #each statements much better
+
+- Some old features have been removed and will be added back in future udpates
+- Should be much easier to create system specific parsers in future
+
 ## [ 1.21.3 ]
 - Update API to allow a player to override DB Data with local data 
 - add saveAllPlayerDataToDB()         save all players local data

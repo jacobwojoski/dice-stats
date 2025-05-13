@@ -5,6 +5,7 @@ import { SystemDataFactory } from "./systemData/systemDataFactory";
 import { DieInfo } from "./genericData/dice";
 import { GenericSystemData } from "./systemData/genericSystemData";
 import { GenericDataParser } from "./genericData/genericDataParser";
+import { PlayerDataForm } from "../ui/forms/playerDataForm";
 
 /* Create a singleton DataModel Class */
 export class DiceStatsDataModel {
@@ -42,6 +43,12 @@ export class DiceStatsDataModel {
                 this.diceStatsPlayerMap.set(user._id, playerObj);
             }
         }
+    }
+
+    // Update Player form to hold system templates
+    public setSystemTemplates(system_chart_tempalte:string, system_data_template:string){
+        PlayerDataForm.templates.systemChartTab = system_chart_tempalte;
+        PlayerDataForm.templates.systemDetailsTab = system_data_template;
     }
 
     /* ========================================================= */
