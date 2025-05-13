@@ -1,4 +1,6 @@
 # CHANGELOG 
+## [ X.XX.X ]
+
 ## [ 1.22.1 ]
 - Create v 13 support
 
@@ -6,6 +8,12 @@
 - Update API to allow a player to override DB Data with local data 
 - add saveAllPlayerDataToDB()         save all players local data
 - add savePlayerDataToDB(player_id)   save specific players local data
+
+## [ 1.21.4 ]
+- Fix issue with module.json causing error due to trying to pull latest (v13) build when in v12. Causing errors from incompat issues
+
+## [ 1.21.3 ]
+- Update API to add feature to save 1 personal local data to DB
 
 ## [ 1.21.2 ]
 - Add validation for roll results (Make sure die's rolled value is between 0 & num sides on die)
