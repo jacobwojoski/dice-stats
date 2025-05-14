@@ -1,5 +1,6 @@
 import { DiceStatsDataModel } from "../../dataModel/dataModel";
 import { MyGenericApplication } from "../forms/GenericForm";
+import { PlayerDataForm } from "../forms/playerDataForm";
 
 export class CustomSceneControlToolSettings implements SceneControls.ToolNoToggle
 {
@@ -64,7 +65,7 @@ export class CustomSceneControlToolCompare implements SceneControls.ToolNoToggle
 // Player Scene Control Icons (Icon can be customized in settings)
 export class CustomSceneControlToolPlayer implements SceneControls.ToolNoToggle
 {
-    static app: MyGenericApplication|undefined = undefined
+    static app: MyGenericApplication| PlayerDataForm | undefined = undefined
     active = false;
     button = true;
     icon = '';
@@ -78,11 +79,11 @@ export class CustomSceneControlToolPlayer implements SceneControls.ToolNoToggle
         // DiceStatsDataModel.getInstance().openPlayerForm(this.associatedPlayerId);
 
         if (CustomSceneControlToolPlayer.app == undefined){
-            CustomSceneControlToolPlayer.app = new MyGenericApplication()
+            CustomSceneControlToolPlayer.app = new PlayerDataForm()
         }
         CustomSceneControlToolPlayer.app.render(true)
-        CustomSceneControlToolPlayer.app.bringToFront()
-        CustomSceneControlToolPlayer.app.maximize()
+        // CustomSceneControlToolPlayer.app.bringToFront()
+        // CustomSceneControlToolPlayer.app.maximize()
     }
 
     constructor(player_name:string, player_id:string, player_icon:string){

@@ -16,9 +16,9 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     associatedPlayerId = '';
     // Default Template Locations. System templates should be overwritten when a system gets loaded
     static templates = {
-        genericDataTab: 'templates/player-data/tabs/generic-dice-data-tab.hbs',
-        systemChartTab: 'templates/player-data/tabs/systemForms/unknown/unknown-system-chart-form.hbs',
-        systemDetailsTab: 'templates/player-data/tabs/systemForms/unknown/unknown-system-data-form.hbs'
+        genericDataTab: 'modules/dice-stats/templates/player-data/tabs/generic-dice-data-tab.hbs',
+        systemChartTab: 'modules/dice-stats/templates/player-data/tabs/systemForms/unknown/unknown-system-chart-form.hbs',
+        systemDetailsTab: 'modules/dice-stats/templates/player-data/tabs/systemForms/unknown/unknown-system-data-form.hbs'
     }
 
     constructor(playerId:string = '', options = {}){
@@ -44,33 +44,34 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     static override PARTS = {
-        header: {
-            template: 'systems/my-system/templates/actor/header.hbs',
-        },
         tabs: {
-            template: 'templates/generic/tab-navigation.hbs',
+            template: 'modules/dice-stats/templates/player-data/player-data-nav-form.hbs',
         },
         genericData: {
-            template: '',
+            template: PlayerDataForm.templates.genericDataTab,
             scrollable: ['']
         },
         systemCharts: {
-            template: 'systems/my-system/templates/actor/traits.hbs',
+            template: PlayerDataForm.templates.systemChartTab,
             scrollable: [''],
         },
         systemDetails: {
-            template: 'systems/my-system/templates/actor/traits.hbs',
+            template: PlayerDataForm.templates.systemDetailsTab,
             scrollable: [''],
         }
     }
 
     // getData(options) replacement
     override async _prepareContext(options:any) {
-        let context:any = {};
+        let context:any = {
+            tabGroups:{
+                primary: ''
+            }
+        };
 
         // Set Generic Data as default selected 
-        if (!context.tabGroups.primary) {
-            context.tabGroups.primary = 'genericData';
+        if (context.tabGroups.primary == '') {
+            context.tabGroups.primary == 'genericData';
         }
 
         // Get Display Data from data model
@@ -80,33 +81,41 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
 
         context.tabs = {
             genericData: {
-                cssClass: this.tabGroups.primary === 'aptitudes' ? 'active' : '',
+                cssClass: context.tabGroups.primary === 'genericData' ? 'active' : '',
                 group: 'primary',
                 id: 'genericData',
                 icon: 'fa-solid fa-dice-d20',
                 label: 'Dice Data - Label',
-                genericData: myGenericDiceData
+                title: 'Dice Data',
+                genericData: true
             },
             systemCharts: {
-                cssClass: this.tabGroups.primary === 'traits' ? 'active' : '',
+                cssClass: context.tabGroups.primary === 'systemCharts' ? 'active' : '',
                 group: 'primary',
                 id: 'systemCharts',
                 icon: 'fa-solid fa-hands-holding-circle',
                 label: 'System Chart Data - Label',
-                systemChartData: mySystemChartData
+                systemCharts: true
             },
             systemDetails: {
-                cssClass: this.tabGroups.primary === 'traits' ? 'active' : '',
+                cssClass: context.tabGroups.primary === 'systemDetails' ? 'active' : '',
                 group: 'primary',
                 id: 'systemDetails',
                 icon: 'fa-solid fa-pen-to-square',
                 label: 'System Details Data - Label',
-                systemDetailsData: mySystemDetailsData
+                systemDetails: true
             }
         }
 
         // Be mindful of mutating other objects in memory when you enrich
         return context;
+    }
+
+    protected override _configureRenderOptions(options: any): void {
+        super._configureRenderOptions(options);
+
+        // TODO: disable specific tabs here Depending on settings?
+        options.parts = ['tabs', 'genericData', 'systemCharts', 'systemDetails']
     }
 
     override _onRender(context:any, options:any): any {
