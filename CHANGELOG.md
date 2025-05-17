@@ -1,5 +1,8 @@
 # CHANGELOG 
-## [ X.XX.X ]
+## [ 1.22.2 ]
+- Add an unused button to dice stats pannel to correct bug. 
+- NOTE: Control will need to be moves to right side buttons to proeprly handle one off buttons rather than the scene controlls.
+- NOTE: Dice stats should not be tied to scenes so it should be moved
 
 ## [ 1.22.1 ]
 - Create v 13 support
