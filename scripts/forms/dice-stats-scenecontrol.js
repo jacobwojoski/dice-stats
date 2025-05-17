@@ -149,10 +149,29 @@ export class CustomSceneControlToolExport
     constructor(){}
 }
 
+export class CustomSceneControlToolUnused
+{
+    name = 'Unused';
+    title = 'Unused';
+    icon = 'fa-solid fa-power-off';
+    order= 0;
+
+    visible= true;
+    toggle= false;
+    active= false;
+    button= true;
+
+    async onChange(event, active){
+        console.log("Unused Dice Stats Button")
+    }
+
+    constructor(){}
+}
+
 // Scene Controller outer button to view player buttons
 export class CustomSceneControl
 {
-    activeTool = '';
+    activeTool = 'Unused';
     icon = 'fas fa-dice-d20';
     name = 'dice-stats';
     title = game.i18n.localize('DICE_STATS_TEXT.title');
@@ -169,9 +188,20 @@ export class CustomSceneControl
             tool_cnt++;
             this.tools[tool.name] = tool
         }
+        this.#onChange()
+        this.onChange()
+        this.onToolChange()
     }
 
-    async onChange(event, active){
+    onChange(event, active){
+        console.log("Change Dice Stats Control")
+    }
 
+    #onChange(event, active){
+        console.log("Change Dice Stats Control")
+    }
+    
+    onToolChange(){
+        console.log("Change Dice Stats Tool")
     }
 }

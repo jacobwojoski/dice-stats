@@ -5,7 +5,7 @@ import { DS_MSG_DIE_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.j
 import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 import { DiceStatsTracker } from "../dice-stats-main.js";
 import { DB_INTERACTION } from "../database/dice-stats-db.js";
-import { CustomSceneControl, CustomSceneControlToolCompare, CustomSceneControlToolExport, CustomSceneControlToolGlobal, CustomSceneControlToolPlayer } from "../forms/dice-stats-scenecontrol.js";
+import { CustomSceneControl, CustomSceneControlToolUnused, CustomSceneControlToolCompare, CustomSceneControlToolExport, CustomSceneControlToolGlobal, CustomSceneControlToolPlayer } from "../forms/dice-stats-scenecontrol.js";
 import { DICE_STATS_UTILS } from "../dice-stats-utils.js";
 import { DS_GLOBALS } from "../dice-stats-globals.js";
 import { DiceStatsAPI } from "./dice-stats-api.js";
@@ -195,6 +195,7 @@ Hooks.on("getSceneControlButtons", controls => {
 
         let playersAsTools = [];
 
+        playersAsTools.push(new CustomSceneControlToolUnused())
         playersAsTools.push(new CustomSceneControlToolGlobal());
         playersAsTools.push(new CustomSceneControlToolCompare());
 
