@@ -14,7 +14,8 @@ being to track session specific information.
 - [Dependencies]()
 - [Incompatabilities]()
 - [Thanks]()
-- 
+- [Development/Contribution Guides]()
+- [Images]()
 
 ## UI Design
 #### Use one of the following to open the different information forms
@@ -84,8 +85,8 @@ Thanks to all Contributors and to anyone who made pull requests or bug reports t
 - ThiefMaster: Fix Depricated warning from V12 Updates
 - cuyima: API Fix
 
-## DEVELOPMENT Guide 
-#### Building Typescript Code 
+## Development Guide 
+#### Building the Typescript Code 
 - [ ] Install [Node][7] nvm and yarn from the nodejs website. (I've used v22.15.1)
 - [ ] Install Charting lib `npm install chart.js` for fancy UI charts
 - [ ] Install Foundry VTT Types: Check [League-of-Foundry-Developers][6] to download whatever version of the types you need. Getting the latest looks to use `yarn add --dev fvtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#main`
@@ -101,6 +102,8 @@ When adding a system you will need to edit the following:
 - [ ] Create new system template
 - [ ] Add Localization to language template (plz)
 - [ ] Update Player form to use new System Display Info
+
+## Images
 
 [1]: https://foundryvtt.com/
 [2]: https://foundryvtt.com/packages/roll-tracker
