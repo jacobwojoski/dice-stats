@@ -8,6 +8,14 @@ Original Idea was from [Catan Online](https://colonist.io/) end-of-game dice sta
 This module can be used to track data over multiple sessions or an entire campaign but that will always lead to the average expected results. Hence the main pupose 
 being to track session specific information.
 
+## Contents
+- [UI Design]()
+- [Module Settings]()
+- [Dependencies]()
+- [Incompatabilities]()
+- [Thanks]()
+- 
+
 ## UI Design
 #### Use one of the following to open the different information forms
 - Use Scene Control buttons to open the forms
@@ -15,12 +23,13 @@ being to track session specific information.
 - Use Macro to open forms
   
 #### Different forms
-- Settings: Quick access to some module settings without going to the module-settings window 
+- Settings: Quick access to some module settings without going to the module-settings window [Settings Form Options Link](#gm-interaction-settings)
 - Global Stats: Info of all players combined possibly includidng or excluding the GM
 - Compare Stats: Directly compare each players rolls on one chart
 - Player Stats: View an individuals dice roll info
 
-## SETTINGS in the Module Tab
+## Module Settings
+#### Module Settings info
 - Players See GM Rolls?         Def: True    // Allow non GM's to see the the GM form
 - Players See Other Players?    Def: True    // Allow players to view other players forms
 - Players See Self?             Def: True    // Allow players to see their own form
@@ -36,7 +45,7 @@ being to track session specific information.
 - Hide Scene Control Buttons?   Def: False
 - Add Chat Window Button?       Def: True
 
-## SETTINGS Form
+#### GM Interaction Settings
 - Pause Saving Rolls?
 - Push Blind Rolls
 - Export Data (File, json or yaml?)
@@ -44,9 +53,6 @@ being to track session specific information.
 - Set Player Icons (Dropdown for each player)
 
 ## DEPENDENCIES 
-- [socketlib][3] | [socketlib Foundry Page](https://foundryvtt.com/packages/socketlib)
-Socketlib needs to be active to allow GM to tell other users to push blind rolls.
-- [Google Charts](http://google.com)
 - [Charts.js](https://www.chartjs.org)
   
 ## INCOMPATABILITIES (Add an Issue for any System Requests)
@@ -57,7 +63,8 @@ Socketlib needs to be active to allow GM to tell other users to push blind rolls
     - Midi-qol.rollComplete hook Doesnt have a way to trace back to the Player that rolled. Only the actor
     - Use actor.owner to track to player but if there are multiple owners it may not track to the correct person.
 
-### Thanks
+## Thanks
+#### External Help
 - [Foundry][1] For making an awesome VTT
 - Used Google Charts originally and now Charts.js (Both MIT License)
 - Used [Roll Tracker Module][2] (MIT License) as a starting point
@@ -65,8 +72,10 @@ Socketlib needs to be active to allow GM to tell other users to push blind rolls
 - [BringingFire Typescript Blog][4] For an easily digestable way to get typesript working for Foundry Modules
 - [BringingFire Typescipt Template][5]  The Typescipt starting point
 - [League-of-Foundry-Developers][6] For typescript types
+- Foundry VTT Discord for many questions
 
-#### Special Thanks to all Contributors and to anyone who made pull requests or bug reports to get the module to where it is now
+#### Module Help!
+Thanks to all Contributors and to anyone who made pull requests or bug reports to get the module to where it is now.
 - Jacobwojo: Lead Developer
 - Juan Ferrer: Fix for canvas buttons
 - RadicalEd: German translation + Remove some hardcoded items
@@ -75,14 +84,16 @@ Socketlib needs to be active to allow GM to tell other users to push blind rolls
 - ThiefMaster: Fix Depricated warning from V12 Updates
 - cuyima: API Fix
 
-## DEVELOPMENT Guide - Building typescript 
+## DEVELOPMENT Guide 
+#### Building Typescript Code 
 - [ ] Install [Node][7] nvm and yarn from the nodejs website. (I've used v22.15.1)
 - [ ] Install Charting lib `npm install chart.js` for fancy UI charts
 - [ ] Install Foundry VTT Types: Check [League-of-Foundry-Developers][6] to download whatever version of the types you need. Getting the latest looks to use `yarn add --dev fvtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#main`
 - [ ] Download needed yarn stuff `yarn add -D typescript vite rollup-plugin-copy`
 - [ ] run `yarn build` and the output should be in the `dist` folder. These files are whats needed to be placed in the `dice-stats` module directory
+- [ ] If on linux you can create a link to the dist folder using `ln -sfn <DEV FOLDER>/dice-stats/dist <FOUNDRY DATA DIR>/modules/dice-stats` otherwise you need to copy the dist directory to `<FOUNDRY DATA DIR>/modules/` and rename it as `dice-stats`
 
-### DEV - Adding A System Implementation
+#### Adding A System Implementation
 When adding a system you will need to edit the following:
 - [ ] Update system data factory to include system id
 - [ ] Create new system data class
