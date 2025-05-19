@@ -52,6 +52,7 @@ Used [Roll Tracker Module][2] (MIT License) as a starting point
 
 ## DEVELOPMENT - Building typescript 
 [ ] Install [Node][7] nvm and yarn from the nodejs website.
+[ ] Install Charting lib `npm install chart.js`
 [ ] Install Foundry VTT Types: Check [League-of-Foundry-Developers][6] to download whatever version of the types you need. Getting the latest looks to use `yarn add --dev fvtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#mai`
 [ ] Download yarn `yarn add -D typescript vite rollup-plugin-copy`
 [ ] run `yarn build` and the output should be in the `dist` folder. These files are whats needed to be placed in the `dice-stats` module directory

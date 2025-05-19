@@ -12,6 +12,10 @@ import { template } from "handlebars";
 
 const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
 
+// Declare google chart Will exist
+import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+
 export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     associatedPlayerId = '';
     // Default Template Locations. System templates should be overwritten when a system gets loaded
@@ -26,6 +30,8 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
         this.associatedPlayerId = playerId;
     }
 
+
+
     static override DEFAULT_OPTIONS:any = {
         tag: "form",
         form: {
@@ -37,6 +43,17 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             width: 600 ,
             height: 400
         },
+        window: {
+            //frame: boolean;
+            //positioned: boolean;
+            //title: string;
+            //icon: string | false;
+            //controls: ApplicationHeaderControlsEntry[];
+            minimizable: false,
+            resizable: true
+            //contentTag: string;
+            //contentClasses: string[];
+        }
     }
 
     override get title() {
@@ -45,7 +62,8 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
 
     static override PARTS = {
         tabs: {
-            template: 'modules/dice-stats/templates/player-data/player-data-nav-form.hbs',
+            //template: 'modules/dice-stats/templates/player-data/player-data-nav-form.hbs',
+            template: 'templates/generic/tab-navigation.hbs'
         },
         genericData: {
             template: PlayerDataForm.templates.genericDataTab,
@@ -120,6 +138,32 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
 
     override _onRender(context:any, options:any): any {
         this.element.querySelector("input[name=gen-btn]")?.addEventListener("click", PlayerDataForm.refresh);
+        
+
+        // Get canvas element
+        const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                y: {
+                    beginAtZero: true
+                }
+                }
+            }
+        });
     }
 
     static async refresh(){
@@ -133,6 +177,9 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
         //         .map(([key, value]) => (game as Game).settings.set("foo", key, value))
         // );
         console.log("Dice Stats GenericApp On Submit!");
+
+        //google.charts.load('current', {packages: ['corechart']});    
+
     }
 
     // override _renderHTML(context:any, options:any): any{

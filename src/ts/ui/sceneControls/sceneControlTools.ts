@@ -2,11 +2,31 @@ import { DiceStatsDataModel } from "../../dataModel/dataModel";
 import { MyGenericApplication } from "../forms/GenericForm";
 import { PlayerDataForm } from "../forms/playerDataForm";
 
-export class CustomSceneControlToolSettings implements SceneControls.ToolNoToggle
+export class CustomSceneControlToolUnused implements SceneControls.ToolNoToggle
 {
-    name = (game as Game).i18n?.localize('DiceStats.SceneControls.Settings.Name') ?? '';
+    name:string = (game as Game).i18n?.localize('DiceStats.SceneControls.Unused.Name') ?? 'Unused';
+    title = (game as Game).i18n?.localize('DiceStats.SceneControls.Unused.Title') ?? '';
+    icon = 'fa-solid fa-power-off';
+    layer = 'diceStats';
+    order= 0;
+
+    visible= true;
+    active= true;
+    button= true;
+
+    async onChange(event:any, active:any){
+        console.log("Unused scene control button")
+    }
+
+    constructor(){}
+}
+
+export class CustomSceneControlToolSettings implements SceneControls.ToolNoToggle 
+{
+    name:string = (game as Game).i18n?.localize('DiceStats.SceneControls.Settings.Name') ?? '';
     title = (game as Game).i18n?.localize('DiceStats.SceneControls.Settings.Title') ?? '';
     icon = 'fa-solid fa-gears';
+    layer = 'diceStats';
     order= 0;
 
     visible= true;
@@ -14,10 +34,8 @@ export class CustomSceneControlToolSettings implements SceneControls.ToolNoToggl
     button= true;
 
     async onChange(event:any, active:any){
-        DiceStatsDataModel.getInstance().openSettingsForm(true)
-        new MyGenericApplication().render()
+        DiceStatsDataModel.getInstance().openSettingsForm()
     }
-
     constructor(){}
     // TODO: Add pause and export functionalities to settings form
     // Give desc of other settings info (Change icon setting here?)
@@ -29,9 +47,10 @@ export class CustomSceneControlToolGlobal implements SceneControls.ToolNoToggle
     active= false;
     button= true;
 
-    name = (game as Game).i18n?.localize('DiceStats.SceneControls.GlobalStats.Name') ?? '';
+    name:string = (game as Game).i18n?.localize('DiceStats.SceneControls.GlobalStats.Name') ?? '';
     title = (game as Game).i18n?.localize('DiceStats.SceneControls.GlobalStats.Title') ?? '';
     icon = 'fa-solid fa-earth-americas';
+    layer = 'diceStats';
     order= 0;
 
     visible= true;
@@ -48,9 +67,10 @@ export class CustomSceneControlToolCompare implements SceneControls.ToolNoToggle
     active= false;
     button= true;
 
-    name = (game as Game).i18n?.localize('DiceStats.SceneControls.CompareStats.Name') ?? '';
+    name:string = (game as Game).i18n?.localize('DiceStats.SceneControls.CompareStats.Name') ?? '';
     title = (game as Game).i18n?.localize('DiceStats.SceneControls.CompareStats.Title') ?? '';
     icon = 'fa-solid fa-users-line';
+    layer = 'diceStats';
     order= 0;
 
     visible= true;
@@ -69,7 +89,8 @@ export class CustomSceneControlToolPlayer implements SceneControls.ToolNoToggle
     active = false;
     button = true;
     icon = '';
-    name = '';
+    name:string = '';
+    layer = 'diceStats';
     order = 0;
     title = '';
     visible = true;
@@ -86,7 +107,7 @@ export class CustomSceneControlToolPlayer implements SceneControls.ToolNoToggle
         // CustomSceneControlToolPlayer.app.maximize()
     }
 
-    constructor(player_name:string, player_id:string, player_icon:string){
+    constructor(player_name:string, player_id:string, player_icon:string='fas fa-dice-d20'){
         var isGM = (game as Game)?.users?.get(player_id)?.isGM ?? false;
 
         this.name = player_name+'_name';

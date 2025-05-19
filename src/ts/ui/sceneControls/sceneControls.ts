@@ -11,15 +11,15 @@
  *  - PLAYER STATS BUTTON
  */
 
-import { CustomSceneControlToolSettings, CustomSceneControlToolGlobal, CustomSceneControlToolCompare, CustomSceneControlToolPlayer } from "./sceneControlTools";
+import { CustomSceneControlToolSettings, CustomSceneControlToolGlobal, CustomSceneControlToolCompare, CustomSceneControlToolPlayer, CustomSceneControlToolUnused } from "./sceneControlTools";
 
 // Scene Controller outer button to view player buttons
-export class CustomSceneControl extends SceneControls
+export class CustomSceneControl // extends SceneControls
 {
-    //activeTool = '';
+    activeTool = (game as Game).i18n?.localize('DiceStats.SceneControls.Unused.Name') ?? 'Unused';
     icon = 'fas fa-dice-d20';
     name = 'dice-stats';
-    //title = (game as Game).i18n?.localize('DiceStats.SceneControls.DiceStatsSceneControl.Title') ?? 'Dice Stats';
+    title = (game as Game).i18n?.localize('DiceStats.SceneControls.DiceStatsSceneControl.Title') ?? 'Dice Stats';
     layer = 'diceStats';
     visible = true;
     tools:any = {};
@@ -28,8 +28,13 @@ export class CustomSceneControl extends SceneControls
     // UUID of players
     constructor(player_ids: [string, string][])
     {
-        super()
+        //super()
         var toolCount = 0
+
+        // Add tools to tool list
+        var unusedTool = new CustomSceneControlToolUnused()
+        unusedTool.order = ++toolCount
+        this.tools[unusedTool.name] = unusedTool
 
         var settingsTool = new CustomSceneControlToolSettings()
         settingsTool.order = ++toolCount
@@ -49,22 +54,23 @@ export class CustomSceneControl extends SceneControls
         for (var [id,name] of player_ids){
             var playerTool = new CustomSceneControlToolPlayer(name,id, "fas fa-dice-d20")
             playerTool.order = ++toolCount;
+            var toolName:string = playerTool.name;
 
-            this.tools[playerTool.name] = playerTool
+            this.tools[toolName] = playerTool
         }
+
     }
 
     async onChange(event:any, active:any){
-
+    
     }
 
-    override get title() {
-        return (game as Game).i18n?.localize('DiceStats.SceneControls.DiceStatsSceneControl.Title') ?? 'Dice Stats'
-    }
+    // override get title() {
+    //     return (game as Game).i18n?.localize('DiceStats.SceneControls.DiceStatsSceneControl.Title') ?? 'Dice Stats'
+    // }
 
-    override get activeTool() {
-        return ""
-    }
-
+    // override get activeTool(){
+    //     return 'Unused'
+    // }
     
 }

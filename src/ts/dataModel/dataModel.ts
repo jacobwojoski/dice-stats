@@ -164,8 +164,8 @@ export class DiceStatsModuleSettings {
         var players_see_gm:any = 'players_see_gm';
         (game as Game).settings.register(DiceStatsDataModel.id, players_see_gm, {
             name: `DiceStats.Settings.${players_see_gm}.Name`,
-            default: false,
-            type: Boolean,
+            //default: false,
+            //type: Boolean,
             scope: 'world',
             config: true,
             hint: `DiceStats.Settings.${players_see_gm}.Hint`

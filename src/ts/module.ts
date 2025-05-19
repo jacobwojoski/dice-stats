@@ -34,8 +34,7 @@ Hooks.once('ready', () => {
 // });
 
 // Hook to interact when scenecontrols get created Method used to have a better location to access player data
-Hooks.on("getSceneControlButtons", controls => {
-  
+Hooks.on("getSceneControlButtons", (controls: { [key: string]: any }) => {
   let playerIds = []
   let playerKeys:[string,string] = ['',''];
   
@@ -48,9 +47,13 @@ Hooks.on("getSceneControlButtons", controls => {
     }
   }
 
-  var customSceneCtrl = new CustomSceneControl(playerIds)
+  var customSceneCtrl = new CustomSceneControl(playerIds);
 
-  let key:any = 'dice-stats'
+  let key:string = 'dice-stats';
+
+  let layers: any = CONFIG.Canvas.layers;
+  layers['diceStats'] = { layerClass: InteractionLayer, group: 'interface' }
+
   controls[key] = customSceneCtrl
   
 });

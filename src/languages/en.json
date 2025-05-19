@@ -105,6 +105,12 @@
         "Tooltip": "View saved Dice Stats info.",
         "PermsErr": "ERROR: Unable to view Dice Stats info. Ask GM for permissions."
       },
+      "Unused":{
+        "Name": "Unused",
+        "Title": "Unused Button",
+        "Tooltip": "This is used to stop the bug with a tool not being selectyed by default",
+        "PermsErr": "ERROR: This button does nothing."
+      },
       "Settings":{
         "Name": "dsSceneControl-Settings",
         "Title": "Settings",
