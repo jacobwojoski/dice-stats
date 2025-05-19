@@ -8,6 +8,18 @@ Original Idea was from [Catan Online](https://colonist.io/) end-of-game dice sta
 This module can be used to track data over multiple sessions or an entire campaign but that will always lead to the average expected results. Hence the main pupose 
 being to track session specific information.
 
+## UI Design
+#### Use one of the following to open the different information forms
+- Use Scene Control buttons to open the forms
+- Use Chat Icon to open forms
+- Use Macro to open forms
+  
+#### Different forms
+- Settings: Quick access to some module settings without going to the module-settings window 
+- Global Stats: Info of all players combined possibly includidng or excluding the GM
+- Compare Stats: Directly compare each players rolls on one chart
+- Player Stats: View an individuals dice roll info
+
 ## SETTINGS in the Module Tab
 - Players See GM Rolls?         Def: True    // Allow non GM's to see the the GM form
 - Players See Other Players?    Def: True    // Allow players to view other players forms
@@ -15,7 +27,6 @@ being to track session specific information.
 - Players See Settings Form?    Def: Trie    // Allow players to open the settings form
 
 - Players See Blind Rolls?      Def: True    // Hide any Blind Rolls from being added to the charts until GM Adds them
- 
 - Track GM In Global Stats?     Def: False
 
 - Disable System Charts Tab?    Def: False
