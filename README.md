@@ -1,14 +1,7 @@
 # FoundryVTT Dice Stats Module
-## OVERVIEW
-This module is designed to record per session dice data. As well as System specific roll information to display to players.
-Each system needs to be added manually so create a bug report if you want me to add details for a specific system thats not currently supported.
 
-Original Idea was from [Catan Online](https://colonist.io/) end-of-game dice stats screen and wanted something similar to let players look at during or the end of a session.  
-
-This module can be used to track data over multiple sessions or an entire campaign but that will always lead to the average expected results. Hence the main pupose 
-being to track session specific information.
-
-## Contents
+## Table of Contents
+- [Overview]()
 - [UI Design]()
 - [Module Settings]()
 - [Dependencies]()
@@ -16,6 +9,18 @@ being to track session specific information.
 - [Thanks]()
 - [Development/Contribution Guides]()
 - [Images]()
+- [Changelog]()
+
+## OVERVIEW
+This module is designed to record per session dice data. Also some system specific roll information to display to players. 
+Each system needs to be added manually so create a bug report if you want me to add details for a specific system thats not currently supported.
+
+Original Idea was from [Catan Online](https://colonist.io/) end-of-game dice stats screen and wanted something similar to let players look at during or the end of a session.
+Always fun to see when the dice were as bad as you thought this session. And when that pesky friend rolled 5 crits while you got none. 
+
+This module can be used to track data over multiple sessions or an entire campaign but that will always lead to the average expected results. 
+Because of this the main pupose of the module is to track session specific information and clear it at the start of every session. As specific session info can 
+vary drastically compared to the average result after a long campaign. 
 
 ## UI Design
 #### Use one of the following to open the different information forms
