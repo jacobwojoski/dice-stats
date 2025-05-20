@@ -3,6 +3,7 @@ import { GenericSystemData } from "./systemData/genericSystemData.js";
 import { SystemDataFactory } from "./systemData/systemDataFactory.js";
 import { DIE_TYPE } from "../constants.js";
 import { PlayerDataForm } from "../ui/forms/playerDataForm.js";
+import { DieChartData } from "./displayData.js";
 
 /**
  * DESC: 
@@ -17,6 +18,7 @@ export class DiceStatsPlayer {
 
     _playerForm:PlayerDataForm;     // {Dice Stats Player Form Obj}
 
+    _diceIsDisplayed:Boolean[];     // {Bool[]}
     _diceInfo:DieInfo[];            // {DieInfo[]}
     _systemInfo:GenericSystemData;     // System Specific Data (Different class onject depending on the system were in)
 
@@ -32,6 +34,10 @@ export class DiceStatsPlayer {
         this._userName = in_user_name;
         this._isGm = in_is_gm;
         
+        this._diceIsDisplayed = new Array(DIE_TYPE.LENGTH)
+        this._diceIsDisplayed.fill(true);
+        this._diceIsDisplayed[DIE_TYPE.UNKNOWN] = true;
+
         this._diceInfo = DieInfo.createDieInfoAry()
         this._systemInfo = SystemDataFactory.createSystemData(system_id)
 
@@ -105,5 +111,16 @@ export class DiceStatsPlayer {
     openPlayerForm(){
         this._playerForm.render(true)
     }
+
+    getDisplayData(){
+        let displayData:DieChartData[] = new Array(DIE_TYPE.LENGTH);
+        for (var die of this._diceInfo){
+            displayData.push(die.getDisplayData())
+        }
+        return displayData
+    }
+}
+
+export class GenericDiceDisplayData {
 
 }

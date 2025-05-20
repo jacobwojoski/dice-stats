@@ -3,5 +3,14 @@
   data-group='primary'
   data-tab='genericData'
 >
-    <h1>Generic Tab Data Here!</h1>
+  <head>
+      <script type = "text/javascript">
+          google.charts.load('current', {packages: ['corechart']});     
+      </script>
+  </head>
+    
+  <h1>Generic Tab Data Here!</h1>
+  <h3>{{this.customHeading}}</h3>
+
+  <canvas id="myChart" width="400" height="200"></canvas>
 </section>

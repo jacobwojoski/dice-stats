@@ -1,4 +1,5 @@
 import { NUM_DIE_TYPES, DIE_TYPE, STREAK_DIRECTION, Utils } from "../../constants";
+import { DieChartData } from "../displayData";
 /**
  * NAME: DieInfo
  * DESC: 
@@ -249,6 +250,13 @@ export class DieInfo {
             diceAry[die_type] = new DieInfo(die_type)
         }
         return diceAry;
+    }
+
+    public getDisplayData(){
+        return new DieChartData(
+            Utils.getDieName(this.type),
+
+        );
     }
     
 }

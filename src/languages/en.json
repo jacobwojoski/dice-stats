@@ -16,6 +16,10 @@
               "Mode": "Dice Mode (Most Common):",
               "Streak": "Longest Sequential Roll (Streak):"
             },
+            "Unknown":{
+              "Checkbox": "UK",
+              "Title": "Unknown"
+            },
             "D2": {
               "Checkbox": "D2",
               "Title": "D-2 Info"

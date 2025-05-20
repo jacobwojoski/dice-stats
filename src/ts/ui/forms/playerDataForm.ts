@@ -14,10 +14,13 @@ const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.a
 
 // Declare google chart Will exist
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
+import { DiceStatsDataModel } from "../../dataModel/dataModel";
+import { DIE_TYPE } from "../../constants";
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     associatedPlayerId = '';
+
     // Default Template Locations. System templates should be overwritten when a system gets loaded
     static templates = {
         genericDataTab: 'modules/dice-stats/templates/player-data/tabs/generic-dice-data-tab.hbs',
@@ -92,11 +95,6 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             context.tabGroups.primary == 'genericData';
         }
 
-        // Get Display Data from data model
-        let myGenericDiceData = {};
-        let mySystemChartData = {};
-        let mySystemDetailsData = {};
-
         context.tabs = {
             genericData: {
                 cssClass: context.tabGroups.primary === 'genericData' ? 'active' : '',
@@ -105,7 +103,8 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
                 icon: 'fa-solid fa-dice-d20',
                 label: 'Dice Data - Label',
                 title: 'Dice Data',
-                genericData: true
+                genericData: true,
+                customHeading: "Tab Lvl Heading"
             },
             systemCharts: {
                 cssClass: context.tabGroups.primary === 'systemCharts' ? 'active' : '',
@@ -124,6 +123,10 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
                 systemDetails: true
             }
         }
+
+        context.genericDiceInfo = DiceStatsDataModel.getInstance().;
+        context.systemChartInfo = {};
+        context.systemDataInfo = {};
 
         // Be mindful of mutating other objects in memory when you enrich
         return context;

@@ -94,6 +94,18 @@ export class DiceStatsDataModel {
         this.saveDataToDB();
     }
 
+    public getPlayerInfo(player_id:str){
+
+    }
+
+    public getCompareInfo(){
+
+    }
+
+    public getGlobalInfo(){
+        
+    }
+
     /* ================= API FN's ==================== */
     public openSettingsForm(isGM: boolean = false){
         this._settingsForm?.render(true)
