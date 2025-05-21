@@ -12,26 +12,35 @@ import { CustomSceneControl } from "./ui/sceneControls/sceneControls";
 Hooks.once('init', () => {
   console.log(`Initializing ${moduleId}`);
   DiceStatsDataModel.getInstance();
-
-
-  // module = (game as Game).modules.get(moduleId) as MyModule;
-  // module.dogBrowser = new DogBrowser();
-  });
+  }
+);
 
 Hooks.once('ready', () => {
   console.log('Scene Ready, We can load player data now!')
   DiceStatsDataModel.getInstance().loadPlayers()
+  }
+);
+
+// TODO: This def doesn't work but should be updated and tested to work!
+class DiceStatsCanvasLayer extends CanvasLayer {
+    static get layerOptions() {
+        return {
+            zIndex: 1000, // Define stacking order
+            name: "myCustomLayer",
+            group: canvas.groups.overlay // Assign to OverlayCanvasGroup
+        };
+    }
+
+    draw() {
+        super.draw();
+        console.log("My custom layer is now part of OverlayCanvasGroup!");
+    }
+}
+
+Hooks.on("canvasInit", () => {
+    CONFIG.Canvas.layers.diceStatsCanvasLayer = DiceStatsCanvasLayer;
 });
 
-// Hooks.on("renderActorDirectory", (_: Application, html: JQuery) => {
-//   const button = $(
-//     `<button class="cc-sidebar-button" type="button">🐶</button>`
-//   );
-//   button.on("click", () => {
-//     module.dogBrowser.render(true);
-//   });
-//   html.find(".directory-header .action-buttons").append(button);
-// });
 
 // Hook to interact when scenecontrols get created Method used to have a better location to access player data
 Hooks.on("getSceneControlButtons", (controls: { [key: string]: any }) => {
