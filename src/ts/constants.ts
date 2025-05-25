@@ -81,36 +81,19 @@ export class Utils {
         }
     }
 
-    public static getDieName(die_type:DIE_TYPE){
-        switch(die_type){
-            case DIE_TYPE.D2:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D2.Checkbox');
-            case DIE_TYPE.D3:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D3.Checkbox');
-            case DIE_TYPE.D4:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D4.Checkbox');
-            case DIE_TYPE.D6:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D6.Checkbox');
-            case DIE_TYPE.D8:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D8.Checkbox');
-            case DIE_TYPE.D10:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D10.Checkbox');
-            case DIE_TYPE.D12:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D12.Checkbox');
-            case DIE_TYPE.D20:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D20.Checkbox');
-            case DIE_TYPE.D50:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D50.Checkbox');
-            case DIE_TYPE.D100:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.D100.Checkbox');
-            
-            case DIE_TYPE.UNKNOWN:
-            default:
-                return (game as Game).i18n?.localize('DiceStats.GenericInfo.DiceInfo.Unknown.Checkbox');
-        }
-    }
-
     public static dsLogError(err_string:string){
         console.log("DICE-STATS ERROR: "+err_string)
+    }
+
+    public static getGenericDieInfoLocalization(die_type: DIE_TYPE){
+        let dieAccess = 'Unknown';
+        switch(die_type){
+            case DIE_TYPE.UNKNOWN:
+                dieAccess = 'Unknown'; break;
+            case DIE_TYPE.D2:
+                
+        }
+        let accessor = 'DiceStats.Forms.PlayerData.GenericInfo.DiceInfo'+dieAccess
+        return accessor
     }
 }

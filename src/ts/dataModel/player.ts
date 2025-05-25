@@ -2,8 +2,7 @@ import { DieInfo } from "./genericData/dice.js";
 import { GenericSystemData } from "./systemData/genericSystemData.js";
 import { SystemDataFactory } from "./systemData/systemDataFactory.js";
 import { DIE_TYPE } from "../constants.js";
-import { PlayerDataForm } from "../ui/forms/playerDataForm.js";
-import { DieChartData } from "./displayData.js";
+import { PlayerDataForm } from "../applications/playerData.js";
 
 /**
  * DESC: 
@@ -111,16 +110,4 @@ export class DiceStatsPlayer {
     openPlayerForm(){
         this._playerForm.render(true)
     }
-
-    getDisplayData(){
-        let displayData:DieChartData[] = new Array(DIE_TYPE.LENGTH);
-        for (var die of this._diceInfo){
-            displayData.push(die.getDisplayData())
-        }
-        return displayData
-    }
-}
-
-export class GenericDiceDisplayData {
-
 }

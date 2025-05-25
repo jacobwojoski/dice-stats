@@ -1,11 +1,10 @@
 import { DIE_TYPE } from "../constants";
 import { DiceStatsPlayer } from "./player";
-import { MyGenericApplication } from "../ui/forms/GenericForm";
 import { SystemDataFactory } from "./systemData/systemDataFactory";
 import { DieInfo } from "./genericData/dice";
 import { GenericSystemData } from "./systemData/genericSystemData";
 import { GenericDataParser } from "./genericData/genericDataParser";
-import { PlayerDataForm } from "../ui/forms/playerDataForm";
+import { PlayerDataForm } from "../applications/playerData";
 
 /* Create a singleton DataModel Class */
 export class DiceStatsDataModel {
@@ -23,9 +22,9 @@ export class DiceStatsDataModel {
         DiceStatsModuleSettings.registerSettings();
 
         // TODO: Create Form Objects
-        this._settingsForm = new MyGenericApplication();
-        this._globalForm = new MyGenericApplication();
-        this._compareForm = new MyGenericApplication();
+        this._settingsForm = new PlayerDataForm();
+        this._globalForm = new PlayerDataForm();
+        this._compareForm = new PlayerDataForm();
 
         // Create Player Map
 
@@ -47,8 +46,8 @@ export class DiceStatsDataModel {
 
     // Update Player form to hold system templates
     public setSystemTemplates(system_chart_tempalte:string, system_data_template:string){
-        PlayerDataForm.templates.systemChartTab = system_chart_tempalte;
-        PlayerDataForm.templates.systemDetailsTab = system_data_template;
+        // PlayerDataForm.templates.systemChartTab = system_chart_tempalte;
+        // PlayerDataForm.templates.systemDetailsTab = system_data_template;
     }
 
     /* ========================================================= */
@@ -94,8 +93,8 @@ export class DiceStatsDataModel {
         this.saveDataToDB();
     }
 
-    public getPlayerInfo(player_id:str){
-
+    public getPlayerInfo(player_id:string){
+        //return this.diceStatsPlayerMap.get(player_id)?.getDisplayData()
     }
 
     public getCompareInfo(){
@@ -103,7 +102,7 @@ export class DiceStatsDataModel {
     }
 
     public getGlobalInfo(){
-        
+
     }
 
     /* ================= API FN's ==================== */

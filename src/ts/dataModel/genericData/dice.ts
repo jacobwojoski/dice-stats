@@ -1,5 +1,4 @@
 import { NUM_DIE_TYPES, DIE_TYPE, STREAK_DIRECTION, Utils } from "../../constants";
-import { DieChartData } from "../displayData";
 /**
  * NAME: DieInfo
  * DESC: 
@@ -253,10 +252,64 @@ export class DieInfo {
     }
 
     public getDisplayData(){
-        return new DieChartData(
-            Utils.getDieName(this.type),
+        
+    }
 
-        );
+    public getChartData(){
+        let returnValue:any = {
+            datasets: [
+                {
+                    label: 'Die Result Roll Count',
+                    data: [...this.rolls],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }
+            ]
+        }
+
+        switch (this.type){
+            case DIE_TYPE.D2:
+                returnValue.labels = ['1','2']; 
+                break;
+            case DIE_TYPE.D3:
+                returnValue.labels = ['1','2','3']; 
+                break; 
+            case DIE_TYPE.D4:
+                returnValue.labels = ['1','2','3','4']; 
+                break; 
+            case DIE_TYPE.D6:
+                returnValue.labels = ['1','2','3','4','5','6']; 
+                break;
+            case DIE_TYPE.D8:
+                returnValue.labels = ['1','2','3','4','5','6','7','8']; 
+                break;
+            case DIE_TYPE.D10:
+                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10']; 
+                break;
+            case DIE_TYPE.D12:
+                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12']; 
+                break;
+            case DIE_TYPE.D20:
+                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']; 
+                break;
+            case DIE_TYPE.D50:
+                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
+                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25']; 
+                break;
+            case DIE_TYPE.D100:
+                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
+                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
+                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
+                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25']; 
+                break;
+            case DIE_TYPE.UNKNOWN:
+                returnValue.labels = ['UNKOWN']
+            default:
+                returnValue.labels = ['UNKOWN']
+        }
+
+        return returnValue
     }
     
 }

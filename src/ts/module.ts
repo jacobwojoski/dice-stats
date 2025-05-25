@@ -1,10 +1,11 @@
 // Do not remove this import. If you do Vite will think your styles are dead
 // code and not include them in the build output.
+import { HandleEmptyObject } from "fvtt-types/utils";
 import "../styles/style.scss";
 // import DogBrowser from "./apps/dogBrowser";
 import { moduleId } from "./constants";
 import { DiceStatsDataModel } from "./dataModel/dataModel";
-import { CustomSceneControl } from "./ui/sceneControls/sceneControls";
+import { CustomSceneControl } from "./ui/sceneControls";
 // import { MyModule } from "./types/types";
 
 //let module: MyModule;
@@ -21,24 +22,9 @@ Hooks.once('ready', () => {
   }
 );
 
-// TODO: This def doesn't work but should be updated and tested to work!
-class DiceStatsCanvasLayer extends CanvasLayer {
-    static get layerOptions() {
-        return {
-            zIndex: 1000, // Define stacking order
-            name: "myCustomLayer",
-            group: canvas.groups.overlay // Assign to OverlayCanvasGroup
-        };
-    }
-
-    draw() {
-        super.draw();
-        console.log("My custom layer is now part of OverlayCanvasGroup!");
-    }
-}
-
 Hooks.on("canvasInit", () => {
-    CONFIG.Canvas.layers.diceStatsCanvasLayer = DiceStatsCanvasLayer;
+    let layers:any = CONFIG.Canvas.layers
+    layers.diceStats = {layerClass: ControlsLayer, group: 'interface'};
 });
 
 

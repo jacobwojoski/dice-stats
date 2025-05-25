@@ -1,6 +1,5 @@
-import { DiceStatsDataModel } from "../../dataModel/dataModel";
-import { MyGenericApplication } from "../forms/GenericForm";
-import { PlayerDataForm } from "../forms/playerDataForm";
+import { DiceStatsDataModel } from "../dataModel/dataModel";
+import { PlayerDataForm } from "../applications/playerData";
 
 export class CustomSceneControlToolUnused implements SceneControls.ToolNoToggle
 {
@@ -85,7 +84,7 @@ export class CustomSceneControlToolCompare implements SceneControls.ToolNoToggle
 // Player Scene Control Icons (Icon can be customized in settings)
 export class CustomSceneControlToolPlayer implements SceneControls.ToolNoToggle
 {
-    static app: MyGenericApplication| PlayerDataForm | undefined = undefined
+    static app: PlayerDataForm | undefined = undefined
     active = false;
     button = true;
     icon = '';

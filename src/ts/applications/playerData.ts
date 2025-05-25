@@ -14,26 +14,25 @@ const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.a
 
 // Declare google chart Will exist
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
-import { DiceStatsDataModel } from "../../dataModel/dataModel";
-import { DIE_TYPE } from "../../constants";
+import { DiceStatsDataModel } from "../dataModel/dataModel";
+import { DIE_TYPE } from "../constants";
+
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
-    associatedPlayerId = '';
-
     // Default Template Locations. System templates should be overwritten when a system gets loaded
-    static templates = {
+    static TEMPLATES = {
         genericDataTab: 'modules/dice-stats/templates/player-data/tabs/generic-dice-data-tab.hbs',
         systemChartTab: 'modules/dice-stats/templates/player-data/tabs/systemForms/unknown/unknown-system-chart-form.hbs',
         systemDetailsTab: 'modules/dice-stats/templates/player-data/tabs/systemForms/unknown/unknown-system-data-form.hbs'
     }
 
+    associatedPlayerId = '';
+
     constructor(playerId:string = '', options = {}){
         super(options)
         this.associatedPlayerId = playerId;
     }
-
-
 
     static override DEFAULT_OPTIONS:any = {
         tag: "form",
@@ -69,15 +68,15 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             template: 'templates/generic/tab-navigation.hbs'
         },
         genericData: {
-            template: PlayerDataForm.templates.genericDataTab,
+            template: PlayerDataForm.TEMPLATES.genericDataTab,
             scrollable: ['']
         },
         systemCharts: {
-            template: PlayerDataForm.templates.systemChartTab,
+            template: PlayerDataForm.TEMPLATES.systemChartTab,
             scrollable: [''],
         },
         systemDetails: {
-            template: PlayerDataForm.templates.systemDetailsTab,
+            template: PlayerDataForm.TEMPLATES.systemDetailsTab,
             scrollable: [''],
         }
     }
@@ -85,14 +84,14 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     // getData(options) replacement
     override async _prepareContext(options:any) {
         let context:any = {
-            tabGroups:{
+            tabGroups: {
                 primary: ''
             }
         };
 
         // Set Generic Data as default selected 
         if (context.tabGroups.primary == '') {
-            context.tabGroups.primary == 'genericData';
+            context.tabGroups.primary = 'genericData';
         }
 
         context.tabs = {
@@ -124,7 +123,7 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         }
 
-        context.genericDiceInfo = DiceStatsDataModel.getInstance().;
+        context.genericDiceInfo = {};
         context.systemChartInfo = {};
         context.systemDataInfo = {};
 
@@ -150,23 +149,59 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             type: 'bar',
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-                }]
+                datasets: [
+                    {
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Round 2 Votes',
+                        data: [15, 15, 15, 15, 15, 15],
+                        backgroundColor: 'rgba(77, 224, 18, 0.2)',
+                        borderColor: 'rgb(192, 75, 75)',
+                        borderWidth: 1
+                    },
+                ]
             },
             options: {
                 responsive: true,
                 scales: {
-                y: {
-                    beginAtZero: true
-                }
+                    x: {
+                        beginAtZero: true,
+                        stacked: true
+                    },
+                    y: {
+                        beginAtZero: true,
+                        stacked: true
+                    }
                 }
             }
         });
+
+        myChart.render()
+
+        // D2 Chart
+
+        // D3 Chart
+
+        // D4 Chart
+
+        // D6 Chart
+
+        // D8 Chart
+
+        // D10 Chart
+
+        // D12 Chart
+
+        // D20 Chart
+
+        // D50 Chart
+
+        // D100 Chart
     }
 
     static async refresh(){
