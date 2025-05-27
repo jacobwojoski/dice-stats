@@ -14,10 +14,11 @@ export class DieInfo {
     max: number =       0;                  // {int}    MAX Value On Die , ex 6 for d6, 10 for d10, 12, 20
 
     lastRolledValue = -1;                   // {int}    Last rolled value on Die     (Needed for streaks)
-    startingStreak = []                     // {int}    For d10 EX: We aprced the follwing rolls fromt he message Rolls: [4,5, 9,6, 7,8,9]. 
-                                            //     The saved longest streak from the message was 7,8,9. But if the data model had an ongoing streak [1,2,3]  
-                                            //     The longest streak would actually be 1,2,3,4,5. Save the initial streak info as well as any other streaks 
-                                            //     to cmpare with datamodel when a Die Object is getting added to itself.
+    startingStreak = []                     // {int}    Why? For d10 EX: We parced the follwing rolls from  the incoming message it had multiple rolls:  
+                                            //         EX: Imcoming Rolls=[4,5, 9,2, 7,8,9]. 
+                                            //     The saved longest streak from the message would be 7,8,9. But if the data model had an ongoing streak of  
+                                            //     [1,2,3] The longest streak would actually be 1,2,3,4,5. So we need to Save the initial streak info as well 
+                                            //     as the longest streaks to copare with datamodel when a Die Object is getting added in.
 
     totalRolls:number =     0;              // {int}    Total number of rolls made
     rolls: number[] =       [];             // {int[] 1d array}  Size of this.max to track number of times each value was rolled on the die 
