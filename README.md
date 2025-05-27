@@ -111,6 +111,32 @@ When adding a system you will need to edit the following:
 - [ ] Add Localization to language template (plz)
 - [ ] Update Player form to use new System Display Info
 
+#### Hooks
+- **Init**: Initializing the Module with other foundry's other inits
+  - Call the constructor for the Dice-Stats data model. 
+  - Load the API Settings
+  - Creates an empty map that player info will be stored into later once we get list of players
+- **Ready**: System Is Now ready
+  - Get system ID 
+  - List of players is now avaialble. 
+  - Update Data Model Map. 
+    - Add a Player Object to the Map for each player defined in the game
+    - Each Player Object Includes *System-Agnostic Dice-Info* and *System-Specific Dice-Info (If System is Supported)*
+    - Update the System Specific Templates to be a *System Not Supported* or *System Charts & System Details* Template if dice-stats supports or does not support the system
+- **ChatMessageCreated**: A chat message has been created
+  - If the message is a roll parse the message, Otherwise ignore the message
+    1. Parse Generic Data
+    2. Parse System Data if supported
+    3. Get Player Data Related Message from Data Model
+    4. Save Data to associated player Data Model
+
+#### What Opening A UI/Application Does internally
+- An Application can be opened in the following ways:
+  - The Scene Control Buttons
+  - The Dice-Stats Button by the chat message area
+  -  Or through a Macro calling the Dice-Stats API. 
+- When an application gets opened the application render asks *Display Packager* to parse the data model and convert the data into the format needed for the application template. Any UI interactions Update the *Data Model* accordingly and a re-render gets called.
+
 ## Images
 
 [1]: https://foundryvtt.com/
