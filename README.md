@@ -23,13 +23,15 @@ Because of this the main pupose of the module is to track session specific infor
 vary drastically compared to the average result after a long campaign. 
 
 ## UI Design
-#### Use one of the following to open the different information forms
-- Use Scene Control buttons to open the forms
-- Use Chat Icon to open forms
-- Use Macro to open forms
+#### Use one of the following to open the different applications (forms)
+- Use Scene Control buttons to open the apps
+- Use Chat Icon to open apps
+- Use Macro to open apps
   
-#### Different forms
+#### Different Application Types
 - Settings: Quick access to some module settings without going to the module-settings window [Settings Form Options Link](#gm-interaction-settings)
+- Pause: Quick enable or disable the recording of Dice-Stats
+- IO: Import or Export Dice-Stats to CSV or JSON
 - Global Stats: Info of all players combined possibly includidng or excluding the GM
 - Compare Stats: Directly compare each players rolls on one chart
 - Player Stats: View an individuals dice roll info
@@ -49,7 +51,7 @@ vary drastically compared to the average result after a long campaign.
 
 - Scene Control Button Icons:   Def: ''      // Comma seperated list of icons for players
 - Hide Scene Control Buttons?   Def: False
-- Add Chat Window Button?       Def: True
+- Hide Chat Window Button?      Def: True
 
 #### GM Interaction Settings
 - Pause Saving Rolls?
@@ -57,6 +59,7 @@ vary drastically compared to the average result after a long campaign.
 - Export Data (File, json or yaml?)
 - Import Data (File, json or yaml?)
 - Set Player Icons (Dropdown for each player)
+- Open Applications (Global, Compare, Player)
 
 ## DEPENDENCIES 
 - [Charts.js](https://www.chartjs.org)
@@ -92,9 +95,9 @@ Thanks to all Contributors and to anyone who made pull requests or bug reports t
 
 ## Development Guide 
 #### Building the Typescript Code 
-- [ ] Install [Node][7] nvm and yarn from the nodejs website. (I've used v22.15.1)
+- [ ] Install [Node][7], nvm, and yarn from the nodejs website. (I've used v22.15.1) on a linux mint machine. I was also able to get it to work on windows using minggw.
 - [ ] Install Charting lib `npm install chart.js` for fancy UI charts
-- [ ] Install Foundry VTT Types: Check [League-of-Foundry-Developers][6] to download whatever version of the types you need. Getting the latest looks to use `yarn add --dev fvtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#main`
+- [ ] Install Foundry VTT Types: Check [League-of-Foundry-Developers][6] to download whatever version of the types you need. Getting the latest looks to use `yarn add --dev fvtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#main` currently
 - [ ] Download needed yarn stuff `yarn add -D typescript vite rollup-plugin-copy`
 - [ ] run `yarn build` and the output should be in the `dist` folder. These files are whats needed to be placed in the `dice-stats` module directory
 - [ ] If on linux you can create a link to the dist folder using `ln -sfn <DEV FOLDER>/dice-stats/dist <FOUNDRY DATA DIR>/modules/dice-stats` otherwise you need to copy the dist directory to `<FOUNDRY DATA DIR>/modules/` and rename it as `dice-stats`
