@@ -3,32 +3,40 @@ import { NUM_DIE_TYPES, DIE_TYPE, STREAK_DIRECTION, Utils } from "../../constant
  * NAME: DieInfo
  * DESC: 
  *  System Agnostic storage for dice info
+ *  - Assume Each Die is seperate for every other roll for generic data
  *  - Die rolls are stored in array thats the size of die
  *  - Allows static size of storage and just increment position in array for number of rolls
  * EX: 
- *  D20 roll was 16 -> Rolls[(16-1)]++;
+ *  D20 roll was 16 -> this.rolls[16]++;
  */
 export class DieInfo {
     type: DIE_TYPE =    DIE_TYPE.UNKNOWN;   // {int}    Type of die <DIE_TYPE> varable
     max: number =       0;                  // {int}    MAX Value On Die , ex 6 for d6, 10 for d10, 12, 20
 
-    rolledValue = -1;                       // {int}    Last rolled value on Die
+    lastRolledValue = -1;                   // {int}    Last rolled value on Die     (Needed for streaks)
+    startingStreak = []                     // {int}    For d10 EX: We aprced the follwing rolls fromt he message Rolls: [4,5, 9,6, 7,8,9]. 
+                                            //     The saved longest streak from the message was 7,8,9. But if the data model had an ongoing streak [1,2,3]  
+                                            //     The longest streak would actually be 1,2,3,4,5. Save the initial streak info as well as any other streaks 
+                                            //     to cmpare with datamodel when a Die Object is getting added to itself.
 
     totalRolls:number =     0;              // {int}    Total number of rolls made
-    rolls: number[] =       [];             // {int[] 1d array}  Size of die to track number of times each value was rolled on the die 
+    rolls: number[] =       [];             // {int[] 1d array}  Size of this.max to track number of times each value was rolled on the die 
 
-    mean:number =       0.0;                // {Double} Average
+    mean: number =      0.0;                // {Double} Average
     median: number =    0;                  // {int}    Middle accourances wise 
     mode: number =      0;                  // {int}    Most Common
 
     streakDir: STREAK_DIRECTION =  STREAK_DIRECTION.UNKNOWN;       // {DS_GLOBALS.STREAK_DIRECTION} 0=UNKNOWN, 1 = desending, 2 = ascending
-    streakSize: number =   -1;      // {int}    Number of incrementing or decrementing rolls
-    streakInit: number =   -1;      // {int}    Starting value for streak
+    streakSize: number =   -1;              // {int}    Number of incrementing or decrementing rolls
+    streakInit: number =   -1;              // {int}    Starting value for streak
 
     longestStreakDir: STREAK_DIRECTION =    STREAK_DIRECTION.UNKNOWN;       // {DS_GLOBALS.STREAK_DIRECTION} 0=UNKNOWN, 1 = desending, 2 = ascending
-    longestStreakSize: number =   -1;      // {int}    Number of incrementing or decrementing rolls
-    longestStreakInit: number =   -1;      // {int}    Starting value for streak
+    longestStreakSize: number =   -1;       // {int}    Number of incrementing or decrementing rolls
+    longestStreakInit: number =   -1;       // {int}    Starting value for streak
 
+    isDisplayedPlayer: bool = true;         // {Bool} Is this dice info displayed or hidden in the player stats application?
+    isDisplayedGlobal: bool = true;         // {Bool} Is this dice info displayed or hidden in the global stats application?
+    
     /**
      * Constructor should be private and only called by the static fn above
      */
@@ -257,51 +265,74 @@ export class DieInfo {
 
     public getChartData(){
         let returnValue:any = {
+            type: 'bar',
             datasets: [
                 {
                     label: 'Die Result Roll Count',
-                    data: [...this.rolls],
+                    data: [, ...this.rolls],                         // Skip first element as its a 0 and there are no 0's rolled
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 }
-            ]
+            ],
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '',
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    }
+                }
+            }
         }
 
         switch (this.type){
             case DIE_TYPE.D2:
-                returnValue.labels = ['1','2']; 
+                returnValue.labels = ['1','2'];
+                returnValue.options.plugins.title.text = 'D-2 Rolls';
                 break;
             case DIE_TYPE.D3:
                 returnValue.labels = ['1','2','3']; 
+                returnValue.options.plugins.title.text = 'D-3 Rolls';
                 break; 
             case DIE_TYPE.D4:
                 returnValue.labels = ['1','2','3','4']; 
+                returnValue.options.plugins.title.text = 'D-4 Rolls';
                 break; 
             case DIE_TYPE.D6:
                 returnValue.labels = ['1','2','3','4','5','6']; 
+                returnValue.options.plugins.title.text = 'D-6 Rolls';
                 break;
             case DIE_TYPE.D8:
                 returnValue.labels = ['1','2','3','4','5','6','7','8']; 
+                returnValue.options.plugins.title.text = 'D-8 Rolls';
                 break;
             case DIE_TYPE.D10:
                 returnValue.labels = ['1','2','3','4','5','6','7','8','9','10']; 
+                returnValue.options.plugins.title.text = 'D-10 Rolls';
                 break;
             case DIE_TYPE.D12:
                 returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12']; 
+                returnValue.options.plugins.title.text = 'D-12 Rolls';
                 break;
             case DIE_TYPE.D20:
                 returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']; 
+                returnValue.options.plugins.title.text = 'D-20 Rolls';
                 break;
             case DIE_TYPE.D50:
                 returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
-                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25']; 
+                                      '26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'];
+                returnValue.options.plugins.title.text = 'D-50 Rolls';
                 break;
             case DIE_TYPE.D100:
                 returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
-                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
-                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
-                                      '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25']; 
+                                      '26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50',
+                                      '51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75',
+                                      '76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100'];
+                returnValue.options.plugins.title.text = 'D-100 Rolls';
                 break;
             case DIE_TYPE.UNKNOWN:
                 returnValue.labels = ['UNKOWN']
