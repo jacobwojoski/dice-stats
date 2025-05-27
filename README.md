@@ -38,28 +38,34 @@ vary drastically compared to the average result after a long campaign.
 
 ## Module Settings
 #### Module Settings info
-- Players See GM Rolls?         Def: True    // Allow non GM's to see the the GM form
-- Players See Other Players?    Def: True    // Allow players to view other players forms
-- Players See Self?             Def: True    // Allow players to see their own form
-- Players See Settings Form?    Def: Trie    // Allow players to open the settings form
+- Players See GM Rolls?         Def: True    // Allow non GM's to see the the GM app
+- Players See Other Players?    Def: True    // Allow players to view other players app
+- Players See Self?             Def: True    // Allow players to see their own app
+- Players See Settings Form?    Def: True    // Allow players to open the settings app
 
-- Players See Blind Rolls?      Def: True    // Hide any Blind Rolls from being added to the charts until GM Adds them
-- Track GM In Global Stats?     Def: False
+- Players See Blind Rolls?      Def: True    // Hide any Blind Rolls from being added to the charts until GM Adds them using setting app
+- Track GM In Global Stats?     Def: False   // Inlcude or keep out GM's stats from the Global stats application
 
-- Disable System Charts Tab?    Def: False
-- Disable System Stats Tab?     Def: False
+- Disable System Tabs?          Def: False   // Disable system specific tabs
 
-- Scene Control Button Icons:   Def: ''      // Comma seperated list of icons for players
-- Hide Scene Control Buttons?   Def: False
-- Hide Chat Window Button?      Def: True
+- Scene Control Button Icons:   Def: ''      // Comma seperated list for custom button icons for each player
+  
+- Hide Scene Control Buttons?   Def: False   // Disable the Scene Control Buttons from appearing on the UI
+- Hide Btns From Players?       Def: False   // Disable the Scene Control Buttons for the players
+- Hide Chat Window Button?      Def: True    // Disable the Button By the chat window to open forms
+- Disable Dice Stats API?       Def: False   // Disable the Use of the Dice Stats API
+
+
+- Pause Saving Rolls?           Def: False   
+- Push Blind Rolls?             Button       
 
 #### GM Interaction Settings
-- Pause Saving Rolls?
-- Push Blind Rolls
-- Export Data (File, json or yaml?)
-- Import Data (File, json or yaml?)
-- Set Player Icons (Dropdown for each player)
-- Open Applications (Global, Compare, Player)
+- Pause Saving Rolls?           Def: False   // Done save any rolls to data while enabled
+- Push Blind Rolls              Button       // Add any non visible rolls to become visisble to players
+- Export Data (File, json or yaml?)          // Export All Data from data model into requested format
+- Import Data (File, json or yaml?)          // Import Data From Expected fromat
+- Set Player Icons (Dropdown for each player)  // Update Players Scene Controls Icons
+- Open Applications (Global, Compare, Player)  // Open each Application Not Using the Scene Control Buttons
 
 ## DEPENDENCIES 
 - [Charts.js](https://www.chartjs.org)
@@ -129,9 +135,14 @@ When adding a system you will need to edit the following:
     2. Parse System Data if supported
     3. Get Player Data Related Message from Data Model
     4. Save Data to associated player Data Model
+- **midi-qol.RollComplete**: A Midi QOL Message was finishied
+  - Multiple people use midi-qol for DnD5e.
+  - Midi Qol Messes with how rolls are normally output to chat.
+  - If Midi QoL is used, Parse Messages from Their chat hool as well as the normal chat ouput.
+  - This allows us to store automated rolls from Midi QoL and hand rolled items like an Item having `[[/r 2d20hk1]]` In the description or a user typing `/r 2d6r1` in chat
 
 #### What Opening A UI/Application Does internally
-- An Application can be opened in the following ways:
+- An Application can be opened in the following ways: (These Elements can be anabled or disabled in the settings)
   - The Scene Control Buttons
   - The Dice-Stats Button by the chat message area
   -  Or through a Macro calling the Dice-Stats API. 
