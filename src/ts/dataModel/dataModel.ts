@@ -73,7 +73,8 @@ export class DiceStatsDataModel {
         // Player -> Parse Generic Data
 
         /* ================================================== */
-        // Get author of message
+        // Get Owner of Token & Get author of message
+        //let ownerId = message.owner.id;
         let authorId = message.author.id;
 
         // Get the player that the roll is associated with
