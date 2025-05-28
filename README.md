@@ -100,6 +100,13 @@ Thanks to all Contributors and to anyone who made pull requests or bug reports t
 - cuyima: API Fix
 
 ## Development Guide 
+#### Style Guide (Try to be consistent but I know I'm not so cant blame ya)
+- `snake_case_in`: method variables (inputs)
+- `_cammelCase`: Private Variables & Private Method Names
+- `cammelCase`: Local Variables & Public Variables & method names (sometimes say `locSomeVariable` for local variables to help differentiate) 
+- `PascalCase`: Class Names
+- `SCREAMING_SNAKE_CASE`: Constants
+
 #### Building the Typescript Code 
 - [ ] Install [Node][7], nvm, and yarn from the nodejs website. (I've used v22.15.1) on a linux mint machine. I was also able to get it to work on windows using minggw.
 - [ ] Install Charting lib `npm install chart.js` for fancy UI charts
