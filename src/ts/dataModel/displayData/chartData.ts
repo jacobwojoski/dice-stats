@@ -1,9 +1,13 @@
-export class DieChartData 
+/**
+ * Generic display data for a chart with all data values being integers
+ */
+export class IntChartData 
 {
     isDisplayed = false;
 
-    chartTitle = '';
-    chartData = [];
+    chartTitle = '';    //
+    chartId = '';       // 
+    chartData = {};     // Chart.js Data object
 
     totalRolls = 0;
     mean = 0;
@@ -13,13 +17,13 @@ export class DieChartData
     streak = '';
 
     constructor(
-        title_in:string, chart_data_in:[], total_rolls_in:number,
+        title_in:string, chart_data_in:any, total_rolls_in:number,
         mean_in:number, median_in:number, mode_in:number,
         streak_in: string, is_displayed_in: boolean
     ){
         this.isDisplayed = is_displayed_in;
         this.chartTitle = title_in;
-        this.chartData = [...chart_data_in];
+        this.chartData = chart_data_in;
         this.totalRolls = total_rolls_in;
         this.mean = mean_in;
         this.median = median_in;

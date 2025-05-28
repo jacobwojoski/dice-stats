@@ -17,7 +17,6 @@ export class DiceStatsPlayer {
 
     _playerForm:PlayerDataForm;     // {Dice Stats Player Form Obj}
 
-    _diceIsDisplayed:Boolean[];     // {Bool[]}
     _diceInfo:DieInfo[];            // {DieInfo[]}
     _systemInfo:GenericSystemData;     // System Specific Data (Different class onject depending on the system were in)
 
@@ -32,10 +31,6 @@ export class DiceStatsPlayer {
         this._userId = in_user_id;
         this._userName = in_user_name;
         this._isGm = in_is_gm;
-        
-        this._diceIsDisplayed = new Array(DIE_TYPE.LENGTH)
-        this._diceIsDisplayed.fill(true);
-        this._diceIsDisplayed[DIE_TYPE.UNKNOWN] = true;
 
         this._diceInfo = DieInfo.createDieInfoAry()
         this._systemInfo = SystemDataFactory.createSystemData(system_id)

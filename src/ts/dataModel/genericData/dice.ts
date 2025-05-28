@@ -1,4 +1,5 @@
 import { NUM_DIE_TYPES, DIE_TYPE, STREAK_DIRECTION, Utils } from "../../constants";
+import { IntChartData } from "../displayData/chartData";
 /**
  * NAME: DieInfo
  * DESC: 
@@ -35,8 +36,8 @@ export class DieInfo {
     longestStreakSize: number =   -1;       // {int}    Number of incrementing or decrementing rolls
     longestStreakInit: number =   -1;       // {int}    Starting value for streak
 
-    isDisplayedPlayer: bool = true;         // {Bool} Is this dice info displayed or hidden in the player stats application?
-    isDisplayedGlobal: bool = true;         // {Bool} Is this dice info displayed or hidden in the global stats application?
+    streakString: string = '';
+    isDisplayed: boolean = true;         // {Bool} Is this dice info displayed or hidden in the player stats application?
     
     /**
      * Constructor should be private and only called by the static fn above
@@ -83,13 +84,12 @@ export class DieInfo {
      */
     addDieInfo(die_info:DieInfo, hasStreakInfo=false, hasSingleRoll = false){
         // Adding a singled rolled value to storage
-        if (hasSingleRoll && die_info.type == this.type && die_info.rolledValue > -1 && die_info.rolledValue <= this.max){
-            this.addNewRoll(die_info.rolledValue)
+        if (hasSingleRoll && die_info.type == this.type && die_info.lastRolledValue > -1 && die_info.lastRolledValue <= this.max){
+            this.addNewRoll(die_info.lastRolledValue)
         // Adding a die with multiple rolls to storage 
         }else if (die_info.type == this.type && die_info.max == this.max){
 
             // -- Add roll values --
-            this.totalRolls +=   die_info.totalRolls;
             for (var roll_value=0; roll_value<this.max; roll_value++){
                 this.rolls[roll_value] += die_info.rolls[roll_value]
             }
@@ -252,6 +252,24 @@ export class DieInfo {
         return indexOfMax+1;
     }
 
+    calculateStreakString(){
+        let streakAsStr = ''
+        if(this.longestStreakSize <= 1){
+            streakAsStr = 'No Streak Created'
+        }else if(this.longestStreakDir == STREAK_DIRECTION.ASCENDING){
+            streakAsStr = String(this.longestStreakInit);
+            for (let i=1; i<this.longestStreakSize; i++){
+                streakAsStr + ','+String(this.longestStreakInit+i)
+            }
+        }else{ // Decending streak
+            streakAsStr = String(this.longestStreakInit);
+            for (let i=1; i<this.longestStreakSize; i++){
+                streakAsStr + ','+String(this.longestStreakInit-i)
+            }
+        }
+        this.streakString = streakAsStr;
+    }
+
     public static createDieInfoAry(){
         var diceAry = new Array(NUM_DIE_TYPES);
         for (var die_type=0; die_type<NUM_DIE_TYPES; die_type++){
@@ -265,7 +283,7 @@ export class DieInfo {
     }
 
     public getChartData(){
-        let returnValue:any = {
+        let chartJsDataObj:any = {
             type: 'bar',
             datasets: [
                 {
@@ -292,55 +310,62 @@ export class DieInfo {
 
         switch (this.type){
             case DIE_TYPE.D2:
-                returnValue.labels = ['1','2'];
-                returnValue.options.plugins.title.text = 'D-2 Rolls';
+                chartJsDataObj.labels = ['1','2'];
+                chartJsDataObj.options.plugins.title.text = 'D-2 Rolls';
                 break;
             case DIE_TYPE.D3:
-                returnValue.labels = ['1','2','3']; 
-                returnValue.options.plugins.title.text = 'D-3 Rolls';
+                chartJsDataObj.labels = ['1','2','3']; 
+                chartJsDataObj.options.plugins.title.text = 'D-3 Rolls';
                 break; 
             case DIE_TYPE.D4:
-                returnValue.labels = ['1','2','3','4']; 
-                returnValue.options.plugins.title.text = 'D-4 Rolls';
+                chartJsDataObj.labels = ['1','2','3','4']; 
+                chartJsDataObj.options.plugins.title.text = 'D-4 Rolls';
                 break; 
             case DIE_TYPE.D6:
-                returnValue.labels = ['1','2','3','4','5','6']; 
-                returnValue.options.plugins.title.text = 'D-6 Rolls';
+                chartJsDataObj.labels = ['1','2','3','4','5','6']; 
+                chartJsDataObj.options.plugins.title.text = 'D-6 Rolls';
                 break;
             case DIE_TYPE.D8:
-                returnValue.labels = ['1','2','3','4','5','6','7','8']; 
-                returnValue.options.plugins.title.text = 'D-8 Rolls';
+                chartJsDataObj.labels = ['1','2','3','4','5','6','7','8']; 
+                chartJsDataObj.options.plugins.title.text = 'D-8 Rolls';
                 break;
             case DIE_TYPE.D10:
-                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10']; 
-                returnValue.options.plugins.title.text = 'D-10 Rolls';
+                chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10']; 
+                chartJsDataObj.options.plugins.title.text = 'D-10 Rolls';
                 break;
             case DIE_TYPE.D12:
-                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12']; 
-                returnValue.options.plugins.title.text = 'D-12 Rolls';
+                chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12']; 
+                chartJsDataObj.options.plugins.title.text = 'D-12 Rolls';
                 break;
             case DIE_TYPE.D20:
-                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']; 
-                returnValue.options.plugins.title.text = 'D-20 Rolls';
+                chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']; 
+                chartJsDataObj.options.plugins.title.text = 'D-20 Rolls';
                 break;
             case DIE_TYPE.D50:
-                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
+                chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
                                       '26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'];
-                returnValue.options.plugins.title.text = 'D-50 Rolls';
+                chartJsDataObj.options.plugins.title.text = 'D-50 Rolls';
                 break;
             case DIE_TYPE.D100:
-                returnValue.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
+                chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
                                       '26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50',
                                       '51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75',
                                       '76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100'];
-                returnValue.options.plugins.title.text = 'D-100 Rolls';
+                chartJsDataObj.options.plugins.title.text = 'D-100 Rolls';
                 break;
             case DIE_TYPE.UNKNOWN:
-                returnValue.labels = ['UNKOWN']
+                chartJsDataObj.labels = ['UNKOWN']
             default:
-                returnValue.labels = ['UNKOWN']
+                chartJsDataObj.labels = ['UNKOWN']
         }
 
+        this.calculateMean();
+        this.calculateMedian();
+        this.calculateMode();
+        this.calculateTotalRolls();
+        this.calculateStreakString();
+
+        let returnValue = new IntChartData(chartJsDataObj.options.plugins.title.text ,chartJsDataObj, this.totalRolls, this.mean,this.median, this.mode, this.streakString, this.isDisplayed)
         return returnValue
     }
     
