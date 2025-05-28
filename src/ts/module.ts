@@ -24,7 +24,8 @@ Hooks.once('ready', () => {
 
 Hooks.on("canvasInit", () => {
     let layers:any = CONFIG.Canvas.layers
-    layers.diceStats = {layerClass: ControlsLayer, group: 'interface'};
+    let canvas:any = foundry.canvas;
+    layers.diceStats = {layerClass: canvas.layers.ControlsLayer, group: 'interface'};
 });
 
 
@@ -46,8 +47,8 @@ Hooks.on("getSceneControlButtons", (controls: { [key: string]: any }) => {
 
   let key:string = 'dice-stats';
 
-  let layers: any = CONFIG.Canvas.layers;
-  layers['diceStats'] = { layerClass: InteractionLayer, group: 'interface' }
+  //let layers: any = CONFIG.Canvas.layers;
+  //layers['diceStats'] = { layerClass: InteractionLayer, group: 'interface' }
 
   controls[key] = customSceneCtrl
   

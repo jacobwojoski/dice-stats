@@ -17,14 +17,15 @@ import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, To
 import { DiceStatsDataModel } from "../dataModel/dataModel";
 import { DIE_TYPE } from "../constants";
 
+
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     // Default Template Locations. System templates should be overwritten when a system gets loaded
     static TEMPLATES = {
-        genericDataTab: 'modules/dice-stats/templates/player-data/tabs/generic-dice-data-tab.hbs',
-        systemChartTab: 'modules/dice-stats/templates/player-data/tabs/systemForms/unknown/unknown-system-chart-form.hbs',
-        systemDetailsTab: 'modules/dice-stats/templates/player-data/tabs/systemForms/unknown/unknown-system-data-form.hbs'
+        genericDataTab: 'modules/dice-stats/templates/player-data/tabs/genericInfo/generic-dice-data-tab.hbs',
+        systemChartTab: 'modules/dice-stats/templates/player-data/tabs/systemInfo/unknown/unknown-system-chart-form.hbs',
+        systemDetailsTab: 'modules/dice-stats/templates/player-data/tabs/systemInfo/unknown/unknown-system-data-form.hbs'
     }
 
     associatedPlayerId = '';
@@ -32,6 +33,9 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(playerId:string = '', options = {}){
         super(options)
         this.associatedPlayerId = playerId;
+
+        let handlebars:any = foundry.applications.handlebars;
+        handlebars.loadTemplates(['modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs'])
     }
 
     static override DEFAULT_OPTIONS:any = {
@@ -123,7 +127,32 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         }
 
-        context.genericDiceInfo = {};
+        context.genericDiceInfo = {
+            charts: [
+                {
+                    isVisible: true,
+                    id: 'myChart1',
+                    tableData: {
+                        meanExpected: 0,
+                        meanActual: 0,
+                        median: 0,
+                        mode: 0,
+                        streak: '9,8,7,6,5'
+                    }
+                },
+                {
+                    isVisible: true,
+                    id: 'myChart2',
+                    tableData: {
+                        meanExpected: 0,
+                        meanActual: 0,
+                        median: 0,
+                        mode: 0,
+                        streak: '9,8,7,6,5'
+                    }
+                }
+            ]
+        };
         context.systemChartInfo = {};
         context.systemDataInfo = {};
 
@@ -140,12 +169,9 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
 
     override _onRender(context:any, options:any): any {
         this.element.querySelector("input[name=gen-btn]")?.addEventListener("click", PlayerDataForm.refresh);
-        
 
         // Get canvas element
-        const ctx = document.getElementById('myChart') as HTMLCanvasElement;
-
-        const myChart = new Chart(ctx, {
+        let chartData:any = {
             type: 'bar',
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -179,10 +205,19 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
                     }
                 }
             }
-        });
+        }
 
+        const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+        const myChart = new Chart(ctx, chartData);
         myChart.render()
 
+        const ctx1 = document.getElementById('myChart1') as HTMLCanvasElement;
+        const myChart1 = new Chart(ctx1, chartData);
+        myChart1.render()
+
+        const ctx2 = document.getElementById('myChart2') as HTMLCanvasElement;
+        const myChart2 = new Chart(ctx2, chartData);
+        myChart2.render()
         // D2 Chart
 
         // D3 Chart
