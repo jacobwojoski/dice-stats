@@ -122,6 +122,10 @@ When adding a system you will need to edit the following:
   - Call the constructor for the Dice-Stats data model. 
   - Load the API Settings
   - Creates an empty map that player info will be stored into later once we get list of players
+- **Canvas Init**: Canvas is getting created:
+  - Add dice stats layer to canvas for the module specific scene controlls
+- **getSceneControlButtons**: Scene control buttons are getting loaded
+  - When scene controll buttons are getting made add the dice stats buttons
 - **Ready**: System Is Now ready
   - Get system ID 
   - List of players is now avaialble. 
