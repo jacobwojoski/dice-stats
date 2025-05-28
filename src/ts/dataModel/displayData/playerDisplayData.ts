@@ -16,6 +16,8 @@ export class PlayerDisplayData {
         for(let die of player_in._diceInfo){
             this.genericData?.push(die.getChartData())
         }
+        this.systemChartData = player_in._systemInfo.getSystemChartData();
+        this.systemDetailsData = player_in._systemInfo.getSystemDetailsData();
     }
 
 }
