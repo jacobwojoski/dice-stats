@@ -152,6 +152,14 @@ When adding a system you will need to edit the following:
   -  Or through a Macro calling the Dice-Stats API. 
 - When an application gets opened the application render asks *Display Packager* to parse the data model and convert the data into the format needed for the application template. Any UI interactions Update the *Data Model* accordingly and a re-render gets called.
 
+#### Parsing Messages Code Guide
+1. When a message is received, check what system we are & get associated player
+2. Call System-Data-factory to get a system-data-object if one has been made for the system
+3. Call the system parser passing in the message object returning a filled in system object
+4. Call the generic data parser passing im the message object returning a filled in message object
+5. Get the associated player object from the data model
+5. Add both the parsed system-data-object and generic-data-object to the associated player
+
 ## Images
 
 [1]: https://foundryvtt.com/
