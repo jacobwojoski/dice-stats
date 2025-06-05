@@ -11,6 +11,7 @@ import { IntChartData } from "../displayData/chartData";
  *  D20 roll was 16 -> this.rolls[16]++;
  */
 export class DieInfo {
+    name: string =      '';                 // {string} Name of Die EX: D2, D6, etc 
     type: DIE_TYPE =    DIE_TYPE.UNKNOWN;   // {int}    Type of die <DIE_TYPE> varable
     max: number =       0;                  // {int}    MAX Value On Die , ex 6 for d6, 10 for d10, 12, 20
 
@@ -25,6 +26,7 @@ export class DieInfo {
     rolls: number[] =       [];             // {int[] 1d array}  Size of this.max to track number of times each value was rolled on the die 
 
     mean: number =      0.0;                // {Double} Average
+    expMean:number =    0.0;                // {Double} Expected Average
     median: number =    0;                  // {int}    Middle accourances wise 
     mode: number =      0;                  // {int}    Most Common
 
@@ -44,7 +46,9 @@ export class DieInfo {
      */
     constructor(die_type: DIE_TYPE){
         this.type =          die_type;                          // {int}    Type of die <DIE_TYPE> varable
+        this.name =          Utils.getDieName(die_type)         // {string} Name for the die
         this.max =           Utils.getDieMax(die_type);         // {int}    MAX Value On Die , ex 6 for d6, 10 for d10, 12, 20
+        this.expMean =       Utils.getDieAverage(die_type)      // {Double} Expected average of die EX: 3.5 for a d6
         this.rolls = new Array(this.max+1)                      // Add 1 to include 0 as option and not req index adjustment from roll value
 
         this.clear()
@@ -270,6 +274,14 @@ export class DieInfo {
         this.streakString = streakAsStr;
     }
 
+    public calculateAll(){
+        this.calculateMean();
+        this.calculateMedian();
+        this.calculateMode();
+        this.calculateStreakString();
+        this.calculateTotalRolls();
+    }
+
     public static createDieInfoAry(){
         var diceAry = new Array(NUM_DIE_TYPES);
         for (var die_type=0; die_type<NUM_DIE_TYPES; die_type++){
@@ -278,11 +290,7 @@ export class DieInfo {
         return diceAry;
     }
 
-    public getDisplayData(){
-        
-    }
-
-    public getChartData(){
+    public getChartData(): IntChartData {
         let chartJsDataObj:any = {
             type: 'bar',
             datasets: [
@@ -359,13 +367,9 @@ export class DieInfo {
                 chartJsDataObj.labels = ['UNKOWN']
         }
 
-        this.calculateMean();
-        this.calculateMedian();
-        this.calculateMode();
-        this.calculateTotalRolls();
-        this.calculateStreakString();
+        this.calculateAll()
 
-        let returnValue = new IntChartData(chartJsDataObj.options.plugins.title.text ,chartJsDataObj, this.totalRolls, this.mean,this.median, this.mode, this.streakString, this.isDisplayed)
+        let returnValue = new IntChartData(chartJsDataObj.options.plugins.title.text, chartJsDataObj, this.totalRolls, this.mean, this.expMean, this.median, this.mode, this.streakString, this.isDisplayed)
         return returnValue
     }
     

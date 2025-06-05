@@ -96,4 +96,31 @@ export class Utils {
         let accessor = 'DiceStats.Forms.PlayerData.GenericInfo.DiceInfo'+dieAccess
         return accessor
     }
+
+    public static getDieName(die_type: DIE_TYPE){
+        switch(die_type){
+            case DIE_TYPE.D2:
+                return "D-2";
+            case DIE_TYPE.D3:
+                return "D-3";
+            case DIE_TYPE.D4:
+                return "D-4";
+            case DIE_TYPE.D6:
+                return "D-6";
+            case DIE_TYPE.D8:
+                return "D-8";
+            case DIE_TYPE.D10:
+                return "D-10";
+            case DIE_TYPE.D12:
+                return "D-12";
+            case DIE_TYPE.D20:
+                return "D-20";
+            case DIE_TYPE.D50:
+                return "D-50"
+            case DIE_TYPE.D100:
+                return "D-100";
+            default:
+                return "Unknown";
+        }
+    }
 }

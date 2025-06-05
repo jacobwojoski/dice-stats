@@ -12,10 +12,8 @@
   <hr>
 
   {{#each this.genericDiceInfo.charts}}
-    {{#if this.isVisible}}
-      <canvas id="{{this.id}}" width="400" height="200"></canvas>
+    {{#if this.isDisplayed}}
       {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs}}
-      <hr>
     {{/if}}
   {{/each}}
 </section>

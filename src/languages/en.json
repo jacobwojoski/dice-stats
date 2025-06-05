@@ -11,7 +11,8 @@
           "DiceInfo":{
             "Common": {
               "Total": "Total Dice Rolled:",
-              "Mean": "Dice Mean (Average):",
+              "CalculatedMean": "Dice Mean (Average):",
+              "ExpectedMean": "Expected Average:",
               "Median": "Dice Median (Middle #):",
               "Mode": "Dice Mode (Most Common):",
               "Streak": "Longest Sequential Roll (Streak):"

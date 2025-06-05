@@ -7,10 +7,11 @@ export class IntChartData
 
     chartTitle = '';    //
     chartId = '';       // 
-    chartData = {};     // Chart.js Data object
+    chartData:any = {};     // Chart.js Data object
 
     totalRolls = 0;
     mean = 0;
+    expectedMean = 0;
     median = 0;
     mode = 0;
 
@@ -18,7 +19,7 @@ export class IntChartData
 
     constructor(
         title_in:string, chart_data_in:any, total_rolls_in:number,
-        mean_in:number, median_in:number, mode_in:number,
+        mean_in:number,  exp_mean_in:number, median_in:number, mode_in:number,
         streak_in: string, is_displayed_in: boolean
     ){
         this.isDisplayed = is_displayed_in;
@@ -26,6 +27,7 @@ export class IntChartData
         this.chartData = chart_data_in;
         this.totalRolls = total_rolls_in;
         this.mean = mean_in;
+        this.expectedMean = exp_mean_in;
         this.median = median_in;
         this.mode = mode_in;
         this.streak = streak_in;

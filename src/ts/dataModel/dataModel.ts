@@ -95,7 +95,7 @@ export class DiceStatsDataModel {
     }
 
     public getPlayerInfo(player_id:string){
-        //return this.diceStatsPlayerMap.get(player_id)?.getDisplayData()
+        return this.diceStatsPlayerMap.get(player_id)
     }
 
     public getCompareInfo(){

@@ -1,35 +1,37 @@
 <!--
-        Total Rolls: 
+Total Rolls: 
 Mean (Avg)                  Expected Avg:
 Median (Middle Number)      Mode (Most Common)
 Streak 
 -->
 <section style="width: 100%; height:fit-content;">
+    <h2>{{this.chartTitle}}</h2>
+    <canvas id="{{this.chartId}}" width="400px" height="200px"></canvas>
     <table class="">
         <tr>
-            <td>Total Rolls</td>
-            <td>25</td>
+            <td>{{localize "DiceStats.Forms.PlayerData.GenericInfo.DiceInfo.Common.Total"}}</td>
+            <td>{{this.totalRolls}}</td>
         </tr>
 
         <tr>
-            <td>Mean (Average)</td>
-            <td>6</td>
+            <td>{{localize "DiceStats.Forms.PlayerData.GenericInfo.DiceInfo.Common.CalculatedMean"}}</td>
+            <td>{{this.mean}}</td>
 
-            <td>Expected Average:</td>
-            <td>3.5</td>
+            <td>{{localize "DiceStats.Forms.PlayerData.GenericInfo.DiceInfo.Common.ExpectedMean"}}</td>
+            <td>{{this.expectedMean}}</td>
         </tr>
 
         <tr>
-            <td>Median Middle Number</td>
-            <td>2</td>
+            <td>{{localize "DiceStats.Forms.PlayerData.GenericInfo.DiceInfo.Common.Median"}}</td>
+            <td>{{this.median}}</td>
 
-            <td>Mode (Most Common):</td>
-            <td>1</td>
+            <td>{{localize "DiceStats.Forms.PlayerData.GenericInfo.DiceInfo.Common.Mode"}}</td>
+            <td>{{this.mode}}</td>
         </tr>
 
         <tr>
-            <td>Streak</td>
-            <td>1,2,3,4,5,6</td>
+            <td>{{localize "DiceStats.Forms.PlayerData.GenericInfo.DiceInfo.Common.Streak"}}</td>
+            <td>{{this.streak}}</td>
         </tr>
     </table>
 </section>

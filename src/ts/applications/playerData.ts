@@ -16,6 +16,8 @@ const { ApplicationV2, DocumentSheetV2, HandlebarsApplicationMixin } = foundry.a
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import { DiceStatsDataModel } from "../dataModel/dataModel";
 import { DIE_TYPE } from "../constants";
+import { DiceStatsPlayer } from "../dataModel/player";
+import { IntChartData } from "../dataModel/displayData/chartData";
 
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
@@ -29,6 +31,8 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     associatedPlayerId = '';
+    localGenericChartData:any = {};
+    localSystemChartData:any = {};
 
     constructor(playerId:string = '', options = {}){
         super(options)
@@ -127,36 +131,13 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         }
 
-        context.genericDiceInfo = {
-            charts: [
-                {
-                    isVisible: true,
-                    id: 'myChart1',
-                    tableData: {
-                        meanExpected: 0,
-                        meanActual: 0,
-                        median: 0,
-                        mode: 0,
-                        streak: '9,8,7,6,5'
-                    }
-                },
-                {
-                    isVisible: true,
-                    id: 'myChart2',
-                    tableData: {
-                        meanExpected: 0,
-                        meanActual: 0,
-                        median: 0,
-                        mode: 0,
-                        streak: '9,8,7,6,5'
-                    }
-                }
-            ]
-        };
-        context.systemChartInfo = {};
-        context.systemDataInfo = {};
+        context.genericChartInfo = DiceStatsDataModel.getInstance().getPlayerInfo(this.associatedPlayerId)?.getGenericChartDisplayData();
+        context.systemChartInfo = DiceStatsDataModel.getInstance().getPlayerInfo(this.associatedPlayerId)?.getSystemChartDisplayData();
 
         // Be mindful of mutating other objects in memory when you enrich
+        // Save a local copy of the chart data so _onRender can render the charts
+        this.localGenericChartData = context.genericChartInfo;
+        this.localSystemChartData = context.systemChartInfo;
         return context;
     }
 
@@ -218,25 +199,32 @@ export class PlayerDataForm extends HandlebarsApplicationMixin(ApplicationV2) {
         const ctx2 = document.getElementById('myChart2') as HTMLCanvasElement;
         const myChart2 = new Chart(ctx2, chartData);
         myChart2.render()
-        // D2 Chart
 
-        // D3 Chart
 
-        // D4 Chart
+        // Create chart objects to be displayed
+        let charts = [];
 
-        // D6 Chart
+        // Generic Chart Objects
+        for (let chartObj of this.localGenericChartData){
+            let chart = chartObj as IntChartData;
+            if (chart.isDisplayed){
+                let ctx = document.getElementById(chart.chartId) as HTMLCanvasElement;
+                charts.push(new Chart(ctx, chart.chartData));
+            }
+        }
 
-        // D8 Chart
+        // System Chart objects
+        for (let chartObj of this.localSystemChartData){
+            let chart = chartObj as IntChartData;
+            if (chart.isDisplayed){
+                let ctx = document.getElementById(chart.chartId) as HTMLCanvasElement;
+                charts.push(new Chart(ctx, chart.chartData));
+            }
+        }
 
-        // D10 Chart
-
-        // D12 Chart
-
-        // D20 Chart
-
-        // D50 Chart
-
-        // D100 Chart
+        for (let chart of charts){
+            chart.render()
+        }
     }
 
     static async refresh(){

@@ -3,6 +3,7 @@ import { GenericSystemData } from "./systemData/genericSystemData.js";
 import { SystemDataFactory } from "./systemData/systemDataFactory.js";
 import { DIE_TYPE } from "../constants.js";
 import { PlayerDataForm } from "../applications/playerData.js";
+import { IntChartData } from "./displayData/chartData.js";
 
 /**
  * DESC: 
@@ -104,5 +105,18 @@ export class DiceStatsPlayer {
     // ---- Player Form Functions ----
     openPlayerForm(){
         this._playerForm.render(true)
+    }
+
+    // ---- Create Display Data Objects ----
+    getGenericChartDisplayData(){
+        let retData:IntChartData[]=[];
+        for (let die of this._diceInfo){
+            retData.push(die.getChartData())
+        }
+        return retData
+    }
+
+    getSystemChartDisplayData(){
+        return {}
     }
 }
