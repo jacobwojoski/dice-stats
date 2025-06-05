@@ -20,4 +20,10 @@ export class GenericSystemData {
 
     public clear(){
     }
+
+    public getChartDisplayData(){
+    }
+    
+    public getDetailsDisplayData(){
+    }
 }

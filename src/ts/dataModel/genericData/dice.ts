@@ -316,43 +316,53 @@ export class DieInfo {
             }
         }
 
+        let chartID = '';
         switch (this.type){
             case DIE_TYPE.D2:
                 chartJsDataObj.labels = ['1','2'];
                 chartJsDataObj.options.plugins.title.text = 'D-2 Rolls';
+                chartID = 'd2chartInfo'
                 break;
             case DIE_TYPE.D3:
                 chartJsDataObj.labels = ['1','2','3']; 
                 chartJsDataObj.options.plugins.title.text = 'D-3 Rolls';
+                chartID = 'd3chartInfo'
                 break; 
             case DIE_TYPE.D4:
                 chartJsDataObj.labels = ['1','2','3','4']; 
                 chartJsDataObj.options.plugins.title.text = 'D-4 Rolls';
+                chartID = 'd4chartInfo'
                 break; 
             case DIE_TYPE.D6:
                 chartJsDataObj.labels = ['1','2','3','4','5','6']; 
                 chartJsDataObj.options.plugins.title.text = 'D-6 Rolls';
+                chartID = 'd6chartInfo'
                 break;
             case DIE_TYPE.D8:
                 chartJsDataObj.labels = ['1','2','3','4','5','6','7','8']; 
                 chartJsDataObj.options.plugins.title.text = 'D-8 Rolls';
+                chartID = 'd8chartInfo'
                 break;
             case DIE_TYPE.D10:
                 chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10']; 
                 chartJsDataObj.options.plugins.title.text = 'D-10 Rolls';
+                chartID = 'd10chartInfo'
                 break;
             case DIE_TYPE.D12:
                 chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12']; 
                 chartJsDataObj.options.plugins.title.text = 'D-12 Rolls';
+                chartID = 'd12chartInfo'
                 break;
             case DIE_TYPE.D20:
                 chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']; 
                 chartJsDataObj.options.plugins.title.text = 'D-20 Rolls';
+                chartID = 'd20chartInfo'
                 break;
             case DIE_TYPE.D50:
                 chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
                                       '26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'];
                 chartJsDataObj.options.plugins.title.text = 'D-50 Rolls';
+                chartID = 'd2=50chartInfo'
                 break;
             case DIE_TYPE.D100:
                 chartJsDataObj.labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25',
@@ -360,6 +370,7 @@ export class DieInfo {
                                       '51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75',
                                       '76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100'];
                 chartJsDataObj.options.plugins.title.text = 'D-100 Rolls';
+                chartID = 'd100chartInfo'
                 break;
             case DIE_TYPE.UNKNOWN:
                 chartJsDataObj.labels = ['UNKOWN']
@@ -369,7 +380,7 @@ export class DieInfo {
 
         this.calculateAll()
 
-        let returnValue = new IntChartData(chartJsDataObj.options.plugins.title.text, chartJsDataObj, this.totalRolls, this.mean, this.expMean, this.median, this.mode, this.streakString, this.isDisplayed)
+        let returnValue = new IntChartData(this.isDisplayed, chartJsDataObj.options.plugins.title.text, chartID, chartJsDataObj, this.totalRolls, this.mean, this.expMean, this.median, this.mode, this.streakString)
         return returnValue
     }
     
