@@ -1,0 +1,83 @@
+<section
+  class='tab {{tab.cssClass}}'
+  data-group='primary'
+  data-tab='genericData'
+  style='overflow-y: auto'
+>   
+  <h1>Generic Tab Data Here!</h1>
+  <h3>{{this.customHeading}}</h3>
+
+  <canvas id="myChart" width="400" height="200"></canvas>
+  <!-- modules/dice-stats/templates/player-data/tabs/genericInfo -->
+  <hr>
+
+  <!-- D2 Info -->
+  {{#if d2.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d2}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d2}}
+  {{/if}}
+
+  <!-- D3 Info -->
+  {{#if d3.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d3}}
+    <canvas id="DiceStatsPlayerChartD3" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d3}}
+  {{/if}}
+
+  <!-- D4 Info -->
+  {{#if d4.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d4}}
+    <canvas id="DiceStatsPlayerChartD4" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d4}}
+  {{/if}}
+
+  <!-- D6 Info -->
+  {{#if d6.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d6}}
+    <canvas id="DiceStatsPlayerChartD6" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d6}}
+  {{/if}}
+
+  <!-- D8 Info -->
+  {{#if d8.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d8}}
+    <canvas id="DiceStatsPlayerChartD8" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d8}}
+  {{/if}}
+
+  <!-- D10 Info -->
+  {{#if d10.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d10}}
+    <canvas id="DiceStatsPlayerChartD10" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d10}}
+  {{/if}}
+
+  <!-- D12 Info -->
+  {{#if d12.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d12}}
+    <canvas id="DiceStatsPlayerChartD12" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d12}}
+  {{/if}}
+
+  <!-- D20 Info -->
+  {{#if d20.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d20}}
+    <canvas id="DiceStatsPlayerChartD20" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d20}}
+  {{/if}}
+
+  <!-- D50 Info -->
+  {{#if d50.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d50}}
+    <canvas id="DiceStatsPlayerChartD50" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d50}}
+  {{/if}}
+
+  <!-- D100 Info -->
+  {{#if d100.isDisplayed}}
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/diceChart.hbs d100}}
+    <canvas id="DiceStatsPlayerChartD100" width="400" height="200"></canvas>
+    {{> modules/dice-stats/templates/player-data/tabs/genericInfo/chartTable.hbs d100}}
+  {{/if}}
+
+</section>

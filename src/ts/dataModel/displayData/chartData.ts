@@ -5,13 +5,12 @@
 /**
 * Generic Chart Display Info
 */
-export class ChartData
-{
+export class ChartData {
     isDisplayed = false;
 
-    chartTitle = '';    //
-    chartId = '';       // 
-    chartData:any = {};     // Chart.js Data object
+    chartTitle:string   = '';    //
+    chartId:string      = '';    // 
+    chartData:any       = {};    // Chart.js Data object
 
     constructor(
         is_displayed_in: boolean, title_in:string, id_in:string,
@@ -24,14 +23,16 @@ export class ChartData
     }
 }
 
-export class IntChartData extends ChartData
-{
-    totalRolls = 0;
-    mean = 0.0;
-    expMean = 0.0;
-    median = 0;
-    mode = 0;
-    streak = '';
+/**
+ * Chart Stats for Int Bassed Charts
+ */
+export class IntChartData extends ChartData {
+    totalRolls  = 0;
+    mean        = 0.0;
+    expMean     = 0.0;
+    median      = 0;
+    mode        = 0;
+    streak      = '';
 
     constructor(
         is_displayed_in: boolean, title_in:string, id_in:string,

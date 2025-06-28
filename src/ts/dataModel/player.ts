@@ -43,6 +43,9 @@ export class DiceStatsPlayer {
     getUsername(){return this._userName}
     getUserID(){return this._userId}
     getIsGm(){return this._isGm}
+    getDieInfo(die_type_in:DIE_TYPE){
+        return this._diceInfo[die_type_in]
+    }
 
     /**
      * @param {string} in_user_name 
